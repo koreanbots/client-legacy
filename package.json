@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "homepage" : "https://koreanbots.github.io/client",
+  "homepage" : "https://koreanbots.github.io/client/",
   "dependencies": {
     "axios": "^0.19.0",
     "gh-pages": "^2.0.1",
