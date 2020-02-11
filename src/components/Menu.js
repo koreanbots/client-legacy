@@ -5,6 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import Search from "./Search"
 import Config from "../config"
 import axios from 'axios'
+import config from '../config'
 export default class MenuExampleStackable extends Component {
       constructor(props){
         super(props)
@@ -19,7 +20,7 @@ export default class MenuExampleStackable extends Component {
 
       componentDidMount(){
         const getUser = async(token) => {
-          axios({method : 'GET', url:'http://localhost:4000/users/login', headers : {token : token}})
+          axios({method : 'GET', url: config + '/users/login', headers : {token : token}})
           .then(r=>{
           this.setState({user : r.data.user, isLoading : false})
           })
