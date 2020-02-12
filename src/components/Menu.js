@@ -9,8 +9,6 @@ import config from '../config'
 export default class MenuExampleStackable extends Component {
       constructor(props){
         super(props)
-        console.log(this.props.token)
-        const token = this.props.token
         this.state = {
           isLoading : true,
           user : {}
@@ -20,7 +18,7 @@ export default class MenuExampleStackable extends Component {
 
       componentDidMount(){
         const getUser = async(token) => {
-          axios({method : 'GET', url: config + '/users/login', headers : {token : token}})
+          axios({method : 'GET', url: config.api + '/users/login', headers : {token : token}})
           .then(r=>{
           this.setState({user : r.data.user, isLoading : false})
           })
@@ -65,7 +63,7 @@ export default class MenuExampleStackable extends Component {
                 name='로그인'
                 href={Config.url}
               >
-                로그인d
+                로그인
               </Menu.Item>
               )
               :

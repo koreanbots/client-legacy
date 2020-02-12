@@ -92,14 +92,14 @@ class Detail extends React.Component {
             bot.web == "false" ? (
               ''
             ) : 
-            <Button color="blue" content='초대하기' labelPosition='left' icon='globe' href={bot.web}></Button>
+            <Button color="blue" content='웹사이트' labelPosition='left' icon='globe' href={bot.web}></Button>
           }
           
           {
             bot.git == "false" ? (
               ''
             ) : 
-            <Button color="black" content='Git' labelPosition='left' icon='git' href={bot.github}></Button>
+            <Button color="black" content='Git' labelPosition='left' icon='git' href={bot.git}></Button>
           }
             </Grid.Column>
           </Grid.Row>

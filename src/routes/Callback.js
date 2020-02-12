@@ -16,12 +16,12 @@ class Detail extends React.Component {
   }
 
 
-  getData = async (id) => {
-    await axios.get(
-      config.api+ '/users/get/' +id
-    )
+  getData = async (token) => {
+    console.log(config.api+ '/oauth/callback?code=' + token)
+    axios.get(config.api+ '/oauth/callback?code=' + token) 
     .then(user=>{
         this.setState({ user : user.data.user, isLoading: false });
+        console.log(this.state.user)
         axios.get(config.api+user.data.user.id)
         .then(async res=>{
             if(res.data.code == 200){
@@ -32,8 +32,7 @@ class Detail extends React.Component {
                 this.props.history.push('/')
             }
             else {
-                console.log('ㅇㅇㅇㅇㅇㅇ')
-                axios.post(config.api + '/users/create/' + id, {headers : {tag : user.data.user.tag, username : user.data.user.username, avatar : user.data.user.avatar}})
+                axios.post(config.api + '/users/create/' + token, {headers : {tag : user.data.user.tag, username : user.data.user.username, avatar : user.data.user.avatar}})
                 .then(async newUser=>{
                   await localStorage.setItem(
                     "token", newUser.data.data.token
@@ -43,16 +42,14 @@ class Detail extends React.Component {
             }
         })
     })
+    .catch(e=>console.log(e))
 
   };
 
  
   componentDidMount(props) {
     var token = this.props.location.search
-    console.log(token.replace('?', ''))
-    console.log(new URLSearchParams(token.replace('?', '')).get('code'))
     token = new URLSearchParams(token.replace('?', '')).get('code')
-    console.log(this.props)
     this.getData(token);
   }
   render() {
