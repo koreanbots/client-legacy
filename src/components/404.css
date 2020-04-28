@@ -1,16 +1,15 @@
-body{
+body {
   margin: 0;
   padding: 0;
-  font-family: "montserrat",sans-serif;
+  font-family: "montserrat", sans-serif;
   min-height: 100vh;
- 
 }
 .notfound > h2 {
   margin-top: 10%;
   font-size: 50px;
-  text-align: center; 
+  text-align: center;
 }
-.notfound > h1{
+.notfound > h1 {
   font-size: 160px;
   font-weight: 900;
   letter-spacing: 20px;
@@ -18,8 +17,5 @@ body{
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  text-align: center; 
+  text-align: center;
 }
-
-
-

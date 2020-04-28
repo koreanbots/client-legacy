@@ -15,7 +15,7 @@ function App() {
     
     <Router>
       
-      <Menu token={localStorage.getItem('token')}/>
+      <Menu token={localStorage.getItem('token')} id={localStorage.getItem('id')} date={localStorage.getItem('date')}/>/>
       <Switch>
       
       <Route path="/" exact={true} component={Home} />

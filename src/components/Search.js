@@ -1,37 +1,47 @@
-import React, { Component } from 'react'
-import {Input, Grid} from 'semantic-ui-react'
+import React, { Component } from "react";
+import { Input, Grid } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
-import "./Search.css"
+import axios from "axios";
+import "./Search.css";
+import config from "../config";
 export default class SearchExampleStandard extends Component {
-    state = {
-        value: "",
-        redirect: false
-    }
-    render() {  
+    constructor(props){
+        super(props)
+        console.log(this.props)
+
+  this.state = {
+    value: "",
+    result: {},
+    redirect: false
+  }
+}
+  render() {
+    return (
+      <div className="search">
+        <Input
+          className="box"
+          onKeyDown={this.handleSubmit.bind(this)}
+          onChange={this.handleChange.bind(this)}
+          icon="search"
+          placeholder="검색..."
+        />
         
-      return (
-         
-    <div className="search">
-          <Input className="box" size='' onKeyDown={this.handleSubmit.bind(this)} onChange={this.handleChange.bind(this)} icon='search' placeholder='검색...'/>
-  
-              {this.state.redirect ? (
-                   <Redirect to={"/search?q="+this.state.value}></Redirect>
-              ) : (
-                  ''
-              ) }
-          </div>
-    )
-     
-    }
-    handleChange(event) {
-        this.setState({
-            value: event.target.value
-          });
-    }
-    handleSubmit(e) {
-        if (e.key === 'Enter') {
-            console.log('g')
-            this.setState({redirect : true})
-        }
+        {this.state.redirect ? (
+          this.props.location.href = "/search?query=" + this.state.value
+        ) : (
+          ""
+        )}
+      </div>
+    );
+  }
+  handleChange(event) {
+    this.setState({
+      value: event.target.value
+    });
+  }
+  handleSubmit(e) {
+    if (e.key === "Enter") {
+      this.setState({ redirect: true });
     }
   }
+}
