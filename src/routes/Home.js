@@ -47,54 +47,6 @@ class Home extends React.Component {
                 intro={bot.intro}
                 desc={bot.desc}
               />
-              <Bot
-                data={bot}
-                key={bot.id}
-                id={bot.id}
-                name={bot.name}
-                avatar={"https://cdn.discordapp.com/avatars/"+bot.id+"/"+bot.avatar+".webp"}
-                votes={bot.votes}
-                servers={bot.servers}
-                category={new Array(bot.category)}
-                intro={bot.intro}
-                desc={bot.desc}
-              />
-              <Bot
-                data={bot}
-                key={bot.id}
-                id={bot.id}
-                name={bot.name}
-                avatar={"https://cdn.discordapp.com/avatars/"+bot.id+"/"+bot.avatar+".webp"}
-                votes={bot.votes}
-                servers={bot.servers}
-                category={new Array(bot.category)}
-                intro={bot.intro}
-                desc={bot.desc}
-              />
-              <Bot
-                data={bot}
-                key={bot.id}
-                id={bot.id}
-                name={bot.name}
-                avatar={"https://cdn.discordapp.com/avatars/"+bot.id+"/"+bot.avatar+".webp"}
-                votes={bot.votes}
-                servers={bot.servers}
-                category={new Array(bot.category)}
-                intro={bot.intro}
-                desc={bot.desc}
-              />
-              <Bot
-                data={bot}
-                key={bot.id}
-                id={bot.id}
-                name={bot.name}
-                avatar={"https://cdn.discordapp.com/avatars/"+bot.id+"/"+bot.avatar+".webp"}
-                votes={bot.votes}
-                servers={bot.servers}
-                category={new Array(bot.category)}
-                intro={bot.intro}
-                desc={bot.desc}
-              />
               </>
             ))}
             
