@@ -1,15 +1,41 @@
 import React from "react";
 import fetch from "node-fetch"
 import Bot from "../components/Bot";
-import { Grid } from 'semantic-ui-react'
+import { Grid, Message, Container } from 'semantic-ui-react'
+import { Redirect } from 'react-router-dom'
 import config from '../config'
 
-import "./Home.css";
 class Home extends React.Component {
-  state = {
-    isLoading: true,
-    bot: {}
-  };
+  constructor(props){
+    super(props)
+    this.state = {
+      isLoading: true,
+      bot: {},
+      message: false
+    };
+  }
+
+removeParam = (parameter) =>
+{
+  var url=window.location.href;
+  var urlparts= url.split('?');
+
+ if (urlparts.length>=2)
+ {
+  var urlBase=urlparts.shift(); 
+  var queryString=urlparts.join("?"); 
+
+  var prefix = encodeURIComponent(parameter)+'=';
+  var pars = queryString.split(/[&;]/g);
+  for (var i= pars.length; i-->0;)               
+      if (pars[i].lastIndexOf(prefix, 0)!==-1)   
+          pars.splice(i, 1);
+  url = urlBase+'?'+pars.join('&');
+  window.history.pushState('',document.title,url); // added this line to push the new url directly to url bar .
+
+}
+return url;
+}
   getData = async () => {
     const bot = await fetch(
       config.api + '/bots/get'
@@ -17,13 +43,32 @@ class Home extends React.Component {
     this.setState({ bot, isLoading: false });
   };
   componentDidMount() {
+    if(this.props.location.search.replace(/^\?message=/, '')) this.setState({ message: messages[this.props.location.search.replace(/^\?message=/, '')] || false})
     this.getData();
   }
+  handleDismiss = async() => {
+    this.setState({ message: false })
+    this.removeParam('message')
+  }
   render() {
+
     const { isLoading, bot } = this.state;
+
     return (
-      
-      
+      <>
+      {
+        this.state.message ? (
+          <Container>
+          <Message
+          header={this.state.message.title}
+          onDismiss={this.handleDismiss}
+          className={ this.state.message.level }
+          content={this.state.message.message}
+        />
+        </Container>
+        ) : ('')
+      }
+      <br/>
       <section>
         {isLoading ? (
           <div className="loader">
@@ -55,22 +100,15 @@ class Home extends React.Component {
           </div>
         )}
       </section>
+      </>
     );
   }
 }
 
 
-export default class extends React.Component {
-
-render(){
-return (
-  <div>
-    <br/>
-
-<Home/>
-  </div>
+export default Home
 
 
-)
-}
+const messages = {
+  submitSuccess: { level: 'success', title: '봇 신청 성공!', message: '봇을 성공적으로 신청하였습니다! 곧 다시 연락드리겠습니다!' }
 }

@@ -20,8 +20,9 @@ class Search extends React.Component {
   }
 
   getData = async q => {
-    const bot = await fetch(config.api + "/bots/search?q=" + q);
-    this.setState({ bots: bot.data.data, isLoading: false });
+    const bot = await fetch(config.api + "/bots/search?q=" + q).then(r=> r.json());
+    console.log(bot)
+    this.setState({ bots: bot.data, isLoading: false });
   };
 
   componentDidMount(props) {

@@ -128,7 +128,7 @@ class Detail extends React.Component {
                       className="discord"
                       content="초대하기"
                       labelPosition="left"
-                      icon="discord"
+                      icon="plus"
                       href={`https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`}
                     ></Button>
                   ) : (
@@ -151,7 +151,17 @@ class Detail extends React.Component {
                       href={bot.web}
                     ></Button>
                   )}
-
+                  {bot.discord === "false" ? (
+                    ""
+                  ) : (
+                    <Button
+                      className="discord"
+                      content="지원 디스코드"
+                      labelPosition="left"
+                      icon="discord"
+                      href={'https://discord.gg/' + bot.discord}
+                    ></Button>
+                  )}
                   {bot.git === "false" ? (
                     ""
                   ) : (
@@ -203,7 +213,7 @@ class Detail extends React.Component {
         </div>
 
         <Divider section />
-        <ReactMarkdown
+        <ReactMarkdown style={{wordWrap: 'break-word'}}
      source={bot.desc}
     />
       </Container>

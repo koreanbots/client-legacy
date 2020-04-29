@@ -15,7 +15,6 @@ import Redirect from "./components/Redirect"
 import "./App.css";
 
 function App() {
-  console.log(localStorage.getItem('token'))
   return (
     
     <Router>
