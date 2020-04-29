@@ -1,21 +1,22 @@
 import React, { Component } from "react";
-import { Input, Grid } from "semantic-ui-react";
-import { Redirect } from "react-router-dom";
-import axios from "axios";
+import { Input } from "semantic-ui-react";
 import "./Search.css";
-import config from "../config";
 export default class SearchExampleStandard extends Component {
     constructor(props){
+        
         super(props)
-        console.log(this.props)
-
+   
   this.state = {
     value: "",
     result: {},
     redirect: false
   }
 }
-  render() {
+  render(props) {
+    const to = (r) => {
+        window.location.href = "/search?query=" + r
+        return ""
+    }
     return (
       <div className="search">
         <Input
@@ -27,7 +28,7 @@ export default class SearchExampleStandard extends Component {
         />
         
         {this.state.redirect ? (
-          this.props.location.href = "/search?query=" + this.state.value
+          to(this.state.value)
         ) : (
           ""
         )}

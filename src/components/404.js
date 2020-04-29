@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Sketch from "react-p5";
 import "./404.css";
 
 export default class MenuExampleStackable extends Component {
@@ -25,7 +24,7 @@ export default class MenuExampleStackable extends Component {
   render() {
     return (
       <div className="notfound">
-        <a>GG</a>
+        <h1>GG</h1>
 
         <h2>Oops! Page not found.</h2>
         <br />

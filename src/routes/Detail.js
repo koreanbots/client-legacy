@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import fetch from "node-fetch"
 import {
   Image,
   Grid,
@@ -9,7 +9,7 @@ import {
   Button,
   Icon
 } from "semantic-ui-react";
-import MarkdownView from 'react-showdown';
+import ReactMarkdown from 'react-markdown/with-html'
 import config from "../config";
 
 class Detail extends React.Component {
@@ -23,27 +23,19 @@ class Detail extends React.Component {
     };
   }
 
-  getUser = async id => {
-    axios({ method: "GET", url: config.api + "/users/get/" + id })
-      .then(r => {
-        this.setState({ user: r.data.user, isLoading: false });
-      })
-      .catch(err => console.log(err));
-  };
-
   getData = async id => {
-    const bot = await axios
-      .get(config.api + "/bots/get/" + id)
-      .catch(this.setState({ bot: false, isLoading: false }));
-    this.setState({ bot: bot.data.data[0], isLoading: false });
+    await fetch(config.api + "/bots/get/" + id)
+      .then(r=> r.json())
+      .then(bot=> this.setState({ bot: bot.code === 200 ? bot.data[0] : false, isLoading: false }))
+      
+    
   };
 
   componentDidMount(props) {
     const {
       match: {
         params: { id }
-      },
-      history: { push }
+      }
     } = this.props;
     this.getData(id);
   }
@@ -59,11 +51,7 @@ class Detail extends React.Component {
           <div className="loader">
             <span>Loading...</span>
           </div>
-        ) : !bot ? (
-          <div className="loader">
-            <h1>존재하지 않는 봇입니다!</h1>
-          </div>
-        ) : (
+        ) : bot ? (
           <>
             <Grid stackable divided="vertically">
               <Grid.Row columns={2}>
@@ -126,7 +114,7 @@ class Detail extends React.Component {
                   <br />
                   <Label.Group tag>
                     카테고리 : <br />
-                    {bot.category.length == 0
+                    {bot.category.length === 0
                       ? " 지정되지 않음"
                       : bot.category.map(c => (
                           <Label as="a" key={c}>
@@ -135,7 +123,7 @@ class Detail extends React.Component {
                         ))}
                   </Label.Group>
                   <br />
-                  {bot.url == "false" ? (
+                  {bot.url === "false" ? (
                     <Button
                       className="discord"
                       content="초대하기"
@@ -152,7 +140,7 @@ class Detail extends React.Component {
                       href={bot.url}
                     ></Button>
                   )}
-                  {bot.web == "false" ? (
+                  {bot.web === "false" ? (
                     ""
                   ) : (
                     <Button
@@ -164,7 +152,7 @@ class Detail extends React.Component {
                     ></Button>
                   )}
 
-                  {bot.git == "false" ? (
+                  {bot.git === "false" ? (
                     ""
                   ) : (
                     <Button
@@ -182,7 +170,7 @@ class Detail extends React.Component {
                 <Grid.Column>
                   <Button
                     className="discord"
-                    content={bot.servers == 0 ? "N/A" : bot.servers + " 서버"}
+                    content={bot.servers === 0 ? "N/A" : bot.servers + " 서버"}
                   ></Button>
                   <Button
                     content={bot.votes}
@@ -194,10 +182,14 @@ class Detail extends React.Component {
               </Grid.Row>
             </Grid>
           </>
-        )}
+        ) : (
+          <div className="loader">
+            <h1>존재하지 않는 봇입니다!</h1>
+          </div>
+        )    }
         <div>
           제작자 :
-          <img
+          <img alt="img"
             src={
               "https://cdn.discordapp.com/avatars/" +
               bot.id +
@@ -211,9 +203,8 @@ class Detail extends React.Component {
         </div>
 
         <Divider section />
-        <MarkdownView
-      markdown={bot.desc}
-      options={{ tables: true, emoji: true }}
+        <ReactMarkdown
+     source={bot.desc}
     />
       </Container>
     );

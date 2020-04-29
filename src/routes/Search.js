@@ -1,15 +1,10 @@
 import React from "react";
-import axios from "axios";
+import fetch from "node-fetch"
 import "semantic-ui-css/semantic.min.css";
 
 import Bot from "../components/Bot";
 import {
-  Image,
-  Grid,
-  Container,
-  Label,
-  Divider,
-  Button
+  Grid
 } from "semantic-ui-react";
 import config from "../config";
 
@@ -25,12 +20,11 @@ class Search extends React.Component {
   }
 
   getData = async q => {
-    const bot = await axios.get(config.api + "/bots/search?q=" + q);
+    const bot = await fetch(config.api + "/bots/search?q=" + q);
     this.setState({ bots: bot.data.data, isLoading: false });
   };
 
   componentDidMount(props) {
-    console.log(this.props)
     this.getData(this.props.location.search.replace(/^\?query=/, ''));
   }
   render() {
@@ -81,11 +75,3 @@ class Search extends React.Component {
 }
 
 export default Search;
-
-const status = {
-  online: "green",
-  idle: "yellow",
-  dnd: "red",
-  offline: "gray",
-  streaming: "purple"
-};

@@ -1,9 +1,8 @@
 import React from "react";
-import axios from "axios";
+import fetch from "node-fetch"
 import Bot from "../components/Bot";
-import Search from "../components/Search";
-import { Grid } from "semantic-ui-react";
-import config from "../config";
+import { Grid } from 'semantic-ui-react'
+import config from '../config'
 
 import "./Home.css";
 class Home extends React.Component {
@@ -12,7 +11,9 @@ class Home extends React.Component {
     bot: {}
   };
   getData = async () => {
-    const bot = await axios.get(config.api + "/bots/get");
+    const bot = await fetch(
+      config.api + '/bots/get'
+    ).then(r=> r.json())
     this.setState({ bot, isLoading: false });
   };
   componentDidMount() {
@@ -21,36 +22,83 @@ class Home extends React.Component {
   render() {
     const { isLoading, bot } = this.state;
     return (
-      <section className="container">
+      
+      
+      <section>
         {isLoading ? (
           <div className="loader">
             <span className="loader__text">Loading...</span>
           </div>
         ) : (
+         
           <div className="bot">
-            <Grid stackable centered columns={2}>
-              <Grid.Row>
-                {bot.data.data.map(bot => (
-                  <Bot
-                    data={bot}
-                    key={bot.id}
-                    id={bot.id}
-                    name={bot.name}
-                    avatar={
-                      "https://cdn.discordapp.com/avatars/" +
-                      bot.id +
-                      "/" +
-                      bot.avatar +
-                      ".webp"
-                    }
-                    votes={bot.votes}
-                    servers={bot.servers}
-                    category={new Array(bot.category)}
-                    intro={bot.intro}
-                    desc={bot.desc}
-                  />
-                ))}
-              </Grid.Row>
+         <Grid stackable centered relaxed columns={5}>
+            {bot.data.map(bot => (
+              <>
+              <Bot
+                data={bot}
+                key={bot.id}
+                id={bot.id}
+                name={bot.name}
+                avatar={"https://cdn.discordapp.com/avatars/"+bot.id+"/"+bot.avatar+".webp"}
+                votes={bot.votes}
+                servers={bot.servers}
+                category={new Array(bot.category)}
+                intro={bot.intro}
+                desc={bot.desc}
+              />
+              <Bot
+                data={bot}
+                key={bot.id}
+                id={bot.id}
+                name={bot.name}
+                avatar={"https://cdn.discordapp.com/avatars/"+bot.id+"/"+bot.avatar+".webp"}
+                votes={bot.votes}
+                servers={bot.servers}
+                category={new Array(bot.category)}
+                intro={bot.intro}
+                desc={bot.desc}
+              />
+              <Bot
+                data={bot}
+                key={bot.id}
+                id={bot.id}
+                name={bot.name}
+                avatar={"https://cdn.discordapp.com/avatars/"+bot.id+"/"+bot.avatar+".webp"}
+                votes={bot.votes}
+                servers={bot.servers}
+                category={new Array(bot.category)}
+                intro={bot.intro}
+                desc={bot.desc}
+              />
+              <Bot
+                data={bot}
+                key={bot.id}
+                id={bot.id}
+                name={bot.name}
+                avatar={"https://cdn.discordapp.com/avatars/"+bot.id+"/"+bot.avatar+".webp"}
+                votes={bot.votes}
+                servers={bot.servers}
+                category={new Array(bot.category)}
+                intro={bot.intro}
+                desc={bot.desc}
+              />
+              <Bot
+                data={bot}
+                key={bot.id}
+                id={bot.id}
+                name={bot.name}
+                avatar={"https://cdn.discordapp.com/avatars/"+bot.id+"/"+bot.avatar+".webp"}
+                votes={bot.votes}
+                servers={bot.servers}
+                category={new Array(bot.category)}
+                intro={bot.intro}
+                desc={bot.desc}
+              />
+              </>
+            ))}
+            
+    
             </Grid>
           </div>
         )}
@@ -59,14 +107,18 @@ class Home extends React.Component {
   }
 }
 
-export default class extends React.Component {
-  render() {
-    return (
-      <div>
-        <br />
 
-        <Home />
-      </div>
-    );
-  }
+export default class extends React.Component {
+
+render(){
+return (
+  <div>
+    <br/>
+
+<Home/>
+  </div>
+
+
+)
+}
 }

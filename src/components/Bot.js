@@ -15,7 +15,7 @@ function Bot({
   desc
 }) {
   return (
-    <div>
+    <div style={{marginTop: '10px'}}>
       <Grid.Column
         mobile={10}
         tablet={5}
