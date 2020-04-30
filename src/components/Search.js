@@ -2,21 +2,20 @@ import React, { Component } from "react";
 import { Input } from "semantic-ui-react";
 import "./Search.css";
 export default class SearchExampleStandard extends Component {
-    constructor(props){
-        
-        super(props)
-   
-  this.state = {
-    value: "",
-    result: {},
-    redirect: false
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: "",
+      result: {},
+      redirect: false
+    };
   }
-}
   render(props) {
-    const to = (r) => {
-        window.location.href = "/search?query=" + r
-        return ""
-    }
+    const to = r => {
+      window.location.href = "/search?query=" + r;
+      return "";
+    };
     return (
       <div className="search">
         <Input
@@ -26,12 +25,8 @@ export default class SearchExampleStandard extends Component {
           icon="search"
           placeholder="검색..."
         />
-        
-        {this.state.redirect ? (
-          to(this.state.value)
-        ) : (
-          ""
-        )}
+
+        {this.state.redirect ? to(this.state.value) : ""}
       </div>
     );
   }

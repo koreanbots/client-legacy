@@ -15,7 +15,7 @@ function Bot({
   desc
 }) {
   return (
-    <div style={{marginTop: '10px'}}>
+    <div style={{ marginTop: "10px" }}>
       <Grid.Column
         mobile={10}
         tablet={5}
@@ -23,8 +23,10 @@ function Bot({
         largeScreen={5}
         widescreen={5}
       >
-        <Segment stacked padded color="blue">
-          <Grid>
+        <Segment stacked padded>
+          <Grid
+          as={Link}
+          to={"/bots/" + id}>
             <Grid.Row>
               <Grid.Column width={16}>
                 <Item.Group link>

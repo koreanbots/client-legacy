@@ -7,10 +7,12 @@ import {
   Label,
   Divider,
   Button,
-  Icon
+  Icon,
+  Message
 } from "semantic-ui-react";
 import ReactMarkdown from "react-markdown/with-html";
 import config from "../config";
+import Redirect from "../components/Redirect";
 
 class Detail extends React.Component {
   constructor(props) {
@@ -24,7 +26,7 @@ class Detail extends React.Component {
   }
 
   getData = async id => {
-    await fetch(config.api + "/bots/get/" + id)
+    await fetch(config.api + "/bots/pending/" + id)
       .then(r => r.json())
       .then(bot =>
         this.setState({
@@ -54,6 +56,15 @@ class Detail extends React.Component {
           </div>
         ) : bot ? (
           <>
+            {bot.state === 0 ? (
+              <Message info>해당 봇은 아직 승인 대기 상태입니다.</Message>
+            ) : bot.state === 1 ? (
+              <Redirect to={"/bots" + bot.id} />
+            ) : bot.state === 2 ? (
+              <Message error>해당 봇은 승인 거부 되었습니다.</Message>
+            ) : (
+              <></>
+            )}
             <Grid stackable divided="vertically">
               <Grid.Row columns={2}>
                 <Grid.Column>
@@ -199,7 +210,7 @@ class Detail extends React.Component {
           </>
         ) : (
           <div className="loader">
-            <h1>존재하지 않는 봇입니다!</h1>
+            <h1>심사 데이터가 삭제되었거나 존재하지 않습니다.</h1>
           </div>
         )}
         <div>
@@ -252,7 +263,8 @@ const status = {
   idle: "yellow",
   dnd: "red",
   offline: "gray",
-  streaming: "purple"
+  streaming: "purple",
+  black: "알 수 없음"
 };
 
 const statusText = {
@@ -260,5 +272,6 @@ const statusText = {
   idle: "자리 비움",
   dnd: "다른 용무중",
   offline: "오프라인",
-  streaming: "방송중"
+  streaming: "방송중",
+  "???": "알 수 없음"
 };

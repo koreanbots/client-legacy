@@ -11,8 +11,6 @@ body {
   height: 100%;
 }
 
-
-
 .loader {
   width: 100%;
   height: 100vh;
@@ -25,4 +23,3 @@ body {
 .ui.button {
   margin-top: 5px;
 }
-

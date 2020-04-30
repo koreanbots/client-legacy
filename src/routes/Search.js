@@ -1,11 +1,9 @@
 import React from "react";
-import fetch from "node-fetch"
+import fetch from "node-fetch";
 import "semantic-ui-css/semantic.min.css";
 
 import Bot from "../components/Bot";
-import {
-  Grid
-} from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import config from "../config";
 
 class Search extends React.Component {
@@ -20,13 +18,18 @@ class Search extends React.Component {
   }
 
   getData = async q => {
-    const bot = await fetch(config.api + "/bots/search?q=" + q).then(r=> r.json());
-    console.log(bot)
-    this.setState({ bots: bot.data, isLoading: false });
+    const bot = await fetch(config.api + "/bots/search?q=" + q).then(r =>
+      r.json()
+    );
+    console.log(bot);
+    this.setState({ bots: bot.code === 200 ? bot.data : [], isLoading: false });
   };
 
   componentDidMount(props) {
-    this.getData(this.props.location.search.replace(/^\?query=/, ''));
+    console.log(this.props.location.search);
+    let q = this.props.location.search;
+    if (!q) this.setState({ bots: [], isLoading: false });
+    this.getData(q.replace(/^\?query=/, ""));
   }
   render() {
     const { bots, isLoading } = this.state;
