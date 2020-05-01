@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import "semantic-ui-css/semantic.min.css";
 
 import Bot from "../components/Bot";
-import { Grid } from "semantic-ui-react";
+import { Grid, Card, Container } from "semantic-ui-react";
 import config from "../config";
 
 class Search extends React.Component {
@@ -36,44 +36,49 @@ class Search extends React.Component {
 
     console.log(this.props);
     return (
-      <section className="container">
+      <Container>
+        <br />
+        <h1>
+          "{decodeURI(this.props.location.search.replace(/^\?query=/, ""))}"에
+          관한 검색결과
+        </h1>
+        <br />
         {isLoading ? (
           <div className="loader">
             <span className="loader__text">Loading...</span>
           </div>
         ) : bots.length === 0 ? (
           <div className="loader">
-            <h2>검색 결과가 없습니다.</h2>
+            <h1>검색 결과가 없습니다.</h1>
           </div>
         ) : (
-          <div className="bot">
-            <Grid stackable centered columns={2}>
-              <Grid.Row>
-                {bots.map(bot => (
-                  <Bot
-                    data={bot}
-                    key={bot.id}
-                    id={bot.id}
-                    name={bot.name}
-                    avatar={
-                      "https://cdn.discordapp.com/avatars/" +
-                      bot.id +
-                      "/" +
-                      bot.avatar +
-                      ".webp"
-                    }
-                    votes={bot.votes}
-                    servers={bot.servers}
-                    category={new Array(bot.category)}
-                    intro={bot.intro}
-                    desc={bot.desc}
-                  />
-                ))}
-              </Grid.Row>
-            </Grid>
-          </div>
+          <>
+            <Card.Group itemsPerRow={3} stackable>
+              {bots.map(bot => (
+                <Bot
+                  data={bot}
+                  key={bot.id}
+                  id={bot.id}
+                  name={bot.name}
+                  avatar={
+                    "https://cdn.discordapp.com/avatars/" +
+                    bot.id +
+                    "/" +
+                    bot.avatar +
+                    ".webp"
+                  }
+                  votes={bot.votes}
+                  servers={bot.servers}
+                  category={new Array(bot.category)}
+                  intro={bot.intro}
+                  desc={bot.desc}
+                  category={bot.category}
+                />
+              ))}
+            </Card.Group>
+          </>
         )}
-      </section>
+      </Container>
     );
   }
 }

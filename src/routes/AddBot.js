@@ -69,7 +69,8 @@ class SubmitBot extends Component {
       this.state.lib &&
       this.state.intro &&
       this.state.desc &&
-      (this.state.category && this.state.category.length > 0)
+      this.state.category &&
+      this.state.category.length > 0
     ) {
       data = await this.sendSumbit(this.state);
     } else {
@@ -106,6 +107,7 @@ class SubmitBot extends Component {
     else
       return (
         <Container>
+          <br />
           <h1>새로운 봇 추가하기</h1>
           <Message info>
             <Message.Header>
@@ -117,6 +119,19 @@ class SubmitBot extends Component {
               </li>
               <li>
                 봇이 <a href="/guidelines">가이드라인</a>을 지키고 있나요?
+              </li>
+              <li>
+                본인이 봇의 소유자라는 것을 증명할 수 있나요? 본인이 봇
+                소유자임을 증명하려면, 태그가 포함되어야합니다. <br />
+                다음 명령어(접두사로 시작하는) 중 하나 이상에 소유자를
+                표시하셔야합니다.
+                <ol>- 도움 명령어: 도움, 도움말, 명령어, help, commands</ol>
+                <ol>
+                  - 도움 명령어에 소유자임을 나타내고 싶지 않으시다면, 아래
+                  명령어를 만들어주세요
+                  <br />
+                  명령어: [접두사]hellothisisverification 응답: 유저#태그(아이디)
+                </ol>
               </li>
             </Message.Content>
           </Message>
@@ -225,13 +240,13 @@ class SubmitBot extends Component {
               />
             </div>
             <Form.Input
-              placeholder="봇을 설명할 수 있는 간단한 설명을 적어주세요! (최대 120자)"
+              placeholder="봇을 설명할 수 있는 간단한 설명을 적어주세요! (최대 60자)"
               width={16}
               label="봇 소개 (*)"
               name="intro"
               value={intro}
               onChange={this.handleChange}
-              maxLength={120}
+              maxLength={60}
             />
             <div className="field">
               <label>봇 설명 (*)</label>
@@ -264,25 +279,6 @@ class SubmitBot extends Component {
           ) : (
             <> </>
           )}
-          <strong>onChange:</strong>
-          <pre>
-            {JSON.stringify(
-              {
-                id,
-                prefix,
-                lib,
-                intro,
-                desc,
-                category,
-                website,
-                git,
-                url,
-                discord
-              },
-              null,
-              2
-            )}
-          </pre>
         </Container>
       );
   }

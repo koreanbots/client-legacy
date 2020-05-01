@@ -7,7 +7,8 @@ import {
   Label,
   Divider,
   Button,
-  Icon
+  Icon,
+  Message
 } from "semantic-ui-react";
 import ReactMarkdown from "react-markdown/with-html";
 import config from "../config";
@@ -17,21 +18,47 @@ class Detail extends React.Component {
     super(props);
     this.state = {
       result: null,
-      error: null,
+      error: {},
       isLoading: true,
       bot: {}
     };
   }
 
   getData = async id => {
-    await fetch(config.api + "/bots/get/" + id)
+    await fetch(config.api + "/bots/get/" + id, {
+      method: "GET",
+      headers: {
+        token: localStorage.token,
+        id: localStorage.id,
+        time: localStorage.date
+      }
+    })
       .then(r => r.json())
       .then(bot =>
         this.setState({
           bot: bot.code === 200 ? bot.data : false,
-          isLoading: false
+          isLoading: false,
+          error: bot.code === 200 ? {} : bot
         })
       );
+  };
+
+  voteAction = async () => {
+    const res = await fetch(
+      config.api + "/bots/vote/" + this.props.match.params.id,
+      {
+        method: "POST",
+        headers: {
+          token: localStorage.token,
+          id: localStorage.id,
+          time: localStorage.date
+        }
+      }
+    ).then(r => r.json());
+    if (res.code !== 200) return (window.location.href = "/login");
+    else {
+      window.location.reload();
+    }
   };
 
   componentDidMount(props) {
@@ -44,6 +71,7 @@ class Detail extends React.Component {
   }
   render() {
     const { bot, isLoading } = this.state;
+    console.log(this.state.bot);
     return (
       <Container>
         <br />
@@ -52,14 +80,25 @@ class Detail extends React.Component {
           <div className="loader">
             <span>Loading...</span>
           </div>
-        ) : bot ? (
+        ) : this.state.error.code === 200 ? (
           <>
+          {
+            bot.url === "private" ? (
+              <Message>해당 봇은 특수목적 봇이므로 초대하실 수 없습니다.</Message>
+            ) : bot.url === "archived" ? (
+              <Message error>해당 봇은 서비스 중이지 않습니다.<br/>일부 행동이 제한될 수 있습니다.</Message>
+              ) : (
+              <></>
+            )
+          }
             <Grid stackable divided="vertically">
               <Grid.Row columns={2}>
                 <Grid.Column>
                   <Image
+                  centered
+                  floated
                     src={
-                      bot.avatar !== "false"
+                      bot.avatar !== false
                         ? "https://cdn.discordapp.com/avatars/" +
                           bot.id +
                           "/" +
@@ -76,14 +115,14 @@ class Detail extends React.Component {
                   <br />
                   <h1 style={{ fontSize: "50px" }}>
                     {bot.name}{" "}
-                    {bot.trusted ? (
+                    {bot.verified ? (
                       <Label className="discord">
                         <Icon className="icon mini check" /> 디스코드 인증됨
                       </Label>
                     ) : (
                       ""
                     )}
-                    {bot.verified ? (
+                    {bot.trusted ? (
                       <Label className="green">
                         <Icon className="icon mini check" /> 신뢰함
                       </Label>
@@ -97,7 +136,6 @@ class Detail extends React.Component {
                       <Icon
                         className="circle"
                         color={status[bot.status]}
-                        empty
                         key="status"
                       />{" "}
                       {statusText[bot.status]}
@@ -128,9 +166,9 @@ class Detail extends React.Component {
                         ))}
                   </Label.Group>
                   <br />
-                  {bot.url === "false" ? (
+                  {bot.url === false ? (
                     <Button
-                      className="discord"
+                      className="yellow"
                       content="초대하기"
                       labelPosition="left"
                       icon="plus"
@@ -138,14 +176,15 @@ class Detail extends React.Component {
                     ></Button>
                   ) : (
                     <Button
-                      className="discord"
+                      disabled={bot.url === "private"||bot.url === "disabled"}
+                      className="yellow"
                       content="초대하기"
                       labelPosition="left"
-                      icon="discord"
+                      icon="plus"
                       href={bot.url}
                     ></Button>
                   )}
-                  {bot.web === "false" ? (
+                  {bot.web === false ? (
                     ""
                   ) : (
                     <Button
@@ -156,7 +195,7 @@ class Detail extends React.Component {
                       href={bot.web}
                     ></Button>
                   )}
-                  {bot.discord === "false" ? (
+                  {bot.discord === false ? (
                     ""
                   ) : (
                     <Button
@@ -167,7 +206,7 @@ class Detail extends React.Component {
                       href={"https://discord.gg/" + bot.discord}
                     ></Button>
                   )}
-                  {bot.git === "false" ? (
+                  {bot.git === false ? (
                     ""
                   ) : (
                     <Button
@@ -181,31 +220,56 @@ class Detail extends React.Component {
                 </Grid.Column>
               </Grid.Row>
 
-              <Grid.Row columns={5}>
+              <Grid.Row columns={2}>
                 <Grid.Column>
                   <Button
                     className="discord"
                     content={bot.servers === 0 ? "N/A" : bot.servers + " 서버"}
                   ></Button>
-                  <Button
-                    content={bot.votes}
+                  {
+                    bot.url === "archived" ? (
+                      <Button
+                    basic={bot.voted === 1 ? false : true}
                     color="red"
+                    content={bot.voted === 1 ? "하트 삭제" : "하트 추가"}
                     icon="heart"
-                    labelPosition="right"
+                    disabled
+                    label={{
+                      basic: true,
+                      color: "red",
+                      pointing: "left",
+                      content: bot.votes
+                        .toString()
+                        .split("...")
+                        .join(",")
+                    }}
                   />
+                    ) : (
+                      <Button
+                    basic={bot.voted === 1 ? false : true}
+                    color="red"
+                    content={bot.voted === 1 ? "하트 삭제" : "하트 추가"}
+                    icon="heart"
+                    onClick={this.voteAction}
+                    label={{
+                      basic: true,
+                      color: "red",
+                      pointing: "left",
+                      content: bot.votes
+                        .toString()
+                        .split("...")
+                        .join(",")
+                    }}
+                  />
+                    )
+                  }
                 </Grid.Column>
               </Grid.Row>
             </Grid>
-          </>
-        ) : (
-          <div className="loader">
-            <h1>존재하지 않는 봇입니다!</h1>
-          </div>
-        )}
-        <div>
+            <div>
           제작/개발:{" "}
           {(bot.owners || []).map(o =>
-            o.avatar !== "false" ? (
+            o.avatar !== false ? (
               <>
                 <Image
                   src={
@@ -237,6 +301,13 @@ class Detail extends React.Component {
             )
           )}
         </div>
+          </>
+        ) : (
+          <div className="loader">
+            <p>{this.state.error.message}</p>
+          </div>
+        )}
+
 
         <Divider section />
         <ReactMarkdown style={{ wordWrap: "break-word" }} source={bot.desc} />

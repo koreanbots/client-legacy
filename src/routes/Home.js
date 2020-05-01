@@ -1,7 +1,7 @@
 import React from "react";
 import fetch from "node-fetch";
 import Bot from "../components/Bot";
-import { Grid, Message, Container } from "semantic-ui-react";
+import { Grid, Message, Container, Card } from "semantic-ui-react";
 import config from "../config";
 
 class Home extends React.Component {
@@ -32,7 +32,14 @@ class Home extends React.Component {
     return url;
   };
   getData = async () => {
-    const bot = await fetch(config.api + "/bots/get").then(r => r.json());
+    const bot = await fetch(config.api + "/bots/get", {
+      method: "GET",
+      headers: {
+        token: localStorage.token,
+        id: localStorage.id,
+        time: localStorage.date
+      }
+    }).then(r => r.json());
     this.setState({ bot, isLoading: false });
   };
   componentDidMount() {
@@ -52,7 +59,7 @@ class Home extends React.Component {
     const { isLoading, bot } = this.state;
 
     return (
-      <div>
+      <Container>
         {this.state.message ? (
           <Message
             header={this.state.message.title}
@@ -69,9 +76,14 @@ class Home extends React.Component {
             <div className="loader">
               <span className="loader__text">Loading...</span>
             </div>
-          ) : (
+          ) : bot.code !== 200 ? (
+            <div className="loader">
+              <span className="loader__text">{bot.message}</span>
+            </div>
+          ) : 
+          (
             <div>
-              <Grid relaxed centered columns={3}>
+              <Card.Group itemsPerRow={3} stackable>
                 {bot.data.map(bot => (
                   <>
                     <Bot
@@ -80,7 +92,7 @@ class Home extends React.Component {
                       id={bot.id}
                       name={bot.name}
                       avatar={
-                        bot.avatar !== "false"
+                        bot.avatar !== false
                           ? "https://cdn.discordapp.com/avatars/" +
                             bot.id +
                             "/" +
@@ -91,17 +103,17 @@ class Home extends React.Component {
                       }
                       votes={bot.votes}
                       servers={bot.servers}
-                      category={new Array(bot.category)}
+                      category={bot.category}
                       intro={bot.intro}
                       desc={bot.desc}
                     />
                   </>
                 ))}
-              </Grid>
+              </Card.Group>
             </div>
           )}
         </section>
-      </div>
+      </Container>
     );
   }
 }

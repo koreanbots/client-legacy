@@ -4,7 +4,7 @@ import { Container } from "semantic-ui-react";
 import Redirect from "../components/Redirect";
 import config from "../config";
 
-class Detail extends React.Component {
+class Callback extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,4 +64,4 @@ class Detail extends React.Component {
   }
 }
 
-export default Detail;
+export default Callback;

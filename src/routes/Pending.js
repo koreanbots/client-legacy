@@ -25,8 +25,8 @@ class Detail extends React.Component {
     };
   }
 
-  getData = async id => {
-    await fetch(config.api + "/bots/pending/" + id)
+  getData = async (id, date) => {
+    await fetch(config.api + "/bots/pending/" + id + "/" + date)
       .then(r => r.json())
       .then(bot =>
         this.setState({
@@ -39,13 +39,21 @@ class Detail extends React.Component {
   componentDidMount(props) {
     const {
       match: {
-        params: { id }
+        params: { id, date }
       }
     } = this.props;
-    this.getData(id);
+    this.getData(id, date);
   }
   render() {
     const { bot, isLoading } = this.state;
+    function Success() {
+      return (
+        <Message success>
+          {" "}
+          해당 봇은 이미 승인되었습니다! 봇 페이지로 리다이랙트합니다.
+        </Message>
+      );
+    }
     return (
       <Container>
         <br />
@@ -59,7 +67,9 @@ class Detail extends React.Component {
             {bot.state === 0 ? (
               <Message info>해당 봇은 아직 승인 대기 상태입니다.</Message>
             ) : bot.state === 1 ? (
-              <Redirect to={"/bots" + bot.id} />
+              <>
+                <Redirect to={"/bots/" + bot.id} content={<Success />} />
+              </>
             ) : bot.state === 2 ? (
               <Message error>해당 봇은 승인 거부 되었습니다.</Message>
             ) : (
@@ -69,16 +79,10 @@ class Detail extends React.Component {
               <Grid.Row columns={2}>
                 <Grid.Column>
                   <Image
-                    src={
-                      bot.avatar !== "false"
-                        ? "https://cdn.discordapp.com/avatars/" +
-                          bot.id +
-                          "/" +
-                          bot.avatar +
-                          ".webp"
-                        : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
-                            5}.png`
-                    }
+                    src={`https://cdn.discordapp.com/embed/avatars/${(bot.tag ===
+                    "????"
+                      ? 5555
+                      : bot.tag) % 5}.png`}
                     size="medium"
                     rounded
                   />
@@ -139,7 +143,7 @@ class Detail extends React.Component {
                         ))}
                   </Label.Group>
                   <br />
-                  {bot.url === "false" ? (
+                  {bot.url === false ? (
                     <Button
                       className="discord"
                       content="초대하기"
@@ -156,7 +160,7 @@ class Detail extends React.Component {
                       href={bot.url}
                     ></Button>
                   )}
-                  {bot.web === "false" ? (
+                  {bot.web === false ? (
                     ""
                   ) : (
                     <Button
@@ -167,7 +171,7 @@ class Detail extends React.Component {
                       href={bot.web}
                     ></Button>
                   )}
-                  {bot.discord === "false" ? (
+                  {bot.discord === false ? (
                     ""
                   ) : (
                     <Button
@@ -178,7 +182,7 @@ class Detail extends React.Component {
                       href={"https://discord.gg/" + bot.discord}
                     ></Button>
                   )}
-                  {bot.git === "false" ? (
+                  {bot.git === false ? (
                     ""
                   ) : (
                     <Button
@@ -216,7 +220,7 @@ class Detail extends React.Component {
         <div>
           제작/개발:{" "}
           {(bot.owners || []).map(o =>
-            o.avatar !== "false" ? (
+            o.avatar !== false ? (
               <>
                 <Image
                   src={

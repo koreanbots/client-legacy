@@ -32,6 +32,7 @@ export default class MenuExampleStackable extends Component {
         .then(r => r.json())
         .then(r => {
           if (r.code === 200) {
+            console.log(r.user);
             localStorage.setItem("userCache", JSON.stringify(r.user));
             this.setState({
               user: JSON.parse(localStorage.userCache),
@@ -72,7 +73,7 @@ export default class MenuExampleStackable extends Component {
               <h1 style={{ fontFamily: "Gugi" }}>디코봇</h1>
             </Menu.Item>
             {this.state.logged === 0 ? (
-              <Menu.Item color="black" name="로그인" href={Config.url}>
+              <Menu.Item color="black" name="로그인" href="/login">
                 로그인
               </Menu.Item>
             ) : this.state.logged === 1 ? (
@@ -81,7 +82,7 @@ export default class MenuExampleStackable extends Component {
                 trigger={
                   <Image
                     src={
-                      this.state.user.avatar !== "false"
+                      this.state.user.avatar !== false
                         ? "https://cdn.discordapp.com/avatars/" +
                           this.state.user.id +
                           "/" +
@@ -95,16 +96,19 @@ export default class MenuExampleStackable extends Component {
                 }
               >
                 <Dropdown.Menu>
-                  <Dropdown.Item  href="/profile">프로필</Dropdown.Item>
-                  <Dropdown.Item>
-                    <a href="/logout" style={{ color: "#ff6e6e" }}>
-                      로그아웃
-                    </a>
+                  <Dropdown.Header
+                    content={
+                      this.state.user.username + "#" + this.state.user.tag
+                    }
+                  />
+                  <Dropdown.Item href="/profile">프로필</Dropdown.Item>
+                  <Dropdown.Item href="/logout">
+                    <a style={{ color: "#ff6e6e" }}>로그아웃</a>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             ) : (
-              <Menu.Item color="black" name="로그인" href={Config.url}>
+              <Menu.Item color="black" name="로그인" href="/login">
                 로그인
               </Menu.Item>
             )}
@@ -148,14 +152,14 @@ export default class MenuExampleStackable extends Component {
                 <Search />
               </Menu.Item>
               {this.state.logged === 0 ? (
-                <Menu.Item color="black" name="로그인" href={Config.url}>
+                <Menu.Item color="black" name="로그인" href="/login">
                   로그인
                 </Menu.Item>
               ) : this.state.logged === 1 ? (
                 <Dropdown
                   item
                   trigger={
-                    this.state.user.avatar !== "false" ? (
+                    this.state.user.avatar !== false ? (
                       <>
                         <Image
                           src={
@@ -189,15 +193,13 @@ export default class MenuExampleStackable extends Component {
                 >
                   <Dropdown.Menu>
                     <Dropdown.Item href="/profile">프로필</Dropdown.Item>
-                    <Dropdown.Item>
-                      <a href="/logout" style={{ color: "#ff6e6e" }}>
-                        로그아웃
-                      </a>
+                    <Dropdown.Item href="/logout">
+                      <a style={{ color: "#ff6e6e" }}>로그아웃</a>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               ) : (
-                <Menu.Item color="black" name="로그인" href={Config.url}>
+                <Menu.Item color="black" name="로그인" href="/login">
                   로그인
                 </Menu.Item>
               )}
