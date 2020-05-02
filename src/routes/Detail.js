@@ -109,9 +109,9 @@ class Detail extends React.Component {
                           bot.id +
                           "/" +
                           bot.avatar +
-                          ".webp"
+                          ".webp?size=1024"
                         : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
-                            5}.png`
+                            5}.png??size=1024`
                     }
                     size="medium"
                     rounded

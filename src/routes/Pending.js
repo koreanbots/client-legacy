@@ -82,7 +82,7 @@ class Detail extends React.Component {
                     src={`https://cdn.discordapp.com/embed/avatars/${(bot.tag ===
                     "????"
                       ? 5555
-                      : bot.tag) % 5}.png`}
+                      : bot.tag) % 5}.png?size=1024`}
                     size="medium"
                     rounded
                   />

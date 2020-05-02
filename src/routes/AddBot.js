@@ -255,7 +255,7 @@ class SubmitBot extends Component {
                 name="desc"
                 value={desc}
                 onChange={this.handleChange}
-                placeholder="봇의 자세하게 설명해주세요! 마크다운을 지원합니다. (최대 1000자)"
+                placeholder="봇을 자세하게 설명해주세요! 마크다운을 지원합니다. (최대 1000자)"
                 maxLength={1000}
               />
               <div className="field">
