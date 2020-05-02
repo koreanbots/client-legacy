@@ -95,7 +95,7 @@ export default class MenuExampleStackable extends Component {
                   />
                 }
               >
-                <Dropdown.Menu>
+                <Dropdown.Menu direction='left'>
                   <Dropdown.Header
                     content={
                       this.state.user.username + "#" + this.state.user.tag
