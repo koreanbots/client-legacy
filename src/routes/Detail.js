@@ -89,7 +89,7 @@ class Detail extends React.Component {
               <Message>
                 해당 봇은 특수목적 봇이므로 초대하실 수 없습니다.
               </Message>
-            ) : bot.url === "archived" ? (
+            ) : bot.url === "disable" ? (
               <Message error>
                 해당 봇은 서비스 중이지 않습니다.
                 <br />
@@ -232,9 +232,9 @@ class Detail extends React.Component {
                 <Grid.Column>
                   <Button
                     className="discord"
-                    content={bot.servers === 0 ? "N/A" : bot.servers + " 서버"}
+                    content={bot.servers === 0 ? "0" : bot.servers + " 서버"}
                   ></Button>
-                  {bot.url === "archived" ? (
+                  {bot.url === "disable" ? (
                     <Button
                       basic={bot.voted === 1 ? false : true}
                       color="red"

@@ -52,12 +52,21 @@ class ManageBot extends Component {
   };
   showToken = () => {
       if(this.state.token.match(/^\*/)) this.setState({ token: this.state.info.data.token })
-      else this.setState({ token: this.state.info.data.token.replace(/./gi, '*') })
+      else this.setState({ token: '******' })
   }
+  regenToken = async() => {
+      const res = await fetch(config.api + '/bots/regenToken', {
+        headers: {
+            token: this.state.info.data.token
+        }
+      }).then(r=> r.json())
+      console.log(res)
+      return window.location.reload()
+    }
   handleChange = (e, { name, value }) => {
     if (name === "desc")
       this.setState({
-        desc: value.replace(/</gi, "&lt").replace(/>/gi, "&gt")
+        desc: '******'
       });
     this.setState({ [name]: value });
     if (name === "intro" && value.length > 120)
@@ -100,7 +109,7 @@ class ManageBot extends Component {
           }
       }).then(r=> r.json())
       if(res.code !== 200 ) this.setState({ info: res })
-      else this.setState({ info: res, id: res.data.id, prefix: res.data.prefix, lib: res.data.lib, website: res.data.web || '', git: res.data.git || '', url: res.data.url || '', discord: res.data.discord || '', category: res.data.category, intro: res.data.intro, desc: res.data.desc, token: res.data.token.replace(/./gi, '*') })
+      else this.setState({ info: res, id: res.data.id, prefix: res.data.prefix, lib: res.data.lib, website: res.data.web || '', git: res.data.git || '', url: res.data.url || '', discord: res.data.discord || '', category: res.data.category, intro: res.data.intro, desc: res.data.desc, token: '******' })
   }
   render() {
     const {
@@ -157,9 +166,9 @@ class ManageBot extends Component {
                 <Grid.Column>
                 <h1>{bot.name}</h1><br/>
                 <h5>ID: {id}</h5>
-                토큰: {this.state.token} 
+                토큰: <pre>{this.state.token} </pre>
                 <br/>
-                <Button content={this.state.token.startsWith('*') ? "보이기" : "가리기  "} onClick={this.showToken}/> <Button content="복사"/>
+                <Button content={this.state.token.startsWith('*') ? "보이기" : "가리기  "} onClick={this.showToken}/> <Button onClick={this.regenToken} content="재발급"/>
                 </Grid.Column>
             </Grid.Row>
             </Grid>
@@ -291,7 +300,7 @@ class ManageBot extends Component {
                 </Segment>
               </div>
 
-              <Form.Button content="제출" />
+              <Form.Button disabled content="제출" />
             </div>
           </Form>
           {this.state.data.state === 1 ? (

@@ -109,7 +109,7 @@ class SubmitBot extends Component {
         <Container>
           <br />
           <h1>새로운 봇 추가하기</h1>
-          <Message info>
+          <Message error>
             <Message.Header>
               신청하시기 전에 다음 사항을 확인해주세요!!
             </Message.Header>

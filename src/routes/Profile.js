@@ -10,9 +10,10 @@ import {
   Card,
   Divider
 } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+
 import Redirect from "../components/Redirect";
 import config from "../config";
+import Bot from "../components/Bot";
 
 class Detail extends React.Component {
   constructor(props) {
@@ -159,47 +160,30 @@ class Detail extends React.Component {
             ) : (
               <Card.Group stackable itemsPerRow={3}>
                 {result.user.voted.map(bot => (
-                  <Card href={"/bots/" + bot.id}>
-                    <Card.Content>
-                      <Card.Header>
-                        {" "}
-                        <Item.Image
-                          floated="right"
-                          src={
-                            bot.avatar !== false
-                              ? "https://cdn.discordapp.com/avatars/" +
-                                bot.id +
-                                "/" +
-                                bot.avatar +
-                                ".webp"
-                              : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
-                                  5}.png`
-                          }
-                          wrapped
-                          ui={false}
-                          avatar
-                        />
-                        {bot.name}
-                      </Card.Header>
-                      <Card.Meta>
-                        <a style={{ color: "#7289DA" }}>{bot.servers} 서버</a> |{" "}
-                        <a style={{ color: "red" }}>
-                          {bot.votes} <Icon className="heart" />
-                        </a>
-                      </Card.Meta>
-                      <Card.Description>{bot.intro}</Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                      <div className="ui two buttons">
-                        <Button basic color="blue">
-                          보기
-                        </Button>
-                        <Button href="/gg" basic color="green">
-                          초대하기
-                        </Button>
-                      </div>
-                    </Card.Content>
-                  </Card>
+                  <Bot
+                  data={bot}
+                  key={bot.id}
+                  id={bot.id}
+                  name={bot.name}
+                  avatar={
+                    bot.avatar !== false
+                      ? "https://cdn.discordapp.com/avatars/" +
+                        bot.id +
+                        "/" +
+                        bot.avatar +
+                        ".png"
+                      : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
+                          5}.png`
+                  }
+                  votes={bot.votes}
+                  servers={bot.servers}
+                  category={bot.category}
+                  intro={bot.intro}
+                  desc={bot.desc}
+                  invite={bot.url === false ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0` : bot.url}
+                  
+                />
+
                 ))}
               </Card.Group>
             )}
