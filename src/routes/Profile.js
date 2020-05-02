@@ -107,7 +107,7 @@ class Detail extends React.Component {
                           <Button basic color="blue">
                             보기
                           </Button>
-                          <Button href="/gg" basic color="green">
+                          <Button href={"/manage/" + bot.id} basic color="green">
                             관리하기
                           </Button>
                         </div>

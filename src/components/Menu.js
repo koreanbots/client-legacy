@@ -32,7 +32,6 @@ export default class MenuExampleStackable extends Component {
         .then(r => r.json())
         .then(r => {
           if (r.code === 200) {
-            console.log(r.user);
             localStorage.setItem("userCache", JSON.stringify(r.user));
             this.setState({
               user: JSON.parse(localStorage.userCache),
@@ -60,7 +59,6 @@ export default class MenuExampleStackable extends Component {
       });
   }
   editSlider = () => {
-    console.log(this.state.visible)
     this.setState({ visible: !this.state.visible });
   }
   render() {
@@ -90,7 +88,7 @@ export default class MenuExampleStackable extends Component {
                           this.state.user.id +
                           "/" +
                           this.state.user.avatar +
-                          ".webp"
+                          ".png"
                         : `https://cdn.discordapp.com/embed/avatars/${this.state
                             .user.tag % 5}.png`
                     }

@@ -156,14 +156,15 @@ class ManageBot extends Component {
                 </Grid.Column>
                 <Grid.Column>
                 <h1>{bot.name}</h1><br/>
-
+                <h5>ID: {id}</h5>
                 토큰: {this.state.token} 
-                <Button content={this.state.token.startsWith('*') ? "보이기" : "가리기"} onClick={this.showToken}/> <Button content="복사"/>
+                <br/>
+                <Button content={this.state.token.startsWith('*') ? "보이기" : "가리기  "} onClick={this.showToken}/> <Button content="복사"/>
                 </Grid.Column>
             </Grid.Row>
             </Grid>
-            <h5>ID: {id}</h5>
-
+            
+                    <br/>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group>
               <Form.Input
