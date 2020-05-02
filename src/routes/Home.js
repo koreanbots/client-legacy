@@ -105,6 +105,8 @@ class Home extends React.Component {
                       category={bot.category}
                       intro={bot.intro}
                       desc={bot.desc}
+                      invite={bot.url === false ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0` : bot.url}
+                      
                     />
                   </>
                 ))}

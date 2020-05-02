@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button, Item, Icon, Label } from "semantic-ui-react";
 import "./Bot.css";
 
-function Bot({ data, id, name, avatar, votes, servers, intro, category }) {
+function Bot({ data, id, name, avatar, votes, servers, intro, category, invite }) {
+  const [ lookHover, setLookHover ] = useState(false)
+  const [ inviteHover, setinviteHover ] = useState(false)
   return (
     <>
       <Card href={"/bots/" + id}>
@@ -28,10 +30,10 @@ function Bot({ data, id, name, avatar, votes, servers, intro, category }) {
         </Card.Content>
         <Card.Content extra>
           <div className="ui two buttons">
-            <Button basic color="blue">
+            <Button basic={!lookHover} color="blue" onMouseOver={()=>setLookHover(true)} onMouseOut={()=>setLookHover(false)}>
               보기
             </Button>
-            <Button href="/gg" basic color="green">
+            <Button disabled={invite === 'private' || invite === 'disabled'} basic={!inviteHover} color="green" onMouseOver={()=>setinviteHover(true)} onMouseOut={()=>setinviteHover(false)}>
               초대하기
             </Button>
           </div>
