@@ -38,7 +38,7 @@ class Detail extends React.Component {
         this.setState({
           bot: bot.code === 200 ? bot.data : false,
           isLoading: false,
-          error: bot.code === 200 ? {} : bot
+          error: bot.code === 200 ? { code: 200 } : bot
         })
       );
   };
@@ -82,21 +82,25 @@ class Detail extends React.Component {
           </div>
         ) : this.state.error.code === 200 ? (
           <>
-          {
-            bot.url === "private" ? (
-              <Message>해당 봇은 특수목적 봇이므로 초대하실 수 없습니다.</Message>
+            {bot.url === "private" ? (
+              <Message>
+                해당 봇은 특수목적 봇이므로 초대하실 수 없습니다.
+              </Message>
             ) : bot.url === "archived" ? (
-              <Message error>해당 봇은 서비스 중이지 않습니다.<br/>일부 행동이 제한될 수 있습니다.</Message>
-              ) : (
+              <Message error>
+                해당 봇은 서비스 중이지 않습니다.
+                <br />
+                일부 행동이 제한될 수 있습니다.
+              </Message>
+            ) : (
               <></>
-            )
-          }
+            )}
             <Grid stackable divided="vertically">
               <Grid.Row columns={2}>
                 <Grid.Column>
                   <Image
-                  centered
-                  floated
+                    centered
+                    floated
                     src={
                       bot.avatar !== false
                         ? "https://cdn.discordapp.com/avatars/" +
@@ -176,7 +180,7 @@ class Detail extends React.Component {
                     ></Button>
                   ) : (
                     <Button
-                      disabled={bot.url === "private"||bot.url === "disabled"}
+                      disabled={bot.url === "private" || bot.url === "disabled"}
                       className="yellow"
                       content="초대하기"
                       labelPosition="left"
@@ -226,88 +230,85 @@ class Detail extends React.Component {
                     className="discord"
                     content={bot.servers === 0 ? "N/A" : bot.servers + " 서버"}
                   ></Button>
-                  {
-                    bot.url === "archived" ? (
-                      <Button
-                    basic={bot.voted === 1 ? false : true}
-                    color="red"
-                    content={bot.voted === 1 ? "하트 삭제" : "하트 추가"}
-                    icon="heart"
-                    disabled
-                    label={{
-                      basic: true,
-                      color: "red",
-                      pointing: "left",
-                      content: bot.votes
-                        .toString()
-                        .split("...")
-                        .join(",")
-                    }}
-                  />
-                    ) : (
-                      <Button
-                    basic={bot.voted === 1 ? false : true}
-                    color="red"
-                    content={bot.voted === 1 ? "하트 삭제" : "하트 추가"}
-                    icon="heart"
-                    onClick={this.voteAction}
-                    label={{
-                      basic: true,
-                      color: "red",
-                      pointing: "left",
-                      content: bot.votes
-                        .toString()
-                        .split("...")
-                        .join(",")
-                    }}
-                  />
-                    )
-                  }
+                  {bot.url === "archived" ? (
+                    <Button
+                      basic={bot.voted === 1 ? false : true}
+                      color="red"
+                      content={bot.voted === 1 ? "하트 삭제" : "하트 추가"}
+                      icon="heart"
+                      disabled
+                      label={{
+                        basic: true,
+                        color: "red",
+                        pointing: "left",
+                        content: bot.votes
+                          .toString()
+                          .split("...")
+                          .join(",")
+                      }}
+                    />
+                  ) : (
+                    <Button
+                      basic={bot.voted === 1 ? false : true}
+                      color="red"
+                      content={bot.voted === 1 ? "하트 삭제" : "하트 추가"}
+                      icon="heart"
+                      onClick={this.voteAction}
+                      label={{
+                        basic: true,
+                        color: "red",
+                        pointing: "left",
+                        content: bot.votes
+                          .toString()
+                          .split("...")
+                          .join(",")
+                      }}
+                    />
+                  )}
                 </Grid.Column>
               </Grid.Row>
             </Grid>
             <div>
-          제작/개발:{" "}
-          {(bot.owners || []).map(o =>
-            o.avatar !== false ? (
-              <>
-                <Image
-                  src={
-                    "https://cdn.discordapp.com/avatars/" +
-                    o.id +
-                    "/" +
-                    o.avatar +
-                    ".webp"
-                  }
-                  avatar
-                />
-                <span>
-                  {" "}
-                  {o.username}#{o.tag}
-                </span>
-              </>
-            ) : (
-              <>
-                <Image
-                  src={`https://cdn.discordapp.com/embed/avatars/${o.tag %
-                    5}.png`}
-                  avatar
-                />
-                <span>
-                  {" "}
-                  {o.username}#{o.tag}
-                </span>
-              </>
-            )
-          )}
-        </div>
+              제작/개발:{" "}
+              {(bot.owners || []).map(o =>
+                o.avatar !== false ? (
+                  <>
+                    <Image
+                      src={
+                        "https://cdn.discordapp.com/avatars/" +
+                        o.id +
+                        "/" +
+                        o.avatar +
+                        ".webp"
+                      }
+                      avatar
+                    />
+                    <span>
+                      {" "}
+                      {o.username}#{o.tag}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <Image
+                      src={`https://cdn.discordapp.com/embed/avatars/${o.tag %
+                        5}.png`}
+                      avatar
+                    />
+                    <span>
+                      {" "}
+                      {o.username}#{o.tag}
+                    </span>
+                  </>
+                )
+              )}
+            </div>
           </>
         ) : (
           <div className="loader">
             <p>{this.state.error.message}</p>
           </div>
         )}
-
 
         <Divider section />
         <ReactMarkdown style={{ wordWrap: "break-word" }} source={bot.desc} />

@@ -130,7 +130,8 @@ class SubmitBot extends Component {
                   - 도움 명령어에 소유자임을 나타내고 싶지 않으시다면, 아래
                   명령어를 만들어주세요
                   <br />
-                  명령어: [접두사]hellothisisverification 응답: 유저#태그(아이디)
+                  명령어: [접두사]hellothisisverification 응답:
+                  유저#태그(아이디)
                 </ol>
               </li>
             </Message.Content>
@@ -262,7 +263,7 @@ class SubmitBot extends Component {
                 <Segment style={{ wordWrap: "break-word" }}>
                   <Label attached="top">설명 미리보기</Label>
                   <br />
-                  <ReactMarkdown source={desc} />
+                  <ReactMarkdown source={desc} escapeHtml={true} />
                   <br />
                   <Divider />
                   <p>다음 결과는 실제와 다를 수 있습니다.</p>

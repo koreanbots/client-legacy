@@ -1,7 +1,7 @@
 {
   "name": "client",
-  "version": "0.1.0",
-  "homepage": "https://koreanbots.github.io/client",
+  "version": "0.2.0",
+  "homepage": "https://koreanbots.cf",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "node-fetch": "^2.6.0",
@@ -38,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-git-info": "^1.1.0"
   }
 }

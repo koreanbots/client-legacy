@@ -63,7 +63,7 @@ class Detail extends React.Component {
           <div>
             <br />
             <h1>프로필</h1>
-            <Button href="/addbot" content="봇 추가하기" icon="plus"/>
+            <Button href="/addbot" content="봇 추가하기" icon="plus" />
             <h2>나의 봇</h2>
             {result.user.bots.length === 0 ? (
               <h3>승인된 봇이 없습니다.</h3>

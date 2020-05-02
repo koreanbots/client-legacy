@@ -80,8 +80,7 @@ class Home extends React.Component {
             <div className="loader">
               <span className="loader__text">{bot.message}</span>
             </div>
-          ) : 
-          (
+          ) : (
             <div>
               <Card.Group itemsPerRow={3} stackable>
                 {bot.data.map(bot => (
