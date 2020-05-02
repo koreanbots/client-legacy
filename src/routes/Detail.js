@@ -8,7 +8,8 @@ import {
   Divider,
   Button,
   Icon,
-  Message
+  Message,
+  Segment
 } from "semantic-ui-react";
 import ReactMarkdown from "react-markdown/with-html";
 import config from "../config";
@@ -111,7 +112,7 @@ class Detail extends React.Component {
                           bot.avatar +
                           ".webp?size=1024"
                         : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
-                            5}.png??size=1024`
+                            5}.png?size=1024`
                     }
                     size="medium"
                     rounded
@@ -121,21 +122,22 @@ class Detail extends React.Component {
                   <br />
                   <h1 style={{ fontSize: "50px" }}>
                     {bot.name}{" "}
+                    </h1>
                     {bot.verified ? (
                       <Label className="discord">
-                        <Icon className="icon mini check" /> 디스코드 인증됨
+                        <Icon className="icon check" /> 디스코드 인증됨
                       </Label>
                     ) : (
                       ""
                     )}
                     {bot.trusted ? (
                       <Label className="green">
-                        <Icon className="icon mini check" /> 신뢰함
+                        <Icon className="icon check" /> 신뢰함
                       </Label>
                     ) : (
                       ""
                     )}
-                  </h1>
+                  <br/><br/>
                   <Label>
                     상태
                     <Label.Detail>
@@ -313,7 +315,9 @@ class Detail extends React.Component {
         )}
 
         <Divider section />
-        <ReactMarkdown style={{ wordWrap: "break-word" }} source={bot.desc} />
+        <Segment style={{ wordWrap: "break-word"}}>
+          <ReactMarkdown source={bot.desc} />
+        </Segment>
       </Container>
     );
   }

@@ -7,13 +7,13 @@ import Search from "./routes/Search";
 import Callback from "./routes/Callback";
 import Logout from "./routes/Logout";
 import AddBot from "./routes/AddBot";
+import ManageBot from "./routes/ManageBot"
 import Profile from "./routes/Profile";
 import Pending from "./routes/Pending";
 import GuideLines from "./routes/GuideLines";
 import Vote from "./routes/Vote";
 import Login from "./routes/Login";
 import Version from "./routes/Version";
-
 import NotFound from "./components/404";
 import Menu from "./components/Menu";
 import Redirect from "./components/Redirect";
@@ -43,6 +43,7 @@ function App() {
         <Route path="/discord">
           <Redirect to="https://discord.gg/JEh53MQ" />
         </Route>
+        <Route path="/manage/:id" component={ManageBot}/>
         <Route path="/clientinfo" component={Version}/>
         <Route path="/guidelines" component={GuideLines} />
         <Route component={NotFound}></Route>
