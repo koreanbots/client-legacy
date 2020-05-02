@@ -216,6 +216,7 @@ class SubmitBot extends Component {
               <label>지원 디스코드 서버</label>
             </div>
             <Input
+              style={{width: '70%'}}
               labelPosition="right"
               placeholder="JEh53MQ"
               name="discord"
@@ -223,7 +224,7 @@ class SubmitBot extends Component {
               onChange={this.handleChange}
               maxLength={8}
             >
-              <Label basic>discord.gg/</Label>
+              <Label basic >discord.gg/</Label>
               <input />
             </Input>
 
