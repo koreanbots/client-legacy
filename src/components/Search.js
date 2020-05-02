@@ -24,6 +24,7 @@ export default class SearchExampleStandard extends Component {
           onChange={this.handleChange.bind(this)}
           icon="search"
           placeholder="검색..."
+          fluid={this.props.fluid}
         />
 
         {this.state.redirect ? to(this.state.value) : ""}

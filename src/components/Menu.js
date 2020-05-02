@@ -59,7 +59,10 @@ export default class MenuExampleStackable extends Component {
         logged: 1
       });
   }
-  editSlider = () => this.setState({ visible: !this.state.visible });
+  editSlider = () => {
+    console.log(this.state.visible)
+    this.setState({ visible: !this.state.visible });
+  }
   render() {
     const { visible } = this.state;
     return (
@@ -114,17 +117,18 @@ export default class MenuExampleStackable extends Component {
             )}
           </Menu>
           <Sidebar
-            onHide={() => this.editSlider()}
             as={Menu}
             animation="overlay"
-            direction="left"
+            direction="top"
             vertical
+            className="nav"
             visible={visible}
           >
-            <Menu.Item as="a" header>
-              메뉴
-            </Menu.Item>
-            <Menu.Item as="a" href="/discord">
+            <Menu.Item position='right' onClick={this.editSlider} >
+            <Icon className="close" />
+                <br/>
+              </Menu.Item>
+            <Menu.Item as="a" href="/discord" >
               디스코드
             </Menu.Item>
             <Menu.Item as="a">
@@ -135,6 +139,9 @@ export default class MenuExampleStackable extends Component {
               <Icon name="camera" />
               Channels
             </Menu.Item>
+            <Menu.Item>
+                <Search fluid />
+              </Menu.Item>
           </Sidebar>
         </Responsive>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>

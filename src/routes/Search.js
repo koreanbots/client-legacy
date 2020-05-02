@@ -61,11 +61,14 @@ class Search extends React.Component {
                   id={bot.id}
                   name={bot.name}
                   avatar={
-                    "https://cdn.discordapp.com/avatars/" +
-                    bot.id +
-                    "/" +
-                    bot.avatar +
-                    ".webp"
+                    bot.avatar !== false
+                      ? "https://cdn.discordapp.com/avatars/" +
+                        bot.id +
+                        "/" +
+                        bot.avatar +
+                        ".webp"
+                      : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
+                          5}.png`
                   }
                   votes={bot.votes}
                   servers={bot.servers}

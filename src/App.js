@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import Home from "./routes/Home";
 import About from "./routes/About";
 import Detail from "./routes/Detail";
@@ -14,21 +15,28 @@ import GuideLines from "./routes/GuideLines";
 import Vote from "./routes/Vote";
 import Login from "./routes/Login";
 import Version from "./routes/Version";
+
 import NotFound from "./components/404";
 import Menu from "./components/Menu";
 import Redirect from "./components/Redirect";
 
 import "./App.css";
+import { Dimmer, Segment } from "semantic-ui-react";
 
 function App() {
+  const [ setDimm, Dimmed ] = useState(false)
+
   return (
     <Router>
       <Menu
+        Dimm={Dimmed}
+        setDimm={setDimm}
         token={localStorage.getItem("token")}
         id={localStorage.getItem("id")}
         date={localStorage.getItem("date")}
       />
       <Switch>
+       
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/search" component={Search} />
@@ -47,6 +55,7 @@ function App() {
         <Route path="/clientinfo" component={Version}/>
         <Route path="/guidelines" component={GuideLines} />
         <Route component={NotFound}></Route>
+       
       </Switch>
     </Router>
   );
