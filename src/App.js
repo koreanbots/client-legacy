@@ -12,6 +12,7 @@ import Pending from "./routes/Pending";
 import GuideLines from "./routes/GuideLines";
 import Vote from "./routes/Vote";
 import Login from "./routes/Login";
+import Version from "./routes/Version";
 
 import NotFound from "./components/404";
 import Menu from "./components/Menu";
@@ -42,6 +43,7 @@ function App() {
         <Route path="/discord">
           <Redirect to="https://discord.gg/JEh53MQ" />
         </Route>
+        <Route path="/clientinfo" component={Version}/>
         <Route path="/guidelines" component={GuideLines} />
         <Route component={NotFound}></Route>
       </Switch>
