@@ -3,8 +3,10 @@ import fetch from "node-fetch";
 import "semantic-ui-css/semantic.min.css";
 
 import Bot from "../components/Bot";
-import { Card, Container } from "semantic-ui-react";
+import { Card, Container, Pagination } from "semantic-ui-react";
 import config from "../config";
+
+import queryString from 'query-string';
 
 class Search extends React.Component {
   constructor(props) {
@@ -13,23 +15,31 @@ class Search extends React.Component {
       result: null,
       error: null,
       isLoading: true,
-      bots: {}
+      bots: {},
+      activePage: 1,
+      totalPage: 1,
+      q: ''
     };
   }
 
-  getData = async q => {
-    const bot = await fetch(config.api + "/bots/search?q=" + q).then(r =>
+  getData = async (q, page) => {
+    const bot = await fetch(config.api + "/bots/search?q=" + q + "&page=" + page).then(r =>
       r.json()
     );
-    console.log(bot);
-    this.setState({ bots: bot.code === 200 ? bot.data : [], isLoading: false });
+    this.setState({ bots: bot.code === 200 ? bot.data : [], isLoading: false, totalPage: bot.totalPage });
   };
 
-  componentDidMount(props) {
-    console.log(this.props.location.search);
-    let q = this.props.location.search;
+  handlePaginationChange = (e, { activePage }) => {  this.setState({ activePage });  this.getData(this.state.q, activePage)}
+
+  componentDidMount() {
+    const query = queryString.parse(window.location.search);
+    const page = Number.isNaN(Number(query.page)) || Number(query.page) < 1 ? 1 : query.page
+    let q = query.query;
     if (!q) this.setState({ bots: [], isLoading: false });
-    this.getData(q.replace(/^\?query=/, ""));
+    this.setState({ activePage:  page, q })
+
+    
+    this.getData(q, page);
   }
   render() {
     const { bots, isLoading } = this.state;
@@ -80,6 +90,10 @@ class Search extends React.Component {
             </Card.Group>
           </>
         )}
+                  <br/>
+          <Container textAlign='center'>
+          <Pagination activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange} />
+          </Container>
       </Container>
     );
   }

@@ -275,36 +275,40 @@ class Detail extends React.Component {
             <div>
               제작/개발:{" "}
               {(bot.owners || []).map(o =>
-                o.avatar !== false ? (
-                  <>
-                    <Image
-                      src={
-                        "https://cdn.discordapp.com/avatars/" +
-                        o.id +
-                        "/" +
-                        o.avatar +
-                        ".webp"
-                      }
-                      avatar
-                    />
-                    <span>
-                      {" "}
-                      {o.username}#{o.tag}
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <Image
-                      src={`https://cdn.discordapp.com/embed/avatars/${o.tag %
-                        5}.png`}
-                      avatar
-                    />
-                    <span>
-                      {" "}
-                      {o.username}#{o.tag}
-                    </span>
-                  </>
-                )
+                <Label>
+                  {
+                    o.avatar !== false ? (
+                      <>
+                        <Image
+                          src={
+                            "https://cdn.discordapp.com/avatars/" +
+                            o.id +
+                            "/" +
+                            o.avatar +
+                            ".webp"
+                          }
+                          avatar
+                        />
+                        <span>
+                          {" "}
+                          {o.username}#{o.tag}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <Image
+                          src={`https://cdn.discordapp.com/embed/avatars/${o.tag %
+                            5}.png`}
+                          avatar
+                        />
+                        <span>
+                          {" "}
+                          {o.username}#{o.tag}
+                        </span>
+                      </>
+                    )
+                  }
+                </Label>
               )}
             </div>
           </>

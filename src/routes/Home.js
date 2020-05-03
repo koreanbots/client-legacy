@@ -1,8 +1,10 @@
 import React from "react";
 import fetch from "node-fetch";
 import Bot from "../components/Bot";
-import { Message, Container, Card } from "semantic-ui-react";
+import { Message, Container, Card, Pagination  } from "semantic-ui-react";
 import config from "../config";
+
+import queryString from 'query-string';
 
 class Home extends React.Component {
   constructor(props) {
@@ -10,10 +12,13 @@ class Home extends React.Component {
     this.state = {
       isLoading: true,
       bot: {},
-      message: false
+      message: false,
+      activePage: 1,
+      totalPage: 1
     };
   }
 
+  handlePaginationChange = (e, { activePage }) => {  this.setState({ activePage });  this.getData(activePage)}
   removeParam = parameter => {
     var url = window.location.href;
     var urlparts = url.split("?");
@@ -31,8 +36,8 @@ class Home extends React.Component {
     }
     return url;
   };
-  getData = async () => {
-    const bot = await fetch(config.api + "/bots/get", {
+  getData = async (page) => {
+    const bot = await fetch(config.api + "/bots/get?page=" + page, {
       method: "GET",
       headers: {
         token: localStorage.token,
@@ -40,16 +45,19 @@ class Home extends React.Component {
         time: localStorage.date
       }
     }).then(r => r.json());
-    this.setState({ bot, isLoading: false });
+    this.setState({ bot, isLoading: false, totalPage: bot.totalPage });
   };
   componentDidMount() {
-    if (this.props.location.search.replace(/^\?message=/, ""))
+    const query = queryString.parse(window.location.search);
+    const page = Number.isNaN(Number(query.page)) || Number(query.page) < 1 ? 1 : query.page
+    this.setState({ activePage:  page})
+    if (query.message)
       this.setState({
         message:
-          messages[this.props.location.search.replace(/^\?message=/, "")] ||
+          messages[query.message] ||
           false
       });
-    this.getData();
+    this.getData(page);
   }
   handleDismiss = async () => {
     this.setState({ message: false });
@@ -113,6 +121,10 @@ class Home extends React.Component {
               </Card.Group>
             </div>
           )}
+          <br/>
+          <Container textAlign='center'>
+          <Pagination activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange} />
+          </Container>
         </section>
       </Container>
     );
