@@ -4,10 +4,10 @@ import { Segment, Container, Grid, Icon, List } from "semantic-ui-react";
 function Footer() {
     return(
         
-        <Segment inverted style={{ position: 'absolute', bottom: 0 ,width: '100%', height: '10rem', borderRadius: 0  }}>
+        <Segment inverted style={{ position: 'absolute', bottom: 0 ,width: '100%', height: '17rem', borderRadius: 0  }}>
             <Container>
                 
-            <Grid columns={2}>
+            <Grid columns={2} stackable>
                     <Grid.Column>
                     <h1>
                 DBKR
