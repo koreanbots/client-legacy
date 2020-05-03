@@ -37,12 +37,7 @@ class Home extends React.Component {
   };
 
   editParm = (parm, val) => {
-    const url=window.location.href
-    let separator = (url.indexOf("?")===-1)?"?":"&"
-    const newParam=separator + `${parm}=${val}`;
-    let newUrl=url.replace(new RegExp("[\\?&]" + parm + "=([^&#]*)",'gi'),"");
-    newUrl+=newParam;
-    window.history.pushState('', document.title ,newUrl.replace('/&', '?'))
+    window.history.pushState('', document.title , `${window.location.origin}?${parm}=${val}`)
   }
   getData = async (page) => {
     const bot = await fetch(config.api + "/bots/get?page=" + page, {
@@ -125,6 +120,7 @@ class Home extends React.Component {
                       desc={bot.desc}
                       invite={bot.url === false ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0` : bot.url}
                       state={bot.state}
+                      count={this.state.bot.data.findIndex(r=> r.id === bot.id) + (this.state.activePage-1)*9 }
                     />
                   </>
                 ))}

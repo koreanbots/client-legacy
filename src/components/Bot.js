@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Card, Button, Item, Icon, Label } from "semantic-ui-react";
 import "./Bot.css";
 
-function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, state }) {
+function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, state, count }) {
   const [ lookHover, setLookHover ] = useState(false)
   const [ inviteHover, setinviteHover ] = useState(false)
-  console.log(id)
+  console.log(count)
   return (
     <>
       <Card>
@@ -19,13 +19,13 @@ function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, 
               ui={false}
               avatar
             />
-            {name}
+            {count === 'undefined' ? '' : count+1 + '. '} {name}
           </Card.Header>
           <Card.Meta>
-            <a style={{ color: "#7289DA" }}>{servers} 서버</a> |{" "}
-            <a style={{ color: "red" }}>
+            <span style={{ color: "#7289DA" }}>{servers} 서버</span> |{" "}
+            <span style={{ color: "red" }}>
               {votes} <Icon className="heart" />
-            </a>
+            </span>
           </Card.Meta>
           <Card.Description>{intro}</Card.Description>
         </Card.Content>

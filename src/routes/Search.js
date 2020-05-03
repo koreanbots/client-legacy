@@ -21,13 +21,9 @@ class Search extends React.Component {
       q: ''
     };
   }
+  
   editParm = (parm, val) => {
-    const url=window.location.href
-    let separator = (url.indexOf("?")===-1)?"?":"&"
-    const newParam=separator + `${parm}=${val}`;
-    let newUrl=url.replace(new RegExp("[\\?&]" + parm + "=([^&#]*)",'gi'),"");
-    newUrl+=newParam;
-    window.history.pushState('', document.title ,newUrl.replace('/&', '?'))
+    window.history.pushState('', document.title , `${window.location.origin}?${parm}=${val}`)
   }
 
   getData = async (q, page) => {
