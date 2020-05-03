@@ -30,7 +30,7 @@ function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, 
         </Card.Content>
         <Card.Content extra>
           <div className="ui two buttons">
-            <Button basic={!lookHover} color="blue" onMouseOver={()=>setLookHover(true)} onMouseOut={()=>setLookHover(false)}>
+            <Button basic={!lookHover}  href={"/bots/" + id} color="blue" onMouseOver={()=>setLookHover(true)} onMouseOut={()=>setLookHover(false)}>
               보기
             </Button>
             <Button disabled={state === 'private' || state === 'archived'} href={invite} basic={!inviteHover} color="green" onMouseOver={()=>setinviteHover(true)} onMouseOut={()=>setinviteHover(false)}>
