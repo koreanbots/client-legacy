@@ -92,12 +92,13 @@ class Search extends React.Component {
                 />
               ))}
             </Card.Group>
-          </>
-        )}
-                  <br/>
+            <br/>
           <Container textAlign='center'>
           <Pagination activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange} />
           </Container>
+          </>
+        )}
+                  
       </Container>
     );
   }

@@ -76,9 +76,6 @@ class Category extends React.Component {
         <br />
         <section>
 
-          <h3>        <Label tag size="large">
-            {this.props.match.params.category}
-            </Label> 카테고리 봇들</h3>
           {isLoading ? (
             <div className="loader">
               <span className="loader__text">Loading...</span>
@@ -89,6 +86,10 @@ class Category extends React.Component {
             </div>
           ) : (
             <div>
+              
+          <h3>        <Label tag size="large">
+            {this.props.match.params.category}
+            </Label> 카테고리 봇들</h3>
               <Card.Group itemsPerRow={3} stackable>
                 {bot.data.map(bot => (
                   <>
@@ -119,12 +120,13 @@ class Category extends React.Component {
                   </>
                 ))}
               </Card.Group>
-            </div>
-          )}
-          <br/>
+              <br/>
           <Container textAlign='center'>
           <Pagination activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange} />
           </Container>
+            </div>
+          )}
+          
         </section>
       </Container>
     );

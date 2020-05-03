@@ -1,7 +1,7 @@
 import React from "react";
 import fetch from "node-fetch";
 import Bot from "../components/Bot";
-import { Message, Container, Card, Pagination  } from "semantic-ui-react";
+import { Message, Container, Card, Pagination, Label  } from "semantic-ui-react";
 import config from "../config";
 
 import queryString from 'query-string';
@@ -83,8 +83,20 @@ class Home extends React.Component {
         ) : (
           ""
         )}
-        <br />
+
         <section>
+          <br/>
+          <h3>카레고리로 빠르게 찾아보기: </h3>
+          {
+            cats.map(r=> (
+              <>
+              <Label tag stackable style={{marginTop: '4px'}} href={"/categorys/" + r}>
+                {r}
+              </Label> {" "}
+              </>
+            ))
+          }
+          <br/><br/>
           {isLoading ? (
             <div className="loader">
               <span className="loader__text">Loading...</span>
@@ -125,12 +137,14 @@ class Home extends React.Component {
                   </>
                 ))}
               </Card.Group>
+              <Container textAlign='center'>
+                <br/>
+          <Pagination activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange} />
+          </Container>
             </div>
           )}
           <br/>
-          <Container textAlign='center'>
-          <Pagination activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange} />
-          </Container>
+          
         </section>
       </Container>
     );
@@ -161,3 +175,6 @@ const messages = {
     message: "봇의 잠금해제를 성공했습니다! 다시 초대가 허용됩니다."
   }
 };
+
+
+const cats = ['관리','뮤직','전적','웹 대시보드', '로깅','도박','게임','밈','레벨링','유틸리티','번역','대화','NSFW','검색']
