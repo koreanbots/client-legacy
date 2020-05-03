@@ -19,7 +19,7 @@ function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, 
               ui={false}
               avatar
             />
-            {count === 'undefined' ? '' : count+1 + '. '} {name}
+            {count === undefined ? '' : count+1 + '. '} {name}
           </Card.Header>
           <Card.Meta>
             <span style={{ color: "#7289DA" }}>{servers} 서버</span> |{" "}
