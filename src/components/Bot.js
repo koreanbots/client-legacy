@@ -5,6 +5,7 @@ import "./Bot.css";
 function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, state }) {
   const [ lookHover, setLookHover ] = useState(false)
   const [ inviteHover, setinviteHover ] = useState(false)
+  console.log(id)
   return (
     <>
       <Card>

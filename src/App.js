@@ -59,6 +59,7 @@ function App() {
        
       </Switch>
       </div>
+      <br/>
       <Footer/>
 
         </div>

@@ -173,7 +173,7 @@ function MyBots(props) {
                       </Card.Content>
                       <Card.Content extra>
                         <div className="ui two buttons">
-                          <Button basic={!see} color="blue" onMouseOver={()=>hoverSee(true)} onMouseOut={()=>hoverSee(false)}>
+                          <Button href={"/bots/" + bot.id} basic={!see} color="blue" onMouseOver={()=>hoverSee(true)} onMouseOut={()=>hoverSee(false)}>
                             보기
                           </Button>
                           <Button href={"/manage/" + bot.id} basic={!manage} color="green" onMouseOver={()=> hoverManage(true)} onMouseOut={()=>hoverManage(false)}>

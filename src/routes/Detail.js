@@ -175,6 +175,7 @@ class Detail extends React.Component {
                   <br />
                   {bot.url === false ? (
                     <Button
+                      disabled={bot.state === "private" || bot.state === "archived"}
                       className="yellow"
                       content="초대하기"
                       labelPosition="left"
@@ -183,7 +184,7 @@ class Detail extends React.Component {
                     ></Button>
                   ) : (
                     <Button
-                      disabled={bot.url === "private" || bot.url === "archived"}
+                      disabled={bot.state === "private" || bot.state === "archived"}
                       className="yellow"
                       content="초대하기"
                       labelPosition="left"

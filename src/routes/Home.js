@@ -131,5 +131,15 @@ const messages = {
     level: "success",
     title: "봇 정보 수정 성공!",
     message: "봇의 정보를 성공적으로 수정했습니다! 오예!"
+  },
+  lockOn: {
+    level: "success",
+    title: "봇 잠금 성공!",
+    message: "봇의 잠금을 성공했습니다! 이제 더 이상 초대할 수 없습니다."
+  },
+  lockOff: {
+    level: "success",
+    title: "봇 잠금 해제 성공!",
+    message: "봇의 잠금해제를 성공했습니다! 다시 초대가 허용됩니다."
   }
 };

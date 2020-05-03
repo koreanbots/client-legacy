@@ -11,7 +11,8 @@ import {
   Input,
   Grid,
   Image,
-  Button
+  Button,
+  Checkbox
 } from "semantic-ui-react";
 import Redirect from "../components/Redirect";
 import ReactMarkdown from "react-markdown/with-html";
@@ -56,6 +57,7 @@ class ManageBot extends Component {
   }
   regenToken = async() => {
       const res = await fetch(config.api + '/bots/regenToken', {
+        method: 'POST',
         headers: {
             token: this.state.info.data.token
         }
@@ -79,7 +81,6 @@ class ManageBot extends Component {
   };
 
   handleSubmit = async () => {
-    console.log(this.state);
     if (
       this.state.lib &&
       this.state.intro &&
@@ -97,6 +98,24 @@ class ManageBot extends Component {
       });
     }
   };
+
+  archive = async () => {
+    const token = localStorage.token,
+    id = localStorage.id,
+    date = localStorage.date;
+  await fetch(config.api + "/bots/archive/" + this.state.info.data.id, {
+    method: "POST",
+    headers: { token, id, time: date, "Content-Type": "application/json" },
+  })
+    .then(r => r.json())
+    .then(res=> {
+      if(res.code === 200) {
+        if(res.archived) window.location.href = "/?message=lockOn"
+        else window.location.href = "/?message=lockOff"
+      }
+    })
+  }
+
   async componentDidMount() {
       const res = await fetch(config.api + '/bots/completeInfo/' + this.props.match.params.id, {
           headers: {
@@ -107,7 +126,9 @@ class ManageBot extends Component {
       }).then(r=> r.json())
       if(res.code !== 200 ) this.setState({ info: res })
       else this.setState({ info: res, id: res.data.id, prefix: res.data.prefix, lib: res.data.lib, website: res.data.web || '', git: res.data.git || '', url: res.data.url || '', discord: res.data.discord || '', category: res.data.category, intro: res.data.intro, desc: res.data.desc, token: '******' })
-  }
+
+      console.log(this.state.info)
+    }
   render() {
     const {
       id,
@@ -295,8 +316,7 @@ class ManageBot extends Component {
                   <p>다음 결과는 실제와 다를 수 있습니다.</p>
                 </Segment>
               </div>
-
-              <Form.Button content="제출" />
+              <Form.Button content="수정하기" />
             </div>
           </Form>
           {this.state.data.state === 1 ? (
@@ -306,6 +326,26 @@ class ManageBot extends Component {
           ) : (
             <> </>
           )}
+          <h2>위험구역</h2>
+                <Segment>
+                  <h3>봇을 잠금 처리합니다</h3>
+                  <p>봇을 잠금처리하면 더 이상 초대할 수 없는 상태가 되면서, 잠금된 봇이라 안내됩니다.</p>
+              <Button color='red' onClick={this.archive}>{this.state.info.data.state === 'archived' ? '잠금 해제' : '잠금 하기'}</Button>
+
+              <h3>봇을 삭제합니다</h3>
+                  <p>봇을 영구적으로 삭제합니다.</p>
+ <br/>
+
+              <Form.Field inline>
+              <Button color='red' disabled>삭제하기
+              </Button>
+      <Label basic color='red' pointing='left'>
+        해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요
+      </Label>
+    </Form.Field>
+              
+               
+                </Segment>
         </Container>
       );
   }
