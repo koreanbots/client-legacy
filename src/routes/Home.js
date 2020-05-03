@@ -18,17 +18,16 @@ class Home extends React.Component {
     };
   }
 
-  handlePaginationChange = (e, { activePage }) => {  this.setState({ activePage });  this.getData(activePage)}
   removeParam = parameter => {
     var url = window.location.href;
     var urlparts = url.split("?");
 
     if (urlparts.length >= 2) {
       var urlBase = urlparts.shift();
-      var queryString = urlparts.join("?");
+      var qus = urlparts.join("?");
 
       var prefix = encodeURIComponent(parameter) + "=";
-      var pars = queryString.split(/[&;]/g);
+      var pars = qus.split(/[&;]/g);
       for (var i = pars.length; i-- > 0; )
         if (pars[i].lastIndexOf(prefix, 0) !== -1) pars.splice(i, 1);
       url = urlBase + "?" + pars.join("&");
@@ -36,6 +35,15 @@ class Home extends React.Component {
     }
     return url;
   };
+
+  editParm = (parm, val) => {
+    const url=window.location.href
+    let separator = (url.indexOf("?")===-1)?"?":"&"
+    const newParam=separator + `${parm}=${val}`;
+    let newUrl=url.replace(new RegExp("[\\?&]" + parm + "=([^&#]*)",'gi'),"");
+    newUrl+=newParam;
+    window.history.pushState('', document.title ,newUrl.replace('/&', '?'))
+  }
   getData = async (page) => {
     const bot = await fetch(config.api + "/bots/get?page=" + page, {
       method: "GET",
@@ -47,6 +55,8 @@ class Home extends React.Component {
     }).then(r => r.json());
     this.setState({ bot, isLoading: false, totalPage: bot.totalPage });
   };
+  handlePaginationChange = (e, { activePage }) => {  this.setState({ activePage });  this.editParm('page', activePage); this.getData(activePage)}
+
   componentDidMount() {
     const query = queryString.parse(window.location.search);
     const page = Number.isNaN(Number(query.page)) || Number(query.page) < 1 ? 1 : query.page
