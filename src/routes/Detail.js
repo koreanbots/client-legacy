@@ -184,7 +184,7 @@ class Detail extends React.Component {
                     ></Button>
                   ) : (
                     <Button
-                      disabled={bot.url === "private" || bot.url === "disabled"}
+                      disabled={bot.url === "private" || bot.url === "archived"}
                       className="yellow"
                       content="초대하기"
                       labelPosition="left"
@@ -338,5 +338,6 @@ const statusText = {
   idle: "자리 비움",
   dnd: "다른 용무중",
   offline: "오프라인",
-  streaming: "방송중"
+  streaming: "방송중",
+  '???': '알 수 없음'
 };

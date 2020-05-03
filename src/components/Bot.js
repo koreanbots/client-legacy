@@ -33,7 +33,7 @@ function Bot({ data, id, name, avatar, votes, servers, intro, category, invite }
             <Button basic={!lookHover} color="blue" onMouseOver={()=>setLookHover(true)} onMouseOut={()=>setLookHover(false)}>
               보기
             </Button>
-            <Button disabled={invite === 'private' || invite === 'disabled'} href={invite} basic={!inviteHover} color="green" onMouseOver={()=>setinviteHover(true)} onMouseOut={()=>setinviteHover(false)}>
+            <Button disabled={invite === 'private' || invite === 'archived'} href={invite} basic={!inviteHover} color="green" onMouseOver={()=>setinviteHover(true)} onMouseOut={()=>setinviteHover(false)}>
               초대하기
             </Button>
           </div>

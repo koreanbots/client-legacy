@@ -39,7 +39,7 @@ class ManageBot extends Component {
     const token = localStorage.token,
       id = localStorage.id,
       date = localStorage.date;
-    return await fetch(config.api + "/bots/submit", {
+    return await fetch(config.api + "/bots/edit/" + body.id, {
       method: "POST",
       headers: { token, id, time: date, "Content-Type": "application/json" },
       body: JSON.stringify(body)
@@ -82,7 +82,6 @@ class ManageBot extends Component {
     let data;
     console.log(this.state);
     if (
-      this.state.id &&
       this.state.lib &&
       this.state.intro &&
       this.state.desc &&
@@ -91,7 +90,6 @@ class ManageBot extends Component {
     ) {
       data = await this.sendSumbit(this.state);
     } else {
-      console.log("GG");
       this.setState({
         data: {
           state: 2,
@@ -300,7 +298,7 @@ class ManageBot extends Component {
                 </Segment>
               </div>
 
-              <Form.Button disabled content="제출" />
+              <Form.Button content="제출" />
             </div>
           </Form>
           {this.state.data.state === 1 ? (
@@ -308,10 +306,10 @@ class ManageBot extends Component {
           ) : this.state.data.state == 2 ? (
             <Message error>{this.state.data.data.message}</Message>
           ) : (
-            <> <p>
-                {JSON.stringify(this.state)}
-                </p> </>
-          )}
+            <> </>
+          )} <p>
+          {JSON.stringify(this.state)}
+          </p>
         </Container>
       );
   }
