@@ -138,7 +138,7 @@ export default class MenuExampleStackable extends Component {
           </Sidebar>
         </Responsive>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-          <Menu>
+          <Menu className="nav" secondary inverted style={{background: 'black'}}>
             <Menu.Menu>
               <Menu.Item href="/">
                 <h1 style={{ fontFamily: "Gugi" }}>디코봇</h1>
