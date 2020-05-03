@@ -107,6 +107,8 @@ class Home extends React.Component {
             </div>
           ) : (
             <div>
+              <h1>하트 랭킹</h1>
+              <p>하트를 많이 받은 봇들의 순위입니다!</p>
               <Card.Group itemsPerRow={3} stackable>
                 {bot.data.map(bot => (
                   <>

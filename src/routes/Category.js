@@ -90,6 +90,7 @@ class Category extends React.Component {
           <h3>        <Label tag size="large">
             {this.props.match.params.category}
             </Label> 카테고리 봇들</h3>
+            <br/>
               <Card.Group itemsPerRow={3} stackable>
                 {bot.data.map(bot => (
                   <>
