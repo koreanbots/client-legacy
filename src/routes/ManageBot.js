@@ -12,7 +12,7 @@ import {
   Grid,
   Image,
   Button,
-  Checkbox
+  Popup
 } from "semantic-ui-react";
 import Redirect from "../components/Redirect";
 import ReactMarkdown from "react-markdown/with-html";
@@ -330,18 +330,16 @@ class ManageBot extends Component {
                 <Segment>
                   <h3>봇을 잠금 처리합니다</h3>
                   <p>봇을 잠금처리하면 더 이상 초대할 수 없는 상태가 되면서, 잠금된 봇이라 안내됩니다.</p>
-              <Button color='red' onClick={this.archive}>{this.state.info.data.state === 'archived' ? '잠금 해제' : '잠금 하기'}</Button>
+              <Button color='red' onClick={this.archive}>{this.state.info.data.state === 'archived' ? '잠금해제' : '잠금하기'}</Button>
 
               <h3>봇을 삭제합니다</h3>
                   <p>봇을 영구적으로 삭제합니다.</p>
  <br/>
 
               <Form.Field inline>
-              <Button color='red' disabled>삭제하기
-              </Button>
-      <Label basic color='red' pointing='left'>
-        해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요
-      </Label>
+
+              <Popup content='해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요' trigger={<Button color='red' content="삭제하기"/>} />
+
     </Form.Field>
               
                

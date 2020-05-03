@@ -14,6 +14,7 @@ import Pending from "./routes/Pending";
 import GuideLines from "./routes/GuideLines";
 import Login from "./routes/Login";
 import Version from "./routes/Version";
+import Category from "./routes/Category";
 
 import NotFound from "./components/404";
 import Menu from "./components/Menu";
@@ -42,6 +43,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/search" component={Search} />
+        <Route path="/categorys/:category" component={Category} />
         <Route path="/profile" component={Profile} />
         <Route path="/addbot" component={AddBot} />
         <Route path="/callback" component={Callback} />

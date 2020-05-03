@@ -167,7 +167,7 @@ class Detail extends React.Component {
                     {bot.category.length === 0
                       ? " 지정되지 않음"
                       : bot.category.map(c => (
-                          <Label as="a" key={c}>
+                          <Label as="a" key={c} href={"/categorys/" + c}>
                             {c}
                           </Label>
                         ))}
