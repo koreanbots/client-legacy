@@ -228,7 +228,7 @@ class Detail extends React.Component {
                     o.id +
                     "/" +
                     o.avatar +
-                    ".webp"
+                    ".png"
                   }
                   avatar
                 />

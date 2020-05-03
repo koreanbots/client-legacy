@@ -170,7 +170,7 @@ export default class MenuExampleStackable extends Component {
                             this.state.user.id +
                             "/" +
                             this.state.user.avatar +
-                            ".webp"
+                            ".png"
                           }
                           avatar
                         />

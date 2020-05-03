@@ -80,7 +80,7 @@ class Search extends React.Component {
                         bot.id +
                         "/" +
                         bot.avatar +
-                        ".webp"
+                        ".png"
                       : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
                           5}.png`
                   }
