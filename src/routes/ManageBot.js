@@ -79,7 +79,6 @@ class ManageBot extends Component {
   };
 
   handleSubmit = async () => {
-    let data;
     console.log(this.state);
     if (
       this.state.lib &&
@@ -88,7 +87,7 @@ class ManageBot extends Component {
       this.state.category &&
       this.state.category.length > 0
     ) {
-      data = await this.sendSumbit(this.state);
+      await this.sendSumbit(this.state);
     } else {
       this.setState({
         data: {
@@ -121,7 +120,6 @@ class ManageBot extends Component {
       git,
       url,
       discord,
-      data,
       info
     } = this.state;
     const bot = info.data
@@ -166,13 +164,13 @@ class ManageBot extends Component {
                 <h5>ID: {id}</h5>
                 토큰: <pre>{this.state.token} </pre>
                 <br/>
-                <Button content={this.state.token.startsWith('*') ? "보이기" : "가리기  "} onClick={this.showToken}/> <Button onClick={this.regenToken} content="재발급"/>
+                <Button content={this.state.token.startsWith('*') ? "보이기" : "가리기  "} onClick={this.showToken}/> <Button content="복사하기" onClick={()=> {navigator.clipboard.writeText(this.state.info.data.token); alert('복사되었습니다!')}}/> <Button onClick={this.regenToken} content="재발급"/>
                 </Grid.Column>
             </Grid.Row>
             </Grid>
             
                     <br/>
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit} disabled>
             <Form.Group>
               <Form.Input
                 placeholder="."
@@ -302,14 +300,12 @@ class ManageBot extends Component {
             </div>
           </Form>
           {this.state.data.state === 1 ? (
-            <Redirect to="/?message=submitSuccess" />
-          ) : this.state.data.state == 2 ? (
+            <Redirect to="/?message=editSuccess" />
+          ) : this.state.data.state === 2 ? (
             <Message error>{this.state.data.data.message}</Message>
           ) : (
             <> </>
-          )} <p>
-          {JSON.stringify(this.state)}
-          </p>
+          )}
         </Container>
       );
   }

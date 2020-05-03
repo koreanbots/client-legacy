@@ -1,7 +1,7 @@
 import React from "react";
 import fetch from "node-fetch";
 import Bot from "../components/Bot";
-import { Grid, Message, Container, Card } from "semantic-ui-react";
+import { Message, Container, Card } from "semantic-ui-react";
 import config from "../config";
 
 class Home extends React.Component {
@@ -106,7 +106,7 @@ class Home extends React.Component {
                       intro={bot.intro}
                       desc={bot.desc}
                       invite={bot.url === false ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0` : bot.url}
-                      
+                      state={bot.state}
                     />
                   </>
                 ))}
@@ -125,6 +125,11 @@ const messages = {
   submitSuccess: {
     level: "success",
     title: "봇 신청 성공!",
-    message: "봇을 성공적으로 신청하였습니다! 곧 다시 연락드리겠습니다!"
+    message: "봇을 성공적으로 신청하였습니다! 신난다! 곧 다시 연락드리겠습니다!"
+  },
+  editSuccess: {
+    level: "success",
+    title: "봇 정보 수정 성공!",
+    message: "봇의 정보를 성공적으로 수정했습니다! 오예!"
   }
 };

@@ -62,7 +62,7 @@ class SubmitBot extends Component {
   };
 
   handleSubmit = async () => {
-    let data;
+    
     console.log(this.state);
     if (
       this.state.id &&
@@ -72,7 +72,7 @@ class SubmitBot extends Component {
       this.state.category &&
       this.state.category.length > 0
     ) {
-      data = await this.sendSumbit(this.state);
+      await this.sendSumbit(this.state);
     } else {
       console.log("GG");
       this.setState({
@@ -91,12 +91,10 @@ class SubmitBot extends Component {
       lib,
       intro,
       desc,
-      category,
       website,
       git,
       url,
-      discord,
-      data
+      discord
     } = this.state;
     if (!localStorage.userCache || !JSON.parse(localStorage.userCache))
       return (
@@ -276,7 +274,7 @@ class SubmitBot extends Component {
           </Form>
           {this.state.data.state === 1 ? (
             <Redirect to="/?message=submitSuccess" />
-          ) : this.state.data.state == 2 ? (
+          ) : this.state.data.state === 2 ? (
             <Message error>{this.state.data.data.message}</Message>
           ) : (
             <> </>

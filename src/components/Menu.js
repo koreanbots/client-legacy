@@ -129,14 +129,9 @@ export default class MenuExampleStackable extends Component {
             <Menu.Item as="a" href="/discord" >
               디스코드
             </Menu.Item>
-            <Menu.Item as="a">
-              <Icon name="gamepad" />
-              Games
-            </Menu.Item>
-            <Menu.Item as="a">
-              <Icon name="camera" />
-              Channels
-            </Menu.Item>
+            <Menu.Item name="add" href="/addbot">
+                봇 추가하기
+              </Menu.Item>
             <Menu.Item>
                 <Search fluid />
               </Menu.Item>
@@ -148,8 +143,11 @@ export default class MenuExampleStackable extends Component {
               <Menu.Item href="/">
                 <h1 style={{ fontFamily: "Gugi" }}>디코봇</h1>
               </Menu.Item>
-              <Menu.Item name="디스코드" href="https://discord.gg/JEh53MQ">
+              <Menu.Item name="discord" href="https://discord.gg/JEh53MQ">
                 디스코드
+              </Menu.Item>
+              <Menu.Item name="add" href="/addbot">
+                봇 추가하기
               </Menu.Item>
             </Menu.Menu>
             <Menu.Menu position="right">

@@ -13,7 +13,7 @@ body {
   font-size: 160px;
   font-weight: 900;
   letter-spacing: 20px;
-  background: url(bg.jpg) center no-repeat;
+  background: black center no-repeat;
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;

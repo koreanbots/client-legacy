@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import "semantic-ui-css/semantic.min.css";
 
 import Bot from "../components/Bot";
-import { Grid, Card, Container } from "semantic-ui-react";
+import { Card, Container } from "semantic-ui-react";
 import config from "../config";
 
 class Search extends React.Component {
@@ -72,7 +72,6 @@ class Search extends React.Component {
                   }
                   votes={bot.votes}
                   servers={bot.servers}
-                  category={new Array(bot.category)}
                   intro={bot.intro}
                   desc={bot.desc}
                   category={bot.category}

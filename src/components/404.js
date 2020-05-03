@@ -24,8 +24,6 @@ export default class MenuExampleStackable extends Component {
   render() {
     return (
       <div className="notfound">
-        <h1>GG</h1>
-
         <h2>Oops! Page not found.</h2>
         <br />
         <h1>404</h1>

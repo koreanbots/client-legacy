@@ -12,16 +12,16 @@ import ManageBot from "./routes/ManageBot"
 import Profile from "./routes/Profile";
 import Pending from "./routes/Pending";
 import GuideLines from "./routes/GuideLines";
-import Vote from "./routes/Vote";
 import Login from "./routes/Login";
 import Version from "./routes/Version";
 
 import NotFound from "./components/404";
 import Menu from "./components/Menu";
 import Redirect from "./components/Redirect";
+import Footer from "./components/Footer";
 
 import "./App.css";
-import { Dimmer, Segment } from "semantic-ui-react";
+
 
 function App() {
   const [ setDimm, Dimmed ] = useState(false)
@@ -35,6 +35,8 @@ function App() {
         id={localStorage.getItem("id")}
         date={localStorage.getItem("date")}
       />
+      <div style={{ position: 'relative', minHeight: '95vh' }}>
+            <div style={{ paddingBottom: '10rem' }}>
       <Switch>
        
         <Route exact path="/" component={Home} />
@@ -47,7 +49,6 @@ function App() {
         <Route path="/logout" component={Logout} />
         <Route path="/pendingBots/:id/:date" component={Pending} />
         <Route exact path="/bots/:id" component={Detail} />
-        <Route path="/bots/:id/vote" component={Vote} />
         <Route path="/discord">
           <Redirect to="https://discord.gg/JEh53MQ" />
         </Route>
@@ -57,6 +58,10 @@ function App() {
         <Route component={NotFound}></Route>
        
       </Switch>
+      </div>
+      <Footer/>
+
+        </div>
     </Router>
   );
 }

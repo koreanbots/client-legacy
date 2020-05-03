@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import fetch from "node-fetch";
 import {
   Container,
-  Grid,
-  Segment,
   Item,
   Button,
   Icon,
@@ -72,7 +70,77 @@ class Detail extends React.Component {
               <>
                 <Card.Group stackable itemsPerRow={3}>
                   {result.user.bots.map(bot => (
-                    <Card href={"/bots/" + bot.id}>
+                    <MyBots bot={bot}/>
+                  ))}
+                </Card.Group>
+                <br />
+              </>
+            )}
+            <Divider />
+            <h2>심사 이력</h2>
+            {result.user.submitted.length === 0 ? (
+              <h3>심사 이력이 없습니다.</h3>
+            ) : (
+              <Card.Group stackable itemsPerRow={3}>
+                {result.user.submitted.map(bot => (
+                  <Submitted bot={bot}/>
+                ))}
+              </Card.Group>
+            )}
+            <Divider />
+            <h2>하트를 남긴 봇</h2>
+            {result.user.voted.length === 0 ? (
+              <h3>하트를 남긴 봇이 없습니다.</h3>
+            ) : (
+              <Card.Group stackable itemsPerRow={3}>
+                {result.user.voted.map(bot => (
+                  <Bot
+                  data={bot}
+                  key={bot.id}
+                  id={bot.id}
+                  name={bot.name}
+                  avatar={
+                    bot.avatar !== false
+                      ? "https://cdn.discordapp.com/avatars/" +
+                        bot.id +
+                        "/" +
+                        bot.avatar +
+                        ".png"
+                      : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
+                          5}.png`
+                  }
+                  votes={bot.votes}
+                  servers={bot.servers}
+                  category={bot.category}
+                  intro={bot.intro}
+                  desc={bot.desc}
+                  invite={bot.url === false ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0` : bot.url}
+                  state={bot.state}
+                />
+
+                ))}
+              </Card.Group>
+            )}
+          </div>
+        )}
+        <br />
+      </Container>
+    );
+  }
+}
+
+export default Detail;
+
+const stateColor = ["gray", "green", "red"];
+const state = ["심사중", "승인됨", "거부됨"];
+
+
+function MyBots(props) {
+    const [ see, hoverSee ] = useState(false)
+    const [ manage, hoverManage ] = useState(false)
+    const { bot } = props
+  return(
+    <Card>
                       <Card.Content>
                         <Card.Header>
                           {" "}
@@ -105,28 +173,23 @@ class Detail extends React.Component {
                       </Card.Content>
                       <Card.Content extra>
                         <div className="ui two buttons">
-                          <Button basic color="blue">
+                          <Button basic={!see} color="blue" onMouseOver={()=>hoverSee(true)} onMouseOut={()=>hoverSee(false)}>
                             보기
                           </Button>
-                          <Button href={"/manage/" + bot.id} basic color="green">
+                          <Button href={"/manage/" + bot.id} basic={!manage} color="green" onMouseOver={()=> hoverManage(true)} onMouseOut={()=>hoverManage(false)}>
                             관리하기
                           </Button>
                         </div>
                       </Card.Content>
                     </Card>
-                  ))}
-                </Card.Group>
-                <br />
-              </>
-            )}
-            <Divider />
-            <h2>심사 이력</h2>
-            {result.user.submitted.length === 0 ? (
-              <h3>심사 이력이 없습니다.</h3>
-            ) : (
-              <Card.Group stackable itemsPerRow={3}>
-                {result.user.submitted.map(bot => (
-                  <Card href={"/pendingBots/" + bot.id + "/" + bot.date}>
+  )
+}
+
+function Submitted(props) {
+  const [ preview, hoverPrev ] = useState(false)
+  const { bot } = props
+  return(
+    <Card href={"/pendingBots/" + bot.id + "/" + bot.date}>
                     <Card.Content>
                       <Card.Header>
                         <a>{bot.id}</a>
@@ -144,58 +207,11 @@ class Detail extends React.Component {
                     </Card.Content>
                     <Card.Content extra>
                       <div className="ui two buttons">
-                        <Button basic color="blue">
+                        <Button basic={!preview} color="blue" onMouseOver={()=>hoverPrev(true)} onMouseOut={()=>hoverPrev(false)}>
                           미리 보기
                         </Button>
                       </div>
                     </Card.Content>
                   </Card>
-                ))}
-              </Card.Group>
-            )}
-            <Divider />
-            <h2>하트를 남긴 봇</h2>
-            {result.user.voted.length === 0 ? (
-              <h3>하트를 남긴 봇이 없습니다.</h3>
-            ) : (
-              <Card.Group stackable itemsPerRow={3}>
-                {result.user.voted.map(bot => (
-                  <Bot
-                  data={bot}
-                  key={bot.id}
-                  id={bot.id}
-                  name={bot.name}
-                  avatar={
-                    bot.avatar !== false
-                      ? "https://cdn.discordapp.com/avatars/" +
-                        bot.id +
-                        "/" +
-                        bot.avatar +
-                        ".png"
-                      : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
-                          5}.png`
-                  }
-                  votes={bot.votes}
-                  servers={bot.servers}
-                  category={bot.category}
-                  intro={bot.intro}
-                  desc={bot.desc}
-                  invite={bot.url === false ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0` : bot.url}
-                  
-                />
-
-                ))}
-              </Card.Group>
-            )}
-          </div>
-        )}
-        <br />
-      </Container>
-    );
-  }
+  )
 }
-
-export default Detail;
-
-const stateColor = ["gray", "green", "red"];
-const state = ["심사중", "승인됨", "거부됨"];
