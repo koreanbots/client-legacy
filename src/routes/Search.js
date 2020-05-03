@@ -21,7 +21,7 @@ class Search extends React.Component {
       q: ''
     };
   }
-  
+
   editParm = (parm, val) => {
     window.history.pushState('', document.title , `${window.location.origin}?${parm}=${val}`)
   }
@@ -30,10 +30,10 @@ class Search extends React.Component {
     const bot = await fetch(config.api + "/bots/search?q=" + q + "&page=" + page).then(r =>
       r.json()
     );
-    this.setState({ bots: bot.code === 200 ? bot.data : [], isLoading: false, totalPage: bot.totalPage });
+    this.setState({ bots: bot.code === 200 ? bot.data : [], isLoading: false, totalPage: bot.totalPage, activePage: page });
   };
 
-  handlePaginationChange = (e, { activePage }) => {  this.setState({ activePage }); this.editParm('page', activePage);  this.getData(this.state.q, activePage)}
+  handlePaginationChange = (e, { activePage }) => {  this.editParm('page', activePage);  this.getData(this.state.q, activePage)}
 
   componentDidMount() {
     const query = queryString.parse(window.location.search);

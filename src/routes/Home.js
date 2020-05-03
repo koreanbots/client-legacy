@@ -48,9 +48,9 @@ class Home extends React.Component {
         time: localStorage.date
       }
     }).then(r => r.json());
-    this.setState({ bot, isLoading: false, totalPage: bot.totalPage });
+    this.setState({ bot, isLoading: false, totalPage: bot.totalPage, activePage: page });
   };
-  handlePaginationChange = (e, { activePage }) => {  this.setState({ activePage });  this.editParm('page', activePage); this.getData(activePage)}
+  handlePaginationChange = (e, { activePage }) => {    this.editParm('page', activePage); this.getData(activePage)}
 
   componentDidMount() {
     const query = queryString.parse(window.location.search);
