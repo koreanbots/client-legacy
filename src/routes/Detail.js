@@ -232,7 +232,7 @@ class Detail extends React.Component {
                 <Grid.Column>
                   <Button
                     className="discord"
-                    content={bot.servers === 0 ? "0" : bot.servers + " 서버"}
+                    content={(bot.servers === 0 ? "0" : bot.servers) + " 서버"}
                   ></Button>
                   {bot.url === "disable" ? (
                     <Button

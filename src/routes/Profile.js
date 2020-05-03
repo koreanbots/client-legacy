@@ -124,7 +124,7 @@ class Detail extends React.Component {
             {result.user.submitted.length === 0 ? (
               <h3>심사 이력이 없습니다.</h3>
             ) : (
-              <Card.Group>
+              <Card.Group stackable itemsPerRow={3}>
                 {result.user.submitted.map(bot => (
                   <Card href={"/pendingBots/" + bot.id + "/" + bot.date}>
                     <Card.Content>
