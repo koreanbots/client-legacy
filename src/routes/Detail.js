@@ -88,7 +88,7 @@ class Detail extends React.Component {
               <Message>
                 해당 봇은 특수목적 봇이므로 초대하실 수 없습니다.
               </Message>
-            ) : bot.url === "disable" ? (
+            ) : bot.url === "archived" ? (
               <Message error>
                 해당 봇은 서비스 중이지 않습니다.
                 <br />
