@@ -23,3 +23,47 @@ body {
 .ui.button {
   margin-top: 5px;
 }
+
+.darkmode {
+  background-color: #2C2F33;
+  color: white;
+}
+
+.darkmode .fields > .field > label , .darkmode .field > label {
+  color: white !important;
+}
+
+.darkmode .card {
+  background-color: #23272A !important;
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 290px;
+  min-height: 0px;
+  padding: 0em;
+  border: none !important;
+  border-radius: 0.28571429rem;
+  box-shadow: 0px 1px 3px 0px #23272A, 0px 0px 0px 1px #23272A;
+  transition: box-shadow 0.1s ease, transform 0.1s ease;
+  z-index: '';
+}
+
+.darkmode .card > .content > .header, 
+.darkmode .card > .content > .meta, 
+.darkmode .card > .content > .description {
+  color: white !important
+}
+
+.darkmode .menu.pagination {
+  border: 0 solid transparent;
+    background: #1b1c1d;
+    box-shadow: none;
+}
+
+.darkmode .menu > .item {
+  color: white !important;
+}
+.darkmode .segment {
+  background-color: #1b1c1d;
+}

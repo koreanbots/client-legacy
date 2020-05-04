@@ -25,21 +25,22 @@ import "./App.css";
 
 
 function App() {
-  const [ setDimm, Dimmed ] = useState(false)
-
+  const [ Dark, setDark ] = useState(localStorage.dark === undefined || JSON.parse(localStorage.dark) ? true : false)
+  if(localStorage.dark === undefined) localStorage.dark = true
   return (
-    <Router>
+
+    <Router >
+      <div className={Dark ? 'darkmode' : 'whitemode'}>
       <Menu
-        Dimm={Dimmed}
-        setDimm={setDimm}
+        Darkmode={Dark}
         token={localStorage.getItem("token")}
         id={localStorage.getItem("id")}
         date={localStorage.getItem("date")}
       />
-      <div style={{ position: 'relative', minHeight: '95vh' }}>
-            <div style={{ paddingBottom: '17rem' }}>
+      <div style={{ position: 'relative', minHeight: '100vh' }} >
+            <div style={{ paddingBottom: '20rem' }}>
       <Switch>
-       
+
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/search" component={Search} />
@@ -58,12 +59,13 @@ function App() {
         <Route path="/clientinfo" component={Version}/>
         <Route path="/guidelines" component={GuideLines} />
         <Route component={NotFound}></Route>
-       
+        
       </Switch>
       </div>
       <br/>
-      <Footer/>
+      <Footer Dark={Dark} setDark={setDark}/>
 
+        </div>
         </div>
     </Router>
   );

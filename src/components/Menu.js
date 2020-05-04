@@ -24,6 +24,7 @@ export default class MenuExampleStackable extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     const getUser = async (token, id, date) => {
       await fetch(config.api + "/users/@me", {
         method: "GET",
@@ -66,7 +67,7 @@ export default class MenuExampleStackable extends Component {
     return (
       <>
         <Responsive {...Responsive.onlyMobile}>
-          <Menu className="nav" pointing widths={3}>
+          <Menu className="nav" pointing widths={3} inverted={this.props.Darkmode}>
             <Menu.Item onClick={this.editSlider}>
               <Icon className="large bars" />
             </Menu.Item>
@@ -138,7 +139,7 @@ export default class MenuExampleStackable extends Component {
           </Sidebar>
         </Responsive>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-          <Menu className="nav" secondary inverted style={{background: 'black'}}>
+          <Menu className="nav" secondary inverted={this.props.Darkmode} style={{background: 'transpert'}}>
             <Menu.Menu>
               <Menu.Item href="/">
                 <h1 style={{ fontFamily: "Gugi" }}>디코봇</h1>
