@@ -90,7 +90,7 @@ class Detail extends React.Component {
                 <Grid.Column>
                   <br />
                   <h1 style={{ fontSize: "50px" }}>
-                    {bot.name}{" "}
+                    {bot.id}{" "}
                     {bot.trusted ? (
                       <Label className="discord">
                         <Icon className="icon mini check" /> 디스코드 인증됨
@@ -145,7 +145,7 @@ class Detail extends React.Component {
                   <br />
                   {bot.url === false ? (
                     <Button
-                      className="discord"
+                      color="yellow"
                       content="초대하기"
                       labelPosition="left"
                       icon="plus"

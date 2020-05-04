@@ -86,7 +86,7 @@ class Home extends React.Component {
 
         <section>
           <br/>
-          <h3>카레고리로 빠르게 찾아보기: </h3>
+          <h3>카테고리로 빠르게 찾아보기: </h3>
           {
             cats.map(r=> (
               <>

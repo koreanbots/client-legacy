@@ -316,7 +316,7 @@ class ManageBot extends Component {
                   <p>다음 결과는 실제와 다를 수 있습니다.</p>
                 </Segment>
               </div>
-              <Form.Button content="수정하기" />
+              <Form.Button content="저장하기" icon="save" />
             </div>
           </Form>
           {this.state.data.state === 1 ? (
@@ -328,19 +328,19 @@ class ManageBot extends Component {
           )}
           <h2>위험구역</h2>
                 <Segment>
-                  <h3>봇을 잠금 처리합니다</h3>
-                  <p>봇을 잠금처리하면 더 이상 초대할 수 없는 상태가 되면서, 잠금된 봇이라 안내됩니다.</p>
-              <Button color='red' onClick={this.archive}>{this.state.info.data.state === 'archived' ? '잠금해제' : '잠금하기'}</Button>
+                  
+              <h3>관리자 추가</h3>
+                  <p>봇의 소유자를 추가합니다. 소유자는 당신과 동일한 권한을 갖게됩니다.</p>
+              <Popup content='해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요' trigger={<Button color='red' content="관리자 추가" icon="plus"/>}/>
+
+                  <h3>{this.state.info.data.state === 'archived' ? '봇을 잠금 해제합니다.' : '봇을 잠금 처리합니다'}</h3>
+                  <p>{this.state.info.data.state === 'archived' ? '봇을 잠금 해제하면, 봇을 다시 초대할 수 있습니다.' : '봇을 잠금처리하면 더 이상 초대할 수 없는 상태가 되면서, 잠금된 봇이라 안내됩니다.'}</p>
+              <Button icon="lock" color='red' onClick={this.archive} content={this.state.info.data.state === 'archived' ? '잠금해제' : '잠금하기'}/>
 
               <h3>봇을 삭제합니다</h3>
                   <p>봇을 영구적으로 삭제합니다.</p>
- <br/>
+              <Popup content='해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요' trigger={<Button color='red' content="삭제하기" icon="trash"/>} />
 
-              <Form.Field inline>
-
-              <Popup content='해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요' trigger={<Button color='red' content="삭제하기"/>} />
-
-    </Form.Field>
               
                
                 </Segment>
