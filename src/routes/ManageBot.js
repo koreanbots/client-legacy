@@ -62,7 +62,6 @@ class ManageBot extends Component {
             token: this.state.info.data.token
         }
       }).then(r=> r.json())
-      console.log(res)
       return window.location.reload()
     }
   handleChange = (e, { name, value }) => {
@@ -127,7 +126,6 @@ class ManageBot extends Component {
       if(res.code !== 200 ) this.setState({ info: res })
       else this.setState({ info: res, id: res.data.id, prefix: res.data.prefix, lib: res.data.lib, website: res.data.web || '', git: res.data.git || '', url: res.data.url || '', discord: res.data.discord || '', category: res.data.category, intro: res.data.intro, desc: res.data.desc, token: '******' })
 
-      console.log(this.state.info)
     }
   render() {
     const {

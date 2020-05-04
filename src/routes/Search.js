@@ -47,8 +47,6 @@ class Search extends React.Component {
   }
   render() {
     const { bots, isLoading } = this.state;
-
-    console.log(this.props);
     return (
       <Container>
         <br />

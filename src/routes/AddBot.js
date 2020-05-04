@@ -62,8 +62,6 @@ class SubmitBot extends Component {
   };
 
   handleSubmit = async () => {
-    
-    console.log(this.state);
     if (
       this.state.id &&
       this.state.lib &&
@@ -74,7 +72,6 @@ class SubmitBot extends Component {
     ) {
       await this.sendSumbit(this.state);
     } else {
-      console.log("GG");
       this.setState({
         data: {
           state: 2,

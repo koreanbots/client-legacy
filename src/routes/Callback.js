@@ -15,11 +15,9 @@ class Callback extends React.Component {
   }
 
   getData = async token => {
-    console.log(config.api + "/oauth/callback?code=" + token);
     await fetch(config.api + "/oauth/callback?code=" + token)
       .then(r => r.json())
       .then(user => {
-        console.log(user);
         const res = user.data;
 
         if (user.code !== 200 || !res)

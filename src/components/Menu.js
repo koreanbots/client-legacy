@@ -24,7 +24,6 @@ export default class MenuExampleStackable extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     const getUser = async (token, id, date) => {
       await fetch(config.api + "/users/@me", {
         method: "GET",
