@@ -7,7 +7,7 @@ function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, 
   const [ inviteHover, setinviteHover ] = useState(false)
   return (
     <>
-      <Card>
+      <Card className="botcard">
         <Card.Content>
           <Card.Header>
             {" "}
@@ -30,7 +30,7 @@ function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, 
           <Card.Description>{intro}</Card.Description>
           <br/>
                   </Card.Content>
-        <Card.Content>
+        <Card.Content extra>
           {category.slice(0,5).map(c=> (
             <a style={{ color: "#7289DA" }} href={"/categorys/" + c}>{c} </a>
           ))}
