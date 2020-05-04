@@ -44,7 +44,7 @@ body {
   padding: 0em;
   border: none !important;
   border-radius: 0.28571429rem;
-  box-shadow: 0px 1px 3px 0px #23272A, 0px 0px 0px 1px #23272A;
+  box-shadow: 0px 1px 3px 0px #23272A, 0px 0px 0px 1px #23272A !important;
   transition: box-shadow 0.1s ease, transform 0.1s ease;
   z-index: '';
 }
