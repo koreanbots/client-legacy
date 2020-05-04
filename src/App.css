@@ -64,6 +64,11 @@ body {
 .darkmode .menu > .item {
   color: white !important;
 }
+
+.darkmode .dropdown.selection .text{
+  color: black;
+}
+
 .darkmode .segment {
   background-color: #1b1c1d;
 }
