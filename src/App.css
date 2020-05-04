@@ -24,8 +24,8 @@ body {
   margin-top: 5px;
 }
 
-.darkmode {
-  background-color: #2C2F33;
+.darkmode, .darkmode .sidebar {
+  background-color: #2C2F33 !important;
   color: white;
 }
 
@@ -66,4 +66,9 @@ body {
 }
 .darkmode .segment {
   background-color: #1b1c1d;
+}
+
+.darkmode .label, .darkmode .tag.labels > a {
+  background-color: #23272A;
+  color: white;
 }
