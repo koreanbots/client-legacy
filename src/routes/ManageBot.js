@@ -183,7 +183,7 @@ class ManageBot extends Component {
                 <h5>ID: {id}</h5>
                 토큰: <pre>{this.state.token} </pre>
                 <br/>
-                <Button content={this.state.token.startsWith('*') ? "보이기" : "가리기  "} onClick={this.showToken}/> <Button content="복사하기" onClick={()=> {navigator.clipboard.writeText(this.state.info.data.token); alert('복사되었습니다!')}}/> <Button onClick={this.regenToken} content="재발급"/>
+                <Button content={this.state.token.startsWith('*') ? "보이기" : "가리기  "} onClick={this.showToken}/> <Button content="복사하기" onClick={()=> {navigator.clipboard.writeText(this.state.info.data.token).then(alert('복사되었습니다!'))}}/> <Button onClick={this.regenToken} content="재발급"/>
                 </Grid.Column>
             </Grid.Row>
             </Grid>

@@ -87,7 +87,7 @@ class Detail extends React.Component {
             {bot.state === "private" ? (
               <Message>
                 해당 봇은 특수목적 봇이므로 초대하실 수 없습니다.
-              </Message>
+              </Message>  
             ) : bot.state === "archived" ? (
               <Message error>
                 해당 봇은 서비스 중이지 않습니다.
@@ -131,7 +131,7 @@ class Detail extends React.Component {
                     )}
                     {bot.trusted ? (
                       <Label className="green">
-                        <Icon className="icon check" /> 신뢰함
+                        <Icon className="icon certificate" /> 신뢰함
                       </Label>
                     ) : (
                       ""
@@ -167,7 +167,7 @@ class Detail extends React.Component {
                     {bot.category.length === 0
                       ? " 지정되지 않음"
                       : bot.category.map(c => (
-                          <Label as="a" key={c} href={"/categorys/" + c}>
+                          <Label as="a" key={c} href={"/categories/" + c}>
                             {c}
                           </Label>
                         ))}

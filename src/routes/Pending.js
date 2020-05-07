@@ -100,7 +100,7 @@ class Detail extends React.Component {
                     )}
                     {bot.verified ? (
                       <Label className="green">
-                        <Icon className="icon mini check" /> 신뢰함
+                        <Icon className="icon mini certificate" /> 신뢰함
                       </Label>
                     ) : (
                       ""

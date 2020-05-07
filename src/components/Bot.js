@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Button, Item, Icon, Label, Divider } from "semantic-ui-react";
 import "./Bot.css";
 
-function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, state, count }) {
+function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, state, count, trusted, verified }) {
   const [ lookHover, setLookHover ] = useState(false)
   const [ inviteHover, setinviteHover ] = useState(false)
   return (
@@ -18,13 +18,13 @@ function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, 
               ui={false}
               avatar
             />
-            {count === undefined ? '' : count+1 + '. '} {name}
+            {count === undefined ? '' : count+1 + '. '} {name} { verified ? (<Icon size="small" className="check" style={{color: '#7289da'}}/>) : ''}{trusted ? (<Icon size="small" color='green' className="certificate"/>) : ''}
           </Card.Header>
           <Card.Meta>
-            <span style={{ color: "#7289DA" }}>{servers} 서버</span> |{" "}
-            <span style={{ color: "red" }}>
-              {votes} <Icon className="heart" />
-            </span>
+          <span style={{ color: "red" }}>
+          <Icon className="heart" /> {votes}</span> | {""}
+            <span style={{ color: "#7289DA" }}>{servers} 서버</span>
+           
             <br/>
           </Card.Meta>
           <Card.Description>{intro}</Card.Description>
@@ -32,7 +32,7 @@ function Bot({ data, id, name, avatar, votes, servers, intro, category, invite, 
                   </Card.Content>
         <Card.Content extra>
           {category.slice(0,5).map(c=> (
-            <a style={{ color: "#7289DA" }} href={"/categorys/" + c}>{c} </a>
+            <a style={{ color: "#7289DA" }} href={"/categories/" + c}>{c} </a>
           ))}
            <span style={{color: 'white'}}> { category.length - 5 > 0 ? ` +${category.length - 5}` : ''}</span>
             <Divider/>

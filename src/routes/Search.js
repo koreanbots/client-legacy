@@ -92,7 +92,7 @@ class Search extends React.Component {
             </Card.Group>
             <br/>
           <Container textAlign='center'>
-          <Pagination activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange} />
+          <Pagination   boundaryRange={0} siblingRange={1} ellipsisItem={null} activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange}/>
           </Container>
           </>
         )}

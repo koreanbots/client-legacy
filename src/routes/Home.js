@@ -1,7 +1,7 @@
 import React from "react";
 import fetch from "node-fetch";
 import Bot from "../components/Bot";
-import { Message, Container, Card, Pagination, Label  } from "semantic-ui-react";
+import { Message, Container, Card, Pagination, Label, Icon  } from "semantic-ui-react";
 import config from "../config";
 
 import queryString from 'query-string';
@@ -90,7 +90,7 @@ class Home extends React.Component {
           {
             cats.map(r=> (
               <>
-              <Label tag stackable style={{marginTop: '4px'}} href={"/categorys/" + r}>
+              <Label tag stackable style={{marginTop: '4px'}} href={"/categories/" + r}>
                 {r}
               </Label> {" "}
               </>
@@ -107,7 +107,7 @@ class Home extends React.Component {
             </div>
           ) : (
             <div>
-              <h1>하트 랭킹</h1>
+              <h1>💖 하트 랭킹</h1>
               <p>하트를 많이 받은 봇들의 순위입니다!</p>
               <Card.Group itemsPerRow={3} stackable>
                 {bot.data.map(bot => (
@@ -135,13 +135,15 @@ class Home extends React.Component {
                       invite={bot.url === false ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0` : bot.url}
                       state={bot.state}
                       count={this.state.bot.data.findIndex(r=> r.id === bot.id) + (this.state.activePage-1)*9 }
+                      verified={bot.verified}
+                      trusted={bot.trusted}
                     />
                   </>
                 ))}
               </Card.Group>
-              <Container textAlign='center'>
+              <Container align="center">
                 <br/>
-          <Pagination activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange} />
+          <Pagination   boundaryRange={0} siblingRange={1} ellipsisItem={null} activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange}/>
           </Container>
             </div>
           )}

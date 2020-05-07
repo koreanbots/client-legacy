@@ -44,7 +44,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/search" component={Search} />
-        <Route path="/categorys/:category" component={Category} />
+        <Route path="/categories/:category" component={Category} />
         <Route path="/profile" component={Profile} />
         <Route path="/addbot" component={AddBot} />
         <Route path="/callback" component={Callback} />
