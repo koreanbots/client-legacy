@@ -87,6 +87,8 @@ class Search extends React.Component {
                   intro={bot.intro}
                   desc={bot.desc}
                   category={bot.category}
+                  verified={bot.verified}
+                  trusted={bot.trusted}
                 />
               ))}
             </Card.Group>
