@@ -143,7 +143,7 @@ class Home extends React.Component {
               </Card.Group>
               <Container align="center">
                 <br/>
-          <Pagination   boundaryRange={0} siblingRange={1} ellipsisItem={null} activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange}/>
+          <Pagination  href="#" boundaryRange={0} siblingRange={1} ellipsisItem={null} activePage={this.state.activePage} totalPages={this.state.totalPage} onPageChange={this.handlePaginationChange}/>
           </Container>
             </div>
           )}
