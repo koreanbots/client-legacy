@@ -189,7 +189,7 @@ function Submitted(props) {
   const [ preview, hoverPrev ] = useState(false)
   const { bot } = props
   return(
-    <Card href={"/pendingBots/" + bot.id + "/" + bot.date}>
+    <Card>
                     <Card.Content>
                       <Card.Header>
                         <a>{bot.id}</a>
@@ -207,8 +207,8 @@ function Submitted(props) {
                     </Card.Content>
                     <Card.Content extra>
                       <div className="ui two buttons">
-                        <Button basic={!preview} color="blue" onMouseOver={()=>hoverPrev(true)} onMouseOut={()=>hoverPrev(false)}>
-                          미리 보기
+                        <Button basic={!preview} color="blue" onMouseOver={()=>hoverPrev(true)} onMouseOut={()=>hoverPrev(false)} href={bot.state === 1 ? "/bots" + bot.id : "/pendingBots/" + bot.id + "/" + bot.date}>
+                        {bot.state === 1 ? "이동하기" : "미리보기"}
                         </Button>
                       </div>
                     </Card.Content>
