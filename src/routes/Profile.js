@@ -207,7 +207,7 @@ function Submitted(props) {
                     </Card.Content>
                     <Card.Content extra>
                       <div className="ui two buttons">
-                        <Button basic={!preview} color="blue" onMouseOver={()=>hoverPrev(true)} onMouseOut={()=>hoverPrev(false)} href={bot.state === 1 ? "/bots" + bot.id : "/pendingBots/" + bot.id + "/" + bot.date}>
+                        <Button basic={!preview} color="blue" onMouseOver={()=>hoverPrev(true)} onMouseOut={()=>hoverPrev(false)} href={bot.state === 1 ? "/bots/" + bot.id : "/pendingBots/" + bot.id + "/" + bot.date}>
                         {bot.state === 1 ? "이동하기" : "미리보기"}
                         </Button>
                       </div>
