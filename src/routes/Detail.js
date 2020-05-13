@@ -9,7 +9,8 @@ import {
   Button,
   Icon,
   Message,
-  Segment
+  Segment,
+  Popup
 } from "semantic-ui-react";
 import ReactMarkdown from "react-markdown/with-html";
 import config from "../config";
@@ -128,23 +129,31 @@ class Detail extends React.Component {
                     {bot.name}{" "}
                     </h1>
                     {bot.verified ? (
-                      <Label className="discord">
-                        <Icon className="icon check" /> 디스코드 인증됨
-                      </Label>
+                      <Popup content='해당봇은 디스코드측에서 인증한 봇입니다!' position="right center" trigger= {<Label className="discord" style={{cursor: 'pointer'}}>
+                      <Icon className="icon check" /> 디스코드 인증됨
+                    </Label>}/>
+                      
                     ) : (
                       ""
                     )}
+                    
+
+                   
                     {bot.trusted ? (
-                      <Label className="green">
-                        <Icon className="icon certificate" /> 신뢰함
-                      </Label>
+
+                <Popup content='해당봇은 디스코드봇 인증을 받은 봇입니다. 엄격한 기준을 통과한 봇입니다! 더 알아보시려면 클릭해보세요!' position="right center" trigger= {
+                <Label className="green" href="https://github.com/koreanbots/verification">
+                <Icon className="icon certificate" /> 신뢰함
+                </Label>}/>
                     ) : (
                       ""
                     )}
                     {bot.boosted ? (
-                      <Label style={{background: '#ff73fa', color: 'white'}}>
+                       <Popup content={`해당봇은 공식 디스코드에 부스터가 소유하고 있는봇입니다!`} position="right center" trigger= {
+                        <Label style={{background: '#ff73fa', color: 'white', cursor: 'pointer' }}>
                         <Icon className="icon diamond" /> 부스트
-                      </Label>
+                      </Label>}/>
+                      
                     ) : (
                       ""
                     )}
