@@ -78,11 +78,7 @@ class Detail extends React.Component {
     return (
       <div
         style={{
-          backgroundImage: `url(${bot.bg})`,
-          backgroundAttachment: 'fixed',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundBlendMode: 'overlay'
+          background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${bot.bg}) top/cover no-repeat fixed`
         }}
       >
         <Container>
@@ -100,7 +96,7 @@ class Detail extends React.Component {
                 </Message>
               ) : bot.state === 'archived' ? (
                 <Message error>
-                  해당 봇은 서비스 중이지 않습니다.
+                  해당 봇은 잠금 상태입니다.
                   <br />
                   일부 행동이 제한될 수 있습니다.
                 </Message>
@@ -133,7 +129,6 @@ class Detail extends React.Component {
                     {bot.verified ? (
                       <Popup
                         content="해당봇은 디스코드측에서 인증한 봇입니다!"
-                        position="right center"
                         trigger={
                           <Label
                             className="discord"
@@ -150,7 +145,7 @@ class Detail extends React.Component {
                     {bot.trusted ? (
                       <Popup
                         content="해당봇은 디스코드봇 인증을 받은 봇입니다. 엄격한 기준을 통과한 봇입니다! 더 알아보시려면 클릭해보세요!"
-                        position="right center"
+                        position="left"
                         trigger={
                           <Label
                             className="green"
@@ -166,7 +161,7 @@ class Detail extends React.Component {
                     {bot.boosted ? (
                       <Popup
                         content={`해당봇은 공식 디스코드에 부스터가 소유하고 있는봇입니다!`}
-                        position="right center"
+                        position="right"
                         trigger={
                           <Label
                             style={{

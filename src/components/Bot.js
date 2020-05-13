@@ -10,7 +10,6 @@ import {
 } from 'semantic-ui-react';
 
 function Bot({
-  data,
   id,
   name,
   avatar,
@@ -36,10 +35,9 @@ function Bot({
       <Card
         className="botcard"
         style={
-          banner && boosted
+         (banner && boosted) || (banner && verified)
             ? {
-                background: `url(${banner}) 2% 2% / cover`,
-                backgroundBlendMode: 'overlay'
+                background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${banner}) top/cover no-repeat`
               }
             : {}
         }
@@ -108,6 +106,7 @@ function Bot({
           <Divider />
           <div className="ui two buttons">
             <Button
+              disabled={state === 'example'}
               basic={!lookHover}
               href={'/bots/' + (vanity && boosted ? vanity : id)}
               color="blue"
@@ -117,7 +116,7 @@ function Bot({
               보기
             </Button>
             <Button
-              disabled={state === 'private' || state === 'archived'}
+              disabled={state === 'private' || state === 'archived' || state === 'example'}
               href={invite}
               basic={!inviteHover}
               color="green"

@@ -130,7 +130,6 @@ class Home extends React.Component {
                 {bot.data.map(bot => (
                   <>
                     <Bot
-                      data={bot}
                       key={bot.id}
                       id={bot.id}
                       name={bot.name}

@@ -95,7 +95,6 @@ class Detail extends React.Component {
               <Card.Group stackable itemsPerRow={3}>
                 {result.user.voted.map(bot => (
                   <Bot
-                    data={bot}
                     key={bot.id}
                     id={bot.id}
                     name={bot.name}

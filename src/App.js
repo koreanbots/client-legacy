@@ -40,7 +40,7 @@ function App() {
         date={localStorage.getItem("date")}
       />
       <div style={{ position: 'relative', minHeight: '100vh' }} >
-            <div style={{ paddingBottom: '20rem' }}>
+            <div style={{ paddingBottom: '23rem' }}>
       <Switch>
 
         <Route exact path="/" component={Home} />
