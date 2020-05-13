@@ -15,6 +15,7 @@ import GuideLines from "./routes/GuideLines";
 import Login from "./routes/Login";
 import Version from "./routes/Version";
 import Category from "./routes/Category";
+import Boost from "./routes/Boost";
 
 import NotFound from "./components/404";
 import Menu from "./components/Menu";
@@ -22,6 +23,7 @@ import Redirect from "./components/Redirect";
 import Footer from "./components/Footer";
 
 import "./App.css";
+
 
 
 function App() {
@@ -58,6 +60,7 @@ function App() {
         <Route path="/manage/:id" component={ManageBot}/>
         <Route path="/clientinfo" component={Version}/>
         <Route path="/guidelines" component={GuideLines} />
+        <Route path="/boost" component={Boost} />
         <Route component={NotFound}></Route>
         
       </Switch>

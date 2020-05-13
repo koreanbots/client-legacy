@@ -85,3 +85,22 @@ body {
   background-color: #7289da !important;
   color: #fff !important;
 }
+
+
+.notfound > h2 {
+  margin-top: 10%;
+  font-size: 50px;
+  text-align: center;
+}
+.notfound > h3  {
+  margin-top: 10%;
+  font-size: 30px;
+  text-align: center;
+}
+.notfound > h1 {
+  font-size: 160px;
+  font-weight: 900;
+  letter-spacing: 20px;
+  background-clip: text;
+  text-align: center;
+}

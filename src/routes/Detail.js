@@ -81,7 +81,8 @@ class Detail extends React.Component {
           backgroundImage: `url(${bot.bg})`,
           backgroundAttachment: 'fixed',
           backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover'
+          backgroundSize: 'cover',
+          backgroundBlendMode: 'overlay'
         }}
       >
         <Container>

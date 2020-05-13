@@ -39,8 +39,13 @@ function Footer(props) {
           <Grid.Column>
             <h2>링크</h2>
             <List>
-              <List.Item href="/discord">디스코드 서버</List.Item>
+              <List.Item href="/discord">공식 디스코드 서버</List.Item>
             </List>
+            <List>
+              <List.Item href="/guidelines">가이드라인</List.Item>
+            </List>
+            <a href="https://github.com/koreanbots"><Icon className="github" style={{color: 'white'}}/></a>
+            <a href="mailto:wonderlandpark@callisto.team"><Icon className="mail" style={{color: 'white'}}/></a><br/>
             <Button onClick={toggleDarkmode}>
               {props.Dark ? (
                 <>

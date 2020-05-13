@@ -51,7 +51,7 @@ function Bot({
             {count === undefined ? (
               ''
             ) : (
-              <Segment floated="right">{count + 1 + '위'}</Segment>
+              <Segment floated="right" style={count === 0 ? { background: 'gold', color: 'black' } : count === 1 ? { background: '#c7c7d0', color: 'black' } : count === 2 ? { background: '#af602e', color: 'white' } : {}}>{count + 1 + '위'}</Segment>
             )}
           </Card.Header>
 
