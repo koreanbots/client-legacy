@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import { Input } from "semantic-ui-react";
-import "./Search.css";
+import React, { Component } from 'react';
+import { Input } from 'semantic-ui-react';
+import './Search.css';
 export default class SearchExampleStandard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: "",
+      value: '',
       result: {},
       redirect: false
     };
   }
   render(props) {
     const to = r => {
-      window.location.href = "/search?query=" + r;
-      return "";
+      window.location.href = '/search?query=' + r;
+      return '';
     };
     return (
       <div className="search">
@@ -27,7 +27,7 @@ export default class SearchExampleStandard extends Component {
           fluid={this.props.fluid}
         />
 
-        {this.state.redirect ? to(this.state.value) : ""}
+        {this.state.redirect ? to(this.state.value) : ''}
       </div>
     );
   }
@@ -37,7 +37,7 @@ export default class SearchExampleStandard extends Component {
     });
   }
   handleSubmit(e) {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       this.setState({ redirect: true });
     }
   }

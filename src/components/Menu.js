@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Menu,
   Image,
@@ -6,11 +6,11 @@ import {
   Icon,
   Sidebar,
   Dropdown
-} from "semantic-ui-react";
-import Search from "./Search";
-import Config from "../config";
-import fetch from "node-fetch";
-import config from "../config";
+} from 'semantic-ui-react';
+import Search from './Search';
+import Config from '../config';
+import fetch from 'node-fetch';
+import config from '../config';
 
 export default class MenuExampleStackable extends Component {
   constructor(props) {
@@ -25,21 +25,21 @@ export default class MenuExampleStackable extends Component {
 
   componentDidMount() {
     const getUser = async (token, id, date) => {
-      await fetch(config.api + "/users/@me", {
-        method: "GET",
+      await fetch(config.api + '/users/@me', {
+        method: 'GET',
         headers: { token, id, time: date }
       })
         .then(r => r.json())
         .then(r => {
           if (r.code === 200) {
-            localStorage.setItem("userCache", JSON.stringify(r.user));
+            localStorage.setItem('userCache', JSON.stringify(r.user));
             this.setState({
               user: JSON.parse(localStorage.userCache),
               isLoading: false,
               logged: 1
             });
           } else {
-            localStorage.setItem("userCache", false);
+            localStorage.setItem('userCache', false);
             this.setState({
               user: JSON.parse(localStorage.userCache),
               isLoading: false,
@@ -60,18 +60,23 @@ export default class MenuExampleStackable extends Component {
   }
   editSlider = () => {
     this.setState({ visible: !this.state.visible });
-  }
+  };
   render() {
     const { visible } = this.state;
     return (
       <>
         <Responsive {...Responsive.onlyMobile}>
-          <Menu className="nav" pointing widths={3} inverted={this.props.Darkmode}>
+          <Menu
+            className="nav"
+            pointing
+            widths={3}
+            inverted={this.props.Darkmode}
+          >
             <Menu.Item onClick={this.editSlider}>
               <Icon className="large bars" />
             </Menu.Item>
             <Menu.Item href="/">
-              <h1 style={{ fontFamily: "Gugi" }}>디코봇</h1>
+              <h1 style={{ fontFamily: 'Gugi' }}>디코봇</h1>
             </Menu.Item>
             {this.state.logged === 0 ? (
               <Menu.Item color="black" name="로그인" href="/login">
@@ -84,11 +89,11 @@ export default class MenuExampleStackable extends Component {
                   <Image
                     src={
                       this.state.user.avatar !== false
-                        ? "https://cdn.discordapp.com/avatars/" +
+                        ? 'https://cdn.discordapp.com/avatars/' +
                           this.state.user.id +
-                          "/" +
+                          '/' +
                           this.state.user.avatar +
-                          ".png"
+                          '.png'
                         : `https://cdn.discordapp.com/embed/avatars/${this.state
                             .user.tag % 5}.png`
                     }
@@ -96,15 +101,15 @@ export default class MenuExampleStackable extends Component {
                   />
                 }
               >
-                <Dropdown.Menu direction='left'>
+                <Dropdown.Menu direction="left">
                   <Dropdown.Header
                     content={
-                      this.state.user.username + "#" + this.state.user.tag
+                      this.state.user.username + '#' + this.state.user.tag
                     }
                   />
                   <Dropdown.Item href="/profile">프로필</Dropdown.Item>
                   <Dropdown.Item href="/logout">
-                    <a style={{ color: "#ff6e6e" }}>로그아웃</a>
+                    <a style={{ color: '#ff6e6e' }}>로그아웃</a>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -122,26 +127,31 @@ export default class MenuExampleStackable extends Component {
             className="nav"
             visible={visible}
           >
-            <Menu.Item position='right' onClick={this.editSlider} >
-            <Icon className="close" />
-                <br/>
-              </Menu.Item>
-            <Menu.Item as="a" href="/discord" >
+            <Menu.Item position="right" onClick={this.editSlider}>
+              <Icon className="close" />
+              <br />
+            </Menu.Item>
+            <Menu.Item as="a" href="/discord">
               디스코드
             </Menu.Item>
             <Menu.Item name="add" href="/addbot">
-                봇 추가하기
-              </Menu.Item>
+              봇 추가하기
+            </Menu.Item>
             <Menu.Item>
-                <Search fluid />
-              </Menu.Item>
+              <Search fluid />
+            </Menu.Item>
           </Sidebar>
         </Responsive>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-          <Menu className="nav" secondary inverted={this.props.Darkmode} style={{background: 'transpert'}}>
+          <Menu
+            className="nav"
+            secondary
+            inverted={this.props.Darkmode}
+            style={{ background: 'transpert' }}
+          >
             <Menu.Menu>
               <Menu.Item href="/">
-                <h1 style={{ fontFamily: "Gugi" }}>디코봇</h1>
+                <h1 style={{ fontFamily: 'Gugi' }}>디코봇</h1>
               </Menu.Item>
               <Menu.Item name="discord" href="https://discord.gg/JEh53MQ">
                 디스코드
@@ -166,16 +176,16 @@ export default class MenuExampleStackable extends Component {
                       <>
                         <Image
                           src={
-                            "https://cdn.discordapp.com/avatars/" +
+                            'https://cdn.discordapp.com/avatars/' +
                             this.state.user.id +
-                            "/" +
+                            '/' +
                             this.state.user.avatar +
-                            ".png"
+                            '.png'
                           }
                           avatar
                         />
                         <span>
-                          {" "}
+                          {' '}
                           {this.state.user.username}#{this.state.user.tag}
                         </span>
                       </>
@@ -187,7 +197,7 @@ export default class MenuExampleStackable extends Component {
                           avatar
                         />
                         <span>
-                          {" "}
+                          {' '}
                           {this.state.user.username}#{this.state.user.tag}
                         </span>
                       </>
@@ -197,7 +207,7 @@ export default class MenuExampleStackable extends Component {
                   <Dropdown.Menu>
                     <Dropdown.Item href="/profile">프로필</Dropdown.Item>
                     <Dropdown.Item href="/logout">
-                      <a style={{ color: "#ff6e6e" }}>로그아웃</a>
+                      <a style={{ color: '#ff6e6e' }}>로그아웃</a>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

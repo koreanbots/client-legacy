@@ -1,5 +1,5 @@
-  import React from "react";
-import fetch from "node-fetch";
+import React from 'react';
+import fetch from 'node-fetch';
 import {
   Image,
   Grid,
@@ -9,10 +9,10 @@ import {
   Button,
   Icon,
   Message
-} from "semantic-ui-react";
-import ReactMarkdown from "react-markdown/with-html";
-import config from "../config";
-import Redirect from "../components/Redirect";
+} from 'semantic-ui-react';
+import ReactMarkdown from 'react-markdown/with-html';
+import config from '../config';
+import Redirect from '../components/Redirect';
 
 class Detail extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class Detail extends React.Component {
   }
 
   getData = async (id, date) => {
-    await fetch(config.api + "/bots/pending/" + id + "/" + date)
+    await fetch(config.api + '/bots/pending/' + id + '/' + date)
       .then(r => r.json())
       .then(bot =>
         this.setState({
@@ -49,7 +49,7 @@ class Detail extends React.Component {
     function Success() {
       return (
         <Message success>
-          {" "}
+          {' '}
           해당 봇은 이미 승인되었습니다! 봇 페이지로 리다이랙트합니다.
         </Message>
       );
@@ -68,7 +68,7 @@ class Detail extends React.Component {
               <Message info>해당 봇은 아직 승인 대기 상태입니다.</Message>
             ) : bot.state === 1 ? (
               <>
-                <Redirect to={"/bots/" + bot.id} content={<Success />} />
+                <Redirect to={'/bots/' + bot.id} content={<Success />} />
               </>
             ) : bot.state === 2 ? (
               <Message error>해당 봇은 승인 거부 되었습니다.</Message>
@@ -80,7 +80,7 @@ class Detail extends React.Component {
                 <Grid.Column>
                   <Image
                     src={`https://cdn.discordapp.com/embed/avatars/${(bot.tag ===
-                    "????"
+                    '????'
                       ? 5555
                       : bot.tag) % 5}.png?size=1024`}
                     size="medium"
@@ -89,21 +89,21 @@ class Detail extends React.Component {
                 </Grid.Column>
                 <Grid.Column>
                   <br />
-                  <h1 style={{ fontSize: "50px" }}>
-                    {bot.id}{" "}
+                  <h1 style={{ fontSize: '50px' }}>
+                    {bot.id}{' '}
                     {bot.trusted ? (
                       <Label className="discord">
                         <Icon className="icon mini check" /> 디스코드 인증됨
                       </Label>
                     ) : (
-                      ""
+                      ''
                     )}
                     {bot.verified ? (
                       <Label className="green">
                         <Icon className="icon mini certificate" /> 신뢰함
                       </Label>
                     ) : (
-                      ""
+                      ''
                     )}
                   </h1>
                   <Label>
@@ -114,7 +114,7 @@ class Detail extends React.Component {
                         color={status[bot.status]}
                         empty
                         key="status"
-                      />{" "}
+                      />{' '}
                       {statusText[bot.status]}
                     </Label.Detail>
                   </Label>
@@ -128,14 +128,14 @@ class Detail extends React.Component {
                     <Label.Detail>{bot.lib}</Label.Detail>
                   </Label>
                   <br />
-                  <p style={{ marginTop: "10px", fontSize: "20px" }}>
+                  <p style={{ marginTop: '10px', fontSize: '20px' }}>
                     {bot.intro}
                   </p>
                   <br />
                   <Label.Group tag>
                     카테고리 : <br />
                     {bot.category.length === 0
-                      ? " 지정되지 않음"
+                      ? ' 지정되지 않음'
                       : bot.category.map(c => (
                           <Label as="a" key={c}>
                             {c}
@@ -161,7 +161,7 @@ class Detail extends React.Component {
                     ></Button>
                   )}
                   {bot.web === false ? (
-                    ""
+                    ''
                   ) : (
                     <Button
                       color="blue"
@@ -172,18 +172,18 @@ class Detail extends React.Component {
                     ></Button>
                   )}
                   {bot.discord === false ? (
-                    ""
+                    ''
                   ) : (
                     <Button
                       className="discord"
                       content="지원 디스코드"
                       labelPosition="left"
                       icon="discord"
-                      href={"https://discord.gg/" + bot.discord}
+                      href={'https://discord.gg/' + bot.discord}
                     ></Button>
                   )}
                   {bot.git === false ? (
-                    ""
+                    ''
                   ) : (
                     <Button
                       color="black"
@@ -200,7 +200,7 @@ class Detail extends React.Component {
                 <Grid.Column>
                   <Button
                     className="discord"
-                    content={bot.servers === 0 ? "N/A" : bot.servers + " 서버"}
+                    content={bot.servers === 0 ? 'N/A' : bot.servers + ' 서버'}
                   ></Button>
                   <Button
                     content={bot.votes}
@@ -218,22 +218,22 @@ class Detail extends React.Component {
           </div>
         )}
         <div>
-          제작/개발:{" "}
+          제작/개발:{' '}
           {(bot.owners || []).map(o =>
             o.avatar !== false ? (
               <>
                 <Image
                   src={
-                    "https://cdn.discordapp.com/avatars/" +
+                    'https://cdn.discordapp.com/avatars/' +
                     o.id +
-                    "/" +
+                    '/' +
                     o.avatar +
-                    ".png"
+                    '.png'
                   }
                   avatar
                 />
                 <span>
-                  {" "}
+                  {' '}
                   {o.username}#{o.tag}
                 </span>
               </>
@@ -245,7 +245,7 @@ class Detail extends React.Component {
                   avatar
                 />
                 <span>
-                  {" "}
+                  {' '}
                   {o.username}#{o.tag}
                 </span>
               </>
@@ -254,7 +254,7 @@ class Detail extends React.Component {
         </div>
 
         <Divider section />
-        <ReactMarkdown style={{ wordWrap: "break-word" }} source={bot.desc} />
+        <ReactMarkdown style={{ wordWrap: 'break-word' }} source={bot.desc} />
       </Container>
     );
   }
@@ -263,19 +263,19 @@ class Detail extends React.Component {
 export default Detail;
 
 const status = {
-  online: "green",
-  idle: "yellow",
-  dnd: "red",
-  offline: "gray",
-  streaming: "purple",
-  black: "알 수 없음"
+  online: 'green',
+  idle: 'yellow',
+  dnd: 'red',
+  offline: 'gray',
+  streaming: 'purple',
+  black: '알 수 없음'
 };
 
 const statusText = {
-  online: "온라인",
-  idle: "자리 비움",
-  dnd: "다른 용무중",
-  offline: "오프라인",
-  streaming: "방송중",
-  "???": "알 수 없음"
+  online: '온라인',
+  idle: '자리 비움',
+  dnd: '다른 용무중',
+  offline: '오프라인',
+  streaming: '방송중',
+  '???': '알 수 없음'
 };

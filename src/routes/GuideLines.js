@@ -1,5 +1,5 @@
-import React from "react";
-import { Container } from "semantic-ui-react";
+import React from 'react';
+import { Container } from 'semantic-ui-react';
 
 function GuildLines() {
   return (
@@ -33,14 +33,25 @@ function GuildLines() {
         </li>
         <li>한국인 개발자가 개발하였으며, 한국어를 지원</li>
         <li>서버로 초대할 수 있는 공개봇 (특수목적의 봇은 제외)</li>
-        <li>오픈소스봇을 따로 거부하지는 않지만, 반드시 <strong>라이선스</strong>를 지켜주세요. 완작자의 문제 제기할 경우, 통보없이 봇이 삭제되거나 거부될 수 있습니다.<br/>오픈소스 라이선스에 <strong>원소스를 표시해야 한다는 조항</strong>(MIT 등 해당)이 있다면, 소스같은 곳뿐만 아니라 반드시 봇 설명에 기재해주세요.<br/>한 두개의 명령어까지 관여할 수는 없지만, 봇의 베이스 소스(예시: Just Some Bot을 활용한 뮤직봇, RedBot 기반 봇.)에 오픈소스가 사용되었을 경우, 반드시 라이선스에 관한 조항을 봇 설명에 표시해주세요.</li>
+        <li>
+          오픈소스봇을 따로 거부하지는 않지만, 반드시 <strong>라이선스</strong>
+          를 지켜주세요. 완작자의 문제 제기할 경우, 통보없이 봇이 삭제되거나
+          거부될 수 있습니다.
+          <br />
+          오픈소스 라이선스에 <strong>원소스를 표시해야 한다는 조항</strong>(MIT
+          등 해당)이 있다면, 소스같은 곳뿐만 아니라 반드시 봇 설명에
+          기재해주세요.
+          <br />한 두개의 명령어까지 관여할 수는 없지만, 봇의 베이스 소스(예시:
+          Just Some Bot을 활용한 뮤직봇, RedBot 기반 봇.)에 오픈소스가
+          사용되었을 경우, 반드시 라이선스에 관한 조항을 봇 설명에 표시해주세요.
+        </li>
       </ul>
       <h3 id="금지사항">금지사항</h3>
       <p>다음 항목에 해당하는 봇들은 추가하실 수 없습니다.</p>
       <ul>
         <li>불법 프로그램 홍보 또는 판매 기타 행위를 조장하는 봇.</li>
         <li>
-          디스코드 <strong>TOS</strong>나 <strong>가이드라인</strong>,{" "}
+          디스코드 <strong>TOS</strong>나 <strong>가이드라인</strong>,{' '}
           <strong>개발자 약관</strong>에 위반되는 봇.
         </li>
         <li>
@@ -64,8 +75,8 @@ function GuildLines() {
         </li>
         <li>다음 항목은 예외가 인정될 경우 해당되지 않을 수도 있습니다.</li>
         <li>
-          디스코드 <strong>TOS</strong>나 <strong>가이드라인</strong>,{" "}
-          <strong>개발자 약관</strong> 또는 <strong>대한민국 법</strong>,{" "}
+          디스코드 <strong>TOS</strong>나 <strong>가이드라인</strong>,{' '}
+          <strong>개발자 약관</strong> 또는 <strong>대한민국 법</strong>,{' '}
           <strong>오픈소스 라이선스</strong>, <strong>기타 라이선스</strong> 중
           하나 이상을 위반 하고 있는 경우
         </li>

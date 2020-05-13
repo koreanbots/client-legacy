@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Form,
   Container,
@@ -13,25 +13,25 @@ import {
   Image,
   Button,
   Popup
-} from "semantic-ui-react";
-import Redirect from "../components/Redirect";
-import ReactMarkdown from "react-markdown/with-html";
-import fetch from "node-fetch";
-import config from "../config";
+} from 'semantic-ui-react';
+import Redirect from '../components/Redirect';
+import ReactMarkdown from 'react-markdown/with-html';
+import fetch from 'node-fetch';
+import config from '../config';
 
 class ManageBot extends Component {
   state = {
-    id: "",
-    lib: "",
-    prefix: "",
-    intro: "",
-    desc: "",
+    id: '',
+    lib: '',
+    prefix: '',
+    intro: '',
+    desc: '',
     category: [],
-    website: "",
-    git: "",
-    url: "",
-    discord: "",
-    token: "",
+    website: '',
+    git: '',
+    url: '',
+    discord: '',
+    token: '',
     info: { code: 0 },
     data: { state: 0, data: {} }
   };
@@ -40,9 +40,9 @@ class ManageBot extends Component {
     const token = localStorage.token,
       id = localStorage.id,
       date = localStorage.date;
-    return await fetch(config.api + "/bots/edit/" + body.id, {
-      method: "POST",
-      headers: { token, id, time: date, "Content-Type": "application/json" },
+    return await fetch(config.api + '/bots/edit/' + body.id, {
+      method: 'POST',
+      headers: { token, id, time: date, 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     })
       .then(r => r.json())
@@ -52,27 +52,28 @@ class ManageBot extends Component {
       });
   };
   showToken = () => {
-      if(this.state.token.match(/^\*/)) this.setState({ token: this.state.info.data.token })
-      else this.setState({ token: '******' })
-  }
-  regenToken = async() => {
-      const res = await fetch(config.api + '/bots/regenToken', {
-        method: 'POST',
-        headers: {
-            token: this.state.info.data.token
-        }
-      }).then(r=> r.json())
-      return window.location.reload()
-    }
+    if (this.state.token.match(/^\*/))
+      this.setState({ token: this.state.info.data.token });
+    else this.setState({ token: '******' });
+  };
+  regenToken = async () => {
+    const res = await fetch(config.api + '/bots/regenToken', {
+      method: 'POST',
+      headers: {
+        token: this.state.info.data.token
+      }
+    }).then(r => r.json());
+    return window.location.reload();
+  };
   handleChange = (e, { name, value }) => {
-    if (name === "desc")
+    if (name === 'desc')
       this.setState({
         desc: '******'
       });
     this.setState({ [name]: value });
-    if (name === "intro" && value.length > 120)
+    if (name === 'intro' && value.length > 120)
       this.setState({ desc: value.slice(0, 120) });
-    else if (name === "desc" && value.length > 1000)
+    else if (name === 'desc' && value.length > 1000)
       this.setState({ desc: value.slice(0, 1000) });
   };
   handleCategory = e => {
@@ -92,7 +93,7 @@ class ManageBot extends Component {
       this.setState({
         data: {
           state: 2,
-          data: { message: "필수 입력칸을 전부 작성해주세요!" }
+          data: { message: '필수 입력칸을 전부 작성해주세요!' }
         }
       });
     }
@@ -100,33 +101,49 @@ class ManageBot extends Component {
 
   archive = async () => {
     const token = localStorage.token,
-    id = localStorage.id,
-    date = localStorage.date;
-  await fetch(config.api + "/bots/archive/" + this.state.info.data.id, {
-    method: "POST",
-    headers: { token, id, time: date, "Content-Type": "application/json" },
-  })
-    .then(r => r.json())
-    .then(res=> {
-      if(res.code === 200) {
-        if(res.archived) window.location.href = "/?message=lockOn"
-        else window.location.href = "/?message=lockOff"
-      }
+      id = localStorage.id,
+      date = localStorage.date;
+    await fetch(config.api + '/bots/archive/' + this.state.info.data.id, {
+      method: 'POST',
+      headers: { token, id, time: date, 'Content-Type': 'application/json' }
     })
-  }
+      .then(r => r.json())
+      .then(res => {
+        if (res.code === 200) {
+          if (res.archived) window.location.href = '/?message=lockOn';
+          else window.location.href = '/?message=lockOff';
+        }
+      });
+  };
 
   async componentDidMount() {
-      const res = await fetch(config.api + '/bots/completeInfo/' + this.props.match.params.id, {
-          headers: {
-              token: localStorage.token,
-              id: localStorage.id,
-              time: localStorage.date
-          }
-      }).then(r=> r.json())
-      if(res.code !== 200 ) this.setState({ info: res })
-      else this.setState({ info: res, id: res.data.id, prefix: res.data.prefix, lib: res.data.lib, website: res.data.web || '', git: res.data.git || '', url: res.data.url || '', discord: res.data.discord || '', category: res.data.category, intro: res.data.intro, desc: res.data.desc, token: '******' })
-
-    }
+    const res = await fetch(
+      config.api + '/bots/completeInfo/' + this.props.match.params.id,
+      {
+        headers: {
+          token: localStorage.token,
+          id: localStorage.id,
+          time: localStorage.date
+        }
+      }
+    ).then(r => r.json());
+    if (res.code !== 200) this.setState({ info: res });
+    else
+      this.setState({
+        info: res,
+        id: res.data.id,
+        prefix: res.data.prefix,
+        lib: res.data.lib,
+        website: res.data.web || '',
+        git: res.data.git || '',
+        url: res.data.url || '',
+        discord: res.data.discord || '',
+        category: res.data.category,
+        intro: res.data.intro,
+        desc: res.data.desc,
+        token: '******'
+      });
+  }
   render() {
     const {
       id,
@@ -141,54 +158,70 @@ class ManageBot extends Component {
       discord,
       info
     } = this.state;
-    const bot = info.data
+    const bot = info.data;
     if (!localStorage.userCache || !JSON.parse(localStorage.userCache))
       return (
         <div className="loader">
           <h1>로그인 해주세요!</h1>
         </div>
       );
-    if(this.state.info.code !== 200) return (
+    if (this.state.info.code !== 200)
+      return (
         <div className="loader">
-        <h1>{this.state.info.message}</h1>
-      </div>
-    )
+          <h1>{this.state.info.message}</h1>
+        </div>
+      );
     else
       return (
         <Container>
           <br />
           <h1>봇 관리하기</h1>
           <Grid stackable divided="vertically">
-              <Grid.Row columns={2}>
-                <Grid.Column>
-                  <Image
-                    centered
-                    floated="left"
-                    src={
-                      bot.avatar !== false
-                        ? "https://cdn.discordapp.com/avatars/" +
-                          bot.id +
-                          "/" +
-                          bot.avatar +
-                          ".png?size=1024"
-                        : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
-                            5}.png??size=1024`
-                    }
-                    size="medium"
-                    rounded
-                  />
-                </Grid.Column>
-                <Grid.Column>
-                <h1>{bot.name}</h1><br/>
+            <Grid.Row columns={2}>
+              <Grid.Column>
+                <Image
+                  centered
+                  floated="left"
+                  src={
+                    bot.avatar !== false
+                      ? 'https://cdn.discordapp.com/avatars/' +
+                        bot.id +
+                        '/' +
+                        bot.avatar +
+                        '.png?size=1024'
+                      : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
+                          5}.png??size=1024`
+                  }
+                  size="medium"
+                  rounded
+                />
+              </Grid.Column>
+              <Grid.Column>
+                <h1>{bot.name}</h1>
+                <br />
                 <h5>ID: {id}</h5>
                 토큰: <pre>{this.state.token} </pre>
-                <br/>
-                <Button content={this.state.token.startsWith('*') ? "보이기" : "가리기  "} onClick={this.showToken}/> <Button content="복사하기" onClick={()=> {navigator.clipboard.writeText(this.state.info.data.token).then(alert('복사되었습니다!'))}}/> <Button onClick={this.regenToken} content="재발급"/>
-                </Grid.Column>
+                <br />
+                <Button
+                  content={
+                    this.state.token.startsWith('*') ? '보이기' : '가리기  '
+                  }
+                  onClick={this.showToken}
+                />{' '}
+                <Button
+                  content="복사하기"
+                  onClick={() => {
+                    navigator.clipboard
+                      .writeText(this.state.info.data.token)
+                      .then(alert('복사되었습니다!'));
+                  }}
+                />{' '}
+                <Button onClick={this.regenToken} content="재발급" />
+              </Grid.Column>
             </Grid.Row>
-            </Grid>
-            
-                    <br/>
+          </Grid>
+
+          <br />
           <Form onSubmit={this.handleSubmit} disabled>
             <Form.Group>
               <Form.Input
@@ -206,29 +239,29 @@ class ManageBot extends Component {
                 value={lib}
                 onChange={this.handleChange}
                 options={[
-                  { text: "discord.js", value: "discord.js" },
-                  { text: "Eris", value: "Eris" },
-                  { text: "discord.py", value: "discord.py" },
-                  { text: "discordcr", value: "discordcr" },
-                  { text: "Nyxx", value: "Nyxx" },
-                  { text: "Discord.Net", value: "Discord.Net" },
-                  { text: "DSharpPlus", value: "DSharpPlus" },
-                  { text: "Nostrum", value: "Nostrum" },
-                  { text: "coxir", value: "coxir" },
-                  { text: "DiscordGo", value: "DiscordGo" },
-                  { text: "Discord4J", value: "Discord4J" },
-                  { text: "Javacord", value: "Javacord" },
-                  { text: "JDA", value: "JDA" },
-                  { text: "Discordia", value: "Discordia" },
-                  { text: "RestCord", value: "RestCord" },
-                  { text: "Yasmin", value: "Yasmin" },
-                  { text: "disco", value: "disco" },
-                  { text: "discordrb", value: "discordrb" },
-                  { text: "serenity", value: "serenity" },
-                  { text: "SwiftDiscord", value: "SwiftDiscord" },
-                  { text: "Sword", value: "Sword" },
-                  { text: "기타", value: "기타" },
-                  { text: "비공개", value: "비공개" }
+                  { text: 'discord.js', value: 'discord.js' },
+                  { text: 'Eris', value: 'Eris' },
+                  { text: 'discord.py', value: 'discord.py' },
+                  { text: 'discordcr', value: 'discordcr' },
+                  { text: 'Nyxx', value: 'Nyxx' },
+                  { text: 'Discord.Net', value: 'Discord.Net' },
+                  { text: 'DSharpPlus', value: 'DSharpPlus' },
+                  { text: 'Nostrum', value: 'Nostrum' },
+                  { text: 'coxir', value: 'coxir' },
+                  { text: 'DiscordGo', value: 'DiscordGo' },
+                  { text: 'Discord4J', value: 'Discord4J' },
+                  { text: 'Javacord', value: 'Javacord' },
+                  { text: 'JDA', value: 'JDA' },
+                  { text: 'Discordia', value: 'Discordia' },
+                  { text: 'RestCord', value: 'RestCord' },
+                  { text: 'Yasmin', value: 'Yasmin' },
+                  { text: 'disco', value: 'disco' },
+                  { text: 'discordrb', value: 'discordrb' },
+                  { text: 'serenity', value: 'serenity' },
+                  { text: 'SwiftDiscord', value: 'SwiftDiscord' },
+                  { text: 'Sword', value: 'Sword' },
+                  { text: '기타', value: '기타' },
+                  { text: '비공개', value: '비공개' }
                 ]}
               />
             </Form.Group>
@@ -305,7 +338,7 @@ class ManageBot extends Component {
               />
               <div className="field">
                 <br />
-                <Segment style={{ wordWrap: "break-word" }}>
+                <Segment style={{ wordWrap: 'break-word' }}>
                   <Label attached="top">설명 미리보기</Label>
                   <br />
                   <ReactMarkdown source={desc} escapeHtml={true} />
@@ -325,23 +358,45 @@ class ManageBot extends Component {
             <> </>
           )}
           <h2>위험구역</h2>
-                <Segment>
-                  
-              <h3>관리자 추가</h3>
-                  <p>봇의 소유자를 추가합니다. 소유자는 당신과 동일한 권한을 갖게됩니다.</p>
-              <Popup content='해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요' trigger={<Button color='red' content="관리자 추가" icon="plus"/>}/>
+          <Segment>
+            <h3>관리자 추가</h3>
+            <p>
+              봇의 소유자를 추가합니다. 소유자는 당신과 동일한 권한을
+              갖게됩니다.
+            </p>
+            <Popup
+              content="해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요"
+              trigger={<Button color="red" content="관리자 추가" icon="plus" />}
+            />
 
-                  <h3>{this.state.info.data.state === 'archived' ? '봇을 잠금 해제합니다.' : '봇을 잠금 처리합니다'}</h3>
-                  <p>{this.state.info.data.state === 'archived' ? '봇을 잠금 해제하면, 봇을 다시 초대할 수 있습니다.' : '봇을 잠금처리하면 더 이상 초대할 수 없는 상태가 되면서, 잠금된 봇이라 안내됩니다.'}</p>
-              <Button icon="lock" color='red' onClick={this.archive} content={this.state.info.data.state === 'archived' ? '잠금해제' : '잠금하기'}/>
+            <h3>
+              {this.state.info.data.state === 'archived'
+                ? '봇을 잠금 해제합니다.'
+                : '봇을 잠금 처리합니다'}
+            </h3>
+            <p>
+              {this.state.info.data.state === 'archived'
+                ? '봇을 잠금 해제하면, 봇을 다시 초대할 수 있습니다.'
+                : '봇을 잠금처리하면 더 이상 초대할 수 없는 상태가 되면서, 잠금된 봇이라 안내됩니다.'}
+            </p>
+            <Button
+              icon="lock"
+              color="red"
+              onClick={this.archive}
+              content={
+                this.state.info.data.state === 'archived'
+                  ? '잠금해제'
+                  : '잠금하기'
+              }
+            />
 
-              <h3>봇을 삭제합니다</h3>
-                  <p>봇을 영구적으로 삭제합니다.</p>
-              <Popup content='해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요' trigger={<Button color='red' content="삭제하기" icon="trash"/>} />
-
-              
-               
-                </Segment>
+            <h3>봇을 삭제합니다</h3>
+            <p>봇을 영구적으로 삭제합니다.</p>
+            <Popup
+              content="해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요"
+              trigger={<Button color="red" content="삭제하기" icon="trash" />}
+            />
+          </Segment>
         </Container>
       );
   }
@@ -350,18 +405,18 @@ class ManageBot extends Component {
 export default ManageBot;
 
 const options = [
-  { text: "관리", value: "관리", key: "관리" },
-  { text: "뮤직", value: "뮤직", key: "뮤직" },
-  { text: "전적", value: "전적", key: "전적" },
-  { text: "웹 대시보드", value: "웹 대시보드", key: "웹 대시보드" },
-  { text: "로깅", value: "로깅", key: "로깅" },
-  { text: "도박", value: "도박", key: "도박" },
-  { text: "게임", value: "게임", key: "게임" },
-  { text: "밈", value: "밈", key: "밈" },
-  { text: "레벨링", value: "레벨링", key: "레벨링" },
-  { text: "유틸리티", value: "유틸리티", key: "유틸리티" },
-  { text: "번역", value: "번역", key: "번역" },
-  { text: "대화", value: "대화", key: "대화" },
-  { text: "NSFW", value: "NSFW", key: "NSFW" },
-  { text: "검색", value: "검색", key: "검색" }
+  { text: '관리', value: '관리', key: '관리' },
+  { text: '뮤직', value: '뮤직', key: '뮤직' },
+  { text: '전적', value: '전적', key: '전적' },
+  { text: '웹 대시보드', value: '웹 대시보드', key: '웹 대시보드' },
+  { text: '로깅', value: '로깅', key: '로깅' },
+  { text: '도박', value: '도박', key: '도박' },
+  { text: '게임', value: '게임', key: '게임' },
+  { text: '밈', value: '밈', key: '밈' },
+  { text: '레벨링', value: '레벨링', key: '레벨링' },
+  { text: '유틸리티', value: '유틸리티', key: '유틸리티' },
+  { text: '번역', value: '번역', key: '번역' },
+  { text: '대화', value: '대화', key: '대화' },
+  { text: 'NSFW', value: 'NSFW', key: 'NSFW' },
+  { text: '검색', value: '검색', key: '검색' }
 ];

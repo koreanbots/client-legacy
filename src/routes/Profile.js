@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import fetch from "node-fetch";
+import React, { useState } from 'react';
+import fetch from 'node-fetch';
 import {
   Container,
   Item,
@@ -7,11 +7,11 @@ import {
   Icon,
   Card,
   Divider
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
-import Redirect from "../components/Redirect";
-import config from "../config";
-import Bot from "../components/Bot";
+import Redirect from '../components/Redirect';
+import config from '../config';
+import Bot from '../components/Bot';
 
 class Detail extends React.Component {
   constructor(props) {
@@ -26,8 +26,8 @@ class Detail extends React.Component {
     const token = localStorage.token,
       id = localStorage.id,
       date = localStorage.date;
-    const res = await fetch(config.api + "/users/@me/profile", {
-      method: "GET",
+    const res = await fetch(config.api + '/users/@me/profile', {
+      method: 'GET',
       headers: { token, id, time: date }
     }).then(r => r.json());
 
@@ -70,7 +70,7 @@ class Detail extends React.Component {
               <>
                 <Card.Group stackable itemsPerRow={3}>
                   {result.user.bots.map(bot => (
-                    <MyBots bot={bot}/>
+                    <MyBots bot={bot} />
                   ))}
                 </Card.Group>
                 <br />
@@ -83,7 +83,7 @@ class Detail extends React.Component {
             ) : (
               <Card.Group stackable itemsPerRow={3}>
                 {result.user.submitted.map(bot => (
-                  <Submitted bot={bot}/>
+                  <Submitted bot={bot} />
                 ))}
               </Card.Group>
             )}
@@ -95,34 +95,37 @@ class Detail extends React.Component {
               <Card.Group stackable itemsPerRow={3}>
                 {result.user.voted.map(bot => (
                   <Bot
-                  data={bot}
-                  key={bot.id}
-                  id={bot.id}
-                  name={bot.name}
-                  avatar={
-                    bot.avatar !== false
-                      ? "https://cdn.discordapp.com/avatars/" +
-                        bot.id +
-                        "/" +
-                        bot.avatar +
-                        ".png"
-                      : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
-                          5}.png`
-                  }
-                  votes={bot.votes}
-                  servers={bot.servers}
-                  category={bot.category}
-                  intro={bot.intro}
-                  desc={bot.desc}
-                  invite={bot.url === false ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0` : bot.url}
-                  state={bot.state}
-                  vanity={bot.vanity}
-                  boosted={bot.boosted}
-                  status={bot.status}
-                  bg={bot.bg}
-                  banner={bot.banner}
-                />
-
+                    data={bot}
+                    key={bot.id}
+                    id={bot.id}
+                    name={bot.name}
+                    avatar={
+                      bot.avatar !== false
+                        ? 'https://cdn.discordapp.com/avatars/' +
+                          bot.id +
+                          '/' +
+                          bot.avatar +
+                          '.png'
+                        : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
+                            5}.png`
+                    }
+                    votes={bot.votes}
+                    servers={bot.servers}
+                    category={bot.category}
+                    intro={bot.intro}
+                    desc={bot.desc}
+                    invite={
+                      bot.url === false
+                        ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`
+                        : bot.url
+                    }
+                    state={bot.state}
+                    vanity={bot.vanity}
+                    boosted={bot.boosted}
+                    status={bot.status}
+                    bg={bot.bg}
+                    banner={bot.banner}
+                  />
                 ))}
               </Card.Group>
             )}
@@ -136,87 +139,99 @@ class Detail extends React.Component {
 
 export default Detail;
 
-const stateColor = ["gray", "green", "red"];
-const state = ["심사중", "승인됨", "거부됨"];
-
+const stateColor = ['gray', 'green', 'red'];
+const state = ['심사중', '승인됨', '거부됨'];
 
 function MyBots(props) {
-    const [ see, hoverSee ] = useState(false)
-    const [ manage, hoverManage ] = useState(false)
-    const { bot } = props
-  return(
+  const [see, hoverSee] = useState(false);
+  const [manage, hoverManage] = useState(false);
+  const { bot } = props;
+  return (
     <Card>
-                      <Card.Content>
-                        <Card.Header>
-                          {" "}
-                          <Item.Image
-                            floated="right"
-                            src={
-                              bot.avatar !== false
-                                ? "https://cdn.discordapp.com/avatars/" +
-                                  bot.id +
-                                  "/" +
-                                  bot.avatar +
-                                  ".png"
-                                : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
-                                    5}.png`
-                            }
-                            wrapped
-                            ui={false}
-                            avatar
-                          />
-                          {bot.name}
-                        </Card.Header>
-                        <Card.Meta>
-                          <a style={{ color: "#7289DA" }}>{bot.servers} 서버</a>{" "}
-                          |{" "}
-                          <a style={{ color: "red" }}>
-                            {bot.votes} <Icon className="heart" />
-                          </a>
-                        </Card.Meta>
-                        <Card.Description>{bot.intro}</Card.Description>
-                      </Card.Content>
-                      <Card.Content extra>
-                        <div className="ui two buttons">
-                          <Button href={"/bots/" + (bot.vanity && bot.boosted ? bot.vanity : bot.id)} basic={!see} color="blue" onMouseOver={()=>hoverSee(true)} onMouseOut={()=>hoverSee(false)}>
-                            보기
-                          </Button>
-                          <Button href={"/manage/" + bot.id} basic={!manage} color="green" onMouseOver={()=> hoverManage(true)} onMouseOut={()=>hoverManage(false)}>
-                            관리하기
-                          </Button>
-                        </div>
-                      </Card.Content>
-                    </Card>
-  )
+      <Card.Content>
+        <Card.Header>
+          {' '}
+          <Item.Image
+            floated="right"
+            src={
+              bot.avatar !== false
+                ? 'https://cdn.discordapp.com/avatars/' +
+                  bot.id +
+                  '/' +
+                  bot.avatar +
+                  '.png'
+                : `https://cdn.discordapp.com/embed/avatars/${bot.tag % 5}.png`
+            }
+            wrapped
+            ui={false}
+            avatar
+          />
+          {bot.name}
+        </Card.Header>
+        <Card.Meta>
+          <a style={{ color: '#7289DA' }}>{bot.servers} 서버</a> |{' '}
+          <a style={{ color: 'red' }}>
+            {bot.votes} <Icon className="heart" />
+          </a>
+        </Card.Meta>
+        <Card.Description>{bot.intro}</Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <div className="ui two buttons">
+          <Button
+            href={'/bots/' + (bot.vanity && bot.boosted ? bot.vanity : bot.id)}
+            basic={!see}
+            color="blue"
+            onMouseOver={() => hoverSee(true)}
+            onMouseOut={() => hoverSee(false)}
+          >
+            보기
+          </Button>
+          <Button
+            href={'/manage/' + bot.id}
+            basic={!manage}
+            color="green"
+            onMouseOver={() => hoverManage(true)}
+            onMouseOut={() => hoverManage(false)}
+          >
+            관리하기
+          </Button>
+        </div>
+      </Card.Content>
+    </Card>
+  );
 }
 
 function Submitted(props) {
-  const [ preview, hoverPrev ] = useState(false)
-  const { bot } = props
-  return(
-    <Card href={"/pendingBots/" + bot.id + "/" + bot.date}>
-                    <Card.Content>
-                      <Card.Header>
-                        <a>{bot.id}</a>
-                      </Card.Header>
-                      <Card.Meta>
-                        상태:{" "}
-                        <a style={{ color: stateColor[bot.state] }}>
-                          {state[bot.state]}
-                        </a>
-                      </Card.Meta>
-                      <Card.Description>
-                        설명:
-                        {bot.intro}
-                      </Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                      <div className="ui two buttons">
-                        <Button basic={!preview} color="blue" onMouseOver={()=>hoverPrev(true)} onMouseOut={()=>hoverPrev(false)}>
-                          미리 보기
-                        </Button>
-                      </div>
-                    </Card.Content>
-                  </Card>
-  )
+  const [preview, hoverPrev] = useState(false);
+  const { bot } = props;
+  return (
+    <Card href={'/pendingBots/' + bot.id + '/' + bot.date}>
+      <Card.Content>
+        <Card.Header>
+          <a>{bot.id}</a>
+        </Card.Header>
+        <Card.Meta>
+          상태:{' '}
+          <a style={{ color: stateColor[bot.state] }}>{state[bot.state]}</a>
+        </Card.Meta>
+        <Card.Description>
+          설명:
+          {bot.intro}
+        </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <div className="ui two buttons">
+          <Button
+            basic={!preview}
+            color="blue"
+            onMouseOver={() => hoverPrev(true)}
+            onMouseOut={() => hoverPrev(false)}
+          >
+            미리 보기
+          </Button>
+        </div>
+      </Card.Content>
+    </Card>
+  );
 }

@@ -1,6 +1,6 @@
-import React from "react";
-import { Container } from "semantic-ui-react";
-import Redirect from "../components/Redirect";
+import React from 'react';
+import { Container } from 'semantic-ui-react';
+import Redirect from '../components/Redirect';
 
 class Detail extends React.Component {
   constructor(props) {

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./404.css";
+import React, { Component } from 'react';
+import './404.css';
 
 export default class MenuExampleStackable extends Component {
   setup = (p5, canvasParentRef) => {

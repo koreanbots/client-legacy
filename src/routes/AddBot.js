@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Form,
   Container,
@@ -9,24 +9,24 @@ import {
   Divider,
   Dropdown,
   Input
-} from "semantic-ui-react";
-import Redirect from "../components/Redirect";
-import ReactMarkdown from "react-markdown/with-html";
-import fetch from "node-fetch";
-import config from "../config";
+} from 'semantic-ui-react';
+import Redirect from '../components/Redirect';
+import ReactMarkdown from 'react-markdown/with-html';
+import fetch from 'node-fetch';
+import config from '../config';
 
 class SubmitBot extends Component {
   state = {
-    id: "",
-    lib: "",
-    prefix: "",
-    intro: "",
-    desc: "",
+    id: '',
+    lib: '',
+    prefix: '',
+    intro: '',
+    desc: '',
     category: [],
-    website: "",
-    git: "",
-    url: "",
-    discord: "",
+    website: '',
+    git: '',
+    url: '',
+    discord: '',
     data: { state: 0, data: {} }
   };
 
@@ -34,9 +34,9 @@ class SubmitBot extends Component {
     const token = localStorage.token,
       id = localStorage.id,
       date = localStorage.date;
-    return await fetch(config.api + "/bots/submit", {
-      method: "POST",
-      headers: { token, id, time: date, "Content-Type": "application/json" },
+    return await fetch(config.api + '/bots/submit', {
+      method: 'POST',
+      headers: { token, id, time: date, 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     })
       .then(r => r.json())
@@ -47,14 +47,14 @@ class SubmitBot extends Component {
   };
 
   handleChange = (e, { name, value }) => {
-    if (name === "desc")
+    if (name === 'desc')
       this.setState({
-        desc: value.replace(/</gi, "&lt").replace(/>/gi, "&gt")
+        desc: value.replace(/</gi, '&lt').replace(/>/gi, '&gt')
       });
     this.setState({ [name]: value });
-    if (name === "intro" && value.length > 120)
+    if (name === 'intro' && value.length > 120)
       this.setState({ desc: value.slice(0, 120) });
-    else if (name === "desc" && value.length > 1000)
+    else if (name === 'desc' && value.length > 1000)
       this.setState({ desc: value.slice(0, 1000) });
   };
   handleCategory = e => {
@@ -75,7 +75,7 @@ class SubmitBot extends Component {
       this.setState({
         data: {
           state: 2,
-          data: { message: "필수 입력칸을 전부 작성해주세요!" }
+          data: { message: '필수 입력칸을 전부 작성해주세요!' }
         }
       });
     }
@@ -135,7 +135,7 @@ class SubmitBot extends Component {
             <Form.Group>
               <Form.Input
                 placeholder="387548561816027138"
-                label={"봇 ID (*)"}
+                label={'봇 ID (*)'}
                 description="GG"
                 name="id"
                 value={id}
@@ -157,29 +157,29 @@ class SubmitBot extends Component {
                 value={lib}
                 onChange={this.handleChange}
                 options={[
-                  { text: "discord.js", value: "discord.js" },
-                  { text: "Eris", value: "Eris" },
-                  { text: "discord.py", value: "discord.py" },
-                  { text: "discordcr", value: "discordcr" },
-                  { text: "Nyxx", value: "Nyxx" },
-                  { text: "Discord.Net", value: "Discord.Net" },
-                  { text: "DSharpPlus", value: "DSharpPlus" },
-                  { text: "Nostrum", value: "Nostrum" },
-                  { text: "coxir", value: "coxir" },
-                  { text: "DiscordGo", value: "DiscordGo" },
-                  { text: "Discord4J", value: "Discord4J" },
-                  { text: "Javacord", value: "Javacord" },
-                  { text: "JDA", value: "JDA" },
-                  { text: "Discordia", value: "Discordia" },
-                  { text: "RestCord", value: "RestCord" },
-                  { text: "Yasmin", value: "Yasmin" },
-                  { text: "disco", value: "disco" },
-                  { text: "discordrb", value: "discordrb" },
-                  { text: "serenity", value: "serenity" },
-                  { text: "SwiftDiscord", value: "SwiftDiscord" },
-                  { text: "Sword", value: "Sword" },
-                  { text: "기타", value: "기타" },
-                  { text: "비공개", value: "비공개" }
+                  { text: 'discord.js', value: 'discord.js' },
+                  { text: 'Eris', value: 'Eris' },
+                  { text: 'discord.py', value: 'discord.py' },
+                  { text: 'discordcr', value: 'discordcr' },
+                  { text: 'Nyxx', value: 'Nyxx' },
+                  { text: 'Discord.Net', value: 'Discord.Net' },
+                  { text: 'DSharpPlus', value: 'DSharpPlus' },
+                  { text: 'Nostrum', value: 'Nostrum' },
+                  { text: 'coxir', value: 'coxir' },
+                  { text: 'DiscordGo', value: 'DiscordGo' },
+                  { text: 'Discord4J', value: 'Discord4J' },
+                  { text: 'Javacord', value: 'Javacord' },
+                  { text: 'JDA', value: 'JDA' },
+                  { text: 'Discordia', value: 'Discordia' },
+                  { text: 'RestCord', value: 'RestCord' },
+                  { text: 'Yasmin', value: 'Yasmin' },
+                  { text: 'disco', value: 'disco' },
+                  { text: 'discordrb', value: 'discordrb' },
+                  { text: 'serenity', value: 'serenity' },
+                  { text: 'SwiftDiscord', value: 'SwiftDiscord' },
+                  { text: 'Sword', value: 'Sword' },
+                  { text: '기타', value: '기타' },
+                  { text: '비공개', value: '비공개' }
                 ]}
               />
             </Form.Group>
@@ -211,7 +211,7 @@ class SubmitBot extends Component {
               <label>지원 디스코드 서버</label>
             </div>
             <Input
-              style={{width: '70%'}}
+              style={{ width: '70%' }}
               labelPosition="right"
               placeholder="JEh53MQ"
               name="discord"
@@ -219,7 +219,7 @@ class SubmitBot extends Component {
               onChange={this.handleChange}
               maxLength={8}
             >
-              <Label basic >discord.gg/</Label>
+              <Label basic>discord.gg/</Label>
               <input />
             </Input>
 
@@ -256,7 +256,7 @@ class SubmitBot extends Component {
               />
               <div className="field">
                 <br />
-                <Segment style={{ wordWrap: "break-word" }}>
+                <Segment style={{ wordWrap: 'break-word' }}>
                   <Label attached="top">설명 미리보기</Label>
                   <br />
                   <ReactMarkdown source={desc} escapeHtml={true} />
@@ -284,18 +284,18 @@ class SubmitBot extends Component {
 export default SubmitBot;
 
 const options = [
-  { text: "관리", value: "관리", key: "관리" },
-  { text: "뮤직", value: "뮤직", key: "뮤직" },
-  { text: "전적", value: "전적", key: "전적" },
-  { text: "웹 대시보드", value: "웹 대시보드", key: "웹 대시보드" },
-  { text: "로깅", value: "로깅", key: "로깅" },
-  { text: "도박", value: "도박", key: "도박" },
-  { text: "게임", value: "게임", key: "게임" },
-  { text: "밈", value: "밈", key: "밈" },
-  { text: "레벨링", value: "레벨링", key: "레벨링" },
-  { text: "유틸리티", value: "유틸리티", key: "유틸리티" },
-  { text: "번역", value: "번역", key: "번역" },
-  { text: "대화", value: "대화", key: "대화" },
-  { text: "NSFW", value: "NSFW", key: "NSFW" },
-  { text: "검색", value: "검색", key: "검색" }
+  { text: '관리', value: '관리', key: '관리' },
+  { text: '뮤직', value: '뮤직', key: '뮤직' },
+  { text: '전적', value: '전적', key: '전적' },
+  { text: '웹 대시보드', value: '웹 대시보드', key: '웹 대시보드' },
+  { text: '로깅', value: '로깅', key: '로깅' },
+  { text: '도박', value: '도박', key: '도박' },
+  { text: '게임', value: '게임', key: '게임' },
+  { text: '밈', value: '밈', key: '밈' },
+  { text: '레벨링', value: '레벨링', key: '레벨링' },
+  { text: '유틸리티', value: '유틸리티', key: '유틸리티' },
+  { text: '번역', value: '번역', key: '번역' },
+  { text: '대화', value: '대화', key: '대화' },
+  { text: 'NSFW', value: 'NSFW', key: 'NSFW' },
+  { text: '검색', value: '검색', key: '검색' }
 ];
