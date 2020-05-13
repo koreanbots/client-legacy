@@ -62,7 +62,6 @@ function App() {
         
       </Switch>
       </div>
-      <br/>
       <Footer Dark={Dark} setDark={setDark}/>
 
         </div>

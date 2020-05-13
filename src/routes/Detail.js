@@ -75,6 +75,11 @@ class Detail extends React.Component {
   render() {
     const { bot, isLoading } = this.state;
     return (
+      <div style={{ backgroundImage: `url(${bot.bg})`,
+        backgroundAttachment: 'fixed',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+        }}>
       <Container>
         <br />
 
@@ -132,6 +137,13 @@ class Detail extends React.Component {
                     {bot.trusted ? (
                       <Label className="green">
                         <Icon className="icon certificate" /> 신뢰함
+                      </Label>
+                    ) : (
+                      ""
+                    )}
+                    {bot.boosted ? (
+                      <Label style={{background: '#ff73fa', color: 'white'}}>
+                        <Icon className="icon diamond" /> 부스트
                       </Label>
                     ) : (
                       ""
@@ -319,10 +331,11 @@ class Detail extends React.Component {
         )}
 
         <Divider section />
-        <Segment style={{ wordWrap: "break-word"}}>
+        <Segment style={{ wordWrap: "break-word", borderRadius: 0 }}>
           <ReactMarkdown source={bot.desc} />
         </Segment>
       </Container>
+      </div>
     );
   }
 }

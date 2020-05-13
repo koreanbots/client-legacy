@@ -73,7 +73,15 @@ body {
   background-color: #1b1c1d;
 }
 
+
+
 .darkmode .label, .darkmode .tag.labels > a {
   background-color: #23272A;
   color: white;
+}
+
+
+.discord {
+  background-color: #7289da !important;
+  color: #fff !important;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import fetch from "node-fetch";
 import Bot from "../components/Bot";
-import { Message, Container, Card, Pagination, Label, Icon  } from "semantic-ui-react";
+import { Message, Container, Card, Pagination, Label } from "semantic-ui-react";
 import config from "../config";
 
 import queryString from 'query-string';
@@ -137,6 +137,11 @@ class Home extends React.Component {
                       count={this.state.bot.data.findIndex(r=> r.id === bot.id) + (this.state.activePage-1)*9 }
                       verified={bot.verified}
                       trusted={bot.trusted}
+                      vanity={bot.vanity}
+                      boosted={bot.boosted}
+                      status={bot.status}
+                      banner={bot.banner}
+                      bg={bot.bg}
                     />
                   </>
                 ))}

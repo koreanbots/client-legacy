@@ -116,6 +116,11 @@ class Detail extends React.Component {
                   desc={bot.desc}
                   invite={bot.url === false ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0` : bot.url}
                   state={bot.state}
+                  vanity={bot.vanity}
+                  boosted={bot.boosted}
+                  status={bot.status}
+                  bg={bot.bg}
+                  banner={bot.banner}
                 />
 
                 ))}
@@ -173,7 +178,7 @@ function MyBots(props) {
                       </Card.Content>
                       <Card.Content extra>
                         <div className="ui two buttons">
-                          <Button href={"/bots/" + bot.id} basic={!see} color="blue" onMouseOver={()=>hoverSee(true)} onMouseOut={()=>hoverSee(false)}>
+                          <Button href={"/bots/" + (bot.vanity && bot.boosted ? bot.vanity : bot.id)} basic={!see} color="blue" onMouseOver={()=>hoverSee(true)} onMouseOut={()=>hoverSee(false)}>
                             보기
                           </Button>
                           <Button href={"/manage/" + bot.id} basic={!manage} color="green" onMouseOver={()=> hoverManage(true)} onMouseOut={()=>hoverManage(false)}>

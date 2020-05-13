@@ -117,6 +117,13 @@ class Category extends React.Component {
                       invite={bot.url === false ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0` : bot.url}
                       state={bot.state}
                       count={this.state.bot.data.findIndex(r=> r.id === bot.id) + (this.state.activePage-1)*9 }
+                      verified={bot.verified}
+                      trusted={bot.trusted}
+                      vanity={bot.vanity}
+                      boosted={bot.boosted}
+                      status={bot.status}
+                      banner={bot.banner}
+                      bg={bot.bg}
                     />
                   </>
                 ))}
