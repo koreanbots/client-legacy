@@ -47,7 +47,7 @@ class Detail extends React.Component {
 
   voteAction = async () => {
     const res = await fetch(
-      config.api + '/bots/vote/' + this.props.match.params.id,
+      config.api + '/bots/vote/' + this.state.bot.id,
       {
         method: 'POST',
         headers: {
