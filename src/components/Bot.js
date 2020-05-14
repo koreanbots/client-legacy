@@ -35,7 +35,7 @@ function Bot({
       <Card
         className="botcard"
         style={
-         (banner && boosted) || (banner && verified)
+         (banner && boosted) || (banner && trusted)
             ? {
                 background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${banner}) top/cover no-repeat`
               }
@@ -108,7 +108,7 @@ function Bot({
             <Button
               disabled={state === 'example'}
               basic={!lookHover}
-              href={'/bots/' + ((vanity && boosted) || (vanity && verified)  ? vanity : id)}
+              href={'/bots/' + ((vanity && boosted) || (vanity && trusted)  ? vanity : id)}
               color="blue"
               onMouseOver={() => setLookHover(true)}
               onMouseOut={() => setLookHover(false)}

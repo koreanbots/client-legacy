@@ -178,7 +178,7 @@ function MyBots(props) {
       <Card.Content extra>
         <div className="ui two buttons">
           <Button
-            href={'/bots/' + (bot.vanity && bot.boosted ? bot.vanity : bot.id)}
+            href={'/bots/' + ((bot.vanity && bot.boosted) || (bot.vanity && bot.trusted) ? bot.vanity : bot.id)}
             basic={!see}
             color="blue"
             onMouseOver={() => hoverSee(true)}

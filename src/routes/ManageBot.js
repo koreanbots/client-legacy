@@ -63,7 +63,9 @@ class ManageBot extends Component {
         token: this.state.info.data.token
       }
     }).then(r => r.json());
-    return window.location.reload();
+    console.log(res)
+    if(res !== 200) alert(res.message)
+    else return window.location.reload();
   };
   handleChange = (e, { name, value }) => {
     if (name === 'desc')
@@ -201,6 +203,7 @@ class ManageBot extends Component {
                 <br />
                 <h5>ID: {id}</h5>
                 토큰: <pre>{this.state.token} </pre>
+                ※ 토큰은 1년마다 만료됩니다.
                 <br />
                 <Button
                   content={

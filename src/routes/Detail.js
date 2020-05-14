@@ -77,7 +77,7 @@ class Detail extends React.Component {
     const { bot, isLoading } = this.state;
     return (
       <div
-        style={(bot.boosted && bot.bg) || (bot.verified && bot.bg) ? {
+        style={(bot.boosted && bot.bg) || (bot.trusted && bot.bg) ? {
           background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${bot.bg}) top/cover no-repeat fixed`
         } : {}}
       >

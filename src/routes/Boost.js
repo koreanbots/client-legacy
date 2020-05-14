@@ -1,6 +1,6 @@
 import React from 'react';
 import Typed from 'typed.js'
-import { Container, Card, Icon, Label, Segment, Image, Popup, Input, Divider } from 'semantic-ui-react';
+import { Container, Card, Icon, Label, Segment, Image, Popup, Divider } from 'semantic-ui-react';
 import Bot from '../components/Bot';
 
 class Boost extends React.Component{
