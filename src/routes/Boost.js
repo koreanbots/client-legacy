@@ -10,8 +10,8 @@ class Boost extends React.Component{
     // your desired props to this destructuring assignment.
     // You can pass other options here, such as typing speed, back speed, etc.
     const options = {
-    	strings: ['iubot', 'hellobot', 'coolbot'],
-      typeSpeed: 30,
+    	strings: ['iubot', 'hellobot', 'coolbot', 'mybot'],
+      typeSpeed: 100,
       backSpeed: 100,
       loop: true,
       loopCount: Infinity,

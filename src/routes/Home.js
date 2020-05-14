@@ -139,9 +139,9 @@ class Home extends React.Component {
                             bot.id +
                             '/' +
                             bot.avatar +
-                            '.png'
+                            '.png?size=128'
                           : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
-                              5}.png`
+                              5}.png?size=128`
                       }
                       votes={bot.votes}
                       servers={bot.servers}

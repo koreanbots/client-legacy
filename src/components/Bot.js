@@ -45,7 +45,7 @@ function Bot({
         <Card.Content className="botimg">
           <Card.Header>
             {' '}
-            <Item.Image floated="left" src={avatar} wrapped ui={false} />
+            <Item.Image floated="left" src={avatar} wrapped ui={false} size="small"/>
             {count === undefined ? (
               ''
             ) : (
@@ -108,7 +108,7 @@ function Bot({
             <Button
               disabled={state === 'example'}
               basic={!lookHover}
-              href={'/bots/' + (vanity && boosted ? vanity : id)}
+              href={'/bots/' + ((vanity && boosted) || (vanity && verified)  ? vanity : id)}
               color="blue"
               onMouseOver={() => setLookHover(true)}
               onMouseOut={() => setLookHover(false)}
