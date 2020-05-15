@@ -12,6 +12,7 @@ class Home extends React.Component {
     this.state = {
       isLoading: true,
       bot: {},
+      trusted: {},
       message: false,
       activePage: 1,
       totalPage: 1
@@ -52,8 +53,11 @@ class Home extends React.Component {
         time: localStorage.date
       }
     }).then(r => r.json());
+
+    const trusted = await fetch(config.api + '/bots/trusted').then(r=> r.json())
     this.setState({
       bot,
+      trusted,
       isLoading: false,
       totalPage: bot.totalPage,
       activePage: page
@@ -82,7 +86,7 @@ class Home extends React.Component {
     this.removeParam('message');
   };
   render() {
-    const { isLoading, bot } = this.state;
+    const { isLoading, bot, trusted } = this.state;
 
     return (
       <Container>
@@ -97,7 +101,7 @@ class Home extends React.Component {
           ''
         )}
 
-        <section>
+        <section id="all">
           <br />
           <h3>카테고리로 빠르게 찾아보기: </h3>
           {cats.map(r => (
@@ -114,6 +118,8 @@ class Home extends React.Component {
           ))}
           <br />
           <br />
+          <h1>💖 하트 랭킹</h1>
+          <p>하트를 많이 받은 봇들의 순위입니다!</p>
           {isLoading ? (
             <div className="loader">
               <span className="loader__text">Loading...</span>
@@ -124,8 +130,8 @@ class Home extends React.Component {
             </div>
           ) : (
             <div>
-              <h1>💖 하트 랭킹</h1>
-              <p>하트를 많이 받은 봇들의 순위입니다!</p>
+
+
               <Card.Group itemsPerRow={3} stackable>
                 {bot.data.map(bot => (
                   <>
@@ -185,6 +191,72 @@ class Home extends React.Component {
           )}
           <br />
         </section>
+
+        {
+          this.state.activePage === 1 ? (
+            <>
+            <h1>✅ 신뢰된 봇</h1>
+            <p>KOREANBOTS에서 인증받은 신뢰할 수 있는 봇들입니다!!</p>
+          {isLoading ? (
+            <div className="loader">
+              <span className="loader__text">Loading...</span>
+            </div>
+          ) : trusted.code !== 200 ? (
+            <div className="loader">
+              <span className="loader__text">{trusted.message}</span>
+            </div>
+          ) : (
+            <div>
+
+              <Card.Group itemsPerRow={3} stackable>
+                {trusted.data.map(trusted => (
+                  <>
+                    <Bot
+                      key={trusted.id}
+                      id={trusted.id}
+                      name={trusted.name}
+                      avatar={
+                        trusted.avatar !== false
+                          ? 'https://cdn.discordapp.com/avatars/' +
+                            trusted.id +
+                            '/' +
+                            trusted.avatar +
+                            '.png?size=128'
+                          : `https://cdn.discordapp.com/embed/avatars/${trusted.tag %
+                              5}.png?size=128`
+                      }
+                      votes={trusted.votes}
+                      servers={trusted.servers}
+                      category={trusted.category}
+                      intro={trusted.intro}
+                      desc={trusted.desc}
+                      invite={
+                        trusted.url === false
+                          ? `https://discordapp.com/oauth2/authorize?client_id=${trusted.id}&scope=trusted&permissions=0`
+                          : trusted.url
+                      }
+                      state={trusted.state}
+                      count={
+                        this.state.trusted.data.findIndex(r => r.id === trusted.id) +
+                        (this.state.activePage - 1) * 9
+                      }
+                      verified={trusted.verified}
+                      trusted={trusted.trusted}
+                      vanity={trusted.vanity}
+                      boosted={trusted.boosted}
+                      status={trusted.status}
+                      banner={trusted.banner}
+                      bg={trusted.bg}
+                    />
+                  </>
+                ))}
+              </Card.Group>
+            </div>
+          )}
+            </>
+          ) : ('')
+        }
+        <br/><br/>
       </Container>
     );
   }
