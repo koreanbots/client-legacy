@@ -20,7 +20,7 @@ function Footer(props) {
         position: 'absolute',
         bottom: 0,
         width: '100%',
-        height: '23rem',
+        maxHeight: '27rem',
         borderRadius: 0
       }}
     >
@@ -53,7 +53,7 @@ function Footer(props) {
                 </>
               ) : (
                 <>
-                  <Icon className="moon" /> 다크모드 켜기
+                  <Icon className="moon" /> 다크모드 켜기 (추천)
                 </>
               )}
             </Button>
