@@ -76,7 +76,7 @@ export default class MenuExampleStackable extends Component {
               <Icon className="large bars" />
             </Menu.Item>
             <Menu.Item href="/">
-              <h1 style={{ fontFamily: 'Gugi' }}>디코봇</h1>
+              <h1 style={{ fontFamily: 'Uni Sans Heavy CAPS', fontSize: '18px' }}>KOREANBOTS</h1>
             </Menu.Item>
             {this.state.logged === 0 ? (
               <Menu.Item color="black" name="로그인" href="/login">
@@ -151,7 +151,7 @@ export default class MenuExampleStackable extends Component {
           >
             <Menu.Menu>
               <Menu.Item href="/">
-                <h1 style={{ fontFamily: 'Gugi' }}>디코봇</h1>
+                <h1 style={{ fontFamily: 'Uni Sans Heavy CAPS' }}>KOREANBOTS</h1>
               </Menu.Item>
               <Menu.Item name="discord" href="https://discord.gg/JEh53MQ">
                 디스코드

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Helmet} from 'react-helmet'
 import fetch from 'node-fetch';
 import Bot from '../components/Bot';
 import { Message, Container, Card, Pagination, Label } from 'semantic-ui-react';
@@ -90,6 +91,10 @@ class Home extends React.Component {
 
     return (
       <Container>
+      <Helmet>
+        <title>한국 디스코드봇 리스트</title>
+        <meta name="description" content="한국 디스코드봇 리스트는 한국인 개발자가 개발한 디스코드봇을 확인하시고, 초대할 수 있는 공간입니다!" />
+      </Helmet>
         {this.state.message ? (
           <Message
             header={this.state.message.title}

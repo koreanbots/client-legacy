@@ -1,14 +1,19 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
+import { Helmet } from 'react-helmet';
 
 function GuildLines() {
   return (
     <Container>
+      <Helmet>
+        <title>가이드라인 - 한국 디스코드봇 리스트</title>
+        <meta name="description" content="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!" />
+      </Helmet>
       <br />
       <h1 id="가이드라인">가이드라인</h1>
       <blockquote>
         <p>작성 2020-04-30</p>
-        <p>수정 2020-05-07</p>
+        <p>수정 2020-05-15</p>
       </blockquote>
       <p>봇 추가 또는 등재 유지를 위해서 반드시 지켜야할 가이드라인들입니다.</p>
       <p>
@@ -24,8 +29,8 @@ function GuildLines() {
           지정해주셔야합니다.)
         </li>
         <li>
-          오픈소스가 베이스가 되는 봇(유사한 점이 인정되는 경우(은 설명란에 해당
-          오픈소스를 기재해주세요
+          오픈소스가 베이스가 되는 봇(유사한 점이 인정되는 경우는 설명란에 해당
+          오픈소스를 기재해주세요)
         </li>
         <li>
           100퍼센트 업타임을 유지할 필요는 없지만, 심사 시간 기준으로 오프라인일
@@ -35,7 +40,7 @@ function GuildLines() {
         <li>서버로 초대할 수 있는 공개봇 (특수목적의 봇은 제외)</li>
         <li>
           오픈소스봇을 따로 거부하지는 않지만, 반드시 <strong>라이선스</strong>
-          를 지켜주세요. 완작자의 문제 제기할 경우, 통보없이 봇이 삭제되거나
+          를 지켜주세요. 완작자가 문제 제기할 경우, 통보없이 봇이 삭제되거나
           거부될 수 있습니다.
           <br />
           오픈소스 라이선스에 <strong>원소스를 표시해야 한다는 조항</strong>(MIT

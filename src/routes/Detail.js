@@ -14,6 +14,7 @@ import {
 } from 'semantic-ui-react';
 import ReactMarkdown from 'react-markdown/with-html';
 import config from '../config';
+import { Helmet } from 'react-helmet';
 
 class Detail extends React.Component {
   constructor(props) {
@@ -76,6 +77,7 @@ class Detail extends React.Component {
   render() {
     const { bot, isLoading } = this.state;
     return (
+      
       <div
         style={(bot.boosted && bot.bg) || (bot.trusted && bot.bg) ? {
           background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${bot.bg}) top/cover no-repeat fixed`
@@ -90,6 +92,10 @@ class Detail extends React.Component {
             </div>
           ) : this.state.error.code === 200 ? (
             <>
+            <Helmet>
+        <title>{`${bot.name} - 한국 디스코드봇 리스트`}</title>
+        <meta name="description" content="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!" />
+        </Helmet>
               {bot.state === 'private' ? (
                 <Message>
                   해당 봇은 특수목적 봇이므로 초대하실 수 없습니다.

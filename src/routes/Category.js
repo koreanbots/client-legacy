@@ -5,6 +5,7 @@ import { Message, Container, Card, Pagination, Label } from 'semantic-ui-react';
 import config from '../config';
 
 import queryString from 'query-string';
+import { Helmet } from 'react-helmet';
 
 class Category extends React.Component {
   constructor(props) {
@@ -83,6 +84,10 @@ class Category extends React.Component {
 
     return (
       <Container>
+        <Helmet>
+    <title>{this.props.match.params.category} 카테고리 봇들 - 한국 디스코드봇 리스트</title>
+        <meta name="description" content={`${this.props.match.params.category} 카테고리 봇들입니다. 당신의 서버로 초대해보세요!`} />
+      </Helmet>
         {this.state.message ? (
           <Message
             header={this.state.message.title}

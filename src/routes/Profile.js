@@ -12,6 +12,7 @@ import {
 import Redirect from '../components/Redirect';
 import config from '../config';
 import Bot from '../components/Bot';
+import { Helmet } from 'react-helmet';
 
 class Detail extends React.Component {
   constructor(props) {
@@ -46,6 +47,10 @@ class Detail extends React.Component {
     const { result } = this.state;
     return (
       <Container>
+        <Helmet>
+        <title>프로필 - 한국 디스코드봇 리스트</title>
+        <meta name="description" content="전반적인 본인의 프로필입니다!!" />
+        </Helmet>
         {this.state.isLoading ? (
           <div className="loader">
             <span>Loading...</span>
