@@ -222,7 +222,7 @@ class SubmitBot extends Component {
               name="discord"
               value={discord}
               onChange={this.handleChange}
-              maxLength={8}
+              maxLength={10}
             >
               <Label basic>discord.gg/</Label>
               <input />
