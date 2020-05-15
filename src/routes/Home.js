@@ -236,10 +236,6 @@ class Home extends React.Component {
                           : trusted.url
                       }
                       state={trusted.state}
-                      count={
-                        this.state.trusted.data.findIndex(r => r.id === trusted.id) +
-                        (this.state.activePage - 1) * 9
-                      }
                       verified={trusted.verified}
                       trusted={trusted.trusted}
                       vanity={trusted.vanity}
