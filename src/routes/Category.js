@@ -40,7 +40,7 @@ class Category extends React.Component {
     window.history.pushState(
       '',
       document.title,
-      `${window.location.origin}?${parm}=${val}`
+      `${window.location.origin}${window.location.pathname}?${parm}=${val}`
     );
   };
   getData = async page => {
@@ -168,7 +168,9 @@ class Category extends React.Component {
                   totalPages={this.state.totalPage}
                   onPageChange={this.handlePaginationChange}
                 />
+                
               </Container>
+              <br/>
             </div>
           )}
         </section>
