@@ -99,7 +99,7 @@ function Bot({
               #{c}{' '}
             </a>
           ))}
-          <span style={{ color: 'white' }}>
+          <span>
             {' '}
             {category.length - 5 > 0 ? ` +${category.length - 5}` : ''}
           </span>

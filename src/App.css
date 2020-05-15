@@ -29,7 +29,7 @@ body {
   color: white;
 }
 
-.darkmode .fields > .field > label , .darkmode .field > label {
+.darkmode .fields > .field > label , .darkmode .field > label, .darkmode span {
   color: white !important;
 }
 
