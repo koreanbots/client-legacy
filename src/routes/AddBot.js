@@ -151,6 +151,9 @@ class SubmitBot extends Component {
                   유저#태그(아이디)
                 </ol>
               </li>
+              <li>
+                또한, 봇을 등록하게되면 작성하신 모든 정보는 웹과 API에 공개됩니다.
+              </li>
             </Message.Content>
           </Message>
           <br/>
