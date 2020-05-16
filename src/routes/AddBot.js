@@ -8,7 +8,10 @@ import {
   Label,
   Divider,
   Dropdown,
-  Input
+  Input,
+  Checkbox,
+  Transition,
+  Button
 } from 'semantic-ui-react';
 import Redirect from '../components/Redirect';
 import ReactMarkdown from 'react-markdown/with-html';
@@ -28,9 +31,14 @@ class SubmitBot extends Component {
     git: '',
     url: '',
     discord: '',
+    read: false,
+    visible: false,
     data: { state: 0, data: {} }
   };
-
+  componentDidMount(){
+    this.setState({ visible: true })
+  }
+  myRef = React.createRef()
   sendSumbit = async body => {
     const token = localStorage.token,
       id = localStorage.id,
@@ -63,6 +71,10 @@ class SubmitBot extends Component {
   };
 
   handleSubmit = async () => {
+    if(!this.state.read) {
+      this.scrollToMyRef()
+      return this.setState({ visible: !this.state.visible})
+    }
     if (
       this.state.id &&
       this.state.lib &&
@@ -82,6 +94,7 @@ class SubmitBot extends Component {
     }
   };
 
+  toggle = () => this.setState((prevState) => ({ read: !prevState.read }))
   render() {
     const {
       id,
@@ -92,7 +105,8 @@ class SubmitBot extends Component {
       website,
       git,
       url,
-      discord
+      discord,
+      read
     } = this.state;
     if (!localStorage.userCache || !JSON.parse(localStorage.userCache))
       return (
@@ -109,7 +123,10 @@ class SubmitBot extends Component {
           </Helmet>
           <br />
           <h1>새로운 봇 추가하기</h1>
-          <Message error>
+          <Transition animation='shake' duration={500} visible={this.state.visible}>
+          <section id="readme">
+          
+          <Message error ref={this.myRef}>
             <Message.Header>
               신청하시기 전에 다음 사항을 확인해주세요!!
             </Message.Header>
@@ -136,6 +153,14 @@ class SubmitBot extends Component {
               </li>
             </Message.Content>
           </Message>
+          <br/>
+          <Checkbox checked={read} onChange={this.toggle}/><strong> 해당 내용을 숙지하였으며, 모두 이행하였고 위 내용에 해당하는 거부 사유는 답변받지 않는다는 점을 이해합니다.</strong> 
+          <br/>
+          </section>
+          </Transition>
+         
+          <Divider/>
+          <h2>봇 정보</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group>
               <Form.Input
@@ -274,16 +299,19 @@ class SubmitBot extends Component {
               <Form.Button content="제출" />
             </div>
           </Form>
+
           {this.state.data.state === 1 ? (
             <Redirect to="/?message=submitSuccess" />
           ) : this.state.data.state === 2 ? (
             <Message error>{this.state.data.data.message}</Message>
           ) : (
-            <> </>
+            <></>
           )}
         </Container>
       );
+      
   }
+  scrollToMyRef = () => window.scrollTo(0, this.myRef.current.offsetTop)
 }
 
 export default SubmitBot;
