@@ -87,7 +87,7 @@ class SubmitBot extends Component {
     } else {
       this.setState({
         data: {
-          state: 2,
+          state: 3,
           data: { message: '필수 입력칸을 전부 작성해주세요!' }
         }
       });
@@ -299,7 +299,7 @@ class SubmitBot extends Component {
                 </Segment>
               </div>
 
-              <Form.Button content="제출" />
+              <Form.Button content="제출" disabled={this.state.data.state === 1}/>
             </div>
           </Form>
 
@@ -307,6 +307,20 @@ class SubmitBot extends Component {
             <Redirect to="/?message=submitSuccess" />
           ) : this.state.data.state === 2 ? (
             <Message error>{this.state.data.data.message}</Message>
+          ) : this.state.data.state === 3 && !( this.state.id &&
+            this.state.lib &&
+            this.state.intro &&
+            this.state.desc &&
+            this.state.category &&
+            this.state.category.length > 0) ? (
+            <Message error>{this.state.data.data.message}({ !this.state.id ? '아이디' :
+            !this.state.prefix ? '접두사' :
+            !this.state.lib ? '라이브러리' :
+            !this.state.category ? '카테고리' :
+            this.state.category.length === 0 ? '카테고리' :
+            !this.state.intro ? '봇 소개' :
+            !this.state.desc ? '봇 설명' : ''
+            })</Message>
           ) : (
             <></>
           )}

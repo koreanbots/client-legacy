@@ -114,7 +114,7 @@ class ManageBot extends Component {
         if (res.code === 200) {
           if (res.archived) window.location.href = '/?message=lockOn';
           else window.location.href = '/?message=lockOff';
-        }
+        } else alert(res.message)
       });
   };
 
