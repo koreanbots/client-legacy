@@ -104,3 +104,13 @@ body {
   background-clip: text;
   text-align: center;
 }
+
+/* HTTP STATUS CODE */
+
+.GET {
+  color: green
+}
+
+.POST {
+  color: yellow !important
+}

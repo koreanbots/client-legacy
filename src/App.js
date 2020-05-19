@@ -23,6 +23,7 @@ import Redirect from "./components/Redirect";
 import Footer from "./components/Footer";
 
 import "./App.css";
+import API from "./routes/API";
 
 
 
@@ -40,7 +41,7 @@ function App() {
         date={localStorage.getItem("date")}
       />
       <div style={{ position: 'relative', minHeight: '100vh' }} >
-            <div style={{ paddingBottom: '27rem' }}>
+            <div style={{ paddingBottom: '27rem' }} className="wrap">
       <Switch>
 
         <Route exact path="/" component={Home} />
@@ -54,6 +55,7 @@ function App() {
         <Route path="/logout" component={Logout} />
         <Route path="/pendingBots/:id/:date" component={Pending} />
         <Route exact path="/bots/:id" component={Detail} />
+        <Route path="/api/:topic?/:doc?" component={API}/>
         <Route path="/discord">
           <Redirect to="https://discord.gg/JEh53MQ" />
         </Route>
@@ -61,6 +63,7 @@ function App() {
         <Route path="/clientinfo" component={Version}/>
         <Route path="/guidelines" component={GuideLines} />
         <Route path="/boost" component={Boost} />
+
         <Route component={NotFound}></Route>
         
       </Switch>

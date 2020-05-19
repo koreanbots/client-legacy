@@ -1,0 +1,15 @@
+.wrap {
+    padding-bottom: 0 !important;
+}
+
+.message {
+    margin-bottom: 10px !important;
+}
+
+method.get {
+    color: greenyellow !important
+}
+
+method.post {
+    color: orange !important
+}

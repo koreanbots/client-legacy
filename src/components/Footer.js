@@ -15,6 +15,7 @@ function Footer(props) {
   }
   return (
     <Segment
+      className="footer"
       inverted
       style={{
         position: 'absolute',
