@@ -33,7 +33,7 @@ class Home extends React.Component {
       for (var i = pars.length; i-- > 0; )
         if (pars[i].lastIndexOf(prefix, 0) !== -1) pars.splice(i, 1);
       url = urlBase + '?' + pars.join('&');
-      window.history.pushState('', document.title, url); // added this line to push the new url directly to url bar .
+      window.history.pushState('', document.title, url);
     }
     return url;
   };
