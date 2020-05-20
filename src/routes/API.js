@@ -6,33 +6,18 @@ import ReactMarkdown from 'react-markdown';
 
 import './API.css'
 
-class Block extends React.PureComponent {
-    constructor(props){
-        super(props)
-    }
-    render() {
-        return (
-          <pre>
-            <code>
-              {JSON.stringify(this.props)}
-            </code>
-          </pre>
-        )
-      }
-}
-
 function API(params){
     const [ topic, setTopic ] = useState( params.match.params.topic || 'main')
     const [ doc, setDoc ] = useState(params.match.params.doc || 'starting')
     const [ visible, setVisible ] = useState(false)
-    const handleItemClick = (e, { topic, id }) => { setTopic(topic); setDoc(id); setVisible(false)};
+    const handleItemClick = (__e, { topic, id }) => { setTopic(topic); setDoc(id); setVisible(false); window.history.pushState('', document.title, `/api/${topic}/${id}`); };
 
     return(
         <div style={{ height: '100% !important'}}>
                 <Responsive minWidth={1500} >
                     <Grid>
                         <Grid.Column width={2}>
-                        <Menu vertical inverted style={{ borderRadius: 0, width: '100%', height: '150vh'}}>
+                        <Menu vertical inverted style={{ borderRadius: 0, width: '100%', height: '150vh', marginBottom: '-190px'}}>
                 { (Object.keys(docs.docs)).map(el=> {
                     return(
                         <>
@@ -67,7 +52,7 @@ function API(params){
 
                         <Grid.Column width={12}>
                         <Container>
-                <ReactMarkdown source={docs.docs[topic].docs[doc].content} escapeHtml={false} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell, code: Block }} />
+                <ReactMarkdown source={docs.docs[topic].docs[doc].content} escapeHtml={false} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell }} />
 
         </Container>
                         </Grid.Column>
@@ -77,7 +62,7 @@ function API(params){
         <Responsive maxWidth={1499}>
             <Container style={{ height: '100%'}}>
         <Button {...Responsive.onlyComputer} onClick={()=> setVisible(true)} content="목차보기"/><br/>
-                <ReactMarkdown source={docs.docs[topic].docs[doc].content} escapeHtml={false} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell, code: Block }} />
+                <ReactMarkdown source={docs.docs[topic].docs[doc].content} escapeHtml={false} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell }} />
 
         </Container>
         <Sidebar animation="scale down" visible={visible} vertical width="wide" direction="left">
