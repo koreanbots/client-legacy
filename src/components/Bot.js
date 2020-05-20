@@ -33,7 +33,7 @@ function Bot({
   return (
     <>
       <Card
-        className="botcard"
+        className={`botcard ${(banner && boosted) || (banner && trusted) ? 'bg' : ''}`}
         style={
          (banner && boosted) || (banner && trusted)
             ? {
@@ -71,7 +71,7 @@ function Bot({
                 <Icon
                   size="small"
                   className="check"
-                  style={{ color: '#7289da' }}
+                  style={{ color: '#7289da !important' }}
                 />
               ) : (
                 ''

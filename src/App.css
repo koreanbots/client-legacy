@@ -105,12 +105,10 @@ body {
   text-align: center;
 }
 
-/* HTTP STATUS CODE */
-
-.GET {
-  color: green
+.bg * :not(a){
+  color: white !important
 }
 
-.POST {
-  color: yellow !important
+.icon.check {
+  color: #7289da !important
 }
