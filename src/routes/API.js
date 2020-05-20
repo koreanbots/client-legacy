@@ -4,6 +4,8 @@ import { Container, Grid, Menu, Sidebar, Responsive, Button, Icon, Segment, Tabl
 import docs from "./docs.json"
 import ReactMarkdown from 'react-markdown';
 
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import './API.css'
 
 function API(params){
@@ -52,7 +54,10 @@ function API(params){
 
                         <Grid.Column width={12}>
                         <Container>
-                <ReactMarkdown source={docs.docs[topic].docs[doc].content} escapeHtml={false} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell }} />
+                        
+                        <ReactMarkdown source={docs.docs[topic].docs[doc].content} escapeHtml={false} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell }} />
+
+
 
         </Container>
                         </Grid.Column>
@@ -62,7 +67,7 @@ function API(params){
         <Responsive maxWidth={1499}>
             <Container style={{ height: '100%'}}>
         <Button {...Responsive.onlyComputer} onClick={()=> setVisible(true)} content="목차보기"/><br/>
-                <ReactMarkdown source={docs.docs[topic].docs[doc].content} escapeHtml={false} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell }} />
+                <ReactMarkdown source={docs.docs[topic].docs[doc].content} escapeHtml={false}  renderers={{ table: Table, thead: Table.Header, tr: Table.Cell }} />
 
         </Container>
         <Sidebar animation="scale down" visible={visible} vertical width="wide" direction="left">
