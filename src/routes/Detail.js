@@ -10,11 +10,16 @@ import {
   Icon,
   Message,
   Segment,
-  Popup
+  Popup,
+  Table,
+  Modal,
+  Form,
+  TextArea
 } from 'semantic-ui-react';
 import ReactMarkdown from 'react-markdown/with-html';
 import config from '../config';
 import { Helmet } from 'react-helmet';
+import CodeBlock from '../components/Code';
 
 class Detail extends React.Component {
   constructor(props) {
@@ -23,7 +28,11 @@ class Detail extends React.Component {
       result: null,
       error: {},
       isLoading: true,
-      bot: {}
+      bot: {},
+      popup: false,
+      report: 0,
+      reportCategory: '',
+      reportDesc: ''
     };
   }
 
@@ -65,6 +74,32 @@ class Detail extends React.Component {
       this.setState({ bot: this.state.bot });
     }
   };
+
+  report = async() => {
+    let body = {
+      category: this.state.reportCategory,
+      desc: this.state.reportDesc
+    }
+    const res = await fetch(
+      config.api + '/bots/report/' + this.state.bot.id,
+      {
+        method: 'POST',
+        headers: {
+          token: localStorage.token,
+          id: localStorage.id,
+          time: localStorage.date,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      }
+    ).then(r => r.json());
+    if (res.code !== 200) {
+      this.setState({ report: res.message })
+    }
+    else {
+      window.location.href = '/?message=reportSuccess'
+    }
+  }
 
   componentDidMount(props) {
     const {
@@ -277,6 +312,35 @@ class Detail extends React.Component {
                         href={bot.git}
                       ></Button>
                     )}
+
+        <Modal trigger={<Button color="red"><Icon className="flag outline"/>신고하기</Button>}>
+          <Modal.Header>{bot.name}#{bot.tag} 신고하기</Modal.Header>
+          <Modal.Description>
+            <Container style={{ padding: '10px' }}>
+                <Form>
+                      <h3>신고 구분</h3>
+                    {
+                      ["불법", "괴롭힘, 모욕, 명예훼손", "스팸, 도배, 의미없는 텍스트", "폭력, 자해, 테러 옹호하거나 조장하는 컨텐츠", "라이선스혹은 권리 침해", "Discord ToS 위반", "Koreanbots 가이드라인 위반", "기타"].map(el=> (
+                        <Form.Radio checked={el === this.state.reportCategory} label={el} value={el} onChange={(_e, { value })=> this.setState({ reportCategory: value })}/>
+                      ))
+
+                        }
+                      <h3>설명</h3>
+                      <TextArea maxLength={1000} value={this.state.desc}  onChange={(_e, { value })=> this.setState({ reportDesc: value})}/>
+                        {this.state.reportCategory}
+                        {this.state.reportDesc}
+                        <br/><br/><br/>
+                        지속적인 허위 신고혹은 장난 신고는 제재대상입니다.<br/>
+                        <Button primary content="제출" onClick={this.report}/>
+                </Form>
+               {
+                 this.state.report === 0 ? (<></>) : (
+                  <Message error>{this.state.report}</Message>
+                 )
+               }
+            </Container>
+          </Modal.Description>
+        </Modal>
                   </Grid.Column>
                 </Grid.Row>
 
@@ -288,41 +352,22 @@ class Detail extends React.Component {
                         (bot.servers === 0 ? '0' : bot.servers) + ' 서버'
                       }
                     ></Button>
-                    {bot.url === 'disable' ? (
+
                       <Button
                         basic={bot.voted === 1 ? false : true}
                         color="red"
                         content={bot.voted === 1 ? '하트 삭제' : '하트 추가'}
                         icon="heart"
-                        disabled
+                        disabled={bot.state === 'archived'}
                         label={{
                           basic: true,
                           color: 'red',
                           pointing: 'left',
                           content: bot.votes
-                            .toString()
-                            .split('...')
-                            .join(',')
                         }}
                       />
-                    ) : (
-                      <Button
-                        basic={bot.voted === 1 ? false : true}
-                        color="red"
-                        content={bot.voted === 1 ? '하트 삭제' : '하트 추가'}
-                        icon="heart"
-                        onClick={this.voteAction}
-                        label={{
-                          basic: true,
-                          color: 'red',
-                          pointing: 'left',
-                          content: bot.votes
-                            .toString()
-                            .split('...')
-                            .join(',')
-                        }}
-                      />
-                    )}
+
+        <br/>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
@@ -372,7 +417,7 @@ class Detail extends React.Component {
 
           <Divider section />
           <Segment style={{ wordWrap: 'break-word', borderRadius: 0 }}>
-            <ReactMarkdown source={bot.desc} />
+            <ReactMarkdown source={bot.desc} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell, code: CodeBlock }} />
           </Segment>
         </Container>
       </div>

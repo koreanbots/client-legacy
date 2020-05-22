@@ -285,6 +285,11 @@ const messages = {
     level: 'success',
     title: '봇 잠금 해제 성공!',
     message: '봇의 잠금해제를 성공했습니다! 다시 초대가 허용됩니다.'
+  },
+  reportSuccess: {
+    level: 'success',
+    title: '봇 신고 성공!',
+    message: '신고 내용이 관리자에게 전달되었습니다.'
   }
 };
 

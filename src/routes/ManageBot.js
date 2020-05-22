@@ -12,12 +12,14 @@ import {
   Grid,
   Image,
   Button,
-  Popup
+  Popup,
+  Table
 } from 'semantic-ui-react';
 import Redirect from '../components/Redirect';
 import ReactMarkdown from 'react-markdown/with-html';
 import fetch from 'node-fetch';
 import config from '../config';
+import CodeBlock from '../components/Code';
 
 class ManageBot extends Component {
   state = {
@@ -344,7 +346,7 @@ class ManageBot extends Component {
                 <Segment style={{ wordWrap: 'break-word' }}>
                   <Label attached="top">설명 미리보기</Label>
                   <br />
-                  <ReactMarkdown source={desc} escapeHtml={true} />
+                  <ReactMarkdown source={desc} escapeHtml={true} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell, code: CodeBlock }}/>
                   <br />
                   <Divider />
                   <p>다음 결과는 실제와 다를 수 있습니다.</p>
