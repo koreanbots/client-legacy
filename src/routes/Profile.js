@@ -129,6 +129,7 @@ class Detail extends React.Component {
                     status={bot.status}
                     bg={bot.bg}
                     banner={bot.banner}
+                    verified={bot.verified}
                   />
                 ))}
               </Card.Group>
