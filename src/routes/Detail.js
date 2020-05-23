@@ -313,8 +313,9 @@ class Detail extends React.Component {
                       ></Button>
                     )}
 
-        <Modal trigger={<Button color="red"><Icon className="flag outline"/>신고하기</Button>}>
-          <Modal.Header>{bot.name}#{bot.tag} 신고하기</Modal.Header>
+        <Modal trigger={<Button color="red"><Icon className="flag outline"/>신고하기</Button>} closeIcon>
+          <Modal.Header>{bot.name}#{bot.tag} 신고하기
+          </Modal.Header>
           <Modal.Description>
             <Container style={{ padding: '10px' }}>
                 <Form>
