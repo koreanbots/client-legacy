@@ -21,7 +21,7 @@ function Footer(props) {
         position: 'absolute',
         bottom: 0,
         width: '100%',
-        maxHeight: '27rem',
+        height: '27rem',
         borderRadius: 0
       }}
     >
