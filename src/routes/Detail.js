@@ -365,6 +365,7 @@ class Detail extends React.Component {
                           pointing: 'left',
                           content: bot.votes
                         }}
+                        onClick={this.voteAction}
                       />
 
         <br/>
