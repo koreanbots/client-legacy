@@ -412,6 +412,10 @@ class Detail extends React.Component {
                   </Label>
                 ))}
               </div>
+              <Divider section />
+          <Segment style={{ wordWrap: 'break-word', borderRadius: 0 }}>
+            <ReactMarkdown source={bot.desc} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell, code: CodeBlock }} />
+          </Segment>
             </>
           ) : (
             <div className="loader">
@@ -419,10 +423,7 @@ class Detail extends React.Component {
             </div>
           )}
           </div>
-          <Divider section />
-          <Segment style={{ wordWrap: 'break-word', borderRadius: 0 }}>
-            <ReactMarkdown source={bot.desc} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell, code: CodeBlock }} />
-          </Segment>
+
         </Container>
       </div>
     );
