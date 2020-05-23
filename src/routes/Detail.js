@@ -116,9 +116,13 @@ class Detail extends React.Component {
       <div
         style={(bot.boosted && bot.bg) || (bot.trusted && bot.bg) ? {
           background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${bot.bg}) top/cover no-repeat fixed`
+        
         } : {}}
       >
         <Container>
+        <div style={(bot.boosted && bot.bg) || (bot.trusted && bot.bg) ? {
+          color: 'white'
+        } : {}}>
           <br />
 
           {isLoading ? (
@@ -416,7 +420,7 @@ class Detail extends React.Component {
               <p>{this.state.error.message}</p>
             </div>
           )}
-
+          </div>
           <Divider section />
           <Segment style={{ wordWrap: 'break-word', borderRadius: 0 }}>
             <ReactMarkdown source={bot.desc} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell, code: CodeBlock }} />
