@@ -112,3 +112,7 @@ body {
 .card .icon.check {
   color: #7289da !important
 }
+
+.ui.nav.menu {
+  margin: 0;
+}
