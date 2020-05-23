@@ -332,8 +332,6 @@ class Detail extends React.Component {
                         }
                       <h3>설명</h3>
                       <TextArea maxLength={1000} value={this.state.desc}  onChange={(_e, { value })=> this.setState({ reportDesc: value})}/>
-                        {this.state.reportCategory}
-                        {this.state.reportDesc}
                         <br/><br/><br/>
                         지속적인 허위 신고혹은 장난 신고는 제재대상입니다.<br/>
                         <Button primary content="제출" onClick={this.report}/>
