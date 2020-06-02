@@ -210,7 +210,7 @@ class Boost extends React.Component{
             <br/>
             <Segment style={{ marginTop: '2em' }}>
           <h4>
-            https://koreanbots.cf/bots/
+            https://koreanbots.dev/bots/
             {           <span
           style={{ whiteSpace: 'pre', fontSize: '1.5em' }}
           ref={(el) => { this.el = el; }}
