@@ -127,6 +127,7 @@ export default class MenuExampleStackable extends Component {
             className="nav"
             visible={visible}
           >
+      
             <Menu.Item position="right" onClick={this.editSlider}>
               <Icon className="close" />
               <br />
@@ -134,6 +135,12 @@ export default class MenuExampleStackable extends Component {
             <Menu.Item as="a" href="/discord">
               디스코드
             </Menu.Item>
+            <Menu.Item name="about" href="/about">
+                소개
+              </Menu.Item>
+              <Menu.Item name="api" href="/api">
+                API
+              </Menu.Item>
             <Menu.Item name="add" href="/addbot">
               봇 추가하기
             </Menu.Item>
@@ -155,6 +162,12 @@ export default class MenuExampleStackable extends Component {
               </Menu.Item>
               <Menu.Item name="discord" href="https://discord.gg/JEh53MQ">
                 디스코드
+              </Menu.Item>
+              <Menu.Item name="about" href="/about">
+                소개
+              </Menu.Item>
+              <Menu.Item name="api" href="/api">
+                API
               </Menu.Item>
               <Menu.Item name="add" href="/addbot">
                 봇 추가하기
