@@ -22,7 +22,7 @@ function API(params){
                     return(
                         <>
                         <Menu.Item>
-          <Menu.Header>{docs.docs[el].name}</Menu.Header>
+          <Menu.Header as={'h1'}>{docs.docs[el].name}</Menu.Header>
           <Menu.Menu>
            {
                Object.keys(docs.docs[el].docs).map(d=> {
@@ -75,7 +75,7 @@ function API(params){
                     return(
                         <>
                         <Menu.Item>
-          <Menu.Header>{docs.docs[el].name}</Menu.Header>
+          <Menu.Header as={'h1'}>{docs.docs[el].name}</Menu.Header>
           <Menu.Menu>
            {
                Object.keys(docs.docs[el].docs).map(d=> {
@@ -108,5 +108,3 @@ function API(params){
 }
 
 export default API
-
-

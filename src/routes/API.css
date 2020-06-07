@@ -9,3 +9,7 @@ method.get {
 method.post {
     color: orange !important
 }
+
+h1.header {
+    font-size: large !important;
+}
