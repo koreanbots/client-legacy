@@ -6,23 +6,33 @@ class Detail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      done: false
+      done: false,
+      error: false
     };
   }
 
   componentDidMount() {
-    delete localStorage.userCache;
-    delete localStorage.token;
-    delete localStorage.date;
-    delete localStorage.id;
-    this.setState({ done: true });
+    const user = JSON.parse(localStorage.userCache)
+    if(!user || user.id === this.props.match.params.id) {
+      delete localStorage.userCache;
+      delete localStorage.token;
+      delete localStorage.date;
+      delete localStorage.id;
+      this.setState({ done: true });
+    } else {
+      this.setState({ error: true });
+    }
   }
   render() {
-    const { done } = this.state;
+    const { done, error } = this.state;
     return (
       <Container>
-        {done ? (
+        {done && !error ? (
           <Redirect to="/" />
+        ) :  error ? (
+          <div className="loader">
+            CSRF 방지 검증 아이디 인증에 실패하였습니다.
+          </div>
         ) : (
           <div className="loader">
             <span>로그아웃중...</span>

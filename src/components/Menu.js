@@ -108,7 +108,7 @@ export default class MenuExampleStackable extends Component {
                     }
                   />
                   <Dropdown.Item href="/profile">프로필</Dropdown.Item>
-                  <Dropdown.Item href="/logout">
+                  <Dropdown.Item href={"/logout/" + this.state.user.id}>
                     <a style={{ color: '#ff6e6e' }}>로그아웃</a>
                   </Dropdown.Item>
                 </Dropdown.Menu>
@@ -219,7 +219,7 @@ export default class MenuExampleStackable extends Component {
                 >
                   <Dropdown.Menu>
                     <Dropdown.Item href="/profile">프로필</Dropdown.Item>
-                    <Dropdown.Item href="/logout">
+                    <Dropdown.Item href={"/logout/" + this.state.user.id}>
                       <a style={{ color: '#ff6e6e' }}>로그아웃</a>
                     </Dropdown.Item>
                   </Dropdown.Menu>
