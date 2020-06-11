@@ -212,7 +212,7 @@ function Submitted(props) {
   const [preview, hoverPrev] = useState(false);
   const { bot } = props;
   return (
-    <Card href={bot.state === 1 ? "/bots" + bot.id : "/pendingBots/" + bot.id + "/" + bot.date}>
+    <Card href={bot.state === 1 ? "/bots/" + bot.id : "/pendingBots/" + bot.id + "/" + bot.date}>
       <Card.Content>
         <Card.Header>
           <a>{bot.id}</a>
