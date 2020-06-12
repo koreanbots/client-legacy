@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import Home from "./routes/Home";
 import About from "./routes/About";
@@ -32,7 +33,7 @@ function App() {
   if(localStorage.dark === undefined) localStorage.dark = true
   return (
 
-    <Router >
+    <Router>
       <div className={Dark ? 'darkmode' : 'whitemode'}>
       <Menu
         Darkmode={Dark}

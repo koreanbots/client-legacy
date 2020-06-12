@@ -57,7 +57,7 @@ class Detail extends React.Component {
           </div>
         ) : result.code !== 200 ? (
           result.code === 401 ? (
-            <Redirect to="/logout" content={<></>} />
+            <Redirect to={"/logout/" + JSON.parse(localStorage.userCache).id} content={<></>} />
           ) : (
             <div className="loader">
               <span>{result.message}</span>

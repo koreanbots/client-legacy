@@ -1,12 +1,17 @@
 import React from 'react';
 import withImportantStyle from 'react-with-important-style';
 import { Container, Image, Segment, Card, Icon, Divider } from 'semantic-ui-react';
+import { Helmet } from 'react-helmet';
 
 function About(props) {
   const CustomCard = withImportantStyle('div');
 
   return (
     <Container>
+      <Helmet>
+        <title>소개 - 한국 디스코드봇 리스트</title>
+        <meta name="description" content="한국 디스코드봇 리스트는 한국인 개발자가 개발한 디스코드봇을 확인하시고, 초대할 수 있는 공간입니다!" />
+      </Helmet>
       <br/>
       <h1>한국 디스코드봇 리스트</h1>
       국내봇을 등록하거나, 확인해볼 수 있는 웹사이트입니다.
