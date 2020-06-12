@@ -34,6 +34,8 @@ class ManageBot extends Component {
     url: '',
     discord: '',
     token: '',
+    owners: '',
+    ownersError: '',
     info: { code: 0 },
     data: { state: 0, data: {} }
   };
@@ -59,14 +61,15 @@ class ManageBot extends Component {
     else this.setState({ token: '******' });
   };
   regenToken = async () => {
-    const res = await fetch(config.api + '/bots/regenToken', {
+    const re = await fetch(config.api + '/bots/regenToken', {
       method: 'POST',
       headers: {
         token: this.state.info.data.token
       }
-    }).then(r => r.json());
-    console.log(res)
-    if(res !== 200) alert(res.message)
+    })
+    const res = re.json()
+    console.log(re.status)
+    if(re.status !== 200) alert(res.message)
     else return window.location.reload();
   };
   handleChange = (e, { name, value }) => {
@@ -120,6 +123,23 @@ class ManageBot extends Component {
       });
   };
 
+  setOwner = async() => {
+    const token = localStorage.token,
+      id = localStorage.id,
+      date = localStorage.date;
+    await fetch(config.api + '/bots/editOwners/' + this.state.info.data.id, {
+      method: 'POST',
+      headers: { token, id, time: date, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        owners: this.state.owners.replace(/ /gi, '').split(',')
+      })
+    })
+      .then(r => r.json())
+      .then(res=> {
+        if(res.code !== 200) this.setState({ ownersError: res.message })
+        else window.location.reload();
+      })
+  }
   async componentDidMount() {
     const res = await fetch(
       config.api + '/bots/completeInfo/' + this.props.match.params.id,
@@ -131,6 +151,7 @@ class ManageBot extends Component {
         }
       }
     ).then(r => r.json());
+    console.log(res)
     if (res.code !== 200) this.setState({ info: res });
     else
       this.setState({
@@ -145,6 +166,7 @@ class ManageBot extends Component {
         category: res.data.category,
         intro: res.data.intro,
         desc: res.data.desc,
+        owners: res.data.owners.toString(),
         token: '******'
       });
   }
@@ -160,6 +182,7 @@ class ManageBot extends Component {
       git,
       url,
       discord,
+      owners,
       info
     } = this.state;
     const bot = info.data;
@@ -364,16 +387,23 @@ class ManageBot extends Component {
           )}
           <h2>위험구역</h2>
           <Segment>
-            <h3>관리자 추가</h3>
+            <h3>관리자 수정</h3>
             <p>
-              봇의 소유자를 추가합니다. 소유자는 당신과 동일한 권한을
-              갖게됩니다.
+              관리자는 "관리자 수정"과 "봇 삭제" 이외의 모든 항목을 수정할 수 있습니다.<br/>
+              관리자는 유저 아이디로 추가하며, 쉼표로 구분합니다.<br/>
+              모든 봇 제작자는 <a href="/discord">디스코드</a>에 참여를 권장합니다.
             </p>
-            <Popup
-              content="해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요"
-              trigger={<Button color="red" content="관리자 추가" icon="plus" />}
-            />
-
+            <Input value={owners} style={{ width: '100%'}} name="owners" onChange={this.handleChange}/>
+            <Button color="red" content="관리자 수정" icon="save" onClick={this.setOwner}/>
+            {
+              this.state.ownersError ? (
+                <Message error>
+                  {this.state.ownersError}
+                </Message>
+              ) : (
+                <></>
+              )
+            }
             <h3>
               {this.state.info.data.state === 'archived'
                 ? '봇을 잠금 해제합니다.'
@@ -382,7 +412,7 @@ class ManageBot extends Component {
             <p>
               {this.state.info.data.state === 'archived'
                 ? '봇을 잠금 해제하면, 봇을 다시 초대할 수 있습니다.'
-                : '봇을 잠금처리하면 더 이상 초대할 수 없는 상태가 되면서, 잠금된 봇이라 안내됩니다.'}
+                : '봇을 잠금처리하면 더 이상 초대할 수 없는 상태가 되면서, 일부 행동이 제한됩니다.'}
             </p>
             <Button
               icon="lock"
