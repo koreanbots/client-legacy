@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "homepage": "https://koreanbots.dev",
   "dependencies": {
     "gh-pages": "^2.0.1",
