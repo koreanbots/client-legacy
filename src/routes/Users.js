@@ -108,9 +108,6 @@ class User extends React.Component {
                       {data.username}
                       <h2 style={{ color: 'gray' }}>#{data.tag}</h2>
                     </h1>
-                    <h3 style={{ color: '#d4d4d5' }}>
-                      {new Date(data.date * 1000).toLocaleDateString()} 가입
-                    </h3>
                     {data.perm === 'admin' ? (
                       <Popup
                         content="해당 유저는 관리자입니다."
