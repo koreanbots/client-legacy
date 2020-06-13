@@ -122,3 +122,7 @@ body {
 .ui.nav.menu {
   margin: 0;
 }
+
+textarea {
+  min-height: 300px;
+}
