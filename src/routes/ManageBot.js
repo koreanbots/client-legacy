@@ -95,6 +95,10 @@ class ManageBot extends Component {
       this.state.category &&
       this.state.category.length > 0
     ) {
+      if(this.state.desc.match(/!\[.*?\] *\(http:\/\/.*?.*?\)/)) return this.setState({ data: {
+        state: 2,
+        data: { message: '보안 연결(HTTPS)이 없는 컨텐츠는 사용하실 수 없습니다. (이미지)' }
+      } })
       await this.sendSumbit(this.state)
     } else {
       this.setState({
