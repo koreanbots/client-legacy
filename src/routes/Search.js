@@ -1,17 +1,17 @@
-import React from 'react';
-import fetch from 'node-fetch';
-import 'semantic-ui-css/semantic.min.css';
+import React from 'react'
+import fetch from 'node-fetch'
+import 'semantic-ui-css/semantic.min.css'
 
-import Bot from '../components/Bot';
-import { Card, Container, Pagination } from 'semantic-ui-react';
-import config from '../config';
+import Bot from '../components/Bot'
+import { Card, Container, Pagination } from 'semantic-ui-react'
+import config from '../config'
 
-import queryString from 'query-string';
-import { Helmet } from 'react-helmet';
+import queryString from 'query-string'
+import { Helmet } from 'react-helmet'
 
 class Search extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       result: null,
       error: null,
@@ -20,7 +20,7 @@ class Search extends React.Component {
       activePage: 1,
       totalPage: 1,
       q: ''
-    };
+    }
   }
 
   editParm = (parm, val) => {
@@ -28,45 +28,48 @@ class Search extends React.Component {
       '',
       document.title,
       `${window.location.origin}?${parm}=${val}`
-    );
-  };
+    )
+  }
 
   getData = async (q, page) => {
     const bot = await fetch(
       config.api + '/bots/search?q=' + q + '&page=' + page
-    ).then(r => r.json());
+    ).then(r => r.json())
     this.setState({
       bots: bot.code === 200 ? bot.data : [],
       isLoading: false,
       totalPage: bot.totalPage,
       activePage: page
-    });
-  };
+    })
+  }
 
   handlePaginationChange = (e, { activePage }) => {
-    this.editParm('page', activePage);
-    this.getData(this.state.q, activePage);
-  };
+    this.editParm('page', activePage)
+    this.getData(this.state.q, activePage)
+  }
 
   componentDidMount() {
-    const query = queryString.parse(window.location.search);
+    const query = queryString.parse(window.location.search)
     const page =
       Number.isNaN(Number(query.page)) || Number(query.page) < 1
         ? 1
-        : query.page;
-    let q = query.query;
-    if (!q) this.setState({ bots: [], isLoading: false });
-    this.setState({ activePage: page, q });
+        : query.page
+    let q = query.query
+    if (!q) this.setState({ bots: [], isLoading: false })
+    this.setState({ activePage: page, q })
 
-    this.getData(q, page);
+    this.getData(q, page)
   }
   render() {
-    const { bots, isLoading } = this.state;
+    const { bots, isLoading } = this.state
     return (
       <Container>
         <Helmet>
-        <title>검색결과 - 한국 디스코드봇 리스트</title>
-        <meta name="description" content="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!" />
+          <title>검색결과 - 한국 디스코드봇 리스트</title>
+          <meta
+            name="description"
+            content="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!"
+          />
         </Helmet>
         <br />
         <h1>
@@ -137,8 +140,8 @@ class Search extends React.Component {
           </>
         )}
       </Container>
-    );
+    )
   }
 }
 
-export default Search;
+export default Search

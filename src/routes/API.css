@@ -1,15 +1,15 @@
 .message {
-    margin-bottom: 10px !important;
+  margin-bottom: 10px !important;
 }
 
 method.get {
-    color: greenyellow !important
+  color: greenyellow !important;
 }
 
 method.post {
-    color: orange !important
+  color: orange !important;
 }
 
 h1.header {
-    font-size: large !important;
+  font-size: large !important;
 }

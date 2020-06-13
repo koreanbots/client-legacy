@@ -1,43 +1,43 @@
-import React from 'react';
-import fetch from 'node-fetch';
-import { Container } from 'semantic-ui-react';
-import Redirect from '../components/Redirect';
-import config from '../config';
+import React from 'react'
+import fetch from 'node-fetch'
+import { Container } from 'semantic-ui-react'
+import Redirect from '../components/Redirect'
+import config from '../config'
 
 class Callback extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       result: null,
       error: false,
       isLoading: true
-    };
+    }
   }
 
   getData = async token => {
     await fetch(config.api + '/oauth/callback?code=' + token)
       .then(r => r.json())
       .then(user => {
-        const res = user.data;
+        const res = user.data
 
         if (user.code !== 200 || !res)
-          this.setState({ isLoading: false, error: user.message });
+          this.setState({ isLoading: false, error: user.message })
         else {
-          localStorage.setItem('token', res.token);
-          localStorage.setItem('id', res.id);
-          localStorage.setItem('date', res.date);
-          this.setState({ isLoading: false });
+          localStorage.setItem('token', res.token)
+          localStorage.setItem('id', res.id)
+          localStorage.setItem('date', res.date)
+          this.setState({ isLoading: false })
         }
-      });
-  };
+      })
+  }
 
   componentDidMount() {
-    var token = this.props.location.search;
-    token = new URLSearchParams(token.replace('?', '')).get('code');
-    this.getData(token);
+    var token = this.props.location.search
+    token = new URLSearchParams(token.replace('?', '')).get('code')
+    this.getData(token)
   }
   render() {
-    const { isLoading, error } = this.state;
+    const { isLoading, error } = this.state
     return (
       <Container>
         {isLoading ? (
@@ -58,8 +58,8 @@ class Callback extends React.Component {
           <Redirect to="/" />
         )}
       </Container>
-    );
+    )
   }
 }
 
-export default Callback;
+export default Callback

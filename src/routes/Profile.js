@@ -1,41 +1,34 @@
-import React, { useState } from 'react';
-import fetch from 'node-fetch';
-import {
-  Container,
-  Item,
-  Button,
-  Icon,
-  Card,
-  Divider
-} from 'semantic-ui-react';
+import React, { useState } from 'react'
+import fetch from 'node-fetch'
+import { Container, Item, Button, Icon, Card, Divider } from 'semantic-ui-react'
 
-import Redirect from '../components/Redirect';
-import config from '../config';
-import Bot from '../components/Bot';
-import { Helmet } from 'react-helmet';
+import Redirect from '../components/Redirect'
+import config from '../config'
+import Bot from '../components/Bot'
+import { Helmet } from 'react-helmet'
 
 class Detail extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       result: { code: 401 },
       isLoading: true
-    };
+    }
   }
 
   getProfile = async () => {
     const token = localStorage.token,
       id = localStorage.id,
-      date = localStorage.date;
+      date = localStorage.date
     const res = await fetch(config.api + '/users/@me/profile', {
       method: 'GET',
       headers: { token, id, time: date }
-    }).then(r => r.json());
+    }).then(r => r.json())
 
-    this.setState({ result: res, isLoading: false });
-  };
+    this.setState({ result: res, isLoading: false })
+  }
   componentDidMount() {
-    this.getProfile();
+    this.getProfile()
   }
   render() {
     if (!localStorage.userCache || !JSON.parse(localStorage.userCache))
@@ -43,13 +36,16 @@ class Detail extends React.Component {
         <div className="loader">
           <h1>로그인 해주세요!</h1>
         </div>
-      );
-    const { result } = this.state;
+      )
+    const { result } = this.state
     return (
       <Container>
         <Helmet>
-        <title>프로필 - 한국 디스코드봇 리스트</title>
-        <meta name="description" content="전반적인 본인의 프로필입니다!!" />
+          <title>관리패널 - 한국 디스코드봇 리스트</title>
+          <meta
+            name="description"
+            content="자신의 봇들을 관리하고, 하트를 관리하거나, 심사결과를 확인하세요"
+          />
         </Helmet>
         {this.state.isLoading ? (
           <div className="loader">
@@ -57,7 +53,10 @@ class Detail extends React.Component {
           </div>
         ) : result.code !== 200 ? (
           result.code === 401 ? (
-            <Redirect to={"/logout/" + JSON.parse(localStorage.userCache).id} content={<></>} />
+            <Redirect
+              to={'/logout/' + JSON.parse(localStorage.userCache).id}
+              content={<></>}
+            />
           ) : (
             <div className="loader">
               <span>{result.message}</span>
@@ -66,9 +65,22 @@ class Detail extends React.Component {
         ) : (
           <div>
             <br />
-            <h1>프로필</h1>
-            <Button href="/addbot" content="봇 추가하기" icon="plus" />
+            <h1>관리패널</h1>
+            <Button
+              href={'/users/' + result.user.id}
+              content="프로필 보기"
+              icon="right arrow"
+              labelPosition="right"
+            />
             <h2>나의 봇</h2>
+            <Button
+              href="/addbot"
+              content="새로운 봇 추가하기"
+              icon="plus"
+              labelPosition="left"
+            />
+            <br />
+            <br />
             {result.user.bots.length === 0 ? (
               <h3>승인된 봇이 없습니다.</h3>
             ) : (
@@ -139,19 +151,19 @@ class Detail extends React.Component {
         )}
         <br />
       </Container>
-    );
+    )
   }
 }
 
-export default Detail;
+export default Detail
 
-const stateColor = ['gray', 'green', 'red'];
-const state = ['심사중', '승인됨', '거부됨'];
+const stateColor = ['gray', 'green', 'red']
+const state = ['심사중', '승인됨', '거부됨']
 
 function MyBots(props) {
-  const [see, hoverSee] = useState(false);
-  const [manage, hoverManage] = useState(false);
-  const { bot } = props;
+  const [see, hoverSee] = useState(false)
+  const [manage, hoverManage] = useState(false)
+  const { bot } = props
   return (
     <Card>
       <Card.Content>
@@ -185,7 +197,12 @@ function MyBots(props) {
       <Card.Content extra>
         <div className="ui two buttons">
           <Button
-            href={'/bots/' + ((bot.vanity && bot.boosted) || (bot.vanity && bot.trusted) ? bot.vanity : bot.id)}
+            href={
+              '/bots/' +
+              ((bot.vanity && bot.boosted) || (bot.vanity && bot.trusted)
+                ? bot.vanity
+                : bot.id)
+            }
             basic={!see}
             color="blue"
             onMouseOver={() => hoverSee(true)}
@@ -205,14 +222,20 @@ function MyBots(props) {
         </div>
       </Card.Content>
     </Card>
-  );
+  )
 }
 
 function Submitted(props) {
-  const [preview, hoverPrev] = useState(false);
-  const { bot } = props;
+  const [preview, hoverPrev] = useState(false)
+  const { bot } = props
   return (
-    <Card href={bot.state === 1 ? "/bots/" + bot.id : "/pendingBots/" + bot.id + "/" + bot.date}>
+    <Card
+      href={
+        bot.state === 1
+          ? '/bots/' + bot.id
+          : '/pendingBots/' + bot.id + '/' + bot.date
+      }
+    >
       <Card.Content>
         <Card.Header>
           <a>{bot.id}</a>
@@ -234,10 +257,10 @@ function Submitted(props) {
             onMouseOver={() => hoverPrev(true)}
             onMouseOut={() => hoverPrev(false)}
           >
-            {bot.state === 1 ? "이동하기" : "미리보기"}
+            {bot.state === 1 ? '이동하기' : '미리보기'}
           </Button>
         </div>
       </Card.Content>
     </Card>
-  );
+  )
 }

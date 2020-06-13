@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   Card,
   Button,
@@ -7,7 +7,7 @@ import {
   Label,
   Divider,
   Segment
-} from 'semantic-ui-react';
+} from 'semantic-ui-react'
 
 function Bot({
   id,
@@ -28,14 +28,16 @@ function Bot({
   status,
   banner
 }) {
-  const [lookHover, setLookHover] = useState(false);
-  const [inviteHover, setinviteHover] = useState(false);
+  const [lookHover, setLookHover] = useState(false)
+  const [inviteHover, setinviteHover] = useState(false)
   return (
     <>
       <Card
-        className={`botcard ${(banner && boosted) || (banner && trusted) ? 'bg' : ''}`}
+        className={`botcard ${
+          (banner && boosted) || (banner && trusted) ? 'bg' : ''
+        }`}
         style={
-         (banner && boosted) || (banner && trusted)
+          (banner && boosted) || (banner && trusted)
             ? {
                 background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${banner}) top/cover no-repeat`
               }
@@ -45,11 +47,30 @@ function Bot({
         <Card.Content className="botimg">
           <Card.Header>
             {' '}
-            <Item.Image floated="left" src={avatar} wrapped ui={false} size="small"/>
+            <Item.Image
+              floated="left"
+              src={avatar}
+              wrapped
+              ui={false}
+              size="small"
+            />
             {count === undefined ? (
               ''
             ) : (
-              <Segment floated="right" style={count === 0 ? { background: 'gold', color: 'black' } : count === 1 ? { background: '#c7c7d0', color: 'black' } : count === 2 ? { background: '#af602e', color: 'white' } : {}}>{count + 1 + '위'}</Segment>
+              <Segment
+                floated="right"
+                style={
+                  count === 0
+                    ? { background: 'gold', color: 'black' }
+                    : count === 1
+                    ? { background: '#c7c7d0', color: 'black' }
+                    : count === 2
+                    ? { background: '#af602e', color: 'white' }
+                    : {}
+                }
+              >
+                {count + 1 + '위'}
+              </Segment>
             )}
           </Card.Header>
 
@@ -108,7 +129,10 @@ function Bot({
             <Button
               disabled={state === 'example'}
               basic={!lookHover}
-              href={'/bots/' + ((vanity && boosted) || (vanity && trusted)  ? vanity : id)}
+              href={
+                '/bots/' +
+                ((vanity && boosted) || (vanity && trusted) ? vanity : id)
+              }
               color="blue"
               onMouseOver={() => setLookHover(true)}
               onMouseOut={() => setLookHover(false)}
@@ -116,7 +140,11 @@ function Bot({
               보기
             </Button>
             <Button
-              disabled={state === 'private' || state === 'archived' || state === 'example'}
+              disabled={
+                state === 'private' ||
+                state === 'archived' ||
+                state === 'example'
+              }
               href={invite}
               basic={!inviteHover}
               color="green"
@@ -129,10 +157,10 @@ function Bot({
         </Card.Content>
       </Card>
     </>
-  );
+  )
 }
 
-export default Bot;
+export default Bot
 
 const statusColor = {
   online: 'green',
@@ -140,7 +168,7 @@ const statusColor = {
   dnd: 'red',
   offline: false,
   streaming: 'purple'
-};
+}
 
 const statusText = {
   online: '온라인',
@@ -149,4 +177,4 @@ const statusText = {
   offline: '오프라인',
   streaming: '방송중',
   '???': '알 수 없음'
-};
+}

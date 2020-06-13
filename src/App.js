@@ -17,6 +17,8 @@ import Login from "./routes/Login";
 import Version from "./routes/Version";
 import Category from "./routes/Category";
 import Boost from "./routes/Boost";
+import API from "./routes/API";
+import User from "./routes/Users";
 
 import NotFound from "./components/404";
 import Menu from "./components/Menu";
@@ -24,7 +26,7 @@ import Redirect from "./components/Redirect";
 import Footer from "./components/Footer";
 
 import "./App.css";
-import API from "./routes/API";
+import Privacy from "./routes/Privacy";
 
 
 
@@ -56,6 +58,7 @@ function App() {
         <Route path="/logout/:id?" component={Logout} />
         <Route path="/pendingBots/:id/:date" component={Pending} />
         <Route exact path="/bots/:id" component={Detail} />
+        <Route exact path="/users/:id" component={User} />
         <Route path="/api/:topic?/:doc?" component={API}/>
         <Route path="/discord">
           <Redirect to="https://discord.gg/JEh53MQ" />
@@ -63,8 +66,8 @@ function App() {
         <Route path="/manage/:id" component={ManageBot}/>
         <Route path="/clientinfo" component={Version}/>
         <Route path="/guidelines" component={GuideLines} />
+        <Route path="/privacy" component={Privacy}/>
         <Route path="/boost" component={Boost} />
-
         <Route component={NotFound}></Route>
         
       </Switch>

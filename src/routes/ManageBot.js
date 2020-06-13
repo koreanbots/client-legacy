@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Form,
   Container,
@@ -14,12 +14,12 @@ import {
   Button,
   Popup,
   Table
-} from 'semantic-ui-react';
-import Redirect from '../components/Redirect';
-import ReactMarkdown from 'react-markdown/with-html';
-import fetch from 'node-fetch';
-import config from '../config';
-import CodeBlock from '../components/Code';
+} from 'semantic-ui-react'
+import Redirect from '../components/Redirect'
+import ReactMarkdown from 'react-markdown/with-html'
+import fetch from 'node-fetch'
+import config from '../config'
+import CodeBlock from '../components/Code'
 
 class ManageBot extends Component {
   state = {
@@ -38,12 +38,12 @@ class ManageBot extends Component {
     ownersError: '',
     info: { code: 0 },
     data: { state: 0, data: {} }
-  };
+  }
 
   sendSumbit = async body => {
     const token = localStorage.token,
       id = localStorage.id,
-      date = localStorage.date;
+      date = localStorage.date
     return await fetch(config.api + '/bots/edit/' + body.id, {
       method: 'POST',
       headers: { token, id, time: date, 'Content-Type': 'application/json' },
@@ -51,15 +51,15 @@ class ManageBot extends Component {
     })
       .then(r => r.json())
       .then(res => {
-        if (res.code === 200) this.setState({ data: { state: 1 } });
-        else this.setState({ data: { state: 2, data: res } });
-      });
-  };
+        if (res.code === 200) this.setState({ data: { state: 1 } })
+        else this.setState({ data: { state: 2, data: res } })
+      })
+  }
   showToken = () => {
     if (this.state.token.match(/^\*/))
-      this.setState({ token: this.state.info.data.token });
-    else this.setState({ token: '******' });
-  };
+      this.setState({ token: this.state.info.data.token })
+    else this.setState({ token: '******' })
+  }
   regenToken = async () => {
     const re = await fetch(config.api + '/bots/regenToken', {
       method: 'POST',
@@ -69,23 +69,23 @@ class ManageBot extends Component {
     })
     const res = re.json()
     console.log(re.status)
-    if(re.status !== 200) alert(res.message)
-    else return window.location.reload();
-  };
+    if (re.status !== 200) alert(res.message)
+    else return window.location.reload()
+  }
   handleChange = (e, { name, value }) => {
     if (name === 'desc')
       this.setState({
         desc: '******'
-      });
-    this.setState({ [name]: value });
+      })
+    this.setState({ [name]: value })
     if (name === 'intro' && value.length > 120)
-      this.setState({ desc: value.slice(0, 120) });
+      this.setState({ desc: value.slice(0, 120) })
     else if (name === 'desc' && value.length > 1000)
-      this.setState({ desc: value.slice(0, 1000) });
-  };
+      this.setState({ desc: value.slice(0, 1000) })
+  }
   handleCategory = e => {
-    this.setState({ category: e.value });
-  };
+    this.setState({ category: e.value })
+  }
 
   handleSubmit = async () => {
     if (
@@ -95,21 +95,21 @@ class ManageBot extends Component {
       this.state.category &&
       this.state.category.length > 0
     ) {
-      await this.sendSumbit(this.state);
+      await this.sendSumbit(this.state)
     } else {
       this.setState({
         data: {
           state: 2,
           data: { message: '필수 입력칸을 전부 작성해주세요!' }
         }
-      });
+      })
     }
-  };
+  }
 
   archive = async () => {
     const token = localStorage.token,
       id = localStorage.id,
-      date = localStorage.date;
+      date = localStorage.date
     await fetch(config.api + '/bots/archive/' + this.state.info.data.id, {
       method: 'POST',
       headers: { token, id, time: date, 'Content-Type': 'application/json' }
@@ -117,16 +117,16 @@ class ManageBot extends Component {
       .then(r => r.json())
       .then(res => {
         if (res.code === 200) {
-          if (res.archived) window.location.href = '/?message=lockOn';
-          else window.location.href = '/?message=lockOff';
+          if (res.archived) window.location.href = '/?message=lockOn'
+          else window.location.href = '/?message=lockOff'
         } else alert(res.message)
-      });
-  };
+      })
+  }
 
-  setOwner = async() => {
+  setOwner = async () => {
     const token = localStorage.token,
       id = localStorage.id,
-      date = localStorage.date;
+      date = localStorage.date
     await fetch(config.api + '/bots/editOwners/' + this.state.info.data.id, {
       method: 'POST',
       headers: { token, id, time: date, 'Content-Type': 'application/json' },
@@ -135,9 +135,9 @@ class ManageBot extends Component {
       })
     })
       .then(r => r.json())
-      .then(res=> {
-        if(res.code !== 200) this.setState({ ownersError: res.message })
-        else window.location.reload();
+      .then(res => {
+        if (res.code !== 200) this.setState({ ownersError: res.message })
+        else window.location.reload()
       })
   }
   async componentDidMount() {
@@ -150,9 +150,9 @@ class ManageBot extends Component {
           time: localStorage.date
         }
       }
-    ).then(r => r.json());
+    ).then(r => r.json())
     console.log(res)
-    if (res.code !== 200) this.setState({ info: res });
+    if (res.code !== 200) this.setState({ info: res })
     else
       this.setState({
         info: res,
@@ -168,7 +168,7 @@ class ManageBot extends Component {
         desc: res.data.desc,
         owners: res.data.owners.toString(),
         token: '******'
-      });
+      })
   }
   render() {
     const {
@@ -184,20 +184,20 @@ class ManageBot extends Component {
       discord,
       owners,
       info
-    } = this.state;
-    const bot = info.data;
+    } = this.state
+    const bot = info.data
     if (!localStorage.userCache || !JSON.parse(localStorage.userCache))
       return (
         <div className="loader">
           <h1>로그인 해주세요!</h1>
         </div>
-      );
+      )
     if (this.state.info.code !== 200)
       return (
         <div className="loader">
           <h1>{this.state.info.message}</h1>
         </div>
-      );
+      )
     else
       return (
         <Container>
@@ -241,7 +241,7 @@ class ManageBot extends Component {
                   onClick={() => {
                     navigator.clipboard
                       .writeText(this.state.info.data.token)
-                      .then(alert('복사되었습니다!'));
+                      .then(alert('복사되었습니다!'))
                   }}
                 />{' '}
                 <Button onClick={this.regenToken} content="재발급" />
@@ -369,7 +369,16 @@ class ManageBot extends Component {
                 <Segment style={{ wordWrap: 'break-word' }}>
                   <Label attached="top">설명 미리보기</Label>
                   <br />
-                  <ReactMarkdown source={desc} escapeHtml={true} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell, code: CodeBlock }}/>
+                  <ReactMarkdown
+                    source={desc}
+                    escapeHtml={true}
+                    renderers={{
+                      table: Table,
+                      thead: Table.Header,
+                      tr: Table.Cell,
+                      code: CodeBlock
+                    }}
+                  />
                   <br />
                   <Divider />
                   <p>다음 결과는 실제와 다를 수 있습니다.</p>
@@ -389,21 +398,31 @@ class ManageBot extends Component {
           <Segment>
             <h3>관리자 수정</h3>
             <p>
-              관리자는 "관리자 수정"과 "봇 삭제" 이외의 모든 항목을 수정할 수 있습니다.<br/>
-              관리자는 유저 아이디로 추가하며, 쉼표로 구분합니다.<br/>
-              모든 봇 제작자는 <a href="/discord">디스코드</a>에 참여를 권장합니다.
+              관리자는 "관리자 수정"과 "봇 삭제" 이외의 모든 항목을 수정할 수
+              있습니다.
+              <br />
+              관리자는 유저 아이디로 추가하며, 쉼표로 구분합니다.
+              <br />
+              모든 봇 제작자는 <a href="/discord">디스코드</a>에 참여를
+              권장합니다.
             </p>
-            <Input value={owners} style={{ width: '100%'}} name="owners" onChange={this.handleChange}/>
-            <Button color="red" content="관리자 수정" icon="save" onClick={this.setOwner}/>
-            {
-              this.state.ownersError ? (
-                <Message error>
-                  {this.state.ownersError}
-                </Message>
-              ) : (
-                <></>
-              )
-            }
+            <Input
+              value={owners}
+              style={{ width: '100%' }}
+              name="owners"
+              onChange={this.handleChange}
+            />
+            <Button
+              color="red"
+              content="관리자 수정"
+              icon="save"
+              onClick={this.setOwner}
+            />
+            {this.state.ownersError ? (
+              <Message error>{this.state.ownersError}</Message>
+            ) : (
+              <></>
+            )}
             <h3>
               {this.state.info.data.state === 'archived'
                 ? '봇을 잠금 해제합니다.'
@@ -433,11 +452,11 @@ class ManageBot extends Component {
             />
           </Segment>
         </Container>
-      );
+      )
   }
 }
 
-export default ManageBot;
+export default ManageBot
 
 const options = [
   { text: '관리', value: '관리', key: '관리' },
@@ -454,4 +473,4 @@ const options = [
   { text: '대화', value: '대화', key: '대화' },
   { text: 'NSFW', value: 'NSFW', key: 'NSFW' },
   { text: '검색', value: '검색', key: '검색' }
-];
+]

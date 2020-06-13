@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Form,
   Container,
@@ -12,13 +12,13 @@ import {
   Checkbox,
   Transition,
   Table
-} from 'semantic-ui-react';
-import Redirect from '../components/Redirect';
-import ReactMarkdown from 'react-markdown/with-html';
-import fetch from 'node-fetch';
-import config from '../config';
-import { Helmet } from 'react-helmet';
-import CodeBlock from '../components/Code';
+} from 'semantic-ui-react'
+import Redirect from '../components/Redirect'
+import ReactMarkdown from 'react-markdown/with-html'
+import fetch from 'node-fetch'
+import config from '../config'
+import { Helmet } from 'react-helmet'
+import CodeBlock from '../components/Code'
 
 class SubmitBot extends Component {
   state = {
@@ -35,15 +35,15 @@ class SubmitBot extends Component {
     read: false,
     visible: false,
     data: { state: 0, data: {} }
-  };
-  componentDidMount(){
+  }
+  componentDidMount() {
     this.setState({ visible: true })
   }
   myRef = React.createRef()
   sendSumbit = async body => {
     const token = localStorage.token,
       id = localStorage.id,
-      date = localStorage.date;
+      date = localStorage.date
     return await fetch(config.api + '/bots/submit', {
       method: 'POST',
       headers: { token, id, time: date, 'Content-Type': 'application/json' },
@@ -51,30 +51,30 @@ class SubmitBot extends Component {
     })
       .then(r => r.json())
       .then(res => {
-        if (res.code === 200) this.setState({ data: { state: 1 } });
-        else this.setState({ data: { state: 2, data: res } });
-      });
-  };
+        if (res.code === 200) this.setState({ data: { state: 1 } })
+        else this.setState({ data: { state: 2, data: res } })
+      })
+  }
 
   handleChange = (e, { name, value }) => {
     if (name === 'desc')
       this.setState({
         desc: value.replace(/</gi, '&lt').replace(/>/gi, '&gt')
-      });
-    this.setState({ [name]: value });
+      })
+    this.setState({ [name]: value })
     if (name === 'intro' && value.length > 120)
-      this.setState({ desc: value.slice(0, 120) });
+      this.setState({ desc: value.slice(0, 120) })
     else if (name === 'desc' && value.length > 1000)
-      this.setState({ desc: value.slice(0, 1000) });
-  };
+      this.setState({ desc: value.slice(0, 1000) })
+  }
   handleCategory = e => {
-    this.setState({ category: e.value });
-  };
+    this.setState({ category: e.value })
+  }
 
   handleSubmit = async () => {
-    if(!this.state.read) {
+    if (!this.state.read) {
       this.scrollToMyRef()
-      return this.setState({ visible: !this.state.visible})
+      return this.setState({ visible: !this.state.visible })
     }
     if (
       this.state.id &&
@@ -84,18 +84,18 @@ class SubmitBot extends Component {
       this.state.category &&
       this.state.category.length > 0
     ) {
-      await this.sendSumbit(this.state);
+      await this.sendSumbit(this.state)
     } else {
       this.setState({
         data: {
           state: 3,
           data: { message: '필수 입력칸을 전부 작성해주세요!' }
         }
-      });
+      })
     }
-  };
+  }
 
-  toggle = () => this.setState((prevState) => ({ read: !prevState.read }))
+  toggle = () => this.setState(prevState => ({ read: !prevState.read }))
   render() {
     const {
       id,
@@ -108,62 +108,74 @@ class SubmitBot extends Component {
       url,
       discord,
       read
-    } = this.state;
+    } = this.state
     if (!localStorage.userCache || !JSON.parse(localStorage.userCache))
       return (
         <div className="loader">
           <h1>로그인 해주세요!</h1>
         </div>
-      );
+      )
     else
       return (
         <Container>
           <Helmet>
-          <title>봇 추가하기 - 한국 디스코드봇 리스트</title>
-        <meta name="description" content="본인의 봇을 리스트에 추가합니다!" />
+            <title>봇 추가하기 - 한국 디스코드봇 리스트</title>
+            <meta
+              name="description"
+              content="본인의 봇을 리스트에 추가합니다!"
+            />
           </Helmet>
           <br />
           <h1>새로운 봇 추가하기</h1>
-          <Transition animation='shake' duration={500} visible={this.state.visible}>
-          <section id="readme">
-          
-          <Message error ref={this.myRef}>
-            <Message.Header>
-              신청하시기 전에 다음 사항을 확인해주세요!!
-            </Message.Header>
-            <Message.Content>
-              <li>
-                <a href="/discord">디스코드</a>에 참가하셨나요?
-              </li>
-              <li>
-                봇이 <a href="/guidelines">가이드라인</a>을 지키고 있나요?
-              </li>
-              <li>
-                본인이 봇의 소유자라는 것을 증명할 수 있나요? 본인이 봇
-                소유자임을 증명하려면, 태그가 포함되어야합니다. <br />
-                다음 명령어(접두사로 시작하는) 중 하나 이상에 소유자를
-                표시하셔야합니다.
-                <ol>- 도움 명령어: 도움, 도움말, 명령어, help, commands</ol>
-                <ol>
-                  - 도움 명령어에 소유자임을 나타내고 싶지 않으시다면, 아래
-                  명령어를 만들어주세요
-                  <br />
-                  명령어: [접두사]hellothisisverification 응답:
-                  유저#태그(아이디)
-                </ol>
-              </li>
-              <li>
-                또한, 봇을 등록하게되면 작성하신 모든 정보는 웹과 API에 공개됩니다.
-              </li>
-            </Message.Content>
-          </Message>
-          <br/>
-          <Checkbox checked={read} onChange={this.toggle}/><strong> 해당 내용을 숙지하였으며, 모두 이행하였고 위 내용에 해당하는 거부 사유는 답변받지 않는다는 점을 이해합니다.</strong> 
-          <br/>
-          </section>
+          <Transition
+            animation="shake"
+            duration={500}
+            visible={this.state.visible}
+          >
+            <section id="readme">
+              <Message error ref={this.myRef}>
+                <Message.Header>
+                  신청하시기 전에 다음 사항을 확인해주세요!!
+                </Message.Header>
+                <Message.Content>
+                  <li>
+                    <a href="/discord">디스코드</a>에 참가하셨나요?
+                  </li>
+                  <li>
+                    봇이 <a href="/guidelines">가이드라인</a>을 지키고 있나요?
+                  </li>
+                  <li>
+                    본인이 봇의 소유자라는 것을 증명할 수 있나요? 본인이 봇
+                    소유자임을 증명하려면, 태그가 포함되어야합니다. <br />
+                    다음 명령어(접두사로 시작하는) 중 하나 이상에 소유자를
+                    표시하셔야합니다.
+                    <ol>- 도움 명령어: 도움, 도움말, 명령어, help, commands</ol>
+                    <ol>
+                      - 도움 명령어에 소유자임을 나타내고 싶지 않으시다면, 아래
+                      명령어를 만들어주세요
+                      <br />
+                      명령어: [접두사]hellothisisverification 응답:
+                      유저#태그(아이디)
+                    </ol>
+                  </li>
+                  <li>
+                    또한, 봇을 등록하게되면 작성하신 모든 정보는 웹과 API에
+                    공개됩니다.
+                  </li>
+                </Message.Content>
+              </Message>
+              <br />
+              <Checkbox checked={read} onChange={this.toggle} />
+              <strong>
+                {' '}
+                해당 내용을 숙지하였으며, 모두 이행하였고 위 내용에 해당하는
+                거부 사유는 답변받지 않는다는 점을 이해합니다.
+              </strong>
+              <br />
+            </section>
           </Transition>
-         
-          <Divider/>
+
+          <Divider />
           <h2>봇 정보</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group>
@@ -294,14 +306,26 @@ class SubmitBot extends Component {
                 <Segment style={{ wordWrap: 'break-word' }}>
                   <Label attached="top">설명 미리보기</Label>
                   <br />
-                  <ReactMarkdown source={desc} escapeHtml={true} renderers={{ table: Table, thead: Table.Header, tr: Table.Cell, code: CodeBlock }}/>
+                  <ReactMarkdown
+                    source={desc}
+                    escapeHtml={true}
+                    renderers={{
+                      table: Table,
+                      thead: Table.Header,
+                      tr: Table.Cell,
+                      code: CodeBlock
+                    }}
+                  />
                   <br />
                   <Divider />
                   <p>다음 결과는 실제와 다를 수 있습니다.</p>
                 </Segment>
               </div>
 
-              <Form.Button content="제출" disabled={this.state.data.state === 1}/>
+              <Form.Button
+                content="제출"
+                disabled={this.state.data.state === 1}
+              />
             </div>
           </Form>
 
@@ -309,31 +333,44 @@ class SubmitBot extends Component {
             <Redirect to="/?message=submitSuccess" />
           ) : this.state.data.state === 2 ? (
             <Message error>{this.state.data.data.message}</Message>
-          ) : this.state.data.state === 3 && !( this.state.id &&
-            this.state.lib &&
-            this.state.intro &&
-            this.state.desc &&
-            this.state.category &&
-            this.state.category.length > 0) ? (
-            <Message error>{this.state.data.data.message}({ !this.state.id ? '아이디' :
-            !this.state.prefix ? '접두사' :
-            !this.state.lib ? '라이브러리' :
-            !this.state.category ? '카테고리' :
-            this.state.category.length === 0 ? '카테고리' :
-            !this.state.intro ? '봇 소개' :
-            !this.state.desc ? '봇 설명' : ''
-            })</Message>
+          ) : this.state.data.state === 3 &&
+            !(
+              this.state.id &&
+              this.state.lib &&
+              this.state.intro &&
+              this.state.desc &&
+              this.state.category &&
+              this.state.category.length > 0
+            ) ? (
+            <Message error>
+              {this.state.data.data.message}(
+              {!this.state.id
+                ? '아이디'
+                : !this.state.prefix
+                ? '접두사'
+                : !this.state.lib
+                ? '라이브러리'
+                : !this.state.category
+                ? '카테고리'
+                : this.state.category.length === 0
+                ? '카테고리'
+                : !this.state.intro
+                ? '봇 소개'
+                : !this.state.desc
+                ? '봇 설명'
+                : ''}
+              )
+            </Message>
           ) : (
             <></>
           )}
         </Container>
-      );
-      
+      )
   }
   scrollToMyRef = () => window.scrollTo(0, this.myRef.current.offsetTop)
 }
 
-export default SubmitBot;
+export default SubmitBot
 
 const options = [
   { text: '관리', value: '관리', key: '관리' },
@@ -350,4 +387,4 @@ const options = [
   { text: '대화', value: '대화', key: '대화' },
   { text: 'NSFW', value: 'NSFW', key: 'NSFW' },
   { text: '검색', value: '검색', key: '검색' }
-];
+]

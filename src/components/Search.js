@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { Input } from 'semantic-ui-react';
-import './Search.css';
+import React, { Component } from 'react'
+import { Input } from 'semantic-ui-react'
+import './Search.css'
 export default class SearchExampleStandard extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       value: '',
       result: {},
       redirect: false
-    };
+    }
   }
   render(props) {
     const to = r => {
-      window.location.href = '/search?query=' + r;
-      return '';
-    };
+      window.location.href = '/search?query=' + r
+      return ''
+    }
     return (
       <div className="search">
         <Input
@@ -29,16 +29,16 @@ export default class SearchExampleStandard extends Component {
 
         {this.state.redirect ? to(this.state.value) : ''}
       </div>
-    );
+    )
   }
   handleChange(event) {
     this.setState({
       value: event.target.value
-    });
+    })
   }
   handleSubmit(e) {
     if (e.key === 'Enter') {
-      this.setState({ redirect: true });
+      this.setState({ redirect: true })
     }
   }
 }

@@ -1,49 +1,49 @@
-import React from 'react';
-import fetch from 'node-fetch';
-import Bot from '../components/Bot';
-import { Message, Container, Card, Pagination, Label } from 'semantic-ui-react';
-import config from '../config';
+import React from 'react'
+import fetch from 'node-fetch'
+import Bot from '../components/Bot'
+import { Message, Container, Card, Pagination, Label } from 'semantic-ui-react'
+import config from '../config'
 
-import queryString from 'query-string';
-import { Helmet } from 'react-helmet';
+import queryString from 'query-string'
+import { Helmet } from 'react-helmet'
 
 class Category extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       isLoading: true,
       bot: {},
       message: false,
       activePage: 1,
       totalPage: 1
-    };
+    }
   }
 
   removeParam = parameter => {
-    var url = window.location.href;
-    var urlparts = url.split('?');
+    var url = window.location.href
+    var urlparts = url.split('?')
 
     if (urlparts.length >= 2) {
-      var urlBase = urlparts.shift();
-      var qus = urlparts.join('?');
+      var urlBase = urlparts.shift()
+      var qus = urlparts.join('?')
 
-      var prefix = encodeURIComponent(parameter) + '=';
-      var pars = qus.split(/[&;]/g);
+      var prefix = encodeURIComponent(parameter) + '='
+      var pars = qus.split(/[&;]/g)
       for (var i = pars.length; i-- > 0; )
-        if (pars[i].lastIndexOf(prefix, 0) !== -1) pars.splice(i, 1);
-      url = urlBase + '?' + pars.join('&');
-      window.history.pushState('', document.title, url); // added this line to push the new url directly to url bar .
+        if (pars[i].lastIndexOf(prefix, 0) !== -1) pars.splice(i, 1)
+      url = urlBase + '?' + pars.join('&')
+      window.history.pushState('', document.title, url) // added this line to push the new url directly to url bar .
     }
-    return url;
-  };
+    return url
+  }
 
   editParm = (parm, val) => {
     window.history.pushState(
       '',
       document.title,
       `${window.location.origin}${window.location.pathname}?${parm}=${val}`
-    );
-  };
+    )
+  }
   getData = async page => {
     const bot = await fetch(
       config.api +
@@ -57,37 +57,43 @@ class Category extends React.Component {
           time: localStorage.date
         }
       }
-    ).then(r => r.json());
+    ).then(r => r.json())
     this.setState({
       bot,
       isLoading: false,
       totalPage: bot.totalPage,
       activePage: page
-    });
-  };
+    })
+  }
   handlePaginationChange = (e, { activePage }) => {
-    this.editParm('page', activePage);
-    this.getData(activePage, this.props);
-  };
+    this.editParm('page', activePage)
+    this.getData(activePage, this.props)
+  }
 
   componentDidMount(props) {
-    const query = queryString.parse(window.location.search);
+    const query = queryString.parse(window.location.search)
     const page =
       Number.isNaN(Number(query.page)) || Number(query.page) < 1
         ? 1
-        : query.page;
-    this.setState({ activePage: page });
-    this.getData(page);
+        : query.page
+    this.setState({ activePage: page })
+    this.getData(page)
   }
   render() {
-    const { isLoading, bot } = this.state;
+    const { isLoading, bot } = this.state
 
     return (
       <Container>
         <Helmet>
-    <title>{this.props.match.params.category} 카테고리 봇들 - 한국 디스코드봇 리스트</title>
-        <meta name="description" content={`${this.props.match.params.category} 카테고리 봇들입니다. 당신의 서버로 초대해보세요!`} />
-      </Helmet>
+          <title>
+            {this.props.match.params.category} 카테고리 봇들 - 한국 디스코드봇
+            리스트
+          </title>
+          <meta
+            name="description"
+            content={`${this.props.match.params.category} 카테고리 봇들입니다. 당신의 서버로 초대해보세요!`}
+          />
+        </Helmet>
         {this.state.message ? (
           <Message
             header={this.state.message.title}
@@ -173,15 +179,14 @@ class Category extends React.Component {
                   totalPages={this.state.totalPage}
                   onPageChange={this.handlePaginationChange}
                 />
-                
               </Container>
-              <br/>
+              <br />
             </div>
           )}
         </section>
       </Container>
-    );
+    )
   }
 }
 
-export default Category;
+export default Category

@@ -1,15 +1,15 @@
-import React from 'react';
-import {Helmet} from 'react-helmet'
-import fetch from 'node-fetch';
-import Bot from '../components/Bot';
-import { Message, Container, Card, Pagination, Label } from 'semantic-ui-react';
-import config from '../config';
+import React from 'react'
+import { Helmet } from 'react-helmet'
+import fetch from 'node-fetch'
+import Bot from '../components/Bot'
+import { Message, Container, Card, Pagination, Label } from 'semantic-ui-react'
+import config from '../config'
 
-import queryString from 'query-string';
+import queryString from 'query-string'
 
 class Home extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       isLoading: true,
       bot: {},
@@ -17,34 +17,34 @@ class Home extends React.Component {
       message: false,
       activePage: 1,
       totalPage: 1
-    };
+    }
   }
 
   removeParam = parameter => {
-    var url = window.location.href;
-    var urlparts = url.split('?');
+    var url = window.location.href
+    var urlparts = url.split('?')
 
     if (urlparts.length >= 2) {
-      var urlBase = urlparts.shift();
-      var qus = urlparts.join('?');
+      var urlBase = urlparts.shift()
+      var qus = urlparts.join('?')
 
-      var prefix = encodeURIComponent(parameter) + '=';
-      var pars = qus.split(/[&;]/g);
+      var prefix = encodeURIComponent(parameter) + '='
+      var pars = qus.split(/[&;]/g)
       for (var i = pars.length; i-- > 0; )
-        if (pars[i].lastIndexOf(prefix, 0) !== -1) pars.splice(i, 1);
-      url = urlBase + '?' + pars.join('&');
-      window.history.pushState('', document.title, url);
+        if (pars[i].lastIndexOf(prefix, 0) !== -1) pars.splice(i, 1)
+      url = urlBase + '?' + pars.join('&')
+      window.history.pushState('', document.title, url)
     }
-    return url;
-  };
+    return url
+  }
 
   editParm = (parm, val) => {
     window.history.pushState(
       '',
       document.title,
       `${window.location.origin}?${parm}=${val}`
-    );
-  };
+    )
+  }
   getData = async page => {
     const bot = await fetch(config.api + '/bots/get?page=' + page, {
       method: 'GET',
@@ -53,48 +53,53 @@ class Home extends React.Component {
         id: localStorage.id,
         time: localStorage.date
       }
-    }).then(r => r.json());
+    }).then(r => r.json())
 
-    const trusted = await fetch(config.api + '/bots/trusted').then(r=> r.json())
+    const trusted = await fetch(config.api + '/bots/trusted').then(r =>
+      r.json()
+    )
     this.setState({
       bot,
       trusted,
       isLoading: false,
       totalPage: bot.totalPage,
       activePage: page
-    });
-  };
+    })
+  }
   handlePaginationChange = (e, { activePage }) => {
-    this.editParm('page', activePage);
-    this.getData(activePage);
-  };
+    this.editParm('page', activePage)
+    this.getData(activePage)
+  }
 
   componentDidMount() {
-    const query = queryString.parse(window.location.search);
+    const query = queryString.parse(window.location.search)
     const page =
       Number.isNaN(Number(query.page)) || Number(query.page) < 1
         ? 1
-        : query.page;
-    this.setState({ activePage: page });
+        : query.page
+    this.setState({ activePage: page })
     if (query.message)
       this.setState({
         message: messages[query.message] || false
-      });
-    this.getData(page);
+      })
+    this.getData(page)
   }
   handleDismiss = async () => {
-    this.setState({ message: false });
-    this.removeParam('message');
-  };
+    this.setState({ message: false })
+    this.removeParam('message')
+  }
   render() {
-    const { isLoading, bot, trusted } = this.state;
+    const { isLoading, bot, trusted } = this.state
 
     return (
       <Container>
-      <Helmet>
-        <title>한국 디스코드봇 리스트</title>
-        <meta name="description" content="국내 디스코드봇들을 확인하고, 초대해보세요!" />
-      </Helmet>
+        <Helmet>
+          <title>한국 디스코드봇 리스트</title>
+          <meta
+            name="description"
+            content="국내 디스코드봇들을 확인하고, 초대해보세요!"
+          />
+        </Helmet>
         {this.state.message ? (
           <Message
             header={this.state.message.title}
@@ -135,8 +140,6 @@ class Home extends React.Component {
             </div>
           ) : (
             <div>
-
-
               <Card.Group itemsPerRow={3} stackable>
                 {bot.data.map(bot => (
                   <>
@@ -197,73 +200,73 @@ class Home extends React.Component {
           <br />
         </section>
 
-        {
-          this.state.activePage === 1 ? (
-            <>
+        {this.state.activePage === 1 ? (
+          <>
             <h1>✅ 신뢰된 봇</h1>
             <p>KOREANBOTS에서 인증받은 신뢰할 수 있는 봇들입니다!!</p>
-          {isLoading ? (
-            <div className="loader">
-              <span className="loader__text">Loading...</span>
-            </div>
-          ) : trusted.code !== 200 ? (
-            <div className="loader">
-              <span className="loader__text">{trusted.message}</span>
-            </div>
-          ) : (
-            <div>
-
-              <Card.Group itemsPerRow={3} stackable>
-                {trusted.data.map(trusted => (
-                  <>
-                    <Bot
-                      key={trusted.id}
-                      id={trusted.id}
-                      name={trusted.name}
-                      avatar={
-                        trusted.avatar !== false
-                          ? 'https://cdn.discordapp.com/avatars/' +
-                            trusted.id +
-                            '/' +
-                            trusted.avatar +
-                            '.png?size=128'
-                          : `https://cdn.discordapp.com/embed/avatars/${trusted.tag %
-                              5}.png?size=128`
-                      }
-                      votes={trusted.votes}
-                      servers={trusted.servers}
-                      category={trusted.category}
-                      intro={trusted.intro}
-                      desc={trusted.desc}
-                      invite={
-                        trusted.url === false
-                          ? `https://discordapp.com/oauth2/authorize?client_id=${trusted.id}&scope=trusted&permissions=0`
-                          : trusted.url
-                      }
-                      state={trusted.state}
-                      verified={trusted.verified}
-                      trusted={trusted.trusted}
-                      vanity={trusted.vanity}
-                      boosted={trusted.boosted}
-                      status={trusted.status}
-                      banner={trusted.banner}
-                      bg={trusted.bg}
-                    />
-                  </>
-                ))}
-              </Card.Group>
-            </div>
-          )}
-            </>
-          ) : ('')
-        }
-        <br/><br/>
+            {isLoading ? (
+              <div className="loader">
+                <span className="loader__text">Loading...</span>
+              </div>
+            ) : trusted.code !== 200 ? (
+              <div className="loader">
+                <span className="loader__text">{trusted.message}</span>
+              </div>
+            ) : (
+              <div>
+                <Card.Group itemsPerRow={3} stackable>
+                  {trusted.data.map(trusted => (
+                    <>
+                      <Bot
+                        key={trusted.id}
+                        id={trusted.id}
+                        name={trusted.name}
+                        avatar={
+                          trusted.avatar !== false
+                            ? 'https://cdn.discordapp.com/avatars/' +
+                              trusted.id +
+                              '/' +
+                              trusted.avatar +
+                              '.png?size=128'
+                            : `https://cdn.discordapp.com/embed/avatars/${trusted.tag %
+                                5}.png?size=128`
+                        }
+                        votes={trusted.votes}
+                        servers={trusted.servers}
+                        category={trusted.category}
+                        intro={trusted.intro}
+                        desc={trusted.desc}
+                        invite={
+                          trusted.url === false
+                            ? `https://discordapp.com/oauth2/authorize?client_id=${trusted.id}&scope=trusted&permissions=0`
+                            : trusted.url
+                        }
+                        state={trusted.state}
+                        verified={trusted.verified}
+                        trusted={trusted.trusted}
+                        vanity={trusted.vanity}
+                        boosted={trusted.boosted}
+                        status={trusted.status}
+                        banner={trusted.banner}
+                        bg={trusted.bg}
+                      />
+                    </>
+                  ))}
+                </Card.Group>
+              </div>
+            )}
+          </>
+        ) : (
+          ''
+        )}
+        <br />
+        <br />
       </Container>
-    );
+    )
   }
 }
 
-export default Home;
+export default Home
 
 const messages = {
   submitSuccess: {
@@ -291,7 +294,7 @@ const messages = {
     title: '봇 신고 성공!',
     message: '신고 내용이 관리자에게 전달되었습니다.'
   }
-};
+}
 
 const cats = [
   '관리',
@@ -308,4 +311,4 @@ const cats = [
   '대화',
   'NSFW',
   '검색'
-];
+]

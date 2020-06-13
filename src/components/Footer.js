@@ -1,17 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-import {
-  Segment,
-  Container,
-  Grid,
-  Icon,
-  List,
-  Button
-} from 'semantic-ui-react';
+import { Segment, Container, Grid, Icon, List, Button } from 'semantic-ui-react'
 function Footer(props) {
   function toggleDarkmode() {
-    props.setDark(!props.Dark);
-    localStorage.dark = !props.Dark;
+    props.setDark(!props.Dark)
+    localStorage.dark = !props.Dark
   }
   return (
     <Segment
@@ -28,9 +21,9 @@ function Footer(props) {
       <Container>
         <Grid columns={2} stackable>
           <Grid.Column>
-            <h1>DBKR</h1>
+            <h1>KOREANBOTS</h1>
             <p>
-              <Icon className="copyright" /> 2020 DBKR, All rights reserved.
+              <Icon className="copyright" /> 2020 Koreanbots, All rights reserved.
             </p>
             <p>
               이 사이트는 <Icon className="blue react" />로 제작된{' '}
@@ -41,12 +34,16 @@ function Footer(props) {
             <h2>링크</h2>
             <List>
               <List.Item href="/discord">공식 디스코드 서버</List.Item>
-            </List>
-            <List>
               <List.Item href="/guidelines">가이드라인</List.Item>
+              <List.Item href="/privacy">개인정보취급방침</List.Item>
             </List>
-            <a href="https://github.com/koreanbots"><Icon className="github" style={{color: 'white'}}/></a>
-            <a href="mailto:wonderlandpark@callisto.team"><Icon className="mail" style={{color: 'white'}}/></a><br/>
+            <a href="https://github.com/koreanbots">
+              <Icon className="github" style={{ color: 'white' }} />
+            </a>
+            <a href="mailto:wonderlandpark@callisto.team">
+              <Icon className="mail" style={{ color: 'white' }} />
+            </a>
+            <br />
             <Button onClick={toggleDarkmode}>
               {props.Dark ? (
                 <>
@@ -62,7 +59,7 @@ function Footer(props) {
         </Grid>
       </Container>
     </Segment>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

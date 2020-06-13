@@ -1,13 +1,16 @@
-import React from 'react';
-import { Container } from 'semantic-ui-react';
-import { Helmet } from 'react-helmet';
+import React from 'react'
+import { Container } from 'semantic-ui-react'
+import { Helmet } from 'react-helmet'
 
 function GuildLines() {
   return (
     <Container>
       <Helmet>
         <title>가이드라인 - 한국 디스코드봇 리스트</title>
-        <meta name="description" content="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!" />
+        <meta
+          name="description"
+          content="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!"
+        />
       </Helmet>
       <br />
       <h1 id="가이드라인">가이드라인</h1>
@@ -91,7 +94,7 @@ function GuildLines() {
         처리하기 전에는 반드시 유저에게 통보를 시도해야합니다.
       </p>
     </Container>
-  );
+  )
 }
 
-export default GuildLines;
+export default GuildLines
