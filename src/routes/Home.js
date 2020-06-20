@@ -4,8 +4,9 @@ import fetch from 'node-fetch'
 import Bot from '../components/Bot'
 import { Message, Container, Card, Pagination, Label } from 'semantic-ui-react'
 import config from '../config'
-
+import Typed from 'typed.js'
 import queryString from 'query-string'
+import SearchField from '../components/Search'
 
 class Home extends React.Component {
   constructor(props) {
@@ -18,8 +19,13 @@ class Home extends React.Component {
       activePage: 1,
       totalPage: 1
     }
+   
   }
-
+  componentWillUnmount() {
+    // Make sure to destroy Typed instance on unmounting
+    // to prevent memory leaks
+    this.typed.destroy()
+  }
   removeParam = parameter => {
     var url = window.location.href
     var urlparts = url.split('?')
@@ -83,6 +89,13 @@ class Home extends React.Component {
         message: messages[query.message] || false
       })
     this.getData(page)
+    this.typed = new Typed(this.el, {
+      strings: cats,
+      typeSpeed: 200,
+      backSpeed: 100,
+      loop: true,
+      loopCount: Infinity
+    })
   }
   handleDismiss = async () => {
     this.setState({ message: false })
@@ -92,6 +105,24 @@ class Home extends React.Component {
     const { isLoading, bot, trusted } = this.state
 
     return (
+      <>
+      {
+              this.state.activePage === 1 && (
+                <div className="top" style={{ padding: '10px', marginBottom: '10px', display: 'flex', minHeight: '370px', alignItems: 'center', justifyContent: 'center', color: 'white'}}>
+            <Container>
+            <h1>한국 디스코드봇 리스트에서  <span
+                      style={{ whiteSpace: 'pre', fontSize: '1.2em'}}
+                      ref={el => {
+                        this.el = el
+                      }}
+                    />봇을 확인하세요</h1>
+            <h2>다양한 국내봇을 한곳에서 확인하세요!</h2>
+            <SearchField large style={{ width: '100% !important' }}/>
+            </Container>
+          </div>
+              )
+                  }
+      
       <Container>
         <Helmet>
           <title>한국 디스코드봇 리스트</title>
@@ -110,24 +141,20 @@ class Home extends React.Component {
         ) : (
           ''
         )}
-
-        <section id="all">
-          <br />
-          <h3>카테고리로 빠르게 찾아보기: </h3>
+         <h3 style={{ marginTop: '30px'}}>카테고리로 빠르게 찾아보기: </h3>
           {cats.map(r => (
             <>
               <Label
                 tag
                 stackable
-                style={{ marginTop: '4px' }}
+                style={{ marginTop: '4px'}}
                 href={'/categories/' + r}
               >
                 {r}
               </Label>{' '}
             </>
           ))}
-          <br />
-          <br />
+        <section id="all" style={{ marginTop: '15px'}}>
           <h1>💖 하트 랭킹</h1>
           <p>하트를 많이 받은 봇들의 순위입니다!</p>
           {isLoading ? (
@@ -261,7 +288,9 @@ class Home extends React.Component {
         )}
         <br />
         <br />
+        
       </Container>
+      </>
     )
   }
 }

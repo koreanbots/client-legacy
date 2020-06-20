@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Input } from 'semantic-ui-react'
 import './Search.css'
-export default class SearchExampleStandard extends Component {
+export default class SearchField extends Component {
   constructor(props) {
     super(props)
 
@@ -19,12 +19,14 @@ export default class SearchExampleStandard extends Component {
     return (
       <div className="search">
         <Input
-          className="box"
+          className={this.props.large ? 'gg box' : 'box'}
           onKeyDown={this.handleSubmit.bind(this)}
           onChange={this.handleChange.bind(this)}
           icon="search"
           placeholder="검색..."
           fluid={this.props.fluid}
+          size={this.props.large ? 'massive' : ''}
+          style={this.props.style}
         />
 
         {this.state.redirect ? to(this.state.value) : ''}

@@ -17,16 +17,15 @@ class Boost extends React.Component {
   componentDidMount() {
     // If you want to pass more options as props, simply add
     // your desired props to this destructuring assignment.
-    // You can pass other options here, such as typing speed, back speed, etc.
-    const options = {
+    // You can pass other options here, such as typing speed, back speed, etc. 
+    // this.el refers to the <span> in the render() method
+    this.typed = new Typed(this.el, {
       strings: ['iubot', 'hellobot', 'coolbot', 'mybot'],
       typeSpeed: 100,
       backSpeed: 100,
       loop: true,
       loopCount: Infinity
-    }
-    // this.el refers to the <span> in the render() method
-    this.typed = new Typed(this.el, options)
+    })
   }
 
   componentWillUnmount() {
