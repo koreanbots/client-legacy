@@ -126,3 +126,15 @@ body {
 textarea {
   min-height: 300px;
 }
+
+.gg.box {
+  width: 100% !important;
+}
+
+.darkmode .top {
+  background-color:  rgba(0,0,0,0.2) !important;
+}
+
+.top {
+  background: #7289DA
+}

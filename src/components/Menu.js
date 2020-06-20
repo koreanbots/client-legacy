@@ -12,7 +12,7 @@ import Config from '../config'
 import fetch from 'node-fetch'
 import config from '../config'
 
-export default class MenuExampleStackable extends Component {
+export default class Nav extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -184,7 +184,6 @@ export default class MenuExampleStackable extends Component {
             </Menu.Menu>
             <Menu.Menu position="right">
               <Menu.Item>
-                <Search />
               </Menu.Item>
               {this.state.logged === 0 ? (
                 <Menu.Item color="black" name="로그인" href="/login">
