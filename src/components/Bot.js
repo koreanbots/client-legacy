@@ -105,9 +105,9 @@ function Bot({
               <br />
             </h1>
             <Label color="red">
-              <Icon className="heart" /> {votes}
+              <Icon className="heart" /> {formatNum(votes)}
             </Label>
-            <Label className="discord">{servers} 서버</Label>
+            <Label className="discord">{formatNum(servers)} 서버</Label>
             <br />
             <br />
             {intro}
@@ -177,4 +177,15 @@ const statusText = {
   offline: '오프라인',
   streaming: '방송중',
   '???': '알 수 없음'
+}
+
+
+function formatNum (value) {
+  var suffixes = ["", "K", "M", "B","T"];
+  var suffixNum = Math.floor((""+value).length/3);
+  var shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000,suffixNum)) : value).toPrecision(2));
+  if (shortValue % 1 != 0) {
+      shortValue = shortValue.toFixed(1);
+  }
+  return shortValue+suffixes[suffixNum];
 }
