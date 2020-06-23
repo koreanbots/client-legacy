@@ -108,7 +108,7 @@ class Home extends React.Component {
       <>
       {
               this.state.activePage === 1 && (
-                <div className="top" style={{ padding: '10px', marginBottom: '10px', display: 'flex', minHeight: '370px', alignItems: 'center', justifyContent: 'center', color: 'white'}}>
+                <div className="verytop" style={{ padding: '10px', marginBottom: '10px', display: 'flex', minHeight: '370px', alignItems: 'center', justifyContent: 'center', color: 'white'}}>
             <Container>
             <h1>한국 디스코드봇 리스트에서  <span
                       style={{ whiteSpace: 'pre', fontSize: '1.2em'}}
