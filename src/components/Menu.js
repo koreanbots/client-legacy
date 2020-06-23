@@ -132,7 +132,7 @@ export default class Nav extends Component {
             animation="overlay"
             direction="top"
             vertical
-            className="nav"
+            className="nav sidebar"
             visible={visible}
           >
             <Menu.Item position="right" onClick={this.editSlider}>
