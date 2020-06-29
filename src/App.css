@@ -86,6 +86,14 @@ body {
   color: white
 }
 
+.darkmode.modal, .darkmode.modal > .header {
+  background-color: #1b1c1d;
+  color: white !important;
+}
+
+.darkmode.modal .field > * > * {
+  color: white;
+}
 
 .discord {
   background-color: #7289da !important;
