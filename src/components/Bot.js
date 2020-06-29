@@ -53,6 +53,7 @@ function Bot({
               wrapped
               ui={false}
               size="small"
+              width="128"
             />
             {count === undefined ? (
               ''
