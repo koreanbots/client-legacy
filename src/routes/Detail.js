@@ -318,6 +318,7 @@ class Detail extends React.Component {
                       )}
 
                       <Modal
+                        className={localStorage.dark === 'true' ? 'darkmode' : 'lightmode'}
                         trigger={
                           <Button color="red">
                             <Icon className="flag outline" />
