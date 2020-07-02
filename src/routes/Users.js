@@ -134,7 +134,7 @@ class User extends React.Component {
               </Grid>
               <div>
                 <h2>제작한 봇</h2>
-                <p>해당 유저에 개발하였거나, 관리하는 봇입니다.</p>
+                <p>해당 유저가 개발에 참여하였거나, 관리하는 봇입니다.</p>
                 {data.bots ? (
                   <Card.Group itemsPerRow={3} stackable>
                     {data.bots.map(bot => (
