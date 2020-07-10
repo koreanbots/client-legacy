@@ -106,6 +106,7 @@ class Home extends React.Component {
 
     return (
       <>
+
       {
               this.state.activePage === 1 && (
                 <div className="verytop" style={{ padding: '10px', marginBottom: '10px', display: 'flex', minHeight: '370px', alignItems: 'center', justifyContent: 'center', color: 'white'}}>
