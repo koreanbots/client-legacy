@@ -146,3 +146,15 @@ textarea {
 .verytop {
   background-color: #7289DA !important;
 }
+
+.darkmode .wave > path {
+  fill: #232629;
+}
+
+@media all and (max-width:1000px) {
+  
+  .wave {
+    display: none;
+  }
+  
+}
