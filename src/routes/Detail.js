@@ -20,6 +20,7 @@ import ReactMarkdown from 'react-markdown/with-html'
 import config from '../config'
 import { Helmet } from 'react-helmet'
 import CodeBlock from '../components/Code'
+import ads from './ads'
 
 class Detail extends React.Component {
   constructor(props) {
@@ -32,7 +33,8 @@ class Detail extends React.Component {
       popup: false,
       report: 0,
       reportCategory: '',
-      reportDesc: ''
+      reportDesc: '',
+      ads: ads.bot[Math.floor(Math.random() * ads.bot.length)]
     }
   }
 
@@ -104,6 +106,7 @@ class Detail extends React.Component {
   }
   render() {
     const { bot, isLoading } = this.state
+
     return (
       <div
         style={
@@ -448,6 +451,23 @@ class Detail extends React.Component {
                     </Label>
                   ))}
                 </div>
+                {
+                  ads.bot && (bot.trusted || bot.boosted) ? "" : (
+                   <>
+                    <Divider section />
+                    <a href={this.state.ads.link}>
+                    <div class="ui fluid image">
+                    <a class="ui top right attached label" href="/ad" style={{ borderRadius: 0 }}>
+                      광고
+                    </a>
+                    <img src={this.state.ads.img} style={{ width: '100%' }}/>
+                      </div>
+                    </a>
+                   </>
+                  )
+                    
+                  
+                }
                 <Divider section />
                 <Segment
                   style={{
