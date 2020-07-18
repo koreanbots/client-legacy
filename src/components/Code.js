@@ -7,7 +7,7 @@ class CodeBlock extends React.PureComponent {
       <Segment padded style={{ minHeight: '200px' }}>
         <Label attached="top">{Langs[this.props.language]}</Label>
         <pre>
-          <code>{this.props.value}></code>
+          <code>{this.props.value}</code>
         </pre>
       </Segment>
     )
