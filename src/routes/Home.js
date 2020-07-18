@@ -2,11 +2,12 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import fetch from 'node-fetch'
 import Bot from '../components/Bot'
-import { Message, Container, Card, Pagination, Label } from 'semantic-ui-react'
+import { Message, Container, Card, Pagination, Label, Segment } from 'semantic-ui-react'
 import config from '../config'
 import Typed from 'typed.js'
 import queryString from 'query-string'
 import SearchField from '../components/Search'
+import ads from './ads'
 
 class Home extends React.Component {
   constructor(props) {
@@ -109,6 +110,7 @@ class Home extends React.Component {
 
       {
               this.state.activePage === 1 && (
+                <>
                 <div className="verytop" style={{ padding: '10px', marginBottom: '10px', display: 'flex', minHeight: '370px', alignItems: 'center', justifyContent: 'center', color: 'white'}}>
             <Container>
             <h1>한국 디스코드봇 리스트에서  <span
@@ -121,6 +123,17 @@ class Home extends React.Component {
             <SearchField large style={{ width: '100% !important' }}/>
             </Container>
           </div>
+          <Container>
+            <a href={ads.top.link}>
+            <div class="ui fluid image">
+            <a class="ui top right attached label" href="/ad" style={{ borderRadius: 0 }}>
+              광고
+            </a>
+            <img src={ads.top.img} style={{ width: '100%' }}/>
+              </div>
+            </a>
+          </Container>
+          </>
               )
                   }
       
@@ -142,6 +155,7 @@ class Home extends React.Component {
         ) : (
           ''
         )}
+
          <h3 style={{ marginTop: '30px'}}>카테고리로 빠르게 찾아보기: </h3>
           {cats.map(r => (
             <>
@@ -227,7 +241,17 @@ class Home extends React.Component {
           )}
           <br />
         </section>
-
+        {
+          ads.bottom && ( <a href={ads.bottom.link}>
+            <div class="ui fluid image">
+            <a class="ui top right attached label" href="/ad" style={{ borderRadius: 0 }}>
+              광고
+            </a>
+            <img src={ads.bottom.img} style={{ width: '100%' }}/>
+              </div>
+            </a>)
+        }
+            
         {this.state.activePage === 1 ? (
           <>
             <h1>✅ 신뢰된 봇</h1>
