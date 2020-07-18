@@ -27,6 +27,7 @@ import Footer from "./components/Footer";
 
 import "./App.css";
 import Privacy from "./routes/Privacy";
+import Ad from "./routes/Ad";
 
 
 
@@ -68,6 +69,8 @@ function App() {
         <Route path="/guidelines" component={GuideLines} />
         <Route path="/privacy" component={Privacy}/>
         <Route path="/boost" component={Boost} />
+        <Route path="/boost" component={Boost} />
+        <Route path="/ad" component={Ad} />
         <Route component={NotFound}></Route>
         
       </Switch>
