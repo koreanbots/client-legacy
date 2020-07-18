@@ -122,16 +122,22 @@ class Home extends React.Component {
             <h2>다양한 국내봇을 한곳에서 확인하세요!</h2>
             <SearchField large style={{ width: '100% !important' }}/>
             </Container>
+
           </div>
+          <svg className="wave" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none" style={{ marginTop: '-4em', width: '100%', marginBottom: '-9em' }}>
+            <path fill="#7289DA" fill-opacity="1" d="M0,128L60,106.7C120,85,240,43,360,69.3C480,96,600,192,720,192C840,192,960,96,1080,69.3C1200,43,1320,85,1380,106.7L1440,128L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+          </svg>
           <Container>
-            <a href={ads.top.link}>
+          {
+          ads.top && ( <a href={ads.top.link}>
             <div class="ui fluid image">
             <a class="ui top right attached label" href="/ad" style={{ borderRadius: 0 }}>
               광고
             </a>
             <img src={ads.top.img} style={{ width: '100%' }}/>
               </div>
-            </a>
+            </a>)
+          }
           </Container>
           </>
               )
