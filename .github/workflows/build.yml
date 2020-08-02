@@ -1,6 +1,9 @@
 on:
-  - push
-  - pull_request
+  pull_request:
+  push:
+    branches:
+      - master
+      - beta
 jobs:
   build:
     name: Test Build
