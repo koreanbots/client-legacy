@@ -65,9 +65,12 @@ class Home extends React.Component {
     const trusted = await fetch(config.api + '/bots/trusted').then(r =>
       r.json()
     )
+
+    const newBot = await fetch(config.api + '/bots/new').then(r=> r.json())
     this.setState({
       bot,
       trusted,
+      newBot,
       isLoading: false,
       totalPage: bot.totalPage,
       activePage: page
@@ -103,7 +106,7 @@ class Home extends React.Component {
     this.removeParam('message')
   }
   render() {
-    const { isLoading, bot, trusted } = this.state
+    const { isLoading, bot, trusted, newBot } = this.state
 
     return (
       <>
@@ -178,7 +181,7 @@ class Home extends React.Component {
         <section id="all" style={{ marginTop: '15px'}}>
           <h1>💖 하트 랭킹</h1>
           <p>하트를 많이 받은 봇들의 순위입니다!</p>
-          {isLoading ? (
+          {isLoading && !trusted ? (
             <div className="loader">
               <span className="loader__text">Loading...</span>
             </div>
@@ -257,9 +260,65 @@ class Home extends React.Component {
               </div>
             </a>)
         }
-            
         {this.state.activePage === 1 ? (
           <>
+          <section id="new" style={{marginTop: '15px'}}>
+          <h1>➕ 새로운 봇</h1>
+          <p>최근에 한국 디스코드봇 리스트에 추가된 따끈따근한 봇입니다.</p>
+          {
+            isLoading && !newBot? (
+              <div className="loader">
+                <span className="loader__text">Loading...</span>
+              </div>
+            ) : newBot.code !== 200 ? (
+              <div className="loader">
+                <span className="loader__text">{newBot.message}</span>
+              </div>
+            ) : (
+              <div>
+                <Card.Group itemsPerRow={3} stackable>
+                  {newBot.data.map(n => (
+                    <>
+                      <Bot
+                        key={n.id}
+                        id={n.id}
+                        name={n.name}
+                        avatar={
+                          n.avatar !== false
+                            ? 'https://cdn.discordapp.com/avatars/' +
+                              n.id +
+                              '/' +
+                              n.avatar +
+                              '.png?size=128'
+                            : `https://cdn.discordapp.com/embed/avatars/${n.tag %
+                                5}.png?size=128`
+                        }
+                        votes={n.votes}
+                        servers={n.servers}
+                        category={n.category}
+                        intro={n.intro}
+                        desc={n.desc}
+                        invite={
+                          n.url === false
+                            ? `https://discordapp.com/oauth2/authorize?client_id=${n.id}&scope=bot&permissions=0`
+                            : n.url
+                        }
+                        state={n.state}
+                        verified={n.verified}
+                        trusted={n.trusted}
+                        vanity={n.vanity}
+                        boosted={n.boosted}
+                        status={n.status}
+                        banner={n.banner}
+                        bg={n.bg}
+                      />
+                    </>
+                  ))}
+                </Card.Group>
+              </div>
+            )
+          }
+        </section>
             <h1>✅ 신뢰된 봇</h1>
             <p>KOREANBOTS에서 인증받은 신뢰할 수 있는 봇들입니다!!</p>
             {isLoading ? (
@@ -296,7 +355,7 @@ class Home extends React.Component {
                         desc={trusted.desc}
                         invite={
                           trusted.url === false
-                            ? `https://discordapp.com/oauth2/authorize?client_id=${trusted.id}&scope=trusted&permissions=0`
+                            ? `https://discordapp.com/oauth2/authorize?client_id=${trusted.id}&scope=bot&permissions=0`
                             : trusted.url
                         }
                         state={trusted.state}

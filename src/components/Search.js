@@ -13,7 +13,7 @@ export default class SearchField extends Component {
   }
   render(props) {
     const to = r => {
-      window.location.href = '/search?query=' + r
+      window.location.href = '/search?query=' + r + '&page=1'
       return ''
     }
     return (
