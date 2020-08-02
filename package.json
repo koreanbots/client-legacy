@@ -45,6 +45,6 @@
     ]
   },
   "devDependencies": {
-    "react-git-info": "^1.1.0"
+    "react-git-info": "^2.0.0"
   }
 }
