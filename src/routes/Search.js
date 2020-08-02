@@ -23,11 +23,11 @@ class Search extends React.Component {
     }
   }
 
-  editParm = (parm, val) => {
+  editPage = (val) => {
     window.history.pushState(
       '',
       document.title,
-      `${window.location.origin}?${parm}=${val}`
+      window.location.href.search(/page=.*?/) ? window.location.href.replace(/page=.*/, `page=${val}`) : window.location.href + `page=${val}`
     )
   }
 
@@ -44,7 +44,7 @@ class Search extends React.Component {
   }
 
   handlePaginationChange = (e, { activePage }) => {
-    this.editParm('page', activePage)
+    this.editPage(activePage)
     this.getData(this.state.q, activePage)
   }
 
@@ -126,7 +126,7 @@ class Search extends React.Component {
               ))}
             </Card.Group>
             <br />
-            <Container textAlign="center">
+            <Container textAlign="center" style={{ paddingBottom: '10px'}}>
               <Pagination
                 href="#"
                 boundaryRange={0}
