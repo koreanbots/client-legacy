@@ -13,7 +13,8 @@ import {
   Image,
   Button,
   Popup,
-  Table
+  Table,
+  Modal
 } from 'semantic-ui-react'
 import Redirect from '../components/Redirect'
 import ReactMarkdown from 'react-markdown/with-html'
@@ -36,6 +37,7 @@ class ManageBot extends Component {
     token: '',
     owners: '',
     ownersError: '',
+    delete: '',
     info: { code: 0 },
     data: { state: 0, data: {} }
   }
@@ -143,6 +145,21 @@ class ManageBot extends Component {
         if (res.code !== 200) this.setState({ ownersError: res.message })
         else window.location.reload()
       })
+  }
+
+  removeBot = async() => {
+    const token = localStorage.token,
+    id = localStorage.id,
+    date = localStorage.date
+  await fetch(config.api + '/bots/' + this.state.info.data.id, {
+    method: 'DELETE',
+    headers: { token, id, time: date }
+  })
+    .then(r => r.json())
+    .then(res => {
+      if (res.code !== 200) alert(res.message)
+      else window.location.href = '/?message=delete'
+    })
   }
   async componentDidMount() {
     const res = await fetch(
@@ -450,10 +467,20 @@ class ManageBot extends Component {
 
             <h3>봇을 삭제합니다</h3>
             <p>봇을 영구적으로 삭제합니다.</p>
-            <Popup
-              content="해당 기능은 사용하실 수 없습니다. 관리자에게 문의해주세요"
-              trigger={<Button color="red" content="삭제하기" icon="trash" />}
-            />
+            <Modal className={localStorage.dark === 'true' ? 'darkmode' : 'lightmode'} trigger={<Button color="red" content="삭제하기" icon="trash" />} closeIcon>
+              <Modal.Header>
+                {bot.name} 삭제하기
+              </Modal.Header>
+              <Modal.Description>
+                <Container style={{ padding: '10px'}}>
+                  <p>봇을 삭제하시려면 <strong>{bot.name}</strong> 을 입력해주세요.</p>
+                  <Input name="delete" onChange={this.handleChange} value={this.state.delete} placeholder="봇 이름을 입력해주세요." />
+                  <br/><br/>
+                  봇을 삭제하시게되면 다시는 복구하실 수 없다는 점을 동의합니다.<br/>
+                  <Button color="red" content="삭제하기" icon="trash" disabled={this.state.delete !== bot.name} onClick={this.removeBot}/>
+                </Container>
+              </Modal.Description>
+            </Modal>
           </Segment>
         </Container>
       )

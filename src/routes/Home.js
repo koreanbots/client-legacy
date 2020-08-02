@@ -131,6 +131,16 @@ class Home extends React.Component {
             <path fill="#7289DA" fill-opacity="1" d="M0,128L60,106.7C120,85,240,43,360,69.3C480,96,600,192,720,192C840,192,960,96,1080,69.3C1200,43,1320,85,1380,106.7L1440,128L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
           </svg>
           <Container>
+          {this.state.message ? (
+          <Message
+            header={this.state.message.title}
+            onDismiss={this.handleDismiss}
+            className={this.state.message.level}
+            content={this.state.message.message}
+          />
+        ) : (
+          ''
+        )}
           {
           ads.top && ( <a href={ads.top.link}>
             <div class="ui fluid image">
@@ -154,17 +164,6 @@ class Home extends React.Component {
             content="국내 디스코드봇들을 확인하고, 초대해보세요!"
           />
         </Helmet>
-        {this.state.message ? (
-          <Message
-            header={this.state.message.title}
-            onDismiss={this.handleDismiss}
-            className={this.state.message.level}
-            content={this.state.message.message}
-          />
-        ) : (
-          ''
-        )}
-
          <h3 style={{ marginTop: '30px'}}>카테고리로 빠르게 찾아보기: </h3>
           {cats.map(r => (
             <>
@@ -412,6 +411,11 @@ const messages = {
     level: 'success',
     title: '봇 신고 성공!',
     message: '신고 내용이 관리자에게 전달되었습니다.'
+  },
+  delete: {
+    level: 'success',
+    title: '봇 삭제 성공!',
+    message: '봇이 삭제처리되셨습니다.'
   }
 }
 
