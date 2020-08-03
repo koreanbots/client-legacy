@@ -16,7 +16,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
     "react-showdown": "^2.0.3",
-    "react-syntax-highlighter": "^12.2.1",
+    "react-syntax-highlighter": "^13.2.1",
     "react-with-important-style": "^0.2.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^1.1.0",
