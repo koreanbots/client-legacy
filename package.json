@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "homepage": "https://koreanbots.dev",
   "dependencies": {
-    "gh-pages": "^2.0.1",
+    "gh-pages": "^3.1.0",
     "node-fetch": "^2.6.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.12.1",
