@@ -73,7 +73,7 @@ class Search extends React.Component {
         </Helmet>
         <br />
         <h1>
-          "{decodeURI(this.props.location.search.replace(/^\?query=/, ''))}"에
+          "{decodeURI(this.props.location.search.replace(/^\?query=/, '')).split('&page=')[0]}"에
           관한 검색결과
         </h1>
         <br />
