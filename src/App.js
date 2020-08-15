@@ -33,7 +33,10 @@ import Ad from "./routes/Ad";
 
 function App() {
   const [ Dark, setDark ] = useState(localStorage.dark === undefined || JSON.parse(localStorage.dark) ? true : false)
-  if(localStorage.dark === undefined) localStorage.dark = true
+  const systemColor = window.matchMedia('(prefers-color-scheme: dark)')
+  if(localStorage.dark === undefined) localStorage.dark = systemColor.matches
+  systemColor.addEventListener('change', () => { setDark(systemColor.matches) })
+
   return (
 
     <Router>
