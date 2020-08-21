@@ -1,8 +1,7 @@
 module.exports = {
     top: {
-        img: '/img/attachments/1.png',
-        link: 'https://discord.gg/2gxSqWu'
-    }, 
+        img: '/img/attachments/2.png',
+        link: 'https://koreanbots.dev'
     bottom: {
         img: '/img/attachments/2.png',
         link: 'https://koreanbots.dev'
