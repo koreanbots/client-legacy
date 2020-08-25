@@ -6,7 +6,7 @@ export default class SearchField extends Component {
     super(props)
 
     this.state = {
-      value: '',
+      value: props.value || '',
       result: {},
       redirect: false
     }
@@ -27,6 +27,7 @@ export default class SearchField extends Component {
           fluid={this.props.fluid}
           size={this.props.large ? 'massive' : ''}
           style={this.props.style}
+          value={this.state.value}
         />
 
         {this.state.redirect ? to(this.state.value) : ''}

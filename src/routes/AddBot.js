@@ -90,6 +90,14 @@ class SubmitBot extends Component {
         state: 2,
         data: { message: '보안 연결(HTTPS)이 없는 컨텐츠는 사용하실 수 없습니다. (이미지)' }
       } })
+
+      if((this.state.website && !validURL(this.state.website)) || (this.state.git && !validURL(this.state.git)) || (this.state.url && !validURL(this.state.url))) return this.setState({
+        data: {
+          state: 2,
+          data: { message: 'URL형식이 올바르지 않습니다.' }
+        }
+      })
+
       this.setState({
         data: {
           state: 3,
@@ -392,3 +400,7 @@ const options = [
   { text: 'NSFW', value: 'NSFW', key: 'NSFW' },
   { text: '검색', value: '검색', key: '검색' }
 ]
+
+function validURL(url) {
+  return !!url.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/)
+}

@@ -23,8 +23,6 @@ class Home extends React.Component {
    
   }
   componentWillUnmount() {
-    // Make sure to destroy Typed instance on unmounting
-    // to prevent memory leaks
     this.typed.destroy()
   }
   removeParam = parameter => {
