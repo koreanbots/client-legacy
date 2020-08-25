@@ -3,6 +3,7 @@ import fetch from 'node-fetch'
 import 'semantic-ui-css/semantic.min.css'
 
 import Bot from '../components/Bot'
+import SearchField from '../components/Search'
 import { Card, Container, Pagination } from 'semantic-ui-react'
 import config from '../config'
 
@@ -63,6 +64,15 @@ class Search extends React.Component {
   render() {
     const { bots, isLoading } = this.state
     return (
+      <>
+        <div className="verytop" style={{ padding: '10px', marginBottom: '10px', display: 'flex', minHeight: '370px', alignItems: 'center', justifyContent: 'center', color: 'white'}}>
+          <Container>
+            <h1>검색결과</h1>
+            <h2>"{decodeURI(this.props.location.search.match(/query=([^&]*)/, '')[1])}"에 관한 검색결과</h2>
+            <SearchField large style={{ width: '100% !important' }} value={decodeURI(this.props.location.search.match(/query=([^&]*)/, '')[1])}/>
+          </Container>
+
+          </div>
       <Container>
         <Helmet>
           <title>검색결과 - 한국 디스코드봇 리스트</title>
@@ -71,11 +81,6 @@ class Search extends React.Component {
             content="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!"
           />
         </Helmet>
-        <br />
-        <h1>
-          "{decodeURI(this.props.location.search.match(/query=([^&]*)/, '')[1])}"에
-          관한 검색결과
-        </h1>
         <br />
         {isLoading ? (
           <div className="loader">
@@ -140,6 +145,7 @@ class Search extends React.Component {
           </>
         )}
       </Container>
+      </>
     )
   }
 }
