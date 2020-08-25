@@ -431,7 +431,7 @@ class ManageBot extends Component {
               관리자는 유저 아이디로 추가하며, 쉼표로 구분합니다.
               <br />
               모든 봇 제작자는 <a href="/discord">디스코드</a>에 참여를
-              권장합니다.
+              권장합니다. (소유권 이전은 디스코드로 문의해주세요.)
             </p>
             <Input
               value={owners}
