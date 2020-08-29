@@ -261,7 +261,7 @@ class Home extends React.Component {
           <>
           <section id="new" style={{marginTop: '15px'}}>
           <h1>➕ 새로운 봇</h1>
-          <p>최근에 한국 디스코드봇 리스트에 추가된 따끈따근한 봇입니다.</p>
+          <p>최근에 한국 디스코드봇 리스트에 추가된 따끈따끈한 봇입니다.</p>
           {
             isLoading && !newBot? (
               <div className="loader">
