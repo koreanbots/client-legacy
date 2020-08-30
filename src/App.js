@@ -33,9 +33,11 @@ import Ad from "./routes/Ad";
 
 function App() {
   const [ Dark, setDark ] = useState(localStorage.dark === undefined || JSON.parse(localStorage.dark) ? true : false)
-  const systemColor = window.matchMedia('(prefers-color-scheme: dark)')
-  if(localStorage.dark === undefined) localStorage.dark = systemColor.matches
-  systemColor.addEventListener('change', () => { setDark(systemColor.matches) })
+  try {
+    const systemColor = window.matchMedia('(prefers-color-scheme: dark)')
+    if(localStorage.dark === undefined) localStorage.dark = systemColor.matches
+    systemColor.addEventListener('change', () => { setDark(systemColor.matches) })
+  } catch(e) {}
 
   return (
 
