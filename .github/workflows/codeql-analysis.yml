@@ -34,14 +34,16 @@ jobs:
     - run: git checkout HEAD^2
       if: ${{ github.event_name == 'pull_request' }}
 
-    # Initializes the CodeQL tools for scanning.
+    - name: install node v12
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v1
       with:
          languages: ${{ matrix.language }}
 
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
-    # If this step fails, then you should remove it and run the build manually (see below)
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
 
