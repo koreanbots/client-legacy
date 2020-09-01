@@ -43,14 +43,16 @@ jobs:
       uses: github/codeql-action/init@v1
       with:
          languages: ${{ matrix.language }}
-
+    
+    - name: yarn install
+      run: yarn install
+  
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
-      env:
-        CI: false
     - run: |
-       yarn install
        yarn build
+    - env:
+        CI: false
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
