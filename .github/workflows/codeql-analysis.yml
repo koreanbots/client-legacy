@@ -49,9 +49,9 @@ jobs:
   
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
-    - run: |
+    - run:
        yarn build
-    - env:
+      env:
         CI: false
 
     - name: Perform CodeQL Analysis
