@@ -1,19 +1,9 @@
 import React from 'react'
-import { Container } from 'semantic-ui-react'
-import { Helmet } from 'react-helmet'
+import Article from './Article'
 
 function Privacy() {
   return (
-    <Container>
-      <Helmet>
-        <title>개인정보취급방침 - 한국 디스코드봇 리스트</title>
-        <meta
-          name="description"
-          content="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!"
-        />
-      </Helmet>
-      <br />
-      <h1>개인정보취급방침</h1>
+    <Article title="개인정보취급방침" description="저희가 개인정보를 처리하는 방침입니다.">
       <h2>1. 개인정보 처리의 목적</h2>
       <p>
         "한국 디스코드봇 리스트"('https://koreanbots.dev')는 다음 목적을 위하여
@@ -135,7 +125,7 @@ function Privacy() {
         <br />
       </h4>
       <br />
-    </Container>
+    </Article>
   )
 }
 

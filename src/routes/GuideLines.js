@@ -1,23 +1,10 @@
 import React from 'react'
-import { Container } from 'semantic-ui-react'
-import { Helmet } from 'react-helmet'
+import Article from './Article'
 
 function GuildLines() {
   return (
-    <Container>
-      <Helmet>
-        <title>가이드라인 - 한국 디스코드봇 리스트</title>
-        <meta
-          name="description"
-          content="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!"
-        />
-      </Helmet>
-      <br />
-      <h1 id="가이드라인">가이드라인</h1>
-      <blockquote>
-        <p>작성 2020-04-30</p>
-        <p>수정 2020-05-15</p>
-      </blockquote>
+    <Article title="가이드라인" subheader="최초 작성: 2020-04-30 수정: 2020-05-15 "description="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!">
+      <h1>KOREANBOTS에 오신 것을 환영합니다.</h1>
       <p>봇 추가 또는 등재 유지를 위해서 반드시 지켜야할 가이드라인들입니다.</p>
       <p>
         가이드라인 위반이 확인될 경우, 거부 또는 삭제 처리될 수 있음을
@@ -93,7 +80,7 @@ function GuildLines() {
         위 항목들은 정확하게 인정되기 전까지는 처리할 수 없습니다. 또한,
         처리하기 전에는 반드시 유저에게 통보를 시도해야합니다.
       </p>
-    </Container>
+    </Article>
   )
 }
 
