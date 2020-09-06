@@ -54,7 +54,7 @@ class Detail extends React.Component {
         ) : result.code !== 200 ? (
           result.code === 401 ? (
             <Redirect
-              to={'/logout/' + JSON.parse(localStorage.userCache).id}
+              to={'/logout'}
               content={<></>}
             />
           ) : (

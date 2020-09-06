@@ -117,7 +117,7 @@ function Bot({
         </Card.Content>
         <Card.Content extra>
           {category.slice(0, 5).map(c => (
-            <a style={{ color: '#7289DA' }} href={'/categories/' + c}>
+            <a style={{ color: '#7289DA' }} href={'/categories/' + c} key={c}>
               #{c}{' '}
             </a>
           ))}
@@ -167,7 +167,7 @@ const statusColor = {
   online: 'green',
   idle: 'yellow',
   dnd: 'red',
-  offline: false,
+  offline: 'grey',
   streaming: 'purple'
 }
 
@@ -177,7 +177,7 @@ const statusText = {
   dnd: '다른 용무중',
   offline: '오프라인',
   streaming: '방송중',
-  '???': '알 수 없음'
+  null: '알 수 없음'
 }
 
 

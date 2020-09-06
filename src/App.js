@@ -61,7 +61,7 @@ function App() {
         <Route path="/addbot" component={AddBot} />
         <Route path="/callback" component={Callback} />
         <Route path="/login" component={Login} />
-        <Route path="/logout/:id?" component={Logout} />
+        <Route path="/logout" component={Logout} />
         <Route path="/pendingBots/:id/:date" component={Pending} />
         <Route exact path="/bots/:id" component={Detail} />
         <Route exact path="/users/:id" component={User} />

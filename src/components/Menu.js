@@ -114,7 +114,7 @@ export default class Nav extends Component {
                   <Dropdown.Item href="/profile">
                     <Icon className="settings" /> 관리패널
                   </Dropdown.Item>
-                  <Dropdown.Item href={'/logout/' + this.state.user.id}>
+                  <Dropdown.Item href={'/logout'}>
                     <a style={{ color: '#ff6e6e' }}>
                       <Icon className="logout" /> 로그아웃
                     </a>
