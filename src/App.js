@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Helmet } from "react-helmet";
 
 import Home from "./routes/Home";
 import About from "./routes/About";

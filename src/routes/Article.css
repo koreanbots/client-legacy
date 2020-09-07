@@ -1,8 +1,8 @@
-h1 {
+div.article h1 {
     font-weight: 500 !important;
 }
 
-h2 {
+div.article h2 {
     margin-top: 40px !important;
     font-weight: 500 !important;
     font-size: 32px !important;

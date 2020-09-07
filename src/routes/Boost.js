@@ -11,7 +11,8 @@ import {
   Divider
 } from 'semantic-ui-react'
 import Bot from '../components/Bot'
-import { Helmet } from 'react-helmet'
+import { HelmetProvider } from 'react-helmet-async'
+import Article from './Article'
 
 class Boost extends React.Component {
   componentDidMount() {
@@ -35,16 +36,7 @@ class Boost extends React.Component {
   }
   render() {
     return (
-      <Container textAlign="center">
-        <Helmet>
-          <title>부스트 - 한국 디스코드봇 리스트</title>
-          <meta
-            name="description"
-            content="국내 디스코드봇들을 확인하고, 초대해보세요!"
-          />
-        </Helmet>
-        <h1>부스터 혜택</h1>
-        <h3>디스코드 서버를 부스트 해주신 멋진 분들에게 드리는 혜택이에요!</h3>
+      <Article title="부스터 혜택" description="디스코드 서버를 부스트 해주신 멋진 분들에게 드리는 혜택이에요!">
         <h2>부스터 티어1</h2>
         <h3>한 개이상의 부스트를 해주신 분이 해당해요!</h3>
         <Card.Group itemsPerRow={3} stackable>
@@ -279,12 +271,14 @@ class Boost extends React.Component {
           혜택들도 이용하실 수 없습니다)
         </p>
         <br />
-        <h3>
-          도움이 필요하신가요? <a href="/discord">디스코드</a>에서
-          도와드리겠습니다!
-        </h3>
-        <br />
-      </Container>
+        <Container textAlign="right">
+          <h3>
+            도움이 필요하신가요? <a href="/discord">디스코드</a>에서
+            도와드리겠습니다!
+          </h3>
+        </Container>
+      </Article>
+
     )
   }
 }

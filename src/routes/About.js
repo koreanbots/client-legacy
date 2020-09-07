@@ -8,7 +8,7 @@ import {
   Icon,
   Divider
 } from 'semantic-ui-react'
-import { Helmet } from 'react-helmet'
+
 import Article from './Article'
 
 function About(props) {

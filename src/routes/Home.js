@@ -1,5 +1,5 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
+import { HelmetProvider } from 'react-helmet-async'
 import fetch from 'node-fetch'
 import Bot from '../components/Bot'
 import {
@@ -252,13 +252,13 @@ class Home extends React.Component {
         )}
 
         <Container>
-          <Helmet>
+          <HelmetProvider>
             <title>한국 디스코드봇 리스트</title>
             <meta
               name="description"
               content="국내 디스코드봇들을 확인하고, 초대해보세요!"
             />
-          </Helmet>
+          </HelmetProvider>
           <h3 style={{ marginTop: '30px' }}>카테고리로 빠르게 찾아보기: </h3>
           {cats.map(r => (
             <>

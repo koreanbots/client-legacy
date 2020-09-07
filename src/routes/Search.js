@@ -8,7 +8,7 @@ import { Card, Container, Pagination } from 'semantic-ui-react'
 import config from '../config'
 
 import queryString from 'query-string'
-import { Helmet } from 'react-helmet'
+import { HelmetProvider } from 'react-helmet-async'
 
 class Search extends React.Component {
   constructor(props) {
@@ -74,13 +74,13 @@ class Search extends React.Component {
 
           </div>
       <Container>
-        <Helmet>
+        <HelmetProvider>
           <title>검색결과 - 한국 디스코드봇 리스트</title>
           <meta
             name="description"
             content="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!"
           />
-        </Helmet>
+        </HelmetProvider>
         <br />
         {isLoading ? (
           <div className="loader">

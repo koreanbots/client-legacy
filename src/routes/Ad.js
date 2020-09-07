@@ -1,6 +1,4 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
-import { Container } from 'semantic-ui-react'
 import Article from './Article'
 
 class Ad extends React.Component {

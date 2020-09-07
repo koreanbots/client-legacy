@@ -1,19 +1,21 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
+import { HelmetProvider, Helmet } from 'react-helmet-async'
 import { Container } from 'semantic-ui-react'
 
 import './Article.css'
 
 function Article (props) {
     return (
-        <>
-        <Helmet>
-            <title>{props.title} - 한국 디스코드봇 리스트</title>
-            <meta
-            name="description"
-            content={props.description}
-            />
-        </Helmet>
+        <div className="article">
+        <HelmetProvider>
+            <Helmet>
+                <title>{props.title} - 한국 디스코드봇 리스트</title>
+                <meta
+                name="description"
+                content={props.description}
+                />
+            </Helmet>
+        </HelmetProvider>
             <Container className="article">
                 <div style={{ marginBottom: '5em' }}>
                     <h1 style={{ fontSize: '45px' }}>
@@ -24,7 +26,7 @@ function Article (props) {
                 </div>
                 {props.children}
             </Container>
-    </>
+    </div>
     )
 }
 

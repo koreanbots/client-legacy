@@ -18,7 +18,7 @@ import {
 } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown/with-html'
 import config from '../config'
-import { Helmet } from 'react-helmet'
+import { HelmetProvider } from 'react-helmet-async'
 import CodeBlock from '../components/Code'
 import Bot from '../components/Bot'
 
@@ -79,9 +79,9 @@ class User extends React.Component {
             </div>
           ) : data && !error ? (
             <>
-              <Helmet>
+              <HelmetProvider>
                 <title>{`${data.username}#${data.tag} - 한국 디스코드봇 리스트`}</title>
-              </Helmet>
+              </HelmetProvider>
               <Grid stackable divided="vertically">
                 <Grid.Row columns={2}>
                   <Grid.Column>

@@ -5,7 +5,7 @@ import { Container, Item, Button, Icon, Card, Divider } from 'semantic-ui-react'
 import Redirect from '../components/Redirect'
 import config from '../config'
 import Bot from '../components/Bot'
-import { Helmet } from 'react-helmet'
+import { HelmetProvider } from 'react-helmet-async'
 
 class Detail extends React.Component {
   constructor(props) {
@@ -40,13 +40,13 @@ class Detail extends React.Component {
     const { result } = this.state
     return (
       <Container>
-        <Helmet>
+        <HelmetProvider>
           <title>관리패널 - 한국 디스코드봇 리스트</title>
           <meta
             name="description"
             content="자신의 봇들을 관리하고, 하트를 관리하거나, 심사결과를 확인하세요"
           />
-        </Helmet>
+        </HelmetProvider>
         {this.state.isLoading ? (
           <div className="loader">
             <span>Loading...</span>

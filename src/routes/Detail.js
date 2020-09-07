@@ -18,7 +18,7 @@ import {
 } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown/with-html'
 import config from '../config'
-import { Helmet } from 'react-helmet'
+import { HelmetProvider } from 'react-helmet-async'
 import CodeBlock from '../components/Code'
 import ads from './ads'
 
@@ -135,9 +135,9 @@ class Detail extends React.Component {
               </div>
             ) : this.state.error.code === 200 ? (
               <>
-                <Helmet>
+                <HelmetProvider>
                   <title>{`${bot.name} - 한국 디스코드봇 리스트`}</title>
-                </Helmet>
+                </HelmetProvider>
                 {bot.state === 'private' ? (
                   <Message>
                     해당 봇은 특수목적 봇이므로 초대하실 수 없습니다.

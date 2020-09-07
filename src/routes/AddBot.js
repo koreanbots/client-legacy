@@ -17,7 +17,7 @@ import Redirect from '../components/Redirect'
 import ReactMarkdown from 'react-markdown/with-html'
 import fetch from 'node-fetch'
 import config from '../config'
-import { Helmet } from 'react-helmet'
+import { HelmetProvider, Helmet } from 'react-helmet-async'
 import CodeBlock from '../components/Code'
 
 class SubmitBot extends Component {
@@ -130,13 +130,15 @@ class SubmitBot extends Component {
     else
       return (
         <Container>
-          <Helmet>
-            <title>봇 추가하기 - 한국 디스코드봇 리스트</title>
-            <meta
-              name="description"
-              content="본인의 봇을 리스트에 추가합니다!"
-            />
-          </Helmet>
+          <HelmetProvider>
+              <Helmet>
+                <title>봇 추가하기 - 한국 디스코드봇 리스트</title>
+                <meta
+                  name="description"
+                  content="본인의 봇을 리스트에 추가합니다!"
+                />
+              </Helmet>
+          </HelmetProvider>
           <br />
           <h1>새로운 봇 추가하기</h1>
           <Transition
