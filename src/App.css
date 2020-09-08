@@ -118,7 +118,7 @@ body {
   text-align: center;
 }
 
-.bg * :not(a){
+.bg > * :not(i):not(a){
   color: white !important
 }
 
