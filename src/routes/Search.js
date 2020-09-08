@@ -1,6 +1,5 @@
 import React from 'react'
 import fetch from 'node-fetch'
-import 'semantic-ui-css/semantic.min.css'
 
 import Bot from '../components/Bot'
 import SearchField from '../components/Search'
@@ -69,7 +68,7 @@ class Search extends React.Component {
           <Container>
             <h1>검색결과</h1>
             <h2>"{decodeURI(this.props.location.search.match(/query=([^&]*)/, '')[1])}"에 관한 검색결과</h2>
-            <SearchField large style={{ width: '100% !important' }} value={decodeURI(this.props.location.search.match(/query=([^&]*)/, '')[1])}/>
+            <SearchField fluid massive large style={{ width: '100% !important' }} value={decodeURI(this.props.location.search.match(/query=([^&]*)/, '')[1])}/>
           </Container>
 
           </div>
