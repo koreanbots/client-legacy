@@ -15,6 +15,7 @@ import queryString from 'query-string'
 import SearchField from '../components/Search'
 import ads, { bot } from './ads'
 import { Redirect } from 'react-router-dom'
+import graphql from '../utils/graphql'
 
 class Home extends React.Component {
   constructor(props) {
@@ -127,21 +128,13 @@ class Home extends React.Component {
       }
     }
     `
-    const bots = await fetch(config.api + '/graphql', {
-      method: 'POST',
-      headers: {
-        Authorization: localStorage.token ? 'Bearer ' + localStorage.token : '',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ query })
-    }).then(r => r.json())
-    console.log(bots)
+    const bots = await graphql(query)
     this.setState({
       bots: bots.data,
       isLoading: false,
       totalPage: bots.data ? bots.data.vote.totalPage : 0,
       code: bots.code,
-      message: bots.message,
+      errMessage: bots.message,
       activePage: page
     })
   }
@@ -175,8 +168,7 @@ class Home extends React.Component {
     this.removeParam('message')
   }
   render() {
-    const { isLoading, bots, code, message } = this.state
-    console.log(bots)
+    const { isLoading, bots, code, errMessage } = this.state
     return (
       <>
         {this.state.activePage === 1 && (
@@ -205,7 +197,7 @@ class Home extends React.Component {
                   봇을 확인하세요
                 </h1>
                 <h2>다양한 국내봇을 한곳에서 확인하세요!</h2>
-                <SearchField large style={{ width: '100% !important' }} />
+                <SearchField fluid massive large style={{ width: '100% !important' }} />
               </Container>
             </div>
             <svg
@@ -272,14 +264,21 @@ class Home extends React.Component {
               </Label>{' '}
             </>
           ))}
-          <section id="all" style={{ marginTop: '15px' }}>
+          {
+            code !== 200 ? (
+              <div className="loader">
+                    <span>{errMessage}</span>
+                  </div>
+            ) : (
+              <>
+              <section id="all" style={{ marginTop: '15px' }}>
             <h1>💖 하트 랭킹</h1>
             <p>하트를 많이 받은 봇들의 순위입니다!</p>
-            {isLoading ? (
+            {isLoading && code !== 200 ? (
               <div className="loader">
                 <span className="loader__text"></span>
               </div>
-            ) : code ? (
+            ) : code === 401 ? (
               <Redirect to="/logout" />
             ) : (
               <div>
@@ -291,7 +290,7 @@ class Home extends React.Component {
                         id={bot.id}
                         name={bot.name}
                         avatar={
-                          bot.avatar !== false
+                          bot.avatar
                             ? 'https://cdn.discordapp.com/avatars/' +
                               bot.id +
                               '/' +
@@ -306,7 +305,7 @@ class Home extends React.Component {
                         intro={bot.intro}
                         desc={bot.desc}
                         invite={
-                          bot.url === false
+                          bot.url
                             ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`
                             : bot.url
                         }
@@ -363,11 +362,11 @@ class Home extends React.Component {
                 <p>
                   최근에 한국 디스코드봇 리스트에 추가된 따끈따끈한 봇입니다.
                 </p>
-                {isLoading ? (
+                {isLoading && code !== 200 ? (
                   <div className="loader">
                     <span className="loader__text">Loading...</span>
                   </div>
-                ) : code ? (
+                ) : code === 401 ? (
                     <Redirect to="/logout" />
                 ) : (
                   <div>
@@ -394,7 +393,7 @@ class Home extends React.Component {
                             intro={n.intro}
                             desc={n.desc}
                             invite={
-                              n.url === false
+                              n.url
                                 ? `https://discordapp.com/oauth2/authorize?client_id=${n.id}&scope=bot&permissions=0`
                                 : n.url
                             }
@@ -415,11 +414,11 @@ class Home extends React.Component {
               </section>
               <h1>✅ 신뢰된 봇</h1>
               <p>KOREANBOTS에서 인증받은 신뢰할 수 있는 봇들입니다!!</p>
-              { isLoading ? (
+              { isLoading && code !== 200 ? (
                 <div className="loader">
                   <span className="loader__text">Loading...</span>
                 </div>
-              ) : code ? (
+              ) : code === 401 ? (
                 <Redirect to="/logout" />
               ) : (
                 <div>
@@ -431,7 +430,7 @@ class Home extends React.Component {
                           id={trusted.id}
                           name={trusted.name}
                           avatar={
-                            trusted.avatar !== false
+                            trusted.avatar
                               ? 'https://cdn.discordapp.com/avatars/' +
                                 trusted.id +
                                 '/' +
@@ -446,7 +445,7 @@ class Home extends React.Component {
                           intro={trusted.intro}
                           desc={trusted.desc}
                           invite={
-                            trusted.url === false
+                            trusted.url 
                               ? `https://discordapp.com/oauth2/authorize?client_id=${trusted.id}&scope=bot&permissions=0`
                               : trusted.url
                           }
@@ -468,6 +467,9 @@ class Home extends React.Component {
           ) : (
             ''
           )}
+              </>
+            )
+          }
           <br />
           <br />
         </Container>
