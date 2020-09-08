@@ -9,11 +9,10 @@ import App from "./App";
 
 import version from "../package.json";
 
-import "semantic-ui-css/semantic.min.css";
-import { func } from "prop-types";
+import "fomantic-ui-css/semantic.min.css";
 
 console.log(
-  `[빌드 정보] 버전: ${version.version} 해시: ${GitInfo().commit.hash}`
+  `[빌드 정보] 버전: ${GitInfo().branch} Build Version v.${version.version} 해시: ${GitInfo().commit.hash}`
 );
 
 ReactDOM.render(<App/>, document.getElementById("potato"));

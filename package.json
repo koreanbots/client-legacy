@@ -3,6 +3,7 @@
   "version": "1.2.0",
   "homepage": "https://koreanbots.dev",
   "dependencies": {
+    "fomantic-ui-css": "^2.8.7",
     "gh-pages": "^2.0.1",
     "node-fetch": "^2.6.0",
     "prop-types": "^15.7.2",
@@ -19,7 +20,6 @@
     "react-showdown": "^2.0.3",
     "react-syntax-highlighter": "^13.2.1",
     "react-with-important-style": "^0.2.2",
-    "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^1.1.0",
     "sha.js": "^2.4.11",
     "typed.js": "^2.0.11"
