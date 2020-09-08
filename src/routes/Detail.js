@@ -39,7 +39,7 @@ class Detail extends React.Component {
   }
 
   getData = async id => {
-    await fetch(config.api + '/bots/get/' + id, {
+    await fetch(config.api + '/bots/' + id, {
       method: 'GET',
       headers: {
         token: localStorage.token,
