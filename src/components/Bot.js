@@ -79,7 +79,7 @@ function Bot({
             <br />
 
             <h1>
-              <Label style={{ background: 'transparent' }}>
+              <Label className="status" style={{ background: 'transparent' }}>
                 <Icon
                   className="circle"
                   color={statusColor[status]}

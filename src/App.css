@@ -50,7 +50,8 @@ body {
 
 .darkmode .card > .content > .header, 
 .darkmode .card > .content > .meta, 
-.darkmode .card > .content > .description {
+.darkmode .card > .content > .description,
+.darkmode .card > .content > .description h1 .label.status {
   color: white !important
 }
 
@@ -70,19 +71,19 @@ body {
 
 .darkmode .segment {
   color: white !important;
-  background-color: #1b1c1d;
+  background-color: #1b1c1d !important;
 }
 
 
 
-.darkmode .label, .darkmode .tag.labels > a, .darkmode .example {
+.darkmode .botDetail .label, .darkmode a.label, .darkmode .tag.labels > a, .darkmode .example {
   background-color: #23272A;
   color: white;
 }
 
-.darkmode .label[href]:hover, .darkmode .tag.labels > a[href]:hover {
+.darkmode .label[href]:hover, .darkmode .tag.labels > a:not(.noHover)[href]:hover {
   background-color: #000000 !important;
-  color: white
+  color: white !important;
 }
 
 .darkmode.modal, .darkmode.modal > .header {
@@ -91,7 +92,7 @@ body {
 }
 
 .darkmode.modal .field > * > * {
-  color: white;
+  color: white !important;
 }
 
 .discord {
@@ -99,6 +100,10 @@ body {
   color: #fff !important;
 }
 
+.trusted {
+  background: #16ab39 !important;
+  color: #fff !important
+}
 
 .notfound > h2 {
   margin-top: 10%;

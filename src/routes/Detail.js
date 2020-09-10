@@ -119,6 +119,7 @@ class Detail extends React.Component {
       >
         <Container>
           <div
+            className="botDetail"
             style={
               (bot.boosted && bot.bg) || (bot.trusted && bot.bg)
                 ? {
@@ -180,7 +181,6 @@ class Detail extends React.Component {
                           trigger={
                             <Label
                               className="discord"
-                              style={{ cursor: 'pointer' }}
                             >
                               <Icon className="icon check" /> 디스코드 인증됨
                             </Label>
@@ -196,7 +196,7 @@ class Detail extends React.Component {
                           position="left"
                           trigger={
                             <Label
-                              className="green"
+                              className="noHover trusted"
                               href="https://github.com/koreanbots/verification"
                             >
                               <Icon className="icon certificate" /> 신뢰함
@@ -208,10 +208,12 @@ class Detail extends React.Component {
                       )}
                       {bot.boosted ? (
                         <Popup
-                          content={`해당봇은 공식 디스코드에 부스터가 소유하고 있는봇입니다!`}
+                          content="해당봇은 공식 디스코드에 부스터가 소유하고 있는봇입니다!"
                           position="right"
                           trigger={
                             <Label
+                              href="/boost"
+                              className="noHover boosted"
                               style={{
                                 background: '#ff73fa',
                                 color: 'white',

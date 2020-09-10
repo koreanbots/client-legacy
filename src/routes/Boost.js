@@ -66,7 +66,7 @@ class Boost extends React.Component {
                 <Icon className="id outline badge" /> 멋진 뱃지
               </Card.Header>
               멋진 뱃지를 봇 프로필에 표시해드립니다!
-              <Segment textAlign="left">
+              <Segment textAlign="left" className="botDetail">
                 <br />
                 <h1 style={{ fontSize: '50px' }}>봇의 이름은</h1>
                 <Popup
@@ -171,6 +171,7 @@ class Boost extends React.Component {
               봇의 프로필 페이지의 배경을 커스터마이징 하세요!
               <div>
                 <Segment
+                  className="botDetail"
                   textAlign="left"
                   style={{
                     background:
