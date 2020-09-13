@@ -8,7 +8,6 @@ import {
   Dropdown
 } from 'semantic-ui-react'
 import Search from './Search'
-import Config from '../config'
 import fetch from 'node-fetch'
 import config from '../config'
 
@@ -61,6 +60,11 @@ export default class Nav extends Component {
   editSlider = () => {
     this.setState({ visible: !this.state.visible })
   }
+
+  logout = () => {
+    delete localStorage.userCache
+    delete localStorage.token
+  }
   render() {
     const { visible } = this.state
     return (
@@ -83,7 +87,7 @@ export default class Nav extends Component {
               </h1>
             </Menu.Item>
             {this.state.logged === 0 ? (
-              <Menu.Item color="black" name="로그인" href="/login">
+              <Menu.Item color="black" name="로그인" href={config.url}>
                 로그인
               </Menu.Item>
             ) : this.state.logged === 1 ? (
@@ -114,7 +118,7 @@ export default class Nav extends Component {
                   <Dropdown.Item href="/profile">
                     <Icon className="settings" /> 관리패널
                   </Dropdown.Item>
-                  <Dropdown.Item href={'/logout'}>
+                  <Dropdown.Item onClick={this.logout}>
                     <a style={{ color: '#ff6e6e' }}>
                       <Icon className="logout" /> 로그아웃
                     </a>
@@ -122,7 +126,7 @@ export default class Nav extends Component {
                 </Dropdown.Menu>
               </Dropdown>
             ) : (
-              <Menu.Item color="black" name="로그인" href="/login">
+              <Menu.Item color="black" name="로그인" href={config.url}>
                 로그인
               </Menu.Item>
             )}
@@ -186,7 +190,7 @@ export default class Nav extends Component {
               <Menu.Item>
               </Menu.Item>
               {this.state.logged === 0 ? (
-                <Menu.Item color="black" name="로그인" href="/login">
+                <Menu.Item color="black" name="로그인" href={config.url}>
                   로그인
                 </Menu.Item>
               ) : this.state.logged === 1 ? (
@@ -229,7 +233,7 @@ export default class Nav extends Component {
                     <Dropdown.Item href="/profile">
                       <Icon className="settings" /> 관리패널
                     </Dropdown.Item>
-                    <Dropdown.Item href={'/logout/' + this.state.user.id}>
+                    <Dropdown.Item onClick={this.logout}>
                       <a style={{ color: '#ff6e6e' }}>
                         <Icon className="logout" /> 로그아웃
                       </a>
@@ -237,7 +241,7 @@ export default class Nav extends Component {
                   </Dropdown.Menu>
                 </Dropdown>
               ) : (
-                <Menu.Item color="black" name="로그인" href="/login">
+                <Menu.Item color="black" name="로그인" href={config.url}>
                   로그인
                 </Menu.Item>
               )}

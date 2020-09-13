@@ -6,13 +6,12 @@ import About from "./routes/About";
 import Detail from "./routes/Detail";
 import Search from "./routes/Search";
 import Callback from "./routes/Callback";
-import Logout from "./routes/Logout";
 import AddBot from "./routes/AddBot";
 import ManageBot from "./routes/ManageBot"
 import Profile from "./routes/Profile";
 import Pending from "./routes/Pending";
 import GuideLines from "./routes/GuideLines";
-import Login from "./routes/Login";
+
 import Version from "./routes/Version";
 import Category from "./routes/Category";
 import Boost from "./routes/Boost";
@@ -59,8 +58,6 @@ function App() {
         <Route path="/profile" component={Profile} />
         <Route path="/addbot" component={AddBot} />
         <Route path="/callback" component={Callback} />
-        <Route path="/login" component={Login} />
-        <Route path="/logout" component={Logout} />
         <Route path="/pendingBots/:id/:date" component={Pending} />
         <Route exact path="/bots/:id" component={Detail} />
         <Route exact path="/users/:id" component={User} />

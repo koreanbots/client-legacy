@@ -3,6 +3,7 @@ import fetch from 'node-fetch'
 import { Container } from 'semantic-ui-react'
 import Redirect from '../components/Redirect'
 import config from '../config'
+import graphql from '../utils/graphql'
 
 class Callback extends React.Component {
   constructor(props) {
@@ -10,31 +11,29 @@ class Callback extends React.Component {
     this.state = {
       result: null,
       error: false,
-      isLoading: true
+      isLoading: true,
+      redirect: null
     }
   }
 
-  getData = async token => {
-    await fetch(config.api + '/oauth/callback?code=' + token)
-      .then(r => r.json())
-      .then(user => {
-        const res = user.data
-
-        if (user.code !== 200 || !res)
-          this.setState({ isLoading: false, error: user.message })
+  getData = async (code) => {
+    await graphql(`mutation {
+      login(code: "${code}")
+    }
+    `)
+      .then(res=> {
+        if(res.code !== 200) this.setState({ isLoading: false, error: res.message })
         else {
-          localStorage.setItem('token', res.token)
-          localStorage.setItem('id', res.id)
-          localStorage.setItem('date', res.date)
+          localStorage.setItem('token', res.data.login)
           this.setState({ isLoading: false })
-        }
+        } 
       })
   }
 
   componentDidMount() {
-    var token = this.props.location.search
-    token = new URLSearchParams(token.replace('?', '')).get('code')
-    this.getData(token)
+    const query = new URLSearchParams(this.props.location.search.replace('?', ''))
+    const code = query.get('code')
+    this.getData(code)
   }
   render() {
     const { isLoading, error } = this.state
@@ -44,7 +43,7 @@ class Callback extends React.Component {
           error ? (
             <div className="loader">
               <span>
-                데이터 검증에 실패하였습니다. 다시 시도해주세요.
+                데이터 검증에 실패하였습니다. 다시 시도해주세요. (새로고침하시거나 다시 로그인해주세요.)
                 <br />
                 {{ error }}
               </span>
@@ -54,9 +53,7 @@ class Callback extends React.Component {
               <span>데이터 검증중...</span>
             </div>
           )
-        ) : (
-          <Redirect to="/" />
-        )}
+        ) : window.history.go(-2) || window.location.assign('/') }
       </Container>
     )
   }
