@@ -1,5 +1,5 @@
 import React from 'react'
-import Article from './Article'
+import Article from '../components/Article'
 
 function Privacy() {
   return (

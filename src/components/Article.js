@@ -4,6 +4,13 @@ import { Container } from 'semantic-ui-react'
 
 import './Article.css'
 
+/**
+ * 
+ * @param {*} props 
+ * props.title
+ * props.description
+ * props.subheader?
+ */
 function Article (props) {
     return (
         <div className="article">

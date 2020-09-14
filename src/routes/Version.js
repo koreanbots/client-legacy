@@ -3,7 +3,7 @@ import React from 'react'
 import GitInfo from 'react-git-info/macro'
 import version from '../../package.json'
 
-import Article from './Article'
+import Article from '../components/Article'
 
 function Version() {
   return (

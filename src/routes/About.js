@@ -9,7 +9,7 @@ import {
   Divider
 } from 'semantic-ui-react'
 
-import Article from './Article'
+import Article from '../components/Article'
 
 function About(props) {
   const CustomCard = withImportantStyle('div')
