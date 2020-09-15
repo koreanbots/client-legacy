@@ -26,6 +26,8 @@ import Footer from "./components/Footer";
 import "./App.css";
 import Privacy from "./routes/Privacy";
 import Ad from "./routes/Ad";
+import Partners from "./routes/Partners";
+import Trusted from "./routes/Trusted";
 
 
 
@@ -57,7 +59,7 @@ function App() {
         <Route path="/categories/:category" component={Category} />
         <Route path="/profile" component={Profile} />
         <Route path="/addbot" component={AddBot} />
-        <Route path="/callback" component={Callback} />
+        <Route path="/callback/discord" component={Callback} />
         <Route path="/pendingBots/:id/:date" component={Pending} />
         <Route exact path="/bots/:id" component={Detail} />
         <Route exact path="/users/:id" component={User} />
@@ -70,6 +72,8 @@ function App() {
         <Route path="/guidelines" component={GuideLines} />
         <Route path="/privacy" component={Privacy}/>
         <Route path="/boost" component={Boost} />
+        <Route path="/partners" component={Partners} />
+        <Route path="/verification" component={Trusted} />
         <Route path="/ad" component={Ad} />
         <Route component={NotFound}></Route>
         
