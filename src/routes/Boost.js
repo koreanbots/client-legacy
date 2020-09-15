@@ -11,7 +11,6 @@ import {
   Divider
 } from 'semantic-ui-react'
 import Bot from '../components/Bot'
-import { HelmetProvider } from 'react-helmet-async'
 import Article from '../components/Article'
 
 class Boost extends React.Component {

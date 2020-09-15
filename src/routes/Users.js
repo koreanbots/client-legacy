@@ -8,18 +8,10 @@ import {
   Divider,
   Card,
   Icon,
-  Message,
-  Segment,
-  Popup,
-  Table,
-  Modal,
-  Form,
-  TextArea
+  Popup
 } from 'semantic-ui-react'
-import ReactMarkdown from 'react-markdown/with-html'
 import config from '../config'
 import { HelmetProvider } from 'react-helmet-async'
-import CodeBlock from '../components/Code'
 import Bot from '../components/Bot'
 
 class User extends React.Component {

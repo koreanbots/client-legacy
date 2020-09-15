@@ -7,9 +7,7 @@ import {
   Responsive,
   Button,
   Icon,
-  Segment,
-  Table,
-  Label
+  Table
 } from 'semantic-ui-react'
 
 import docs from './docs.json'
