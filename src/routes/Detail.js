@@ -197,7 +197,7 @@ class Detail extends React.Component {
                           trigger={
                             <Label
                               className="noHover trusted"
-                              href="https://github.com/koreanbots/verification"
+                              href="/verification"
                             >
                               <Icon className="icon certificate" /> 신뢰함
                             </Label>

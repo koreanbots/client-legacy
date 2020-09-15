@@ -23,7 +23,24 @@ function Article (props) {
                 />
             </Helmet>
         </HelmetProvider>
-            <Container className="article">
+        {
+            props.colorHeader ? ( 
+                <div className="articleDiv">
+                <div style={{ marginBottom: '5em' }} className="verytop">
+                    <Container className="article">
+                        <h1 style={{ fontSize: '45px' }}>
+                            {props.title}
+                        </h1>
+                        { props.subheader && <p style={{ fontSize: '20px' }}>{props.subheader}</p>}
+                        { props.description && <p style={{ fontSize: '20px' }}>{props.description}</p>}
+                    </Container>
+                </div>
+                <Container>
+                    {props.children}
+                </Container>
+                </div>
+            ) : (
+                <Container className="article">
                 <div style={{ marginBottom: '5em' }}>
                     <h1 style={{ fontSize: '45px' }}>
                         {props.title}
@@ -33,6 +50,8 @@ function Article (props) {
                 </div>
                 {props.children}
             </Container>
+            )
+        }
     </div>
     )
 }

@@ -1,3 +1,7 @@
+.verytop > div.article h1 {
+    font-weight: 1000 !important;
+}
+
 div.article h1 {
     font-weight: 500 !important;
 }
@@ -18,4 +22,12 @@ div.article h2 {
     .ui.article.container {
         padding: 100px 60px !important;
     }
+}
+
+.articleDiv {
+    padding-bottom: 100px;
+}
+
+.verytop {
+    color: white;
 }
