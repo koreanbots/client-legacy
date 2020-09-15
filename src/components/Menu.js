@@ -8,7 +8,6 @@ import {
   Dropdown
 } from 'semantic-ui-react'
 import Search from './Search'
-import fetch from 'node-fetch'
 import config from '../config'
 
 export default class Nav extends Component {

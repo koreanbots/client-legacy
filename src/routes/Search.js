@@ -1,5 +1,4 @@
 import React from 'react'
-import fetch from 'node-fetch'
 
 import Bot from '../components/Bot'
 import SearchField from '../components/Search'

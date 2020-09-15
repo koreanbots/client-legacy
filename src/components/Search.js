@@ -1,7 +1,6 @@
 import React, { Component, useEffect, useRef } from 'react'
 import { Input, Image, Search, Icon } from 'semantic-ui-react'
 import './Search.css'
-import fetch from 'node-fetch'
 import config from '../config'
 import graphql from '../utils/graphql'
 import Countdown from './Countdown'

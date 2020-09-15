@@ -1,5 +1,4 @@
 import React from 'react'
-import fetch from 'node-fetch'
 import Bot from '../components/Bot'
 import { Message, Container, Card, Pagination, Label } from 'semantic-ui-react'
 import config from '../config'

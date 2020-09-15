@@ -15,7 +15,6 @@ import {
 } from 'semantic-ui-react'
 import Redirect from '../components/Redirect'
 import ReactMarkdown from 'react-markdown/with-html'
-import fetch from 'node-fetch'
 import config from '../config'
 import { HelmetProvider, Helmet } from 'react-helmet-async'
 import CodeBlock from '../components/Code'

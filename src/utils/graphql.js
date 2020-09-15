@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import config from "../config";
 
 export default async function( query ) {

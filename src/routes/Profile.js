@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import fetch from 'node-fetch'
 import { Container, Item, Button, Icon, Card, Divider } from 'semantic-ui-react'
 
 import Redirect from '../components/Redirect'

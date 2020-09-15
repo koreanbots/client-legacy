@@ -1,8 +1,5 @@
 import React from 'react'
-import fetch from 'node-fetch'
 import { Container } from 'semantic-ui-react'
-import Redirect from '../components/Redirect'
-import config from '../config'
 import graphql from '../utils/graphql'
 
 class Callback extends React.Component {

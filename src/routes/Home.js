@@ -8,7 +8,6 @@ import {
   Pagination,
   Label
 } from 'semantic-ui-react'
-import config from '../config'
 import Typed from 'typed.js'
 import queryString from 'query-string'
 import SearchField from '../components/Search'
