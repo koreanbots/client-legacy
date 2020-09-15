@@ -69,7 +69,7 @@ body {
   color: black !important;
 }
 
-.darkmode .segment {
+.darkmode .segment:not(.top) {
   color: white !important;
   background-color: #1b1c1d !important;
 }
@@ -125,6 +125,14 @@ body {
 
 .bg > * :not(i):not(a){
   color: white !important
+}
+
+.rank.segment {
+  color: black !important;
+}
+
+.darkmode .rank.segment {
+  color: white !important;
 }
 
 .card .icon.check {

@@ -59,6 +59,7 @@ function Bot({
             ) : (
               <Segment
                 floated="right"
+                className={`rank ${count < 3 && 'top'}`}
                 style={
                   count === 0
                     ? { background: 'gold', color: 'black' }
