@@ -1,6 +1,5 @@
 import React from 'react'
 import { HelmetProvider } from 'react-helmet-async'
-import fetch from 'node-fetch'
 import Bot from '../components/Bot'
 import {
   Message,
@@ -13,7 +12,7 @@ import config from '../config'
 import Typed from 'typed.js'
 import queryString from 'query-string'
 import SearchField from '../components/Search'
-import ads, { bot } from './ads'
+import ads from './ads'
 import { Redirect } from 'react-router-dom'
 import graphql from '../utils/graphql'
 
