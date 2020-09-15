@@ -162,3 +162,11 @@ textarea {
   }
   
 }
+
+.ui.pagination .active.item {
+  font-weight: bold !important;
+}
+
+.ui.pagination .item {
+  outline: none;
+}

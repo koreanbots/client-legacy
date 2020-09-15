@@ -24,7 +24,6 @@ function Bot({
   verified,
   vanity,
   boosted,
-  bg,
   status,
   banner
 }) {

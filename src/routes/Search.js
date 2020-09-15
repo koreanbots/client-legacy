@@ -7,6 +7,7 @@ import config from '../config'
 
 import queryString from 'query-string'
 import { HelmetProvider } from 'react-helmet-async'
+import graphql from '../utils/graphql'
 
 class Search extends React.Component {
   constructor(props) {
@@ -31,13 +32,36 @@ class Search extends React.Component {
   }
 
   getData = async (q, page) => {
-    const bot = await fetch(
+    fetch(
       config.api + '/bots/search?q=' + q + '&page=' + page
     ).then(r => r.json())
+    const bot = await graphql(`query {
+        list( type: SEARCH, query: "${q.replace(/"/gi, '\\"').replace(/'/gi, "\\'")}", page: ${page}) {
+          totalPage
+          data {
+            id
+            name
+            avatar
+            votes
+            servers
+            category
+            intro
+            desc
+            url
+            state
+            verified
+            trusted
+            vanity
+            boosted
+            status
+            banner
+          }
+        }
+    }`)
     this.setState({
-      bots: bot.code === 200 ? bot.data : [],
+      bots: bot.code === 200  && bot.data.list ? bot.data.list.data : [],
       isLoading: false,
-      totalPage: bot.totalPage,
+      totalPage: bot.data.list.totalPage,
       activePage: page
     })
   }
@@ -98,7 +122,7 @@ class Search extends React.Component {
                   id={bot.id}
                   name={bot.name}
                   avatar={
-                    bot.avatar !== false
+                    bot.avatar
                       ? 'https://cdn.discordapp.com/avatars/' +
                         bot.id +
                         '/' +
@@ -113,9 +137,7 @@ class Search extends React.Component {
                   intro={bot.intro}
                   desc={bot.desc}
                   invite={
-                    bot.url === false
-                      ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`
-                      : bot.url
+                    bot.url || `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`
                   }
                   state={bot.state}
                   verified={bot.verified}
@@ -124,14 +146,12 @@ class Search extends React.Component {
                   boosted={bot.boosted}
                   status={bot.status}
                   banner={bot.banner}
-                  bg={bot.bg}
                 />
               ))}
             </Card.Group>
             <br />
             <Container textAlign="center" style={{ paddingBottom: '10px'}}>
               <Pagination
-                href="#"
                 boundaryRange={0}
                 siblingRange={1}
                 ellipsisItem={null}
