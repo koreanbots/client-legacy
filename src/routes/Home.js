@@ -63,6 +63,7 @@ class Home extends React.Component {
         data {
           id
           name
+          tag
           avatar
           votes
           servers
@@ -85,6 +86,7 @@ class Home extends React.Component {
         data {
           id
           name
+          tag
           avatar
           votes
           servers
@@ -107,6 +109,7 @@ class Home extends React.Component {
         data {
           id
           name
+          tag
           avatar
           votes
           servers

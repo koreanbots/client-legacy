@@ -40,6 +40,7 @@ class Search extends React.Component {
           totalPage
           data {
             id
+            tag
             name
             avatar
             votes
