@@ -374,7 +374,7 @@ class Home extends React.Component {
                             id={n.id}
                             name={n.name}
                             avatar={
-                              n.avatar !== false
+                              n.avatar
                                 ? 'https://cdn.discordapp.com/avatars/' +
                                   n.id +
                                   '/' +
