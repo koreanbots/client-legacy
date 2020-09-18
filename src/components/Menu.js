@@ -9,6 +9,7 @@ import {
 } from 'semantic-ui-react'
 import Search from './Search'
 import config from '../config'
+import graphql from '../utils/graphql'
 
 export default class Nav extends Component {
   constructor(props) {
@@ -22,33 +23,38 @@ export default class Nav extends Component {
   }
 
   componentDidMount() {
-    const getUser = async (token, id, date) => {
-      await fetch(config.api + '/users/@me', {
-        method: 'GET',
-        headers: { token, id, time: date }
-      })
-        .then(r => r.json())
+    if(!localStorage.token) return
+    const getUser = async () => {
+      await graphql(`query {
+        me {
+          id
+          avatar
+          tag
+          username
+          perm
+        }
+      }`)
         .then(r => {
-          if (r.code === 200) {
-            localStorage.setItem('userCache', JSON.stringify(r.user))
-            this.setState({
-              user: JSON.parse(localStorage.userCache),
-              isLoading: false,
-              logged: 1
-            })
-          } else {
-            localStorage.setItem('userCache', false)
+          if (r.code !== 200) {
+            delete localStorage.userCache
             this.setState({
               user: JSON.parse(localStorage.userCache),
               isLoading: false,
               logged: 0
             })
+          } else {
+            localStorage.setItem('userCache', JSON.stringify(r.data.me))
+            this.setState({
+              user: JSON.parse(localStorage.userCache),
+              isLoading: false,
+              logged: 1
+            })
+
           }
         })
         .catch(err => console.log(err))
     }
-    if (!localStorage.userCache || !JSON.parse(localStorage.userCache))
-      getUser(this.props.token, this.props.id, this.props.date)
+    if (!localStorage.userCache && localStorage.token) getUser(this.props.token)
     else
       this.setState({
         user: JSON.parse(localStorage.userCache),
@@ -63,6 +69,7 @@ export default class Nav extends Component {
   logout = () => {
     delete localStorage.userCache
     delete localStorage.token
+    window.location.assign('/')
   }
   render() {
     const { visible } = this.state
@@ -95,7 +102,7 @@ export default class Nav extends Component {
                 trigger={
                   <Image
                     src={
-                      this.state.user.avatar !== false
+                      this.state.user.avatar
                         ? 'https://cdn.discordapp.com/avatars/' +
                           this.state.user.id +
                           '/' +
@@ -196,7 +203,7 @@ export default class Nav extends Component {
                 <Dropdown
                   item
                   trigger={
-                    this.state.user.avatar !== false ? (
+                    this.state.user.avatar ? (
                       <>
                         <Image
                           src={
