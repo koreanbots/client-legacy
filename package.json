@@ -18,6 +18,7 @@
     "react-showdown": "^2.0.3",
     "react-syntax-highlighter": "^13.2.1",
     "react-with-important-style": "^0.2.2",
+    "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^1.1.0",
     "sha.js": "^2.4.11",
     "typed.js": "^2.0.11"
