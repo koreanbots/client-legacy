@@ -274,10 +274,8 @@ class Home extends React.Component {
             <p>하트를 많이 받은 봇들의 순위입니다!</p>
             {isLoading && code !== 200 ? (
               <div className="loader">
-                <span className="loader__text"></span>
+                <span className="loader__text">{errMessage}</span>
               </div>
-            ) : code === 401 ? (
-              <Redirect to="/logout" />
             ) : (
               <div>
                 <Card.Group itemsPerRow={3} stackable>
