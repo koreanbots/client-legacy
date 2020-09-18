@@ -20,7 +20,7 @@ export default class SearchField extends Component {
     if(+this.state.ratelimit > +new Date()) return
     if(value.length < 2) return this.setState({ result : [], error: '' })
     const query = `query {
-      search( query: "${value.replace(/"/gi, '\\"').replace(/'/gi, "\\'")}", limit: 10) {
+      search( query: "${value.replace(/"/gi, '\\"')}", limit: 10) {
         id
         name
         avatar
@@ -87,7 +87,7 @@ export default class SearchField extends Component {
 }
 
 
-const resultRenderer = ({ idx, name, avatar, tag, intro, votes }) => {
+const resultRenderer = ({ idx, name, avatar, tag, intro, votes, trusted, boosted, vanity }) => {
   return (
     <>
       <Image style={{ height: '3em', width: '3em' }} src={avatar
@@ -99,7 +99,7 @@ const resultRenderer = ({ idx, name, avatar, tag, intro, votes }) => {
         : `https://cdn.discordapp.com/embed/avatars/${tag %
             5}.png?size=128`
     } />
-    <div className="content">
+    <div className="content" onClick={()=> window.location.assign(`/bots/${(trusted || boosted) && vanity ? vanity : idx}`)}>
       <div className="price"><a style={{ color: 'red' }}>{votes} <Icon className="heart" /></a></div>
       <div className="title">{name}</div>
       <div className="description">{intro}</div>
