@@ -21,7 +21,7 @@ export default class SearchField extends Component {
     if(+this.state.ratelimit > +new Date()) return
     if(value.length < 2) return this.setState({ result : [], error: '' })
     const query = `query {
-      search( query: "${value.replace(/"/gi, '\\"').replace(/\\/gi, '\\\\')}", limit: 10) {
+      search( query: "${value.replace(/\\/gi, '\\\\').replace(/"/g, '\\"')}", limit: 10) {
         id
         name
         avatar
