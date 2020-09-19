@@ -17,7 +17,7 @@ export default class SearchField extends Component {
   }
 
   async preview(value) {
-    value = decodeURI(value)
+    value = decodeURIComponent(value)
     if(+this.state.ratelimit > +new Date()) return
     if(value.length < 2) return this.setState({ result : [], error: '' })
     const query = `query {
@@ -49,7 +49,7 @@ export default class SearchField extends Component {
   }
   render() {
     const to = r => {
-      window.location.href = '/search?query=' + encodeURI(r) + '&page=1'
+      window.location.href = '/search?query=' + encodeURIComponent(r) + '&page=1'
       return ''
     }
     return (

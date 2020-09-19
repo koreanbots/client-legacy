@@ -91,8 +91,8 @@ class Search extends React.Component {
         <div className="verytop" style={{ padding: '10px', marginBottom: '10px', display: 'flex', minHeight: '370px', alignItems: 'center', justifyContent: 'center', color: 'white'}}>
           <Container>
             <h1>검색결과</h1>
-            <h2>"{decodeURI(this.props.location.search.match(/query=([^&]*)/, '')[1])}"에 관한 검색결과</h2>
-            <SearchField fluid massive large style={{ width: '100% !important' }} value={decodeURI(this.props.location.search.match(/query=([^&]*)/, '')[1])}/>
+            <h2>"{decodeURIComponent(this.props.location.search.match(/query=([^&]*)/, '')[1])}"에 관한 검색결과</h2>
+            <SearchField fluid massive large style={{ width: '100% !important' }} value={decodeURIComponent(this.props.location.search.match(/query=([^&]*)/, '')[1])}/>
           </Container>
 
           </div>
