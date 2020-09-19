@@ -17,6 +17,7 @@ export default class SearchField extends Component {
   }
 
   async preview(value) {
+    value = decodeURI(value)
     if(+this.state.ratelimit > +new Date()) return
     if(value.length < 2) return this.setState({ result : [], error: '' })
     const query = `query {
@@ -48,7 +49,7 @@ export default class SearchField extends Component {
   }
   render() {
     const to = r => {
-      window.location.href = '/search?query=' + r + '&page=1'
+      window.location.href = '/search?query=' + encodeURI(r) + '&page=1'
       return ''
     }
     return (
@@ -65,7 +66,7 @@ export default class SearchField extends Component {
           fluid={this.props.fluid}
           resultRenderer={resultRenderer}
           noResultsMessage={+this.state.ratelimit > +new Date() ? '지정된 시간에 너무 많은 요청을 보냈습니다.' : this.state.error ? this.state.error : this.state.value.length < 2 ? '2글자 이상 입력해주세요.'  : '검색결과가 없습니다.'}
-          noResultsDescription={+this.state.ratelimit > +new Date() ? (<><Countdown after={()=> this.preview(this.state.value)} time={Math.round((this.state.ratelimit - new Date())/1000)} />초 후에 다시 시도해주세요.</>) : ''}
+          noResultsDescription={+this.state.ratelimit > +new Date() ? (<>dfsat<Countdown after={()=> this.preview(this.state.value)} time={Math.round((this.state.ratelimit - new Date())/1000)} />초 후에 다시 시도해주세요.</>) : 'asfd'}
         />
 
         {this.state.redirect ? to(this.state.value) : ''}
