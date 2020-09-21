@@ -6,13 +6,14 @@ import {
   Container,
   Card,
   Pagination,
-  Label
+  Label, Advertisement
 } from 'semantic-ui-react'
 import Typed from 'typed.js'
 import queryString from 'query-string'
 import SearchField from '../components/Search'
 import ads from './ads'
 import { Redirect } from 'react-router-dom'
+import GitInfo from 'react-git-info/macro'
 import graphql from '../utils/graphql'
 
 class Home extends React.Component {
@@ -226,7 +227,17 @@ class Home extends React.Component {
               ) : (
                 ''
               )}
-              {ads.top && (
+
+              <Advertisement unit="panorama" style={{ width: '100%' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+              <ins class="adsbygoogle"
+                style={{ display: 'block' }}
+                data-ad-client="ca-pub-4856582423981759"
+                data-ad-slot="3250141451"
+                data-ad-format="auto"
+                data-adtest="on"
+                data-full-width-responsive="true"></ins>
+              </Advertisement>
+              {/* {ads.top && (
                 <a href={ads.top.link}>
                   <div className="ui fluid image">
                     <a
@@ -239,7 +250,7 @@ class Home extends React.Component {
                     <img src={ads.top.img} style={{ width: '100%' }} />
                   </div>
                 </a>
-              )}
+              )} */}
             </Container>
           </>
         )}
@@ -340,7 +351,7 @@ class Home extends React.Component {
             )}
             <br />
           </section>
-          {ads.bottom && (
+          {/* {ads.bottom && (
             <a href={ads.bottom.link}>
               <div className="ui fluid image">
                 <a
@@ -353,7 +364,16 @@ class Home extends React.Component {
                 <img src={ads.bottom.img} style={{ width: '100%' }} />
               </div>
             </a>
-          )}
+          )} */}
+          <Advertisement unit="panorama" style={{ width: '100%' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+            <ins class="adsbygoogle"
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-4856582423981759"
+              data-ad-slot="3250141451"
+              data-ad-format="auto"
+              data-adtest="on"
+              data-full-width-responsive="true"></ins>
+          </Advertisement>
           {this.state.activePage === 1 ? (
             <>
               <section id="new" style={{ marginTop: '15px' }}>
@@ -413,6 +433,7 @@ class Home extends React.Component {
               </section>
               <h1>✅ 신뢰된 봇</h1>
               <p>KOREANBOTS에서 인증받은 신뢰할 수 있는 봇들입니다!!</p>
+              <a href="/verification">더 알아보기</a>
               { isLoading && code !== 200 ? (
                 <div className="loader">
                   <span className="loader__text">Loading...</span>

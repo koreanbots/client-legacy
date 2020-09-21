@@ -13,13 +13,14 @@ import {
   Table,
   Modal,
   Form,
-  TextArea
+  TextArea, Advertisement
 } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown/with-html'
 import config from '../config'
 import { HelmetProvider } from 'react-helmet-async'
 import CodeBlock from '../components/Code'
 import ads from './ads'
+import GitInfo from 'react-git-info/macro'
 
 class Detail extends React.Component {
   constructor(props) {
@@ -452,7 +453,7 @@ class Detail extends React.Component {
                     </Label>
                   ))}
                 </div>
-                {
+                {/* {
                   ads.bot && (bot.trusted || bot.boosted) ? "" : (
                    <>
                     <Divider section />
@@ -466,9 +467,16 @@ class Detail extends React.Component {
                     </a>
                    </>
                   )
-                    
-                  
-                }
+                } */}
+              <Advertisement unit="panorama" style={{ width: '100%' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+                <ins class="adsbygoogle"
+                  style={{ display: 'block' }}
+                  data-ad-client="ca-pub-4856582423981759"
+                  data-ad-slot="3250141451"
+                  data-ad-format="auto"
+                  data-adtest="on"
+                  data-full-width-responsive="true"></ins>
+              </Advertisement>
                 <Divider section />
                 <Segment
                   style={{

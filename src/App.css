@@ -178,3 +178,11 @@ textarea {
 .ui.pagination .item {
   outline: none;
 }
+
+img:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  background-image: url(/img/default.png);
+
+}
