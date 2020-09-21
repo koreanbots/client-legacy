@@ -5,7 +5,7 @@ import {
   Responsive,
   Icon,
   Sidebar,
-  Dropdown
+  Dropdown, Container
 } from 'semantic-ui-react'
 import Search from './Search'
 import config from '../config'
@@ -167,6 +167,7 @@ export default class Nav extends Component {
           </Sidebar>
         </Responsive>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+          <Container textAlign="center">
           <Menu
             className="nav"
             secondary
@@ -253,6 +254,7 @@ export default class Nav extends Component {
               )}
             </Menu.Menu>
           </Menu>
+          </Container>
         </Responsive>
       </>
     )
