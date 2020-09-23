@@ -228,7 +228,7 @@ class Home extends React.Component {
                 ''
               )}
 
-              <Advertisement unit="panorama" style={{ width: '100%' }} test={GitInfo().branch !== 'stable' ? '광고' : null} style={{ marginTop: '10px' }}>
+              <Advertisement unit="panorama" style={{ width: '100%',  marginTop: '10px' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
               <ins class="adsbygoogle"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-4856582423981759"
