@@ -32,9 +32,6 @@ class Search extends React.Component {
   }
 
   getData = async (q, page) => {
-    fetch(
-      config.api + '/bots/search?q=' + q + '&page=' + page
-    ).then(r => r.json())
     const bot = await graphql(`query {
         list( type: SEARCH, query: "${q.replace(/"/gi, '\\"')}", page: ${page}) {
           totalPage
