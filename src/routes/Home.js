@@ -191,12 +191,12 @@ class Home extends React.Component {
                 <h1>
                   한국 디스코드봇 리스트에서{' '}
                   <span
-                    style={{ whiteSpace: 'pre', fontSize: '1.2em' }}
+                    style={{ whiteSpace: 'pre', fontSize: '1.1em' }}
                     ref={el => {
                       this.el = el
                     }}
                   />
-                  봇을 확인하세요
+                  봇을 만나보세요.
                 </h1>
                 <h2>다양한 국내봇을 한곳에서 확인하세요!</h2>
                 <SearchField fluid massive large style={{ width: '100% !important' }} />
@@ -228,7 +228,7 @@ class Home extends React.Component {
                 ''
               )}
 
-              <Advertisement unit="panorama" style={{ width: '100%' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+              <Advertisement unit="panorama" style={{ width: '100%' }} test={GitInfo().branch !== 'stable' ? '광고' : null} style={{ marginTop: '10px' }}>
               <ins class="adsbygoogle"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-4856582423981759"
