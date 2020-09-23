@@ -3,7 +3,7 @@ import Article from '../components/Article'
 
 function GuildLines() {
   return (
-    <Article title="가이드라인" subheader="최초 작성: 2020-04-30 수정: 2020-05-15 "description="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!">
+    <Article title="가이드라인" subheader="최초 작성: 2020-04-30 수정: 2020-05-15" description="리스트에 등재되는 모든 봇들이 지켜야하는 가이드라인입니다!" colorHeader>
       <h1>KOREANBOTS에 오신 것을 환영합니다.</h1>
       <p>봇 추가 또는 등재 유지를 위해서 반드시 지켜야할 가이드라인들입니다.</p>
       <p>

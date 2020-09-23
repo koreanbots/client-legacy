@@ -3,7 +3,7 @@ import Article from '../components/Article'
 
 function Privacy() {
   return (
-    <Article title="개인정보취급방침" description="저희가 개인정보를 처리하는 방침입니다.">
+    <Article title="개인정보취급방침" description="저희가 개인정보를 처리하는 방침입니다." colorHeader>
       <h2>개인정보 처리의 목적</h2>
       <p>
         "한국 디스코드봇 리스트"('https://koreanbots.dev')는 다음 목적을 위하여
