@@ -1,10 +1,11 @@
 import React from 'react'
 import Bot from '../components/Bot'
-import { Message, Container, Card, Pagination, Label } from 'semantic-ui-react'
+import { Message, Container, Card, Pagination, Label, Button, Icon } from 'semantic-ui-react'
 import config from '../config'
 
 import queryString from 'query-string'
 import { HelmetProvider } from 'react-helmet-async'
+import graphql from '../utils/graphql'
 
 class Category extends React.Component {
   constructor(props) {
@@ -44,32 +45,45 @@ class Category extends React.Component {
     )
   }
   getData = async page => {
-    const bot = await fetch(
-      config.api +
-        `/bots/category/${this.props.match.params.category}?page=` +
-        page,
-      {
-        method: 'GET',
-        headers: {
-          token: localStorage.token,
-          id: localStorage.id,
-          time: localStorage.date
+    const bot = await graphql(`query {
+      list( type: CATEGORY, query: "${this.props.match.params.category.replace(/"/gi, '\\"')}", page: ${page}) {
+        totalPage
+        data {
+          id
+          tag
+          name
+          avatar
+          votes
+          servers
+          category
+          intro
+          desc
+          url
+          state
+          verified
+          trusted
+          vanity
+          boosted
+          status
+          banner
         }
       }
-    ).then(r => r.json())
+  }`)
+  console.log(bot)
     this.setState({
       bot,
       isLoading: false,
-      totalPage: bot.totalPage,
-      activePage: page
+      totalPage: bot.data && bot.data.list.totalPage,
+      activePage: page,
+      nsfw: !!localStorage.nsfw
     })
   }
-  handlePaginationChange = (e, { activePage }) => {
+  handlePaginationChange = (_e, { activePage }) => {
     this.editParm('page', activePage)
     this.getData(activePage, this.props)
   }
 
-  componentDidMount(props) {
+  componentDidMount() {
     const query = queryString.parse(window.location.search)
     const page =
       Number.isNaN(Number(query.page)) || Number(query.page) < 1
@@ -113,6 +127,14 @@ class Category extends React.Component {
             <div className="loader">
               <span className="loader__text">{bot.message}</span>
             </div>
+          ) : !this.state.nsfw && this.props.match.params.category === 'NSFW' ? (
+            <div className="loader">
+              <div>
+              <h1>NSFW 카테고리는 만19세 이상의 성인만 열람하실 수 있습니다.</h1>
+              <p>계속하시겠습니까?</p>
+              <Button onClick={()=> { localStorage.nsfw = '아이유 예뻐요'; window.location.reload() }}>계속하기 <Icon className="arrow right"/></Button>
+              </div>
+            </div>
           ) : (
             <div>
               <h3>
@@ -124,45 +146,45 @@ class Category extends React.Component {
               </h3>
               <br />
               <Card.Group itemsPerRow={3} stackable>
-                {bot.data.map(bot => (
+                {bot.data.list.data.map(b => (
                   <>
                     <Bot
-                      data={bot}
-                      key={bot.id}
-                      id={bot.id}
-                      name={bot.name}
+                      data={b}
+                      key={b.id}
+                      id={b.id}
+                      name={b.name}
                       avatar={
-                        bot.avatar !== false
+                        b.avatar
                           ? 'https://cdn.discordapp.com/avatars/' +
-                            bot.id +
+                            b.id +
                             '/' +
-                            bot.avatar +
+                            b.avatar +
                             '.png'
-                          : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
+                          : `https://cdn.discordapp.com/embed/avatars/${b.tag %
                               5}.png`
                       }
-                      votes={bot.votes}
-                      servers={bot.servers}
-                      category={bot.category}
-                      intro={bot.intro}
-                      desc={bot.desc}
+                      votes={b.votes}
+                      servers={b.servers}
+                      category={b.category}
+                      intro={b.intro}
+                      desc={b.desc}
                       invite={
-                        bot.url === false
-                          ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`
-                          : bot.url
+                        !b.url
+                          ? `https://discordapp.com/oauth2/authorize?client_id=${b.id}&scope=bot&permissions=0`
+                          : b.url
                       }
-                      state={bot.state}
+                      state={b.state}
                       count={
-                        this.state.bot.data.findIndex(r => r.id === bot.id) +
+                        bot.data.list.data.findIndex(r => r.id === b.id) +
                         (this.state.activePage - 1) * 9
                       }
-                      verified={bot.verified}
-                      trusted={bot.trusted}
-                      vanity={bot.vanity}
-                      boosted={bot.boosted}
-                      status={bot.status}
-                      banner={bot.banner}
-                      bg={bot.bg}
+                      verified={b.verified}
+                      trusted={b.trusted}
+                      vanity={b.vanity}
+                      boosted={b.boosted}
+                      status={b.status}
+                      banner={b.banner}
+                      bg={b.bg}
                     />
                   </>
                 ))}
@@ -181,7 +203,8 @@ class Category extends React.Component {
               </Container>
               <br />
             </div>
-          )}
+          )
+          }
         </section>
       </Container>
     )
