@@ -3,7 +3,6 @@ import React from 'react'
 import Bot from '../components/Bot'
 import SearchField from '../components/Search'
 import { Card, Container, Pagination } from 'semantic-ui-react'
-import config from '../config'
 
 import queryString from 'query-string'
 import { HelmetProvider } from 'react-helmet-async'

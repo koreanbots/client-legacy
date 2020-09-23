@@ -1,7 +1,6 @@
 import React from 'react'
 import Bot from '../components/Bot'
 import { Message, Container, Card, Pagination, Label, Button, Icon } from 'semantic-ui-react'
-import config from '../config'
 
 import queryString from 'query-string'
 import { HelmetProvider } from 'react-helmet-async'
