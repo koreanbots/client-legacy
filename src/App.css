@@ -12,7 +12,7 @@ body {
 
 .loader {
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,7 +76,7 @@ body {
 
 
 
-.darkmode .botDetail .label, .darkmode a.label, .darkmode .tag.labels > a, .darkmode .example {
+.darkmode .botDetail .label, .darkmode a.label, .darkmode .tag.labels > a, .darkmode .example, .darkmode .tag.label {
   background-color: #23272A;
   color: white;
 }
