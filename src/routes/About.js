@@ -15,7 +15,7 @@ function About(props) {
   const CustomCard = withImportantStyle('div')
 
   return (
-    <Article title="한국 디스코드봇 리스트" subheader="국내봇을 등록하거나, 확인해볼 수 있는 웹사이트입니다." description="자신의 봇을 추가하거나 자신의 서버에 맞는 봇을 찾아보세요.">
+    <Article title="한국 디스코드봇 리스트" subheader="국내봇을 등록하거나, 확인해볼 수 있는 웹사이트입니다." description="자신의 봇을 추가하거나 자신의 서버에 맞는 봇을 찾아보세요." colorHeader>
       <h2>슬로건</h2>
       <h3>
         <Icon className="left quote" />
