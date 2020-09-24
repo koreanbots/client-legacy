@@ -24,11 +24,9 @@ class Search extends React.Component {
   }
 
   editPage = (val) => {
-    window.history.pushState(
-      '',
-      document.title,
-      window.location.href.search(/page=.*?/) ? window.location.href.replace(/page=.*/, `page=${val}`) : window.location.href + `page=${val}`
-    )
+    
+    return window.location.href.search(/page=.*?/) ? window.location.href.replace(/page=.*/, `page=${val}`) : window.location.href + `page=${val}`
+    
   }
 
   getData = async (q, page) => {
@@ -65,8 +63,7 @@ class Search extends React.Component {
   }
 
   handlePaginationChange = (e, { activePage }) => {
-    this.editPage(activePage)
-    this.getData(this.state.q, activePage)
+    window.location.href = this.editPage(activePage)
   }
 
   componentDidMount() {

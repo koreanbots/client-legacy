@@ -52,11 +52,7 @@ class Home extends React.Component {
   }
 
   editParm = (parm, val) => {
-    window.history.pushState(
-      '',
-      document.title,
-      `${window.location.origin}?${parm}=${val}`
-    )
+    return `${window.location.origin}?${parm}=${val}`
   }
   getData = async page => {
     const query = `query {
@@ -142,9 +138,8 @@ class Home extends React.Component {
       activePage: page
     })
   }
-  handlePaginationChange = (e, { activePage }) => {
-    this.editParm('page', activePage)
-    this.getData(activePage)
+  handlePaginationChange = (_e, { activePage }) => {
+    window.location.href = this.editParm('page', activePage)
   }
 
   componentDidMount() {

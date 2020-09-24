@@ -87,7 +87,7 @@ body {
 }
 
 .darkmode.modal, .darkmode.modal > .header {
-  background-color: #1b1c1d;
+  background-color: #1b1c1d !important;
   color: white !important;
 }
 
