@@ -186,3 +186,7 @@ img:before {
   background-image: url(/img/default.png);
 
 }
+
+.buttons .ui.button {
+  margin: 3px 2px;
+}
