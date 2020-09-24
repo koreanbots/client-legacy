@@ -10,6 +10,7 @@ import {
 import Search from './Search'
 import config from '../config'
 import graphql from '../utils/graphql'
+import { Link } from 'react-router-dom'
 
 export default class Nav extends Component {
   constructor(props) {
@@ -149,7 +150,7 @@ export default class Nav extends Component {
               <Icon className="close" />
               <br />
             </Menu.Item>
-            <Menu.Item as="a" href="/discord">
+            <Menu.Item href="/discord">
               디스코드
             </Menu.Item>
             <Menu.Item name="about" href="/about">
@@ -180,16 +181,16 @@ export default class Nav extends Component {
                   KOREANBOTS
                 </h1>
               </Menu.Item>
-              <Menu.Item name="discord" href="https://discord.gg/JEh53MQ">
+              <Menu.Item as={Link} href="/discord">
                 디스코드
               </Menu.Item>
-              <Menu.Item name="about" href="/about">
+              <Menu.Item name="about" as={Link} to="/about">
                 소개
               </Menu.Item>
-              <Menu.Item name="api" href="/api">
+              <Menu.Item name="api" as={Link} to="/api">
                 API
               </Menu.Item>
-              <Menu.Item name="add" href="/addbot">
+              <Menu.Item name="add" as={Link} to="/addbot">
                 봇 추가하기
               </Menu.Item>
             </Menu.Menu>
