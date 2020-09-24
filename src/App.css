@@ -202,10 +202,13 @@ img:before {
 
 }
 
-.buttons .ui.button {
+.botDetail .buttons .ui.button {
   margin: 3px 2px;
 }
 
+.botDetail div > .ui.label {
+  margin: 3px 2px;
+}
 .footer h1, .footer h4 {
   color: #3366FF !important;
 }
