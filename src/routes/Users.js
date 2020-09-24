@@ -13,6 +13,7 @@ import {
 import config from '../config'
 import { HelmetProvider } from 'react-helmet-async'
 import Bot from '../components/Bot'
+import graphql from '../utils/graphql'
 
 class User extends React.Component {
   constructor(props) {
@@ -25,18 +26,41 @@ class User extends React.Component {
   }
 
   getData = async id => {
-    await fetch(config.api + '/users/' + id, {
-      method: 'GET'
-    })
-      .then(r => r.json())
-      .then(user => {
-        console.log(user)
+    const user = await graphql(`query {
+      user(id: "${encodeURIComponent(id)}") {
+        id
+        avatar
+        tag
+        username
+        perm
+        github
+        bots {
+          id
+          name
+          avatar
+          votes
+          servers
+          category
+          intro
+          desc
+          url
+          state
+          verified
+          trusted
+          vanity
+          boosted
+          status
+          banner
+          bg
+        }
+      }
+    }`)
+   
         this.setState({
-          data: user.code === 200 ? user.user : null,
-          error: user.code !== 200 ? user.message : '',
+          data: user.code === 200 && user.data.user ? user.data.user : null,
+          error: user.code !== 200 ? user.message : !user.data.user ? '해당 유저가 존재하지 않습니다' : '',
           isLoading: false
         })
-      })
   }
 
   shuffle = a => {
@@ -81,12 +105,12 @@ class User extends React.Component {
                       centered
                       floated
                       src={
-                        data.avatar !== false
+                        data.avatar
                           ? 'https://cdn.discordapp.com/avatars/' +
                             data.id +
                             '/' +
                             data.avatar +
-                            '.png?size=1024'
+                            '.gif?size=1024'
                           : `https://cdn.discordapp.com/embed/avatars/${data.tag %
                               5}.png?size=1024`
                       }
@@ -149,7 +173,7 @@ class User extends React.Component {
                         id={bot.id}
                         name={bot.name}
                         avatar={
-                          bot.avatar !== false
+                          bot.avatar
                             ? 'https://cdn.discordapp.com/avatars/' +
                               bot.id +
                               '/' +
@@ -164,7 +188,7 @@ class User extends React.Component {
                         intro={bot.intro}
                         desc={bot.desc}
                         invite={
-                          bot.url === false
+                          bot.url
                             ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`
                             : bot.url
                         }
@@ -181,70 +205,6 @@ class User extends React.Component {
                   </Card.Group>
                 ) : (
                   <h3>소유한 봇이 없습니다.</h3>
-                )}
-              </div>
-              <Divider section />
-              <div>
-                <h2>하트를 남긴 봇</h2>
-                <p>최대 5개까지만 랜덤으로 표시됩니다.</p>
-                {data.votes ? (
-                  <Card.Group itemsPerRow={3} stackable>
-                    {this.shuffle(data.votes)
-                      .slice(0, 5)
-                      .map(bot => (
-                        <Bot
-                          key={bot.id}
-                          id={bot.id}
-                          name={bot.name}
-                          avatar={
-                            bot.avatar !== false
-                              ? 'https://cdn.discordapp.com/avatars/' +
-                                bot.id +
-                                '/' +
-                                bot.avatar +
-                                '.png?size=128'
-                              : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
-                                  5}.png?size=128`
-                          }
-                          votes={bot.votes}
-                          servers={bot.servers}
-                          category={bot.category}
-                          intro={bot.intro}
-                          desc={bot.desc}
-                          invite={
-                            bot.url === false
-                              ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`
-                              : bot.url
-                          }
-                          state={bot.state}
-                          verified={bot.verified}
-                          trusted={bot.trusted}
-                          vanity={bot.vanity}
-                          boosted={bot.boosted}
-                          status={bot.status}
-                          banner={bot.banner}
-                          bg={bot.bg}
-                        />
-                      ))}
-                    {data.votes.length - 5 > 0 ? (
-                      <Card>
-                        <div
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            height: '100%'
-                          }}
-                        >
-                          <h1>+{data.votes.length - 5}개</h1>
-                        </div>
-                      </Card>
-                    ) : (
-                      <></>
-                    )}
-                  </Card.Group>
-                ) : (
-                  <h3>하트를 남긴 봇이 없습니다.</h3>
                 )}
               </div>
             </>
