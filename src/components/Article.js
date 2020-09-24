@@ -26,7 +26,7 @@ function Article (props) {
         {
             props.colorHeader ? ( 
                 <div className="articleDiv">
-                <div style={{ marginBottom: '5em' }} className="verytop">
+                <div style={{ marginBottom: '1em' }} className="verytop">
                     <Container className="article">
                         <h1 style={{ fontSize: '45px' }}>
                             {props.title}
