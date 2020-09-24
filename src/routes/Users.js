@@ -5,7 +5,6 @@ import {
   Grid,
   Container,
   Label,
-  Divider,
   Card,
   Icon,
   Popup
@@ -110,12 +109,13 @@ class User extends React.Component {
                             data.id +
                             '/' +
                             data.avatar +
-                            '.gif?size=1024'
+                            (data.avatar.startsWith('a_') ? 'gif' : 'png') + '?size=1024'
                           : `https://cdn.discordapp.com/embed/avatars/${data.tag %
                               5}.png?size=1024`
                       }
                       size="medium"
                       rounded
+                      onError={ (e)=> e.src="https://cdn.discordapp.com/embed/avatars/0.png?size=128" }
                     />
                   </Grid.Column>
                   <Grid.Column>
