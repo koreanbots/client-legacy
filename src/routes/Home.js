@@ -12,7 +12,7 @@ import Typed from 'typed.js'
 import queryString from 'query-string'
 import SearchField from '../components/Search'
 import ads from './ads'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import GitInfo from 'react-git-info/macro'
 import graphql from '../utils/graphql'
 
@@ -267,10 +267,11 @@ class Home extends React.Component {
           {cats.map(r => (
             <>
               <Label
+                as={Link}
                 tag
                 stackable={true}
                 style={{ marginTop: '4px' }}
-                href={'/categories/' + r}
+                to={'/categories/' + r}
               >
                 {r}
               </Label>{' '}
@@ -338,7 +339,6 @@ class Home extends React.Component {
                 <Container align="center">
                   <br />
                   <Pagination
-                    href="#"
                     boundaryRange={0}
                     siblingRange={1}
                     ellipsisItem={null}
