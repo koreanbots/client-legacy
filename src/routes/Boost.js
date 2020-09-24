@@ -254,20 +254,20 @@ class Boost extends React.Component {
             </Card.Content>
           </Card>
         </Card.Group>
-        <h3>
-          부스트 하실 여건이 안되시나요? 그렇다면{' '}
-          <a href="https://github.com/koreanbots/verification">봇 인증</a>을
-          신청해보세요! 동일 혜택을 받으실 수 있습니다!
-        </h3>
-        <p style={{ color: 'gray' }}>
-          모든 부스트 카운트는 봇별로 적용됩니다. (ex. 부스트 2개를 했다고
-          소유한 모든 봇에서 혜택을 적용받을 수 없음)
+        <Container textAlign="center" style={{ marginTop: '30px' }}>
+          <h3>
+            부스트 하실 여건이 안되시나요? 그렇다면{' '}
+            <a href="/verification">봇 인증</a>을
+            신청해보세요! 동일 혜택을 받으실 수 있습니다!
+          </h3>
+          <p style={{ color: 'gray' }}>
+            모든 부스트 카운트는 봇별로 적용됩니다. (ex. 부스트 2개를 했다고
+            소유한 모든 봇에서 혜택을 적용받을 수 없음)
+            <br />
+            모든 혜택은 부스트를 유지하실 때만 적용됩니다. (부스트가 해제되면 해당
+            혜택들도 이용하실 수 없습니다)
+          </p>
           <br />
-          모든 혜택은 부스트를 유지하실 때만 적용됩니다. (부스트가 해제되면 해당
-          혜택들도 이용하실 수 없습니다)
-        </p>
-        <br />
-        <Container textAlign="right">
           <h3>
             도움이 필요하신가요? <a href="/discord">디스코드</a>에서
             도와드리겠습니다!
