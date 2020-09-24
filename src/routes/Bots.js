@@ -132,8 +132,6 @@ class Detail extends React.Component {
   }
   render() {
     const { bot, isLoading } = this.state
-    console.log(this.state.error)
-
     return (
         <Container>
             {isLoading ? (
