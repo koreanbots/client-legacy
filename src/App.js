@@ -29,6 +29,8 @@ import Ad from "./routes/Ad";
 import Partners from "./routes/Partners";
 import Trusted from "./routes/Trusted";
 import ScrollTop from "./components/ScrollTop";
+import { Advertisement, Container } from "semantic-ui-react";
+import GitInfo from "react-git-info/macro";
 
 
 
@@ -80,6 +82,17 @@ function App() {
         <Route component={NotFound}></Route>
         
       </Switch>
+        <Container>
+          <Advertisement unit="panorama" style={{ width: '100%', marginBottom: '2em', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+            <ins class="adsbygoogle"
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-4856582423981759"
+              data-ad-slot="3250141451"
+              data-ad-format="auto"
+              data-adtest="on"
+              data-full-width-responsive="true"></ins>
+          </Advertisement>
+        </Container>
       </div>
       <Footer Dark={Dark} setDark={setDark}/>
 
