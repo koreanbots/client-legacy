@@ -6,7 +6,7 @@ import {
   Container,
   Card,
   Pagination,
-  Label, Advertisement
+  Label
 } from 'semantic-ui-react'
 import Typed from 'typed.js'
 import queryString from 'query-string'
@@ -15,6 +15,8 @@ import ads from './ads'
 import { Link, Redirect } from 'react-router-dom'
 import GitInfo from 'react-git-info/macro'
 import graphql from '../utils/graphql'
+
+import Ad from '../components/Advertisement'
 
 class Home extends React.Component {
   constructor(props) {
@@ -228,15 +230,7 @@ class Home extends React.Component {
                 ''
               )}
 
-              <Advertisement unit="panorama" style={{ width: '100%',  marginTop: '10px' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
-              <ins class="adsbygoogle"
-                style={{ display: 'block' }}
-                data-ad-client="ca-pub-4856582423981759"
-                data-ad-slot="3250141451"
-                data-ad-format="auto"
-                data-adtest="on"
-                data-full-width-responsive="true"></ins>
-              </Advertisement>
+              <Ad />
               {/* {ads.top && (
                 <a href={ads.top.link}>
                   <div className="ui fluid image">
@@ -421,15 +415,7 @@ class Home extends React.Component {
                     </Card.Group>
                   </div>
                 )}
-                 <Advertisement unit="panorama" style={{ marginTop: '2em', width: '100%' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
-                  <ins class="adsbygoogle"
-                    style={{ display: 'block' }}
-                    data-ad-client="ca-pub-4856582423981759"
-                    data-ad-slot="3250141451"
-                    data-ad-format="auto"
-                    data-adtest="on"
-                    data-full-width-responsive="true"></ins>
-                </Advertisement>
+                 <Ad/>
               </section>
 
               <h1>✅ 신뢰된 봇</h1>

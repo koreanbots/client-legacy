@@ -1,5 +1,6 @@
 import React from 'react'
 import Bot from '../components/Bot'
+import Adsense from '../components/Advertisement'
 import { Message, Container, Card, Pagination, Label, Button, Icon } from 'semantic-ui-react'
 
 import queryString from 'query-string'
@@ -199,6 +200,7 @@ class Category extends React.Component {
           )
           }
         </section>
+        <Adsense />
       </Container>
     )
   }

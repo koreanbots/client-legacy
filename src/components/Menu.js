@@ -212,7 +212,7 @@ export default class Nav extends Component {
                             this.state.user.id +
                             '/' +
                             this.state.user.avatar +
-                            '.png' : `https://cdn.discordapp.com/embed/avatars/${(this.state.logged ? this
+                            '.png' : `https://cdn.discordapp.com/embed/avatars/${(this.state.logged === 1 ? this
                             .state.user.tag : 0) % 5}.png`
                           }
                           avatar

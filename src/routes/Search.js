@@ -7,6 +7,7 @@ import { Card, Container, Pagination } from 'semantic-ui-react'
 import queryString from 'query-string'
 import { HelmetProvider } from 'react-helmet-async'
 import graphql from '../utils/graphql'
+import Adsense from '../components/Advertisement'
 
 class Search extends React.Component {
   constructor(props) {
@@ -159,6 +160,7 @@ class Search extends React.Component {
             </Container>
           </>
         )}
+        <Adsense />
       </Container>
       </>
     )
