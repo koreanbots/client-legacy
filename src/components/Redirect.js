@@ -7,7 +7,9 @@ const Redirecting = props => {
   if (props.content) return <props.content />
   return (
     <Container>
-      <a href={props.to}>자동으로 리다이렉트되지 않는다면 클릭하세요</a>
+      <div className="loader">
+        <a href={props.to}>자동으로 리다이렉트되지 않는다면 클릭하세요</a>
+      </div>
     </Container>
   )
 }
