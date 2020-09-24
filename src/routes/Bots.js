@@ -21,6 +21,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import CodeBlock from '../components/Code'
 import ads from './ads'
 import GitInfo from 'react-git-info/macro'
+import graphql from '../utils/graphql'
 
 class Detail extends React.Component {
   constructor(props) {
@@ -39,22 +40,47 @@ class Detail extends React.Component {
   }
 
   getData = async id => {
-    await fetch(config.api + '/bots/' + id, {
-      method: 'GET',
-      headers: {
-        token: localStorage.token,
-        id: localStorage.id,
-        time: localStorage.date
+    const bot = await graphql(`query {
+      bot(id: "${encodeURIComponent(id)}") {
+        id
+        lib
+        prefix
+        votes
+        servers
+        intro
+        desc
+        web
+        git
+        url
+        category
+        status
+        name
+        avatar
+        tag
+        verified
+        trusted
+        partnered
+        discord
+        boosted
+        state
+        vanity
+        bg
+        banner
+        owners {
+          id
+          avatar
+          tag
+          username
+        }
       }
+    }`)
+
+
+    this.setState({
+      bot: bot.code === 200 && bot.data.bot ? bot.data.bot : null,
+      isLoading: false,
+      error: !bot.data.bot ? '존재하지 않는 봇입니다' : bot.code !== 200 ? bot.message : ''
     })
-      .then(r => r.json())
-      .then(bot =>
-        this.setState({
-          bot: bot.code === 200 ? bot.data : false,
-          isLoading: false,
-          error: bot.code === 200 ? { code: 200 } : bot
-        })
-      )
   }
 
   voteAction = async () => {
@@ -106,19 +132,16 @@ class Detail extends React.Component {
   }
   render() {
     const { bot, isLoading } = this.state
+    console.log(this.state.error)
 
     return (
-      <div
-        style={
-          (bot.boosted && bot.bg) || (bot.trusted && bot.bg)
-            ? {
-                background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${bot.bg}) top/cover no-repeat fixed`
-              }
-            : {}
-        }
-      >
         <Container>
-          <div
+            {isLoading ? (
+              <div className="loader">
+                <span>Loading...</span>
+              </div>
+            ) : !this.state.error ? (
+              <div
             className="botDetail"
             style={
               (bot.boosted && bot.bg) || (bot.trusted && bot.bg)
@@ -128,14 +151,6 @@ class Detail extends React.Component {
                 : {}
             }
           >
-            <br />
-
-            {isLoading ? (
-              <div className="loader">
-                <span>Loading...</span>
-              </div>
-            ) : this.state.error.code === 200 ? (
-              <>
                 <HelmetProvider>
                   <title>{`${bot.name} - 한국 디스코드봇 리스트`}</title>
                 </HelmetProvider>
@@ -265,6 +280,7 @@ class Detail extends React.Component {
                             ))}
                       </Label.Group>
                       <br />
+                      <div className="buttons">
                       {bot.url === false ? (
                         <Button
                           disabled={
@@ -385,6 +401,7 @@ class Detail extends React.Component {
                           </Container>
                         </Modal.Description>
                       </Modal>
+                      </div>
                     </Grid.Column>
                   </Grid.Row>
 
@@ -420,7 +437,7 @@ class Detail extends React.Component {
                   제작/개발:{' '}
                   {(bot.owners || []).map(o => (
                     <Label href={'/users/' + o.id}>
-                      {o.avatar !== false ? (
+                      {o.avatar ? (
                         <>
                           <Image
                             src={
@@ -468,15 +485,24 @@ class Detail extends React.Component {
                    </>
                   )
                 } */}
-              <Advertisement unit="panorama" style={{ width: '100%', marginTop: '10px' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
-                <ins class="adsbygoogle"
-                  style={{ display: 'block' }}
-                  data-ad-client="ca-pub-4856582423981759"
-                  data-ad-slot="3250141451"
-                  data-ad-format="auto"
-                  data-adtest="on"
-                  data-full-width-responsive="true"></ins>
-              </Advertisement>
+
+              {
+                  !(bot.trusted || bot.boosted) && (
+                   <>
+                    <Divider section />
+                    <Advertisement unit="panorama" style={{ width: '100%', marginTop: '10px' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+                      <ins class="adsbygoogle"
+                        style={{ display: 'block' }}
+                        data-ad-client="ca-pub-4856582423981759"
+                        data-ad-slot="3250141451"
+                        data-ad-format="auto"
+                        data-adtest="on"
+                        data-full-width-responsive="true"></ins>
+                    </Advertisement>
+                   </>
+                  )
+                }
+
                 <Divider section />
                 <Segment
                   style={{
@@ -495,15 +521,13 @@ class Detail extends React.Component {
                     }}
                   />
                 </Segment>
-              </>
+              </div>
             ) : (
               <div className="loader">
-                <p>{this.state.error.message}</p>
+                <p>{this.state.error}</p>
               </div>
             )}
-          </div>
         </Container>
-      </div>
     )
   }
 }
