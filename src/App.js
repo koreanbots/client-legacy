@@ -49,8 +49,7 @@ function App() {
       <Menu
         Darkmode={Dark}
         token={localStorage.getItem("token")}
-        id={localStorage.getItem("id")}
-        date={localStorage.getItem("date")}
+        setDark={setDark}
       />
       <ScrollTop>
       <div style={{ position: 'relative', minHeight: '100vh' }} >
