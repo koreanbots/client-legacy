@@ -83,7 +83,7 @@ function App() {
       </Switch>
         <Container>
           {
-            !["/boost", "/partners", "/verification", "/about", "/guidelines", "/privacy"].includes(window.location.pathname) && (
+            !["/boost", "/partners", "/verification", "/about", "/guidelines", "/privacy", "/clientinfo"].includes(window.location.pathname) && (
               <Advertisement unit="panorama" style={{ width: '100%', marginBottom: '2em', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
                 <ins class="adsbygoogle"
                   style={{ display: 'block' }}
