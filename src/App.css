@@ -135,6 +135,21 @@ body {
   color: white !important;
 }
 
+.rank.first.segment {
+  background: gold;
+  color: black !important;
+}
+
+.rank.second.segment {
+  background: #c7c7d0;
+  color: black !important;
+}
+
+.rank.third.segment {
+  background: #af602e;
+  color: white !important;
+}
+
 .card .icon.check {
   color: #7289da !important
 }

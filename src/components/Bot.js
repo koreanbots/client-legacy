@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import withImportantStyle from 'react-with-important-style'
 import {
   Card,
   Button,
@@ -30,6 +31,7 @@ function Bot({
 }) {
   const [lookHover, setLookHover] = useState(false)
   const [inviteHover, setinviteHover] = useState(false)
+  const CustomSegment = withImportantStyle(Segment)
   return (
     <>
       <Card
@@ -54,13 +56,14 @@ function Bot({
               ui={false}
               size="small"
               width="128"
+              onError={(e)=> { console.log(e); e.src="https://cdn.discordapp.com/embed/avatars/0.png?size=128"}}
             />
             {count === undefined ? (
               ''
             ) : (
               <Segment
                 floated="right"
-                className={`rank ${count < 3 && 'top'}`}
+                className={`rank ${count < 3 && `top ${['first', 'second', 'third'][count] || ''}`}`}
                 style={
                   count === 0
                     ? { background: 'gold', color: 'black' }
@@ -68,7 +71,7 @@ function Bot({
                     ? { background: '#c7c7d0', color: 'black' }
                     : count === 2
                     ? { background: '#af602e', color: 'white' }
-                    : {}
+                    : { color: 'black '}
                 }
               >
                 {count + 1 + '위'}
