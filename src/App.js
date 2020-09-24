@@ -54,7 +54,7 @@ function App() {
       />
       <ScrollTop>
       <div style={{ position: 'relative', minHeight: '100vh' }} >
-            <div style={{ paddingBottom: '30rem' }} className="wrap">
+            <div style={{ paddingBottom: '34rem' }} className="wrap">
       <Switch>
 
         <Route exact path="/" component={Home} />
