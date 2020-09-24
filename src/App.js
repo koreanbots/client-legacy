@@ -28,6 +28,7 @@ import Privacy from "./routes/Privacy";
 import Ad from "./routes/Ad";
 import Partners from "./routes/Partners";
 import Trusted from "./routes/Trusted";
+import ScrollTop from "./components/ScrollTop";
 
 
 
@@ -49,6 +50,7 @@ function App() {
         id={localStorage.getItem("id")}
         date={localStorage.getItem("date")}
       />
+      <ScrollTop>
       <div style={{ position: 'relative', minHeight: '100vh' }} >
             <div style={{ paddingBottom: '27rem' }} className="wrap">
       <Switch>
@@ -82,7 +84,9 @@ function App() {
       <Footer Dark={Dark} setDark={setDark}/>
 
         </div>
+        </ScrollTop>
         </div>
+        
     </Router>
   );
 }
