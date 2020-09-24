@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Home from "./routes/Home";
 import About from "./routes/About";
-import Detail from "./routes/Detail";
+import Bots from "./routes/Bots";
 import Search from "./routes/Search";
 import Callback from "./routes/Callback";
 import AddBot from "./routes/AddBot";
@@ -63,7 +63,7 @@ function App() {
         <Route path="/addbot" component={AddBot} />
         <Route path="/callback/discord" component={Callback} />
         <Route path="/pendingBots/:id/:date" component={Pending} />
-        <Route exact path="/bots/:id" component={Detail} />
+        <Route exact path="/bots/:id" component={Bots} />
         <Route exact path="/users/:id" component={User} />
         <Route path="/api/:topic?/:doc?" component={API}/>
         <Route path="/discord">
