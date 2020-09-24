@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Card,
   Button,
@@ -128,9 +129,10 @@ function Bot({
           <Divider />
           <div className="ui two buttons">
             <Button
+              as={Link}
               disabled={state === 'example'}
               basic={!lookHover}
-              href={
+              to={
                 '/bots/' +
                 ((vanity && boosted) || (vanity && trusted) ? vanity : id)
               }
