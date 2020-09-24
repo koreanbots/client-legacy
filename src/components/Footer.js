@@ -1,12 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Segment, Container, Grid, Icon, List, Button } from 'semantic-ui-react'
+import { Segment, Container, Grid, Icon, List } from 'semantic-ui-react'
 function Footer(props) {
-  function toggleDarkmode() {
-    props.setDark(!props.Dark)
-    localStorage.dark = !props.Dark
-  }
+
   return (
     <Segment
       inverted
