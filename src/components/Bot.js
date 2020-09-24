@@ -56,7 +56,7 @@ function Bot({
               ui={false}
               size="small"
               width="128"
-              onError={(e)=> { console.log(e); e.src="https://cdn.discordapp.com/embed/avatars/0.png?size=128"}}
+              onError={ (e)=> e.src="https://cdn.discordapp.com/embed/avatars/0.png?size=128" }
             />
             {count === undefined ? (
               ''
