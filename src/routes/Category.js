@@ -37,11 +37,7 @@ class Category extends React.Component {
   }
 
   editParm = (parm, val) => {
-    window.history.pushState(
-      '',
-      document.title,
-      `${window.location.origin}${window.location.pathname}?${parm}=${val}`
-    )
+    return `${window.location.origin}${window.location.pathname}?${parm}=${val}`
   }
   getData = async page => {
     const bot = await graphql(`query {
@@ -78,8 +74,7 @@ class Category extends React.Component {
     })
   }
   handlePaginationChange = (_e, { activePage }) => {
-    this.editParm('page', activePage)
-    this.getData(activePage, this.props)
+    window.location.href = this.editParm('page', activePage)
   }
 
   componentDidMount() {
@@ -191,7 +186,6 @@ class Category extends React.Component {
               <br />
               <Container textAlign="center">
                 <Pagination
-                  href="#"
                   boundaryRange={0}
                   siblingRange={1}
                   ellipsisItem={null}
