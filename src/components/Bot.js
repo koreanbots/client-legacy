@@ -121,9 +121,11 @@ function Bot({
         </Card.Content>
         <Card.Content extra>
           {category.slice(0, 5).map(c => (
+            <>
             <a style={{ color: '#7289DA' }} href={'/categories/' + c} key={c}>
-              #{c}{' '}
-            </a>
+              #{c}
+            </a>{' '}
+            </>
           ))}
           <span>
             {' '}
