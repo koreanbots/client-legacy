@@ -435,6 +435,7 @@ class Home extends React.Component {
               <h1>✅ 신뢰된 봇</h1>
               <p>KOREANBOTS에서 인증받은 신뢰할 수 있는 봇들입니다!!</p>
               <a href="/verification">더 알아보기</a>
+              <br/><br/>
               { isLoading && code !== 200 ? (
                 <div className="loader">
                   <span className="loader__text">Loading...</span>
