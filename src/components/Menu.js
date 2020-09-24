@@ -78,7 +78,6 @@ export default class Nav extends Component {
       setDark(!Darkmode)
       localStorage.dark = !Darkmode
     }
-    console.log(this.props)
     return (
       <>
         <Responsive {...Responsive.onlyMobile}>
