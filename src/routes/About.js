@@ -38,7 +38,10 @@ function About(props) {
       </Segment>
       <Divider />
       <h2>KOREANBOTS 색상</h2>
-      <Card.Group stackabl>
+      <Card.Group stackable style={{
+            backgroundColor: '#1B1C1D !important',
+            padding: '15px !important',
+          }}>
         <CustomCard
           className="ui card"
           style={{
