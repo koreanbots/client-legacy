@@ -302,9 +302,7 @@ class Detail extends React.Component {
                           href={bot.url}
                         ></Button>
                       )}
-                      {bot.web === false ? (
-                        ''
-                      ) : (
+                      {bot.web && (
                         <Button
                           color="blue"
                           content="웹사이트"
@@ -313,9 +311,7 @@ class Detail extends React.Component {
                           href={bot.web}
                         ></Button>
                       )}
-                      {bot.discord === false ? (
-                        ''
-                      ) : (
+                      {!bot.discord && (
                         <Button
                           className="discord"
                           content="지원 디스코드"
@@ -324,9 +320,7 @@ class Detail extends React.Component {
                           href={'https://discord.gg/' + bot.discord}
                         ></Button>
                       )}
-                      {bot.git === false ? (
-                        ''
-                      ) : (
+                      {bot.git && (
                         <Button
                           color="black"
                           content="Git"
