@@ -54,7 +54,7 @@ function App() {
       />
       <ScrollTop>
       <div style={{ position: 'relative', minHeight: '100vh' }} >
-            <div style={{ paddingBottom: '27rem' }} className="wrap">
+            <div style={{ paddingBottom: '30rem' }} className="wrap">
       <Switch>
 
         <Route exact path="/" component={Home} />
@@ -83,15 +83,19 @@ function App() {
         
       </Switch>
         <Container>
-          <Advertisement unit="panorama" style={{ width: '100%', marginBottom: '2em', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
-            <ins class="adsbygoogle"
-              style={{ display: 'block' }}
-              data-ad-client="ca-pub-4856582423981759"
-              data-ad-slot="3250141451"
-              data-ad-format="auto"
-              data-adtest="on"
-              data-full-width-responsive="true"></ins>
-          </Advertisement>
+          {
+            !["/boost", "/partners", "verification", "/about", "/guidelines", "privacy"].includes(window.location.pathname) && (
+              <Advertisement unit="panorama" style={{ width: '100%', marginBottom: '2em', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+                <ins class="adsbygoogle"
+                  style={{ display: 'block' }}
+                  data-ad-client="ca-pub-4856582423981759"
+                  data-ad-slot="3250141451"
+                  data-ad-format="auto"
+                  data-adtest="on"
+                  data-full-width-responsive="true"></ins>
+              </Advertisement>
+            )
+          }
         </Container>
       </div>
       <Footer Dark={Dark} setDark={setDark}/>
