@@ -200,6 +200,6 @@ img:before {
 }
 
 
-a[href]:hover:not(.label) {
+a[href]:hover:not(.label, .results) {
   text-decoration: underline;
 }
