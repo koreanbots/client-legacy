@@ -3,6 +3,7 @@ import { Image, Search, Icon } from 'semantic-ui-react'
 import './Search.css'
 import graphql from '../utils/graphql'
 import Countdown from './Countdown'
+import { Link } from 'react-router-dom'
 export default class SearchField extends Component {
   constructor(props) {
     super(props)
@@ -90,7 +91,7 @@ export default class SearchField extends Component {
 
 const resultRenderer = ({ idx, name, avatar, tag, intro, votes, trusted, boosted, vanity }) => {
   return (
-    <>
+    <Link to={`/bots/${(trusted || boosted) && vanity ? vanity : idx}`} className="results">
       <Image style={{ height: '3em', width: '3em' }} src={avatar
         ? 'https://cdn.discordapp.com/avatars/' +
           idx +
@@ -100,11 +101,11 @@ const resultRenderer = ({ idx, name, avatar, tag, intro, votes, trusted, boosted
         : `https://cdn.discordapp.com/embed/avatars/${tag %
             5}.png?size=128`
     } />
-    <div className="content" onClick={()=> window.location.assign(`/bots/${(trusted || boosted) && vanity ? vanity : idx}`)}>
+    <div className="content">
       <div className="price"><a style={{ color: 'red' }}>{votes} <Icon className="heart" /></a></div>
       <div className="title">{name}</div>
       <div className="description">{intro}</div>
     </div>
-    </>
+    </Link>
   )
 }
