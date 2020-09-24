@@ -172,7 +172,7 @@ class Detail extends React.Component {
                         centered
                         floated
                         src={
-                          bot.avatar !== false
+                          bot.avatar
                             ? 'https://cdn.discordapp.com/avatars/' +
                               bot.id +
                               '/' +
