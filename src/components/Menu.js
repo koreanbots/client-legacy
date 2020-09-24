@@ -74,6 +74,11 @@ export default class Nav extends Component {
   }
   render() {
     const { visible } = this.state
+    function toggleDarkmode(setDark, Darkmode) {
+      setDark(!Darkmode)
+      localStorage.dark = !Darkmode
+    }
+    console.log(this.props)
     return (
       <>
         <Responsive {...Responsive.onlyMobile}>
@@ -133,9 +138,9 @@ export default class Nav extends Component {
                 </Dropdown.Menu>
               </Dropdown>
             ) : (
-              <Menu.Item color="black" name="로그인" href={config.url}>
+              <Dropdown.Item color="black" name="로그인" href={config.url}>
                 로그인
-              </Menu.Item>
+              </Dropdown.Item>
             )}
           </Menu>
           <Sidebar
@@ -181,7 +186,7 @@ export default class Nav extends Component {
                   KOREANBOTS
                 </h1>
               </Menu.Item>
-              <Menu.Item as={Link} href="/discord">
+              <Menu.Item href="/discord">
                 디스코드
               </Menu.Item>
               <Menu.Item name="about" as={Link} to="/about">
@@ -197,62 +202,60 @@ export default class Nav extends Component {
             <Menu.Menu position="right">
               <Menu.Item>
               </Menu.Item>
-              {this.state.logged === 0 ? (
-                <Menu.Item color="black" name="로그인" href={config.url}>
-                  로그인
-                </Menu.Item>
-              ) : this.state.logged === 1 ? (
                 <Dropdown
                   item
                   trigger={
-                    this.state.user.avatar ? (
-                      <>
+                        <>
                         <Image
-                          src={
+                          src={ this.state.logged === 1 && this.state.user.avatar ? 
                             'https://cdn.discordapp.com/avatars/' +
                             this.state.user.id +
                             '/' +
                             this.state.user.avatar +
-                            '.png'
+                            '.png' : `https://cdn.discordapp.com/embed/avatars/${(this.state.logged ? this
+                            .state.user.tag : 0) % 5}.png`
                           }
                           avatar
                         />
                         <span>
                           {' '}
-                          {this.state.user.username}#{this.state.user.tag}
+                          {this.state.logged === 1 ? this.state.user.username : "Guest"}{this.state.logged === 1 && '#'+this.state.user.tag}
                         </span>
-                      </>
-                    ) : (
-                      <>
-                        <Image
-                          src={`https://cdn.discordapp.com/embed/avatars/${this
-                            .state.user.tag % 5}.png`}
-                          avatar
-                        />
-                        <span>
-                          {' '}
-                          {this.state.user.username}#{this.state.user.tag}
-                        </span>
-                      </>
-                    )
+                        </>
                   }
                 >
                   <Dropdown.Menu>
-                    <Dropdown.Item href="/profile">
-                      <Icon className="settings" /> 관리패널
+                    <Dropdown.Item onClick={() => toggleDarkmode(this.props.setDark, this.props.Darkmode)}>
+                        {this.props.Darkmode ? (
+                          <>
+                            <Icon className="sun" /> 화이트모드 켜기
+                          </>
+                        ) : (
+                          <>
+                            <Icon className="moon" /> 다크모드 켜기
+                          </>
+                        )}
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={this.logout}>
-                      <a style={{ color: '#ff6e6e' }}>
-                        <Icon className="logout" /> 로그아웃
-                      </a>
-                    </Dropdown.Item>
+                    { this.state.logged === 1 ? (
+                        <>
+                        <Dropdown.Item href="/profile">
+                          <Icon className="settings" /> 관리패널
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={this.logout}>
+                          <a style={{ color: '#ff6e6e' }}>
+                            <Icon className="logout" /> 로그아웃
+                          </a>
+                        </Dropdown.Item>
+                        </>
+                      ) : (
+                        <Dropdown.Item href={config.url}>
+                          <Icon className="sign in" /> 로그인
+                        </Dropdown.Item>
+                      )
+                      }
+                    
                   </Dropdown.Menu>
                 </Dropdown>
-              ) : (
-                <Menu.Item color="black" name="로그인" href={config.url}>
-                  로그인
-                </Menu.Item>
-              )}
             </Menu.Menu>
           </Menu>
           </Container>
