@@ -311,7 +311,7 @@ class Detail extends React.Component {
                           href={bot.web}
                         ></Button>
                       )}
-                      {!bot.discord && (
+                      {bot.discord && (
                         <Button
                           className="discord"
                           content="지원 디스코드"
