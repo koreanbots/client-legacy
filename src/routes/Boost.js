@@ -15,10 +15,6 @@ import Article from '../components/Article'
 
 class Boost extends React.Component {
   componentDidMount() {
-    // If you want to pass more options as props, simply add
-    // your desired props to this destructuring assignment.
-    // You can pass other options here, such as typing speed, back speed, etc. 
-    // this.el refers to the <span> in the render() method
     this.typed = new Typed(this.el, {
       strings: ['iubot', 'hellobot', 'coolbot', 'mybot'],
       typeSpeed: 100,
@@ -29,13 +25,11 @@ class Boost extends React.Component {
   }
 
   componentWillUnmount() {
-    // Make sure to destroy Typed instance on unmounting
-    // to prevent memory leaks
     this.typed.destroy()
   }
   render() {
     return (
-      <Article title="부스터 혜택" description="디스코드 서버를 부스트 해주신 멋진 분들에게 드리는 혜택이에요!">
+      <Article title="부스터 혜택" description="디스코드 서버를 부스트 해주신 멋진 분들에게 드리는 혜택이에요!" colorHeader>
         <h2>부스터 티어1</h2>
         <h3>한 개이상의 부스트를 해주신 분이 해당해요!</h3>
         <Card.Group itemsPerRow={3} stackable>
@@ -153,13 +147,15 @@ class Boost extends React.Component {
                 티어1 혜택
               </Card.Header>
 
-              <h4 style={{ marginTop: '1em' }}>
-                <Image src="/img/booster.png" />
-                <br />
-                <br />
-                모든 티어1 혜택을 이용할 수 있어요! <br />
-                오예 신난다!
-              </h4>
+              <Container textAlign="center">
+                <h4 style={{ marginTop: '1em' }}>
+                  <Image src="/img/booster.png" />
+                  <br />
+                  <br />
+                  모든 티어1 혜택을 이용할 수 있어요! <br />
+                  오예 신난다!
+                </h4>
+              </Container>
             </Card.Content>
           </Card>
           <Card>
