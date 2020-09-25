@@ -137,7 +137,7 @@ export default class Nav extends Component {
                         <Dropdown.Item href={`/users/${this.state.user.id}`}>
                           <Icon className="user" /> 프로필
                         </Dropdown.Item>
-                        <Dropdown.Item href="/profile">
+                        <Dropdown.Item href="/panel">
                           <Icon className="settings" /> 관리패널
                         </Dropdown.Item>
                         <Dropdown.Item onClick={this.logout}>
@@ -252,7 +252,7 @@ export default class Nav extends Component {
                         <Dropdown.Item href={`/users/${this.state.user.id}`}>
                           <Icon className="user" /> 프로필
                         </Dropdown.Item>
-                        <Dropdown.Item href="/profile">
+                        <Dropdown.Item href="/panel">
                           <Icon className="settings" /> 관리패널
                         </Dropdown.Item>
                         <Dropdown.Item onClick={this.logout}>
