@@ -38,8 +38,8 @@ export default class SearchField extends Component {
     }
     `
     const res = await graphql(query)
-    if(!res.data || res.errors) return this.setState({ result: [], error: res.message })
     if(res.code === 429) return this.setState({ ratelimit: new Date(+new Date() + res.try_after * 1000), error: '' })
+    if(!res.data || res.errors) return this.setState({ result: [], error: res.message })
      
     
     if(res.code === 200) this.setState({ error: '', result: res.data.search.map(el=> {
@@ -67,7 +67,7 @@ export default class SearchField extends Component {
           fluid={this.props.fluid}
           resultRenderer={resultRenderer}
           noResultsMessage={+this.state.ratelimit > +new Date() ? '지정된 시간에 너무 많은 요청을 보냈습니다.' : this.state.error ? this.state.error : this.state.value.length < 2 ? '2글자 이상 입력해주세요.'  : '검색결과가 없습니다.'}
-          noResultsDescription={+this.state.ratelimit > +new Date() ? (<>dfsat<Countdown after={()=> this.preview(this.state.value)} time={Math.round((this.state.ratelimit - new Date())/1000)} />초 후에 다시 시도해주세요.</>) : ''}
+          noResultsDescription={+this.state.ratelimit > +new Date() ? (<><Countdown after={()=> this.preview(this.state.value)} time={Math.round((this.state.ratelimit - new Date())/1000)} />초 후에 다시 시도해주세요.</>) : 'asdf'}
         />
 
         {this.state.redirect ? to(this.state.value) : ''}
