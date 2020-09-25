@@ -228,11 +228,6 @@ class Detail extends React.Component {
                             <Label
                               href="/boost"
                               className="noHover boosted"
-                              style={{
-                                background: '#ff73fa',
-                                color: 'white',
-                                cursor: 'pointer'
-                              }}
                             >
                               <Icon className="icon diamond" /> 부스트
                             </Label>
