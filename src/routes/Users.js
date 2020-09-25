@@ -115,7 +115,7 @@ class User extends React.Component {
                       }
                       size="medium"
                       rounded
-                      onError={ (e)=> e.src="/img/default.png" }
+                      onError={ (e)=> e.target.src="/img/default.png" }
                     />
                   </Grid.Column>
                   <Grid.Column>

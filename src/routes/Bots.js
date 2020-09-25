@@ -185,7 +185,7 @@ class Detail extends React.Component {
                             : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
                                 5}.png?size=1024`
                         }
-                        onError={ (e)=> e.src="/img/default.png" }
+                        onError={ (e)=> e.target.src="/img/default.png" }
                         size="medium"
                         rounded
                       />
@@ -439,7 +439,7 @@ class Detail extends React.Component {
                               '.png' : `https://cdn.discordapp.com/embed/avatars/${o.tag %
                               5}.png`
                           }
-                        onError={ (e)=> e.src="/img/default.png" }
+                        onError={ (e)=> e.target.src="/img/default.png" }
                         avatar
                         />
                         <span>

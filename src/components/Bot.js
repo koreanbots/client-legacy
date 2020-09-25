@@ -54,7 +54,7 @@ function Bot({
               ui={false}
               size="small"
               width="128"
-              onError={ (e)=> e.src="/img/default.png" }
+              onError={ (e)=> e.target.src="/img/default.png" }
             />
             {count === undefined ? (
               ''
