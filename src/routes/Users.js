@@ -13,6 +13,7 @@ import config from '../config'
 import { HelmetProvider } from 'react-helmet-async'
 import Bot from '../components/Bot'
 import graphql from '../utils/graphql'
+import Permission from '../utils/permission'
 
 class User extends React.Component {
   constructor(props) {
@@ -124,7 +125,7 @@ class User extends React.Component {
                       {data.username}
                       <h2 style={{ color: 'gray' }}>#{data.tag}</h2>
                     </h1>
-                    {data.perm === 'admin' ? (
+                    {Permission.check(data.perm, 'staff') && (
                       <Popup
                         content="해당 유저는 관리자입니다."
                         trigger={
@@ -136,13 +137,40 @@ class User extends React.Component {
                           </Label>
                         }
                       />
-                    ) : (
-                      ''
+                    )}
+
+                    {Permission.check(data.perm, 'bughunter') && (
+                      <Popup
+                        content="해당 유저는 버그헌터입니다."
+                        trigger={
+                          <Label
+                            className="green"
+                            style={{ cursor: 'pointer' }}
+                          >
+                            <Icon className="icon bug " /> 버그헌터
+                          </Label>
+                        }
+                      />
+                    )}
+
+                    {Permission.check(data.perm, 'booster') && (
+                      <Popup
+                        content="해당 유저는 디스코드 서버 부스터입니다."
+                        trigger={
+                          <Label
+                            className="noHover boosted"
+                            style={{ cursor: 'pointer' }}
+                            href="/boost"
+                          >
+                            <Icon className="icon gem" /> 부스터
+                          </Label>
+                        }
+                      />
                     )}
                     <br/>
                    
                     {
-                      data.github ? (
+                      data.github && (
                     <>
                       <Label style={{ marginTop: '20px' }} href={`https://github.com/${data.github}`}>
                       <Icon className="github" />
@@ -150,7 +178,7 @@ class User extends React.Component {
                       </Label>
                     </>
                         
-                      ) : ("")
+                      )
                     }
                     
                   </Grid.Column>
