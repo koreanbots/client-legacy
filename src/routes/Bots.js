@@ -79,7 +79,7 @@ class Detail extends React.Component {
     this.setState({
       bot: bot.code === 200 && bot.data.bot ? bot.data.bot : null,
       isLoading: false,
-      error: !bot.data.bot ? '존재하지 않는 봇입니다' : bot.code !== 200 ? bot.message : ''
+      error: bot.code !== 200 ? bot.message : !bot.data.bot ? '존재하지 않는 봇입니다' : ''
     })
   }
 
