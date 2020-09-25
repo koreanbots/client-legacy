@@ -52,7 +52,7 @@ function App(props) {
         setDark={setDark}
       />
       <ScrollTop>
-      <div style={{ position: 'relative', minHeight: '100vh', paddingBottom: '30px' }} >
+      <div style={{ position: 'relative', minHeight: '100vh' }} >
     
       <Switch>
 
