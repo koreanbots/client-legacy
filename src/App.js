@@ -29,8 +29,6 @@ import Ad from "./routes/Ad";
 import Partners from "./routes/Partners";
 import Trusted from "./routes/Trusted";
 import ScrollTop from "./components/ScrollTop";
-import { Advertisement, Container } from "semantic-ui-react";
-import GitInfo from "react-git-info/macro";
 
 
 

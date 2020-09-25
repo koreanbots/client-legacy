@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import withImportantStyle from 'react-with-important-style'
 import {
   Card,
   Button,
@@ -31,7 +30,6 @@ function Bot({
 }) {
   const [lookHover, setLookHover] = useState(false)
   const [inviteHover, setinviteHover] = useState(false)
-  const CustomSegment = withImportantStyle(Segment)
   return (
     <>
       <Card

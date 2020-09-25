@@ -9,7 +9,6 @@ import {
   Icon,
   Popup
 } from 'semantic-ui-react'
-import config from '../config'
 import { HelmetProvider } from 'react-helmet-async'
 import Bot from '../components/Bot'
 import graphql from '../utils/graphql'

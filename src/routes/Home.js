@@ -11,9 +11,7 @@ import {
 import Typed from 'typed.js'
 import queryString from 'query-string'
 import SearchField from '../components/Search'
-import ads from './ads'
 import { Link, Redirect } from 'react-router-dom'
-import GitInfo from 'react-git-info/macro'
 import graphql from '../utils/graphql'
 
 import Ad from '../components/Advertisement'
