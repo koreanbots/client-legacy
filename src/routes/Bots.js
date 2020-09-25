@@ -133,7 +133,7 @@ class Detail extends React.Component {
   render() {
     const { bot, isLoading } = this.state
     return (
-        <Container>
+        <>
             {isLoading ? (
               <div className="loader">
                 <span>Loading...</span>
@@ -141,14 +141,18 @@ class Detail extends React.Component {
             ) : !this.state.error ? (
               <div
             className="botDetail"
-            style={
-              (bot.boosted && bot.bg) || (bot.trusted && bot.bg)
-                ? {
-                    color: 'white'
-                  }
-                : {}
-            }
           >
+            <div style={
+              (bot.boosted && bot.bg) || (bot.trusted && bot.bg)
+                ? { 
+                    paddingBottom: '30px',
+                    color: 'white',
+                    background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${bot.bg}) top/cover no-repeat fixed`
+                  }
+                : { paddingBottom: '30px' }
+            }>
+              <br/>
+          <Container>
                 <HelmetProvider>
                   <title>{`${bot.name} - 한국 디스코드봇 리스트`}</title>
                 </HelmetProvider>
@@ -458,22 +462,6 @@ class Detail extends React.Component {
                     </Label>
                   ))}
                 </div>
-                {/* {
-                  ads.bot && (bot.trusted || bot.boosted) ? "" : (
-                   <>
-                    <Divider section />
-                    <a href={this.state.ads.link}>
-                    <div class="ui fluid image">
-                    <a class="ui top right attached label" href="/ad" style={{ borderRadius: 0 }}>
-                      광고
-                    </a>
-                    <img src={this.state.ads.img} style={{ width: '100%' }}/>
-                      </div>
-                    </a>
-                   </>
-                  )
-                } */}
-
               {
                   !(bot.trusted || bot.boosted) && (
                    <>
@@ -501,13 +489,15 @@ class Detail extends React.Component {
                     }}
                   />
                 </Segment>
+                </Container>
+                </div>
               </div>
             ) : (
               <div className="loader">
                 <p>{this.state.error}</p>
               </div>
             )}
-        </Container>
+            </>
     )
   }
 }
