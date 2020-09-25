@@ -109,7 +109,7 @@ class User extends React.Component {
                             data.id +
                             '/' +
                             data.avatar +
-                            (data.avatar.startsWith('a_') ? 'gif' : 'png') + '?size=1024'
+                            (data.avatar.startsWith('a_') ? '.gif' : '.png') + '?size=1024'
                           : `https://cdn.discordapp.com/embed/avatars/${data.tag %
                               5}.png?size=1024`
                       }
