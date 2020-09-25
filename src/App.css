@@ -100,6 +100,10 @@ body {
   color: #fff !important;
 }
 
+.boosted {
+  background: #ff73fa !important;
+  color: white !important
+}
 .trusted {
   background: #16ab39 !important;
   color: #fff !important
