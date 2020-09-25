@@ -244,7 +244,7 @@ class Home extends React.Component {
           </>
         )}
 
-        <Container>
+        <Container style={{ paddingBottom: '30px' }}>
           <HelmetProvider>
             <title>한국 디스코드봇 리스트</title>
             <meta
