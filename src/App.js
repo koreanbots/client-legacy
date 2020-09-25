@@ -52,8 +52,8 @@ function App(props) {
         setDark={setDark}
       />
       <ScrollTop>
-      <div style={{ position: 'relative', minHeight: '100vh' }} >
-            <div style={{ paddingBottom: '34rem' }} className="wrap">
+      <div style={{ position: 'relative', minHeight: '100vh', paddingBottom: '30px' }} >
+    
       <Switch>
 
         <Route exact path="/" component={Home} />
@@ -80,10 +80,8 @@ function App(props) {
         <Route path="/ad" component={Ad} />
         <Route component={NotFound}></Route>
       </Switch>
-      </div>
-      <Footer Dark={Dark} setDark={setDark}/>
-
         </div>
+        <Footer Dark={Dark} setDark={setDark}/>
         </ScrollTop>
         </div>
         
