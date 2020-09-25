@@ -120,9 +120,9 @@ function Bot({
         <Card.Content extra>
           {category.slice(0, 5).map(c => (
             <>
-            <a style={{ color: '#7289DA' }} href={'/categories/' + c} key={c}>
+            <Link as={Link} style={{ color: '#7289DA' }} to={'/categories/' + c} key={c}>
               #{c}
-            </a>{' '}
+            </Link>{' '}
             </>
           ))}
           <span>
