@@ -91,7 +91,7 @@ class Category extends React.Component {
     const { isLoading, bot } = this.state
 
     return (
-      <Container>
+      <Container style={{ paddingBottom: '30px' }}>
         <HelmetProvider>
           <title>
             {this.props.match.params.category} 카테고리 봇들 - 한국 디스코드봇

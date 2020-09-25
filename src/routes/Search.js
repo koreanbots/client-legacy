@@ -81,7 +81,7 @@ class Search extends React.Component {
   render() {
     const { bots, isLoading } = this.state
     return (
-      <>
+      <div style={{ paddingBottom: '30px' }}>
         <div className="verytop" style={{ padding: '10px', marginBottom: '10px', display: 'flex', minHeight: '370px', alignItems: 'center', justifyContent: 'center', color: 'white'}}>
           <Container>
             <h1>검색결과</h1>
@@ -155,11 +155,12 @@ class Search extends React.Component {
                 onPageChange={this.handlePaginationChange}
               />
             </Container>
+            <Adsense />
+
           </>
         )}
-        <Adsense />
       </Container>
-      </>
+      </div>
     )
   }
 }
