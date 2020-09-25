@@ -134,6 +134,9 @@ export default class Nav extends Component {
                     </Dropdown.Item>
                     { this.state.logged === 1 ? (
                         <>
+                        <Dropdown.Item href={`/users/${this.state.user.id}`}>
+                          <Icon className="user" /> 프로필
+                        </Dropdown.Item>
                         <Dropdown.Item href="/profile">
                           <Icon className="settings" /> 관리패널
                         </Dropdown.Item>
@@ -246,6 +249,9 @@ export default class Nav extends Component {
                     </Dropdown.Item>
                     { this.state.logged === 1 ? (
                         <>
+                        <Dropdown.Item href={`/users/${this.state.user.id}`}>
+                          <Icon className="user" /> 프로필
+                        </Dropdown.Item>
                         <Dropdown.Item href="/profile">
                           <Icon className="settings" /> 관리패널
                         </Dropdown.Item>
