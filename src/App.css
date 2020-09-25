@@ -81,7 +81,7 @@ body {
   color: white;
 }
 
-.darkmode .label[href]:hover, .darkmode .tag.labels > a:not(.noHover)[href]:hover {
+.darkmode .label:not(.noHover)[href]:hover, .darkmode .tag.labels > a:not(.noHover)[href]:hover {
   background-color: #000000 !important;
   color: white !important;
 }
