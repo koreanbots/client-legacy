@@ -10,5 +10,5 @@ const perms = {
   general: 0x0,
   staff: 0x1,
   bughunter: 0x2,
-  booster: 0x3
+  booster: 0x4
 }
