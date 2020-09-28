@@ -57,11 +57,17 @@ export default class Nav extends Component {
     }
     if (!localStorage.userCache && localStorage.token) getUser(this.props.token)
     else
+    try {
+      JSON.parse(localStorage.userCache)
       this.setState({
         user: JSON.parse(localStorage.userCache),
         isLoading: false,
         logged: 1
       })
+    } catch {
+      this.logout()
+    }
+      
   }
   editSlider = () => {
     this.setState({ visible: !this.state.visible })
@@ -70,6 +76,8 @@ export default class Nav extends Component {
   logout = () => {
     delete localStorage.userCache
     delete localStorage.token
+    delete localStorage.nsfw
+
     window.location.assign('/')
   }
   render() {
