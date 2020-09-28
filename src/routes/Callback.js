@@ -17,7 +17,7 @@ class Callback extends React.Component {
     await graphql(`mutation {
       login(code: "${code}")
     }
-    `)
+    `, true)
       .then(res=> {
         if(res.code !== 200) this.setState({ isLoading: false, error: res.message })
         else {

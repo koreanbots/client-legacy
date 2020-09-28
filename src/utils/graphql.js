@@ -1,10 +1,10 @@
 import config from "../config";
 
-export default async function( query ) {
+export default async function( query, ignoreToken=false ) {
     const res = await fetch(config.api + '/graphql', {
         method: 'POST',
         headers: {
-            Authorization: localStorage.token ? 'Bearer ' + localStorage.token : '',
+            Authorization: ignoreToken || !localStorage.token ? '' : 'Bearer ' + localStorage.token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ query })

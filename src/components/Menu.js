@@ -26,6 +26,7 @@ export default class Nav extends Component {
   componentDidMount() {
     if(!localStorage.token) return
     const getUser = async () => {
+      if(window.location.pathname === '/callback') return
       await graphql(`query {
         me {
           id
