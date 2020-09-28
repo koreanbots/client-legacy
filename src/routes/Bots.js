@@ -82,7 +82,7 @@ class Detail extends React.Component {
       bot: bot.code === 200 && bot.data.bot ? bot.data.bot : null,
       isLoading: false,
       error: bot.code !== 200 ? bot.message : !bot.data.bot ? '존재하지 않는 봇입니다' : '',
-      user: JSON.parse(localStorage.userCache)
+      user: localStorage.userCache ? JSON.parse(localStorage.userCache) : { }
     })
   }
 
