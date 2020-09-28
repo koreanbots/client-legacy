@@ -22,6 +22,8 @@ import CodeBlock from '../components/Code'
 import ads from './ads'
 import graphql from '../utils/graphql'
 import Adsense from '../components/Advertisement'
+import Permission from '../utils/permission'
+import { Link } from 'react-router-dom'
 
 class Detail extends React.Component {
   constructor(props) {
@@ -79,7 +81,8 @@ class Detail extends React.Component {
     this.setState({
       bot: bot.code === 200 && bot.data.bot ? bot.data.bot : null,
       isLoading: false,
-      error: bot.code !== 200 ? bot.message : !bot.data.bot ? '존재하지 않는 봇입니다' : ''
+      error: bot.code !== 200 ? bot.message : !bot.data.bot ? '존재하지 않는 봇입니다' : '',
+      user: JSON.parse(localStorage.userCache)
     })
   }
 
@@ -393,6 +396,13 @@ class Detail extends React.Component {
                           </Container>
                         </Modal.Description>
                       </Modal>
+                      {
+                        (Permission.check(this.state.user.perm, 'staff') || bot.owners.find(el=> el.id === this.state.user.id)) && (
+                        <Button color="grey" as={Link} to={`/manage/${bot.id}`}>
+                          <Icon className="flag settings" />
+                          관리하기
+                        </Button>)
+                      }
                       </div>
                     </Grid.Column>
                   </Grid.Row>
