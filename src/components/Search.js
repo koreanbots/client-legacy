@@ -67,7 +67,7 @@ export default class SearchField extends Component {
           fluid={this.props.fluid}
           resultRenderer={resultRenderer}
           noResultsMessage={+this.state.ratelimit > +new Date() ? '지정된 시간에 너무 많은 요청을 보냈습니다.' : this.state.error ? this.state.error : this.state.value.length < 2 ? '2글자 이상 입력해주세요.'  : '검색결과가 없습니다.'}
-          noResultsDescription={+this.state.ratelimit > +new Date() ? (<><Countdown after={()=> this.preview(this.state.value)} time={Math.round((this.state.ratelimit - new Date())/1000)} />초 후에 다시 시도해주세요.</>) : 'asdf'}
+          noResultsDescription={+this.state.ratelimit > +new Date() ? (<><Countdown after={()=> this.preview(this.state.value)} time={Math.round((this.state.ratelimit - new Date())/1000)} />초 후에 다시 시도해주세요.</>) : ''}
         />
 
         {this.state.redirect ? to(this.state.value) : ''}
