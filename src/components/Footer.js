@@ -8,7 +8,7 @@ function Footer(props) {
     <Segment
       className="footer"
       inverted
-      style={{ padding: '6rem 0' }}
+      style={{ padding: '6rem 0', borderRadius: 0 }}
     >
       <Container>
         <Grid stackable padded="vertically" className="footer">
