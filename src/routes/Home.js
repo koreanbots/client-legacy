@@ -75,7 +75,6 @@ class Home extends React.Component {
           boosted
           status
           banner
-          bg
         }
       }
       trusted: list(type: TRUSTED, page: ${page}) {
@@ -98,7 +97,6 @@ class Home extends React.Component {
           boosted
           status
           banner
-          bg
         }
       }
       new: list(type: NEW, page: ${page}) {
@@ -121,7 +119,6 @@ class Home extends React.Component {
           boosted
           status
           banner
-          bg
         }
       }
     }
@@ -318,7 +315,6 @@ class Home extends React.Component {
                         boosted={bot.boosted}
                         status={bot.status}
                         banner={bot.banner}
-                        bg={bot.bg}
                       />
                     </>
                   ))}
@@ -401,7 +397,6 @@ class Home extends React.Component {
                             boosted={n.boosted}
                             status={n.status}
                             banner={n.banner}
-                            bg={n.bg}
                           />
                         </>
                       ))}
@@ -457,7 +452,6 @@ class Home extends React.Component {
                           boosted={trusted.boosted}
                           status={trusted.status}
                           banner={trusted.banner}
-                          bg={trusted.bg}
                         />
                       </>
                     ))}
