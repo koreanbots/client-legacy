@@ -29,6 +29,7 @@ import Ad from "./routes/Ad";
 import Partners from "./routes/Partners";
 import Trusted from "./routes/Trusted";
 import ScrollTop from "./components/ScrollTop";
+import GithubCallback from "./routes/Github";
 
 
 
@@ -61,6 +62,7 @@ function App(props) {
         <Route path="/panel" component={Profile} />
         <Route path="/addbot" component={AddBot} />
         <Route path="/callback/discord" component={Callback} />
+        <Route path="/callback/github" component={GithubCallback} />
         <Route path="/pendingBots/:id/:date" component={Pending} />
         <Route exact path="/bots/:id" component={Bots} />
         <Route exact path="/users/:id" component={User} />

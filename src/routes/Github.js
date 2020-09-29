@@ -3,7 +3,7 @@ import { Container, Icon } from 'semantic-ui-react'
 import Logo from '../components/Logo'
 import graphql from '../utils/graphql'
 
-class Callback extends React.Component {
+class GithubCallback extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -16,22 +16,17 @@ class Callback extends React.Component {
 
   getData = async (code) => {
     await graphql(`mutation {
-      login(code: "${code}")
+      github(code: "${code}")
     }
     `, true)
       .then(res=> {
         if(res.code !== 200) this.setState({ isLoading: false, error: res.message })
         else {
-          localStorage.setItem('token', res.data.login)
-          this.setState({ isLoading: false })
+          this.setState({ isLoading: false, result: res.data.github })
         } 
       })
   }
 
-  redirect = () => {
-    window.history.go(-2) || window.location.assign('/')
-    return '성공적으로 로그인하였습니다. 리다이랙트합니다.'
-  }
   componentDidMount() {
     const query = new URLSearchParams(this.props.location.search.replace('?', ''))
     const code = query.get('code')
@@ -40,15 +35,16 @@ class Callback extends React.Component {
   render() {
     const { isLoading, error } = this.state
     return (
-      <div className="loader">
+     
+        <div className="loader">
              <Container textAlign="center">
-            <Logo /> <Icon className="plus" /> <h1 style={{ marginTop: '14px' }}><Icon className="discord" /></h1>
+            <Logo /> <Icon className="plus" /> <h1 style={{ marginTop: '14px' }}><Icon className="github" /></h1>
             <br/>
-            <h2>{ isLoading ? '데이터 검증중입니다.' : error ? '오류가 발생하였습니다. (다시 시도해주세요.)' : this.redirect()}</h2>
+            <h2>{ isLoading ? '계정을 연동중입니다.' : error ? '오류가 발생하였습니다.' : '깃허브 계정을 성공적으로 연동하였습니다.'}</h2>
             </Container>
         </div>
     )
   }
 }
 
-export default Callback
+export default GithubCallback
