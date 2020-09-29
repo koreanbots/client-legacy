@@ -21,7 +21,6 @@ class Home extends React.Component {
     super(props)
     this.state = {
       isLoading: true,
-      bot: {},
       trusted: {},
       message: false,
       activePage: 1,

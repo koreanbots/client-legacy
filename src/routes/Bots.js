@@ -97,8 +97,8 @@ class Detail extends React.Component {
     }).then(r => r.json())
     if (res.code !== 200) return (window.location.href = '/login')
     else {
-      this.state.bot.votes = res.count
-      this.state.bot.voted = res.state
+
+      this.setState({ votes: res.count, voted: res.state })
       this.setState({ bot: this.state.bot })
     }
   }
