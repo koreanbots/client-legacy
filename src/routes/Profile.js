@@ -5,6 +5,7 @@ import Redirect from '../components/Redirect'
 import config from '../config'
 import Bot from '../components/Bot'
 import { HelmetProvider } from 'react-helmet-async'
+import graphql from '../utils/graphql'
 
 class Detail extends React.Component {
   constructor(props) {
@@ -16,13 +17,34 @@ class Detail extends React.Component {
   }
 
   getProfile = async () => {
-    const token = localStorage.token,
-      id = localStorage.id,
-      date = localStorage.date
-    const res = await fetch(config.api + '/users/@me/profile', {
-      method: 'GET',
-      headers: { token, id, time: date }
-    }).then(r => r.json())
+    const res = await graphql(`query {
+      me {
+        id
+        avatar
+        tag
+        username
+        perm
+        github
+        bots {
+          id
+          name
+          tag
+          avatar
+          votes
+          servers
+          category
+          intro
+          desc
+          url
+          state
+          verified
+          trusted
+          vanity
+          boosted
+          status
+        }
+      }
+    }`)
 
     this.setState({ result: res, isLoading: false })
   }
@@ -46,6 +68,7 @@ class Detail extends React.Component {
             content="자신의 봇들을 관리하고, 하트를 관리하거나, 심사결과를 확인하세요"
           />
         </HelmetProvider>
+
         {this.state.isLoading ? (
           <div className="loader">
             <span>Loading...</span>
@@ -53,8 +76,8 @@ class Detail extends React.Component {
         ) : result.code !== 200 ? (
           result.code === 401 ? (
             <Redirect
-              to={'/logout'}
-              content={<></>}
+              to={config.url}
+              content={<>d</>}
             />
           ) : (
             <div className="loader">
@@ -66,11 +89,18 @@ class Detail extends React.Component {
             <br />
             <h1>관리패널</h1>
             <Button
-              href={'/users/' + result.user.id}
+              href={'/users/' + result.data.me.id}
               content="프로필 보기"
               icon="right arrow"
               labelPosition="right"
             />
+            <Button
+              color="black"
+              content={result.data.me.github ? "깃허브 계정 업데이트하기" : "깃허브 계정 추가하기"}
+              icon="github"
+              labelPosition="right"
+              onClick={()=> window.open(config.github, "Github", "width = 1100, height = 800")}
+              />
             <h2>나의 봇</h2>
             <Button
               href="/addbot"
@@ -80,12 +110,12 @@ class Detail extends React.Component {
             />
             <br />
             <br />
-            {result.user.bots.length === 0 ? (
-              <h3>승인된 봇이 없습니다.</h3>
+            {result.data.me.bots.length === 0 ? (
+              <h3>소유하고 있는 봇이 있습니다.</h3>
             ) : (
               <>
                 <Card.Group stackable itemsPerRow={3}>
-                  {result.user.bots.map(bot => (
+                  {result.data.me.bots.map(bot => (
                     <MyBots bot={bot} />
                   ))}
                 </Card.Group>
@@ -94,58 +124,7 @@ class Detail extends React.Component {
             )}
             <Divider />
             <h2>심사 이력</h2>
-            {result.user.submitted.length === 0 ? (
-              <h3>심사 이력이 없습니다.</h3>
-            ) : (
-              <Card.Group stackable itemsPerRow={3}>
-                {result.user.submitted.map(bot => (
-                  <Submitted bot={bot} />
-                ))}
-              </Card.Group>
-            )}
             <Divider />
-            <h2>하트를 남긴 봇</h2>
-            {result.user.voted.length === 0 ? (
-              <h3>하트를 남긴 봇이 없습니다.</h3>
-            ) : (
-              <Card.Group stackable itemsPerRow={3}>
-                {result.user.voted.map(bot => (
-                  <Bot
-                    key={bot.id}
-                    id={bot.id}
-                    name={bot.name}
-                    avatar={
-                      bot.avatar !== false
-                        ? 'https://cdn.discordapp.com/avatars/' +
-                          bot.id +
-                          '/' +
-                          bot.avatar +
-                          '.png'
-                        : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
-                            5}.png`
-                    }
-                    votes={bot.votes}
-                    servers={bot.servers}
-                    category={bot.category}
-                    intro={bot.intro}
-                    desc={bot.desc}
-                    invite={
-                      bot.url === false
-                        ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`
-                        : bot.url
-                    }
-                    state={bot.state}
-                    vanity={bot.vanity}
-                    boosted={bot.boosted}
-                    status={bot.status}
-                    bg={bot.bg}
-                    banner={bot.banner}
-                    verified={bot.verified}
-                    trusted={bot.trusted}
-                  />
-                ))}
-              </Card.Group>
-            )}
           </div>
         )}
         <br />
