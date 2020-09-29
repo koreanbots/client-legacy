@@ -18,7 +18,7 @@ class GithubCallback extends React.Component {
     await graphql(`mutation {
       github(code: "${code}")
     }
-    `, true)
+    `)
       .then(res=> {
         if(res.code !== 200) this.setState({ isLoading: false, error: res.message })
         else {
@@ -40,7 +40,7 @@ class GithubCallback extends React.Component {
              <Container textAlign="center">
             <Logo /> <Icon className="plus" /> <h1 style={{ marginTop: '14px' }}><Icon className="github" /></h1>
             <br/>
-            <h2>{ isLoading ? '계정을 연동중입니다.' : error ? '오류가 발생하였습니다.' : '깃허브 계정을 성공적으로 연동하였습니다.'}</h2>
+            <h3>{ isLoading ? '계정을 연동중입니다.' : error ? '오류가 발생하였습니다.' : '깃허브 계정을 성공적으로 연동하였습니다.'}</h3>
             </Container>
         </div>
     )

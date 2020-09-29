@@ -44,7 +44,7 @@ class Callback extends React.Component {
              <Container textAlign="center">
             <Logo /> <Icon className="plus" /> <h1 style={{ marginTop: '14px' }}><Icon className="discord" /></h1>
             <br/>
-            <h2>{ isLoading ? '데이터 검증중입니다.' : error ? '오류가 발생하였습니다. (다시 시도해주세요.)' : this.redirect()}</h2>
+            <h3>{ isLoading ? '데이터 검증중입니다.' : error ? '오류가 발생하였습니다. (다시 시도해주세요.)' : this.redirect()}</h3>
             </Container>
         </div>
     )
