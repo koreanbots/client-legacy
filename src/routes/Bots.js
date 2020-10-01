@@ -175,6 +175,7 @@ class Detail extends React.Component {
                 <Grid stackable divided="vertically">
                   <Grid.Row columns={2}>
                     <Grid.Column>
+                      <br/><br/>
                       <Image
                         centered
                         floated

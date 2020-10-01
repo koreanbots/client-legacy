@@ -20,7 +20,8 @@ class User extends React.Component {
     this.state = {
       data: null,
       isLoading: true,
-      error: ''
+      error: '',
+      user: localStorage.userCache ? JSON.parse(localStorage.userCache) : { }
     }
   }
 
@@ -100,6 +101,7 @@ class User extends React.Component {
               <Grid stackable divided="vertically">
                 <Grid.Row columns={2}>
                   <Grid.Column>
+                    <br/>
                     <Image
                       centered
                       floated
@@ -177,6 +179,14 @@ class User extends React.Component {
                       </Label>
                     </>
                         
+                      )
+                    }
+                    <br/>
+                    {
+                      this.state.user.id === data.id && (
+                        <Label style={{ marginTop: '20px' }} href="/panel">
+                          <Icon className="settings" /> 관리하기
+                        </Label>
                       )
                     }
                     

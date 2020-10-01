@@ -3,7 +3,6 @@ import { Container, Item, Button, Icon, Card, Divider } from 'semantic-ui-react'
 
 import Redirect from '../components/Redirect'
 import config from '../config'
-import Bot from '../components/Bot'
 import { HelmetProvider } from 'react-helmet-async'
 import graphql from '../utils/graphql'
 
