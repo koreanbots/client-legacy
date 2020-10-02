@@ -30,7 +30,7 @@ class Callback extends React.Component {
 
   redirect = () => {
     window.history.go(-2) || window.location.assign('/')
-    return '성공적으로 로그인하였습니다. 리다이랙트합니다.'
+    return '성공적으로 로그인하였습니다. 리다이렉트합니다.'
   }
   componentDidMount() {
     const query = new URLSearchParams(this.props.location.search.replace('?', ''))
