@@ -23,7 +23,7 @@ export default function Partners( ) {
     }, [ ])
     
     return (
-        <Article title="파트너" description="한국 디스코드봇 리스트와 함께하실래요?" colorHeader>
+        <Article title="파트너" description="한국 디스코드봇 리스트와 함께하실래요?" colorHeader image="/img/growup.svg">
             <Container textAlign="center" style={{ margin: '50px 0' }}>
                 <h1>저희 파트너분들을 만나보세요.</h1>
                 <p>파트너분들께는 다양한 혜택이 함께 제공됩니다.</p>
