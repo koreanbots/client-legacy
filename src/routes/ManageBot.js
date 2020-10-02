@@ -60,14 +60,14 @@ class ManageBot extends Component {
   }
   showToken = () => {
     if (this.state.token.match(/^\*/))
-      this.setState({ token: this.state.info.data.token })
+      this.setState({ token: this.state.token })
     else this.setState({ token: '******' })
   }
   regenToken = async () => {
     const re = await fetch(config.api + '/bots/regenToken', {
       method: 'POST',
       headers: {
-        token: this.state.info.data.token
+        token: this.state.token
       }
     })
     const res = re.json()
@@ -127,7 +127,7 @@ class ManageBot extends Component {
     }`)
 
     if (res.code === 200) {
-      if (res.archived) window.location.href = '/?message=lockOn'
+      if (res.data.bot.state === 'archived') window.location.href = '/?message=lockOn'
       else window.location.href = '/?message=lockOff'
     } else alert(res.message)
   }
@@ -149,7 +149,7 @@ class ManageBot extends Component {
     const token = localStorage.token,
     id = localStorage.id,
     date = localStorage.date
-  await fetch(config.api + '/bots/' + this.state.info.data.id, {
+  await fetch(config.api + '/bots/' + this.state.id, {
     method: 'DELETE',
     headers: { token, id, time: date }
   })
@@ -210,6 +210,7 @@ class ManageBot extends Component {
         category: res.data.bot.category,
         intro: res.data.bot.intro,
         desc: res.data.bot.desc,
+        state: res.data.bot.state,
         owners: res.data.bot.owners.map(el=> el.id).toString(),
         token: '******'
       })
@@ -279,7 +280,7 @@ class ManageBot extends Component {
                   content="복사하기"
                   onClick={() => {
                     navigator.clipboard
-                      .writeText(this.state.info.data.token)
+                      .writeText(this.state.token)
                       .then(alert('복사되었습니다!'))
                   }}
                 />{' '}
@@ -463,12 +464,12 @@ class ManageBot extends Component {
               <></>
             )}
             <h3>
-              {this.state.info.data.state !== 'ok'
+              {this.state.state !== 'ok'
                 ? '봇을 잠금 해제합니다.'
                 : '봇을 잠금 처리합니다'}
             </h3>
             <p>
-              {this.state.info.data.state !== 'ok'
+              {this.state.state !== 'ok'
                 ? '봇을 잠금 해제하면, 봇을 다시 초대할 수 있습니다.'
                 : '봇을 잠금처리하면 더 이상 초대할 수 없는 상태가 되면서, 일부 행동이 제한됩니다.'}
             </p>
@@ -477,7 +478,7 @@ class ManageBot extends Component {
               color="red"
               onClick={this.archive}
               content={
-                this.state.info.data.state !== 'ok'
+                this.state.state !== 'ok'
                   ? '잠금해제'
                   : '잠금하기'
               }
