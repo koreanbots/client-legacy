@@ -149,7 +149,7 @@ function MyBots(props) {
           <Item.Image
             floated="right"
             src={
-              bot.avatar !== false
+              bot.avatar
                 ? 'https://cdn.discordapp.com/avatars/' +
                   bot.id +
                   '/' +
@@ -160,6 +160,7 @@ function MyBots(props) {
             wrapped
             ui={false}
             avatar
+            onError={ (e)=> e.target.src="/img/default.png" }
           />
           {bot.name}
         </Card.Header>
