@@ -19,6 +19,7 @@ import Redirect from '../components/Redirect'
 import ReactMarkdown from 'react-markdown/with-html'
 import config from '../config'
 import CodeBlock from '../components/Code'
+import graphql from '../utils/graphql'
 
 class ManageBot extends Component {
   state = {
@@ -40,20 +41,22 @@ class ManageBot extends Component {
     data: { state: 0, data: {} }
   }
 
-  sendSumbit = async body => {
-    const token = localStorage.token,
-      id = localStorage.id,
-      date = localStorage.date
-    return await fetch(config.api + '/bots/edit/' + body.id, {
-      method: 'POST',
-      headers: { token, id, time: date, 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    })
-      .then(r => r.json())
-      .then(res => {
+  sendRequest = async data => {
+    const res = await graphql(`mutation {
+      bot(id: "${data.id}", category: ${JSON.stringify(data.category)}, lib: "${data.lib}", prefix: "${data.prefix.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", intro: "${data.intro.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", desc: "${data.desc.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", web: ${data.web ? '"' + data.web.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, git: ${data.git ? '"' + data.git.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, url: ${data.url ? '"' + data.url.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, discord: "${data.discord.replace(/\\$/gi, '\\\\').replace(/"/g, '\\"')}") {
+        id
+        lib
+        category,
+        owners {
+          id,
+          username,
+          tag
+        }
+      }
+    }`)
+    console.log(res)
         if (res.code === 200) this.setState({ data: { state: 1 } })
         else this.setState({ data: { state: 2, data: res } })
-      })
   }
   showToken = () => {
     if (this.state.token.match(/^\*/))
@@ -105,7 +108,7 @@ class ManageBot extends Component {
           data: { message: 'URL형식이 올바르지 않습니다.' }
         }
       })
-      await this.sendSumbit(this.state)
+      await this.sendRequest(this.state)
     } else {
       this.setState({
         data: {
@@ -117,38 +120,29 @@ class ManageBot extends Component {
   }
 
   archive = async () => {
-    const token = localStorage.token,
-      id = localStorage.id,
-      date = localStorage.date
-    await fetch(config.api + '/bots/archive/' + this.state.info.data.id, {
-      method: 'POST',
-      headers: { token, id, time: date, 'Content-Type': 'application/json' }
-    })
-      .then(r => r.json())
-      .then(res => {
-        if (res.code === 200) {
-          if (res.archived) window.location.href = '/?message=lockOn'
-          else window.location.href = '/?message=lockOff'
-        } else alert(res.message)
-      })
+    const res = await graphql(`mutation {
+      bot(id: "${this.state.id}", state: ${this.state.state !== 'ok' ? 'ok' : 'archived'} ) {
+        state
+      }
+    }`)
+
+    if (res.code === 200) {
+      if (res.archived) window.location.href = '/?message=lockOn'
+      else window.location.href = '/?message=lockOff'
+    } else alert(res.message)
   }
 
   setOwner = async () => {
-    const token = localStorage.token,
-      id = localStorage.id,
-      date = localStorage.date
-    await fetch(config.api + '/bots/editOwners/' + this.state.info.data.id, {
-      method: 'POST',
-      headers: { token, id, time: date, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        owners: this.state.owners.replace(/ /gi, '').split(',')
-      })
-    })
-      .then(r => r.json())
-      .then(res => {
-        if (res.code !== 200) this.setState({ ownersError: res.message })
-        else window.location.reload()
-      })
+    const res = await graphql(`mutation {
+      bot(id: "${this.state.id}", owners: ${JSON.stringify(this.state.owners.replace(/ /gi, '').split(','))}) {
+        owners {
+          id
+        }
+      }
+    }`)
+  
+    if (res.code !== 200) this.setState({ ownersError: res.message })
+    else window.location.reload()
   }
 
   removeBot = async() => {
@@ -165,33 +159,58 @@ class ManageBot extends Component {
       else window.location.href = '/?message=delete'
     })
   }
-  async componentDidMount() {
-    const res = await fetch(
-      config.api + '/bots/completeInfo/' + this.props.match.params.id,
-      {
-        headers: {
-          token: localStorage.token,
-          id: localStorage.id,
-          time: localStorage.date
+
+  getBot = async( id ) => {
+    return await graphql(`query {
+      bot(id: "${id}") {
+        id
+        lib
+        prefix
+        votes
+        servers
+        intro
+        desc
+        web
+        git
+        url
+        category
+        status
+        name
+        avatar
+        tag
+        verified
+        trusted
+        partnered
+        discord
+        boosted
+        state
+        vanity
+        bg
+        banner
+        owners {
+          id
         }
       }
-    ).then(r => r.json())
-    console.log(res)
+      token(id: "${id}")
+    }`)
+  }
+  async componentDidMount() {
+    const res = await this.getBot(this.props.match.params.id)
     if (res.code !== 200) this.setState({ info: res })
     else
       this.setState({
         info: res,
-        id: res.data.id,
-        prefix: res.data.prefix,
-        lib: res.data.lib,
-        website: res.data.web || '',
-        git: res.data.git || '',
-        url: res.data.url || '',
-        discord: res.data.discord || '',
-        category: res.data.category,
-        intro: res.data.intro,
-        desc: res.data.desc,
-        owners: res.data.owners.toString(),
+        id: res.data.bot.id,
+        prefix: res.data.bot.prefix,
+        lib: res.data.bot.lib,
+        website: res.data.bot.web || '',
+        git: res.data.bot.git || '',
+        url: res.data.bot.url || '',
+        discord: res.data.bot.discord || '',
+        category: res.data.bot.category,
+        intro: res.data.bot.intro,
+        desc: res.data.bot.desc,
+        owners: res.data.bot.owners.map(el=> el.id).toString(),
         token: '******'
       })
   }
@@ -211,12 +230,6 @@ class ManageBot extends Component {
       info
     } = this.state
     const bot = info.data
-    if (!localStorage.userCache || !JSON.parse(localStorage.userCache))
-      return (
-        <div className="loader">
-          <h1>로그인 해주세요!</h1>
-        </div>
-      )
     if (this.state.info.code !== 200)
       return (
         <div className="loader">
@@ -235,21 +248,22 @@ class ManageBot extends Component {
                   centered
                   floated="left"
                   src={
-                    bot.avatar !== false
+                    bot.bot.avatar
                       ? 'https://cdn.discordapp.com/avatars/' +
-                        bot.id +
+                        bot.bot.id +
                         '/' +
-                        bot.avatar +
+                        bot.bot.avatar +
                         '.png?size=1024'
-                      : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
+                      : `https://cdn.discordapp.com/embed/avatars/${bot.bot.tag %
                           5}.png??size=1024`
                   }
+                  onError={ (e)=> e.target.src="/img/default.png" }
                   size="medium"
                   rounded
                 />
               </Grid.Column>
               <Grid.Column>
-                <h1>{bot.name}</h1>
+                <h1>{bot.bot.name}</h1>
                 <br />
                 <h5>ID: {id}</h5>
                 토큰: <pre>{this.state.token} </pre>
@@ -319,7 +333,7 @@ class ManageBot extends Component {
               />
             </Form.Group>
             <Form.Input
-              placeholder="https://wonderbot.xyz"
+              placeholder="https://wonderbot.bot.xyz"
               label="웹사이트"
               name="website"
               value={website}
@@ -351,7 +365,7 @@ class ManageBot extends Component {
               name="discord"
               value={discord}
               onChange={this.handleChange}
-              maxLength={10}
+              maxLength={32}
             >
               <Label basic>discord.gg/</Label>
               <input />
@@ -386,8 +400,8 @@ class ManageBot extends Component {
                 name="desc"
                 value={desc}
                 onChange={this.handleChange}
-                placeholder="봇을 자세하게 설명해주세요! 마크다운을 지원합니다. (최대 1000자)"
-                maxLength={1000}
+                placeholder="봇을 자세하게 설명해주세요! 마크다운을 지원합니다. (최대 2000자)"
+                maxLength={2000}
               />
               <div className="field">
                 <br />
@@ -413,7 +427,7 @@ class ManageBot extends Component {
             </div>
           </Form>
           {this.state.data.state === 1 ? (
-            <Redirect to="/?message=editSuccess" />
+            <Redirect to="/?message=editSuccess" content=""/>
           ) : this.state.data.state === 2 ? (
             <Message error>{this.state.data.data.message}</Message>
           ) : (
@@ -449,12 +463,12 @@ class ManageBot extends Component {
               <></>
             )}
             <h3>
-              {this.state.info.data.state === 'archived'
+              {this.state.info.data.state !== 'ok'
                 ? '봇을 잠금 해제합니다.'
                 : '봇을 잠금 처리합니다'}
             </h3>
             <p>
-              {this.state.info.data.state === 'archived'
+              {this.state.info.data.state !== 'ok'
                 ? '봇을 잠금 해제하면, 봇을 다시 초대할 수 있습니다.'
                 : '봇을 잠금처리하면 더 이상 초대할 수 없는 상태가 되면서, 일부 행동이 제한됩니다.'}
             </p>
@@ -463,7 +477,7 @@ class ManageBot extends Component {
               color="red"
               onClick={this.archive}
               content={
-                this.state.info.data.state === 'archived'
+                this.state.info.data.state !== 'ok'
                   ? '잠금해제'
                   : '잠금하기'
               }
@@ -473,15 +487,15 @@ class ManageBot extends Component {
             <p>봇을 영구적으로 삭제합니다.</p>
             <Modal className={localStorage.dark === 'true' ? 'darkmode' : 'lightmode'} trigger={<Button color="red" content="삭제하기" icon="trash" />} closeIcon>
               <Modal.Header>
-                {bot.name} 삭제하기
+                {bot.bot.name} 삭제하기
               </Modal.Header>
               <Modal.Description>
                 <Container style={{ padding: '10px'}}>
-                  <p>봇을 삭제하시려면 <strong>{bot.name}</strong> 을 입력해주세요.</p>
+                  <p>봇을 삭제하시려면 <strong>{bot.bot.name}</strong> 을 입력해주세요.</p>
                   <Input name="delete" onChange={this.handleChange} value={this.state.delete} placeholder="봇 이름을 입력해주세요." />
                   <br/><br/>
                   봇을 삭제하시게되면 다시는 복구하실 수 없다는 점을 동의합니다.<br/>
-                  <Button color="red" content="삭제하기" icon="trash" disabled={this.state.delete !== bot.name} onClick={this.removeBot}/>
+                  <Button color="red" content="삭제하기" icon="trash" disabled={this.state.delete !== bot.bot.name} onClick={this.removeBot}/>
                 </Container>
               </Modal.Description>
             </Modal>
