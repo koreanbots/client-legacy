@@ -144,10 +144,12 @@ class Detail extends React.Component {
             ) : !this.state.error ? (
               <div
             className="botDetail"
+            style={{ minHeight: '100vh' }}
           >
             <div style={
               (bot.boosted && bot.bg) || (bot.trusted && bot.bg)
                 ? { 
+                    minHeight: '100vh',
                     paddingBottom: '30px',
                     color: 'white',
                     background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${bot.bg}) top/cover no-repeat fixed`
@@ -168,6 +170,12 @@ class Detail extends React.Component {
                     해당 봇은 잠금 상태입니다.
                     <br />
                     일부 행동이 제한될 수 있습니다.
+                  </Message>
+                ) :  bot.state === 'reported' ? (
+                  <Message error>
+                    해당 봇은 신고가 접수되어, 관리자에 의해 잠금 상태입니다.
+                    <br />
+                    <a href="/guidelines">가이드라인</a>에 대한 위반사항을 확인해주시고 <a href="/discord">디스코드 서버</a>로 문의해주세요.
                   </Message>
                 ) : (
                   <></>
@@ -283,29 +291,17 @@ class Detail extends React.Component {
                       </Label.Group>
                       <br />
                       <div className="buttons">
-                      {bot.url === false ? (
                         <Button
                           disabled={
-                            bot.state === 'private' || bot.state === 'archived'
+                            bot.state === 'private' || bot.state === 'archived' || bot.state === 'reported'
                           }
                           className="yellow"
                           content="초대하기"
                           labelPosition="left"
                           icon="plus"
-                          href={`https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`}
+                          href={bot.url || `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`}
                         ></Button>
-                      ) : (
-                        <Button
-                          disabled={
-                            bot.state === 'private' || bot.state === 'archived'
-                          }
-                          className="yellow"
-                          content="초대하기"
-                          labelPosition="left"
-                          icon="plus"
-                          href={bot.url}
-                        ></Button>
-                      )}
+                      
                       {bot.web && (
                         <Button
                           color="blue"
@@ -422,7 +418,7 @@ class Detail extends React.Component {
                         color="red"
                         content={bot.voted === 1 ? '하트 삭제' : '하트 추가'}
                         icon="heart"
-                        disabled={bot.state === 'archived'}
+                        disabled={bot.state === 'archived' || bot.state === 'reported'}
                         label={{
                           basic: true,
                           color: 'red',
@@ -478,7 +474,17 @@ class Detail extends React.Component {
                   }}
                 >
                   <ReactMarkdown
-                    source={bot.desc}
+                    source={bot.desc.replace(/!\[(.*?)\]\((.*?)\)/g, function(whole, alt, link){
+                      let isURL
+                      try {
+                      isURL = new URL(link)
+                      } catch(e) {
+                      isURL = false
+                      }
+                      console.log(isURL)
+                      if(!isURL) return `![${alt}](${link})`
+                      else return `![${alt}](https://cdn.statically.io/img/${isURL.host}${isURL.pathname})`
+                      })}
                     renderers={{
                       table: Table,
                       thead: Table.Header,
