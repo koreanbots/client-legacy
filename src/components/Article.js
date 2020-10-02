@@ -26,7 +26,7 @@ function Article (props) {
         {
             props.colorHeader ? ( 
                 <div className="articleDiv">
-                <div style={{ marginBottom: '1em' }} className="verytop">
+                <div className="verytop" style={{ marginBottom: '1em', backgroundImage: `url('${props.image}')`, backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed', backgroundPosition: 'right top', backgroundSize: '35% 40%' }}>
                     <Container className="article">
                         <h1 style={{ fontSize: '45px' }}>
                             {props.title}
