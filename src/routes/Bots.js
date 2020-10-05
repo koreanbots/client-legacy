@@ -483,7 +483,7 @@ class Detail extends React.Component {
                       }
                       console.log(isURL)
                       if(!isURL) return `![${alt}](${link})`
-                      else return `![${alt}](https://cdn.statically.io/img/${isURL.host}${isURL.pathname})`
+                      else return `![${alt}](https://cdn.statically.io/img/${isURL.host}${isURL.pathname}${isURL.search})`
                       })}
                     renderers={{
                       table: Table,
