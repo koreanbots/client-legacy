@@ -142,7 +142,7 @@ class SubmitBot extends Component {
           <h1>새로운 봇 추가하기</h1>
           <Transition
             animation="shake"
-            duration={500}
+            duration={700}
             visible={this.state.visible}
           >
             <section id="readme">
@@ -190,7 +190,8 @@ class SubmitBot extends Component {
 
           <Divider />
           <h2>봇 정보</h2>
-          <Form onSubmit={this.handleSubmit}>
+          <p>* 표시된 항목은 모두 작성해주셔야합니다.</p>
+          <Form onSubmit={this.handleSubmit} style={{ marginBottom: '20px'}}>
             <Form.Group>
               <Form.Input
                 placeholder="653534001742741552"
@@ -333,7 +334,9 @@ class SubmitBot extends Component {
                   <p>다음 결과는 실제와 다를 수 있습니다.</p>
                 </Segment>
               </div>
-
+              <p>심사는 영업일 기준 최대 3일까지 소요될 수 있습니다.<br/>
+                심사 결과는 DM으로 전달됩니다.
+              </p>
               <Form.Button
                 content="제출"
                 disabled={this.state.data.state === 1}
