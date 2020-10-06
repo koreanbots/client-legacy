@@ -171,23 +171,30 @@ class User extends React.Component {
                     <br/>
                    
                     {
-                      data.github && (
-                    <>
-                      <Label style={{ marginTop: '20px' }} href={`https://github.com/${data.github}`}>
-                      <Icon className="github" />
-                      { data.github }
-                      </Label>
-                    </>
-                        
-                      )
-                    }
-                    <br/>
-                    {
-                      this.state.user.id === data.id && (
-                        <Label style={{ marginTop: '20px' }} href="/panel">
-                          <Icon className="settings" /> 관리하기
-                        </Label>
-                      )
+                      (data.github) && (
+                        <>
+                        <Icon className="address book" />
+                        {
+                          data.github && (
+                          <>
+                            <Label style={{ marginTop: '20px' }} href={`https://github.com/${data.github}`}>
+                            <Icon className="github" />
+                            { data.github }
+                            </Label>
+                          </>
+                              
+                            )
+                          }
+                          <br/>
+                          {
+                            this.state.user.id === data.id && (
+                              <Label style={{ marginTop: '20px' }} href="/panel">
+                                <Icon className="settings" /> 관리하기
+                              </Label>
+                            )
+                        }
+                        </>
+                      ) 
                     }
                     
                   </Grid.Column>
