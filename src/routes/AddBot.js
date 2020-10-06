@@ -193,9 +193,8 @@ class SubmitBot extends Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Group>
               <Form.Input
-                placeholder="387548561816027138"
+                placeholder="653534001742741552"
                 label={'봇 ID (*)'}
-                description="GG"
                 name="id"
                 value={id}
                 maxLength={18}
@@ -210,7 +209,7 @@ class SubmitBot extends Component {
                 onChange={this.handleChange}
               />
               <Form.Select
-                placeholder="discord.js"
+                placeholder="봇 제작 라이브러리입니다."
                 label="라이브러리 (Library) (*)"
                 name="lib"
                 value={lib}
@@ -243,7 +242,7 @@ class SubmitBot extends Component {
               />
             </Form.Group>
             <Form.Input
-              placeholder="https://wonderbot.xyz"
+              placeholder="https://koreanbots.dev"
               label="웹사이트"
               name="website"
               value={website}
@@ -251,7 +250,7 @@ class SubmitBot extends Component {
               onChange={this.handleChange}
             />
             <Form.Input
-              placeholder="https://github.com/wonderlandpark/wonderbot"
+              placeholder="https://github.com/koreanbots/client"
               label="깃"
               name="git"
               value={git}

@@ -256,7 +256,7 @@ class ManageBot extends Component {
                         bot.bot.avatar +
                         '.png?size=1024'
                       : `https://cdn.discordapp.com/embed/avatars/${bot.bot.tag %
-                          5}.png??size=1024`
+                          5}.png?size=1024`
                   }
                   onError={ (e)=> e.target.src="/img/default.png" }
                   size="medium"
@@ -301,7 +301,7 @@ class ManageBot extends Component {
                 onChange={this.handleChange}
               />
               <Form.Select
-                placeholder="discord.js"
+                placeholder="봇 제작 라이브러리입니다."
                 label="라이브러리 (Library) (*)"
                 name="lib"
                 value={lib}
@@ -334,7 +334,7 @@ class ManageBot extends Component {
               />
             </Form.Group>
             <Form.Input
-              placeholder="https://wonderbot.bot.xyz"
+              placeholder="https://koreanbots.dev"
               label="웹사이트"
               name="website"
               value={website}
@@ -342,7 +342,7 @@ class ManageBot extends Component {
               onChange={this.handleChange}
             />
             <Form.Input
-              placeholder="https://github.com/wonderlandpark/wonderbot"
+              placeholder="https://github.com/koreanbots/client"
               label="깃"
               name="git"
               value={git}

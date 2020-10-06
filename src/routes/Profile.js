@@ -43,6 +43,13 @@ class Detail extends React.Component {
           status
         }
       }
+      submits {
+        id
+        date
+        intro
+        state
+        reason
+      }
     }`)
 
     this.setState({ result: res, isLoading: false })
@@ -123,6 +130,15 @@ class Detail extends React.Component {
             )}
             <Divider />
             <h2>심사 이력</h2>
+            {
+              result.data.submits.length !== 0 ? (
+                result.data.submits.map(bot => (
+                  <Submitted {...bot} />
+                ))
+              ) : (
+                <h3>심사이력이 없습니다.</h3>
+              )
+            }
             <Divider />
           </div>
         )}
@@ -205,7 +221,7 @@ function MyBots(props) {
 
 function Submitted(props) {
   const [preview, hoverPrev] = useState(false)
-  const { bot } = props
+  const bot = props
   return (
     <Card
       href={
@@ -220,7 +236,8 @@ function Submitted(props) {
         </Card.Header>
         <Card.Meta>
           상태:{' '}
-          <a style={{ color: stateColor[bot.state] }}>{state[bot.state]}</a>
+          <a style={{ color: stateColor[bot.state] }}>{state[bot.state]}</a><br/>
+          { bot.state === 2 && `사유: ${bot.reason || '없음.'}`}
         </Card.Meta>
         <Card.Description>
           설명:
