@@ -456,14 +456,7 @@ class Detail extends React.Component {
                     </Label>
                   ))}
                 </div>
-              {
-                  !(bot.trusted || bot.boosted) && (
-                   <>
-                    <Divider section />
-                    <Adsense />
-                   </>
-                  )
-                }
+                <Adsense />
 
                 <Divider section />
                 <Segment
