@@ -197,7 +197,7 @@ class SubmitBot extends Component {
                 label={'봇 ID (*)'}
                 name="id"
                 value={id}
-                maxLength={18}
+                maxLength={19}
                 onChange={this.handleChange}
               />
               <Form.Input

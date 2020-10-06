@@ -132,9 +132,14 @@ class Detail extends React.Component {
             <h2>심사 이력</h2>
             {
               result.data.submits.length !== 0 ? (
-                result.data.submits.map(bot => (
-                  <Submitted {...bot} />
-                ))
+                <>
+                {
+                  result.data.submits.map(bot => (
+                    <Submitted {...bot} />
+                  ))
+                }
+                본인의 봇이 거부되셨나요? <a href="https://docs.koreanbots.dev/bots/submit">해당 문서</a>를 확인해주세요.
+                </>
               ) : (
                 <h3>심사이력이 없습니다.</h3>
               )
