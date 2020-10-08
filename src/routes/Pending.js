@@ -7,11 +7,11 @@ import {
   Divider,
   Button,
   Icon,
-  Message
+  Message, Segment
 } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown/with-html'
-import config from '../config'
 import Redirect from '../components/Redirect'
+import graphql from '../utils/graphql'
 
 class Detail extends React.Component {
   constructor(props) {
@@ -25,17 +25,38 @@ class Detail extends React.Component {
   }
 
   getData = async (id, date) => {
-    await fetch(config.api + '/bots/pending/' + id + '/' + date)
-      .then(r => r.json())
-      .then(bot =>
-        this.setState({
-          bot: bot.code === 200 ? bot.data : false,
-          isLoading: false
-        })
-      )
+    const res = await graphql(`query {
+      submit(id: "${id}", date: ${Number(date)}) {
+        id
+        date
+        category
+        lib
+        prefix
+        intro
+        desc
+        url
+        web
+        git
+        discord
+        state
+        owners {
+          id
+          avatar
+          tag
+          username
+        }
+        reason
+      }
+    }`)
+    
+    this.setState({
+      bot: res.code === 200 && res.data.submit ? res.data.submit : false,
+      isLoading: false
+    })
+      
   }
 
-  componentDidMount(props) {
+  componentDidMount() {
     const {
       match: {
         params: { id, date }
@@ -54,7 +75,7 @@ class Detail extends React.Component {
       )
     }
     return (
-      <Container>
+      <Container className="botDetail">
         <br />
 
         {isLoading ? (
@@ -64,13 +85,13 @@ class Detail extends React.Component {
         ) : bot ? (
           <>
             {bot.state === 0 ? (
-              <Message info>해당 봇은 아직 승인 대기 상태입니다.</Message>
+              <Message info header="승인 대기중" content="해당 봇은 아직 승인 대기 상태입니다."/>
             ) : bot.state === 1 ? (
               <>
                 <Redirect to={'/bots/' + bot.id} content={<Success />} />
               </>
             ) : bot.state === 2 ? (
-              <Message error>해당 봇은 승인 거부 되었습니다.</Message>
+              <Message error header="거부됨." content="아쉽게도 신청하신 해당 봇은 승인 거부 되었습니다."/>
             ) : (
               <></>
             )}
@@ -78,46 +99,13 @@ class Detail extends React.Component {
               <Grid.Row columns={2}>
                 <Grid.Column>
                   <Image
-                    src={`https://cdn.discordapp.com/embed/avatars/${(bot.tag ===
-                    '????'
-                      ? 5555
-                      : bot.tag) % 5}.png?size=1024`}
+                    floated
+                    src="/img/default.png"
                     size="medium"
                     rounded
                   />
                 </Grid.Column>
                 <Grid.Column>
-                  <br />
-                  <h1 style={{ fontSize: '50px' }}>
-                    {bot.id}{' '}
-                    {bot.trusted ? (
-                      <Label className="discord">
-                        <Icon className="icon mini check" /> 디스코드 인증됨
-                      </Label>
-                    ) : (
-                      ''
-                    )}
-                    {bot.verified ? (
-                      <Label className="green">
-                        <Icon className="icon mini certificate" /> 신뢰함
-                      </Label>
-                    ) : (
-                      ''
-                    )}
-                  </h1>
-                  <Label>
-                    상태
-                    <Label.Detail>
-                      <Icon
-                        className="circle"
-                        color={status[bot.status]}
-                        empty
-                        key="status"
-                      />{' '}
-                      {statusText[bot.status]}
-                    </Label.Detail>
-                  </Label>
-
                   <Label>
                     접두사
                     <Label.Detail>{bot.prefix}</Label.Detail>
@@ -142,7 +130,7 @@ class Detail extends React.Component {
                         ))}
                   </Label.Group>
                   <br />
-                  {bot.url === false ? (
+                  {bot.url ? (
                     <Button
                       color="yellow"
                       content="초대하기"
@@ -159,9 +147,7 @@ class Detail extends React.Component {
                       href={bot.url}
                     ></Button>
                   )}
-                  {bot.web === false ? (
-                    ''
-                  ) : (
+                  {bot.web && (
                     <Button
                       color="blue"
                       content="웹사이트"
@@ -170,9 +156,7 @@ class Detail extends React.Component {
                       href={bot.web}
                     ></Button>
                   )}
-                  {bot.discord === false ? (
-                    ''
-                  ) : (
+                  {bot.discord && (
                     <Button
                       className="discord"
                       content="지원 디스코드"
@@ -181,9 +165,7 @@ class Detail extends React.Component {
                       href={'https://discord.gg/' + bot.discord}
                     ></Button>
                   )}
-                  {bot.git === false ? (
-                    ''
-                  ) : (
+                  {bot.git && (
                     <Button
                       color="black"
                       content="Git"
@@ -197,16 +179,7 @@ class Detail extends React.Component {
 
               <Grid.Row columns={5}>
                 <Grid.Column>
-                  <Button
-                    className="discord"
-                    content={bot.servers === 0 ? 'N/A' : bot.servers + ' 서버'}
-                  ></Button>
-                  <Button
-                    content={bot.votes}
-                    color="red"
-                    icon="heart"
-                    labelPosition="right"
-                  />
+                  
                 </Grid.Column>
               </Grid.Row>
             </Grid>
@@ -218,42 +191,38 @@ class Detail extends React.Component {
         )}
         <div>
           제작/개발:{' '}
-          {(bot.owners || []).map(o =>
-            o.avatar !== false ? (
-              <>
-                <Image
-                  src={
-                    'https://cdn.discordapp.com/avatars/' +
-                    o.id +
-                    '/' +
-                    o.avatar +
-                    '.png'
-                  }
-                  avatar
-                />
-                <span>
-                  {' '}
-                  {o.username}#{o.tag}
-                </span>
-              </>
-            ) : (
-              <>
-                <Image
-                  src={`https://cdn.discordapp.com/embed/avatars/${o.tag %
-                    5}.png`}
-                  avatar
-                />
-                <span>
-                  {' '}
-                  {o.username}#{o.tag}
-                </span>
-              </>
-            )
-          )}
+          {(bot.owners || []).map(o => (
+                    <Label href={'/users/' + o.id}>
+                      <Image
+                        src={
+                          o.avatar ?
+                            'https://cdn.discordapp.com/avatars/' +
+                              o.id +
+                              '/' +
+                              o.avatar +
+                              '.png' : `https://cdn.discordapp.com/embed/avatars/${o.tag %
+                              5}.png`
+                          }
+                        onError={ (e)=> e.target.src="/img/default.png" }
+                        avatar
+                        />
+                        <span>
+                          {' '}
+                          {o.username}#{o.tag}
+                        </span>
+                    </Label>
+                  ))}
         </div>
 
         <Divider section />
-        <ReactMarkdown style={{ wordWrap: 'break-word' }} source={bot.desc} />
+        <Segment style={{
+                    wordWrap: 'break-word',
+                    borderRadius: 0,
+                    color: 'black'
+                  }}
+          >
+          <ReactMarkdown style={{ wordWrap: 'break-word' }} source={bot.desc} />
+        </Segment>
       </Container>
     )
   }

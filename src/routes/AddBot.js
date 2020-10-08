@@ -15,9 +15,9 @@ import {
 } from 'semantic-ui-react'
 import Redirect from '../components/Redirect'
 import ReactMarkdown from 'react-markdown/with-html'
-import config from '../config'
 import { HelmetProvider, Helmet } from 'react-helmet-async'
 import CodeBlock from '../components/Code'
+import graphql from '../utils/graphql'
 
 class SubmitBot extends Component {
   state = {
@@ -40,19 +40,16 @@ class SubmitBot extends Component {
   }
   myRef = React.createRef()
   sendSumbit = async body => {
-    const token = localStorage.token,
-      id = localStorage.id,
-      date = localStorage.date
-    return await fetch(config.api + '/bots/submit', {
-      method: 'POST',
-      headers: { token, id, time: date, 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    })
-      .then(r => r.json())
-      .then(res => {
-        if (res.code === 200) this.setState({ data: { state: 1 } })
-        else this.setState({ data: { state: 2, data: res } })
-      })
+    this.setState({ data: { state: 4 }})
+    const res = await graphql(`mutation {
+      submitBot(id: "${body.id.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", category: ${JSON.stringify(body.category)}, lib: "${body.lib}", prefix: "${body.prefix.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", intro: "${body.intro.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", desc: "${body.desc.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", web: ${body.web ? '"' + body.web.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, git: ${body.git ? '"' + body.git.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, url: ${body.url ? '"' + body.url.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, discord: "${body.discord.replace(/\\$/gi, '\\\\').replace(/"/g, '\\"')}") {
+        id
+      }
+    }`)
+  
+  this.setState({ data: { state: 0, data: {} }})
+  if (res.code === 200) this.setState({ data: { state: 1 } })
+  else this.setState({ data: { state: 2, data: res } })
   }
 
   handleChange = (e, { name, value }) => {
@@ -339,13 +336,13 @@ class SubmitBot extends Component {
               </p>
               <Form.Button
                 content="제출"
-                disabled={this.state.data.state === 1}
+                disabled={this.state.data.state === 4}
               />
             </div>
           </Form>
 
           {this.state.data.state === 1 ? (
-            <Redirect to="/?message=submitSuccess" />
+            <Redirect to="/?message=submitSuccess" content=""/>
           ) : this.state.data.state === 2 ? (
             <Message error>{this.state.data.data.message}</Message>
           ) : this.state.data.state === 3 &&

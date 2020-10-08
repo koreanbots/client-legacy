@@ -34,13 +34,14 @@ class ManageBot extends Component {
     url: '',
     discord: '',
     token: '',
+    showToken: false,
     owners: '',
     ownersError: '',
     delete: '',
     info: { code: 0 },
     data: { state: 0, data: {} }
   }
-
+  myRef = React.createRef()
   sendRequest = async data => {
     const res = await graphql(`mutation {
       bot(id: "${data.id}", category: ${JSON.stringify(data.category)}, lib: "${data.lib}", prefix: "${data.prefix.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", intro: "${data.intro.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", desc: "${data.desc.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", web: ${data.web ? '"' + data.web.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, git: ${data.git ? '"' + data.git.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, url: ${data.url ? '"' + data.url.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, discord: "${data.discord.replace(/\\$/gi, '\\\\').replace(/"/g, '\\"')}") {
@@ -54,14 +55,14 @@ class ManageBot extends Component {
         }
       }
     }`)
-    console.log(res)
-        if (res.code === 200) this.setState({ data: { state: 1 } })
-        else this.setState({ data: { state: 2, data: res } })
+    if (res.code === 200) {
+      this.setState({ data: { state: 1 } })
+      window.scrollTo(0, this.myRef.current.offsetTop)
+    }
+    else this.setState({ data: { state: 2, data: res } })
   }
   showToken = () => {
-    if (this.state.token.match(/^\*/))
-      this.setState({ token: this.state.token })
-    else this.setState({ token: '******' })
+    this.setState({ showToken: !this.state.showToken })
   }
   regenToken = async () => {
     const re = await fetch(config.api + '/bots/regenToken', {
@@ -161,7 +162,7 @@ class ManageBot extends Component {
   }
 
   getBot = async( id ) => {
-    return await graphql(`query {
+    const res = await graphql(`query {
       bot(id: "${id}") {
         id
         lib
@@ -193,9 +194,7 @@ class ManageBot extends Component {
       }
       token(id: "${id}")
     }`)
-  }
-  async componentDidMount() {
-    const res = await this.getBot(this.props.match.params.id)
+
     if (res.code !== 200) this.setState({ info: res })
     else
       this.setState({
@@ -212,8 +211,11 @@ class ManageBot extends Component {
         desc: res.data.bot.desc,
         state: res.data.bot.state,
         owners: res.data.bot.owners.map(el=> el.id).toString(),
-        token: '******'
+        token: res.data.token
       })
+  }
+  async componentDidMount() {
+    await this.getBot(this.props.match.params.id)
   }
   render() {
     const {
@@ -241,6 +243,11 @@ class ManageBot extends Component {
       return (
         <Container>
           <br />
+          {
+            this.state.data.state === 1 && (
+              <Message ref={this.myRef} header="봇 정보 수정 성공!" onDismiss={()=>this.setState({ data: { state: 0, data: {} } })} className="success" content="봇의 정보를 성공적으로 수정했습니다! 오예!" />
+            )
+          }
           <h1>봇 관리하기</h1>
           <Grid stackable divided="vertically">
             <Grid.Row columns={2}>
@@ -267,21 +274,21 @@ class ManageBot extends Component {
                 <h1>{bot.bot.name}</h1>
                 <br />
                 <h5>ID: {id}</h5>
-                토큰: <pre>{this.state.token} </pre>
+                토큰: <pre>{this.state.showToken ? this.state.token : '******'}</pre>
                 ※ 토큰은 1년마다 만료됩니다.
                 <br />
                 <Button
                   content={
-                    this.state.token.startsWith('*') ? '보이기' : '가리기  '
+                    this.state.showToken ? '가리기' : '보이기'
                   }
                   onClick={this.showToken}
                 />{' '}
                 <Button
                   content="복사하기"
-                  onClick={() => {
+                  onClick={(e) => {
                     navigator.clipboard
                       .writeText(this.state.token)
-                      .then(alert('복사되었습니다!'))
+                      e.target.innerText = '복사됨.'
                   }}
                 />{' '}
                 <Button onClick={this.regenToken} content="재발급" />
@@ -427,9 +434,7 @@ class ManageBot extends Component {
               <Form.Button content="저장하기" icon="save" />
             </div>
           </Form>
-          {this.state.data.state === 1 ? (
-            <Redirect to="/?message=editSuccess" content=""/>
-          ) : this.state.data.state === 2 ? (
+          {this.state.data.state === 2 ? (
             <Message error>{this.state.data.data.message}</Message>
           ) : (
             <> </>

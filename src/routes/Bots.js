@@ -144,7 +144,7 @@ class Detail extends React.Component {
             ) : !this.state.error ? (
               <div
             className="botDetail"
-            style={{ minHeight: '100vh' }}
+            style={{ minHeight: '100vh', margin: '30px 0' }}
           >
             <div style={
               (bot.boosted && bot.bg) || (bot.trusted && bot.bg)
@@ -183,10 +183,7 @@ class Detail extends React.Component {
                 <Grid stackable divided="vertically">
                   <Grid.Row columns={2}>
                     <Grid.Column>
-                      <br/><br/>
                       <Image
-                        centered
-                        floated
                         src={
                           bot.avatar
                             ? 'https://cdn.discordapp.com/avatars/' +
@@ -203,7 +200,6 @@ class Detail extends React.Component {
                       />
                     </Grid.Column>
                     <Grid.Column>
-                      <br />
                       <h1 style={{ fontSize: '50px' }}>{bot.name} </h1>
                       {bot.verified ? (
                         <Popup
