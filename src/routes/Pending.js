@@ -6,7 +6,6 @@ import {
   Label,
   Divider,
   Button,
-  Icon,
   Message, Segment
 } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown/with-html'
@@ -229,21 +228,3 @@ class Detail extends React.Component {
 }
 
 export default Detail
-
-const status = {
-  online: 'green',
-  idle: 'yellow',
-  dnd: 'red',
-  offline: 'gray',
-  streaming: 'purple',
-  black: '알 수 없음'
-}
-
-const statusText = {
-  online: '온라인',
-  idle: '자리 비움',
-  dnd: '다른 용무중',
-  offline: '오프라인',
-  streaming: '방송중',
-  '???': '알 수 없음'
-}

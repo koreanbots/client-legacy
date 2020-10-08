@@ -50,6 +50,19 @@ class Detail extends React.Component {
         state
         reason
       }
+      reports {
+        id
+        type
+        state
+        category
+        desc
+        bot {
+          id
+          name
+          tag
+          avatar
+        }
+      }
     }`)
 
     this.setState({ result: res, isLoading: false })
@@ -133,11 +146,14 @@ class Detail extends React.Component {
             {
               result.data.submits.length !== 0 ? (
                 <>
-                {
-                  result.data.submits.map(bot => (
-                    <Submitted {...bot} />
-                  ))
-                }
+                <Card.Group stackable itemsPerRow={4}>
+                  {
+                    result.data.submits.map(bot => (
+                      <Submitted {...bot} />
+                    ))
+                  }
+                </Card.Group>
+                <br/>
                 본인의 봇이 거부되셨나요? <a href="https://docs.koreanbots.dev/bots/submit">해당 문서</a>를 확인해주세요.
                 </>
               ) : (
@@ -145,6 +161,22 @@ class Detail extends React.Component {
               )
             }
             <Divider />
+            <h2>신고 내역</h2>
+            {
+              result.data.reports.length !== 0 ? (
+                <>
+                <Card.Group stackable itemsPerRow={4}>
+                  {
+                    result.data.reports.reverse().map(report => (
+                      <Reports {...report} />
+                    ))
+                  }
+                </Card.Group>
+                </>
+              ) : (
+                <h3>신고내역이 없습니다.</h3>
+              )
+            }
           </div>
         )}
         <br />
@@ -157,6 +189,7 @@ export default Detail
 
 const stateColor = ['gray', 'green', 'red']
 const state = ['심사중', '승인됨', '거부됨']
+
 
 function MyBots(props) {
   const [see, hoverSee] = useState(false)
@@ -258,6 +291,46 @@ function Submitted(props) {
             onMouseOut={() => hoverPrev(false)}
           >
             {bot.state === 1 ? '이동하기' : '미리보기'}
+          </Button>
+        </div>
+      </Card.Content>
+    </Card>
+  )
+}
+
+function Reports(props) {
+  const [preview, hoverPrev] = useState(false)
+  const report = props
+  return (
+    <Card
+      href={
+        '/report/' + report.id
+      }
+    >
+      <Card.Content>
+        <Card.Header>
+          <a>#{report.id}</a>
+        </Card.Header>
+        <Card.Meta>
+          상태:{' '}
+          <a style={{ color: stateColor[report.state === 0 ? 0 : 1] }}>{report.state === 0 ? '대기중' : '답변 완료'}</a><br/>
+        </Card.Meta>
+        <Card.Description>
+          신고 내용: 
+          {
+            report.type === 'bot' ? `${report.bot.name}#${report.bot.tag}` : ''
+          } - { report.category }
+        </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <div className="ui two buttons">
+          <Button
+            basic={!preview}
+            color="blue"
+            onMouseOver={() => hoverPrev(true)}
+            onMouseOut={() => hoverPrev(false)}
+          >
+            보기
           </Button>
         </div>
       </Card.Content>

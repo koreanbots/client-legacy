@@ -15,7 +15,6 @@ import {
   Table,
   Modal
 } from 'semantic-ui-react'
-import Redirect from '../components/Redirect'
 import ReactMarkdown from 'react-markdown/with-html'
 import config from '../config'
 import CodeBlock from '../components/Code'
