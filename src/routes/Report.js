@@ -101,10 +101,11 @@ export default function Report({ match }) {
                                 />
                             </Segment>
                             <Divider />
+                            <h2>답변 내용</h2>
                             {
-                                data.data.report.state !== 0 && (
+                                data.data.report.state !== 0 ? (
                                     <>
-                                        <h2>답변 내용</h2>
+                                        
                                         <Segment style={{
                                         wordWrap: 'break-word',
                                         color: 'black'
@@ -113,6 +114,8 @@ export default function Report({ match }) {
                                             source={reply[data.data.report.state]} />
                                         </Segment>
                                     </>
+                                ) : (
+                                    <h3>답변 대기중</h3>
                                 )
                             }
                         </div>
