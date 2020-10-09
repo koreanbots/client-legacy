@@ -129,7 +129,7 @@ class Detail extends React.Component {
                         ))}
                   </Label.Group>
                   <br />
-                  {bot.url ? (
+                  {!bot.url ? (
                     <Button
                       color="yellow"
                       content="초대하기"
@@ -139,7 +139,7 @@ class Detail extends React.Component {
                     ></Button>
                   ) : (
                     <Button
-                      className="discord"
+                      className="yellow"
                       content="초대하기"
                       labelPosition="left"
                       icon="discord"
