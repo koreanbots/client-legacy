@@ -24,6 +24,7 @@ import graphql from '../utils/graphql'
 import Adsense from '../components/Advertisement'
 import Permission from '../utils/permission'
 import { Link } from 'react-router-dom'
+import Redirecting from '../components/Redirect'
 
 class Detail extends React.Component {
   constructor(props) {
@@ -132,7 +133,12 @@ class Detail extends React.Component {
               <div className="loader">
                 <span>Loading...</span>
               </div>
-            ) : !this.state.error ? (
+            ) : !this.state.error ? (bot.trusted || bot.boosted) && bot.vanity && this.props.match.params.id !== bot.vanity ? (
+              <div className="loader">
+                <Redirecting to={`/bots/${bot.vanity}`}/>
+
+              </div>
+            ) : (
               <div
             className="botDetail"
             style={{ minHeight: '100vh' }}
