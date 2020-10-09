@@ -135,17 +135,18 @@ class Detail extends React.Component {
             ) : !this.state.error ? (
               <div
             className="botDetail"
-            style={{ minHeight: '100vh', margin: '30px 0' }}
+            style={{ minHeight: '100vh' }}
           >
             <div style={
               (bot.boosted && bot.bg) || (bot.trusted && bot.bg)
                 ? { 
+                    padding: '30px 0',
                     minHeight: '100vh',
                     paddingBottom: '30px',
                     color: 'white',
                     background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${bot.bg}) top/cover no-repeat fixed`
                   }
-                : { paddingBottom: '30px' }
+                : { padding: '30px 0' }
             }>
               <br/>
           <Container>
