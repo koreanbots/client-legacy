@@ -156,7 +156,7 @@ export default class Nav extends Component {
                         </Dropdown.Item>
                         </>
                       ) : (
-                        <Dropdown.Item href={config.url}>
+                        <Dropdown.Item href={config.url} onClick={()=> localStorage.redirect = window.location.href }>
                           <Icon className="sign in" /> 로그인
                         </Dropdown.Item>
                       )
@@ -271,7 +271,7 @@ export default class Nav extends Component {
                         </Dropdown.Item>
                         </>
                       ) : (
-                        <Dropdown.Item href={config.url}>
+                        <Dropdown.Item href={config.url} onClick={()=> localStorage.redirect = window.location.href }>
                           <Icon className="sign in" /> 로그인
                         </Dropdown.Item>
                       )
