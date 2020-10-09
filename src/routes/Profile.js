@@ -142,7 +142,8 @@ class Detail extends React.Component {
               </>
             )}
             <Divider />
-            <h2>심사 이력</h2>
+            <h2>심사이력</h2>
+            <p>신청하신 내용을 보시려면 카드를 클릭해주세요!</p>
             {
               result.data.submits.length !== 0 ? (
                 <>
@@ -161,7 +162,8 @@ class Detail extends React.Component {
               )
             }
             <Divider />
-            <h2>신고 내역</h2>
+            <h2>신고내역</h2>
+            <p>신고내역을 확인하시려면 카드를 클릭해주세요!</p>
             {
               result.data.reports.length !== 0 ? (
                 <>
@@ -192,13 +194,16 @@ const state = ['심사중', '승인됨', '거부됨']
 
 
 function MyBots(props) {
-  const [see, hoverSee] = useState(false)
-  const [manage, hoverManage] = useState(false)
   const { bot } = props
   return (
     <Card>
       <Card.Content>
-        <Card.Header>
+        <Card.Header href={
+              '/bots/' +
+              ((bot.vanity && bot.boosted) || (bot.vanity && bot.trusted)
+                ? bot.vanity
+                : bot.id)
+            }>
           {' '}
           <Item.Image
             floated="right"
@@ -228,26 +233,10 @@ function MyBots(props) {
       </Card.Content>
       <Card.Content extra>
         <div className="ui two buttons">
-          <Button
-            href={
-              '/bots/' +
-              ((bot.vanity && bot.boosted) || (bot.vanity && bot.trusted)
-                ? bot.vanity
-                : bot.id)
-            }
-            basic={!see}
-            color="blue"
-            onMouseOver={() => hoverSee(true)}
-            onMouseOut={() => hoverSee(false)}
-          >
-            보기
-          </Button>
-          <Button
+          <Button inverted
             href={'/manage/' + bot.id}
-            basic={!manage}
             color="green"
-            onMouseOver={() => hoverManage(true)}
-            onMouseOut={() => hoverManage(false)}
+            
           >
             관리하기
           </Button>
@@ -258,7 +247,6 @@ function MyBots(props) {
 }
 
 function Submitted(props) {
-  const [preview, hoverPrev] = useState(false)
   const bot = props
   return (
     <Card
@@ -282,24 +270,11 @@ function Submitted(props) {
           {bot.intro}
         </Card.Description>
       </Card.Content>
-      <Card.Content extra>
-        <div className="ui two buttons">
-          <Button
-            basic={!preview}
-            color="blue"
-            onMouseOver={() => hoverPrev(true)}
-            onMouseOut={() => hoverPrev(false)}
-          >
-            {bot.state === 1 ? '이동하기' : '미리보기'}
-          </Button>
-        </div>
-      </Card.Content>
     </Card>
   )
 }
 
 function Reports(props) {
-  const [preview, hoverPrev] = useState(false)
   const report = props
   return (
     <Card
@@ -313,7 +288,7 @@ function Reports(props) {
         </Card.Header>
         <Card.Meta>
           상태:{' '}
-          <a style={{ color: stateColor[report.state === 0 ? 0 : 1] }}>{report.state === 0 ? '대기중' : '답변 완료'}</a><br/>
+          <a style={{ color: stateColor[report.state === 0 ? 0 : 1] }}>{report.state === 0 ? '대기 중' : '답변 완료'}</a><br/>
         </Card.Meta>
         <Card.Description>
           신고 내용: 
@@ -321,18 +296,6 @@ function Reports(props) {
             report.type === 'bot' ? `${report.bot.name}#${report.bot.tag}` : ''
           } - { report.category }
         </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <div className="ui two buttons">
-          <Button
-            basic={!preview}
-            color="blue"
-            onMouseOver={() => hoverPrev(true)}
-            onMouseOut={() => hoverPrev(false)}
-          >
-            보기
-          </Button>
-        </div>
       </Card.Content>
     </Card>
   )
