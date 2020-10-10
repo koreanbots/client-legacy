@@ -31,6 +31,7 @@ import Trusted from "./routes/Trusted";
 import ScrollTop from "./components/ScrollTop";
 import GithubCallback from "./routes/Github";
 import Report from "./routes/Report";
+import ServiceNotAvailable from "./routes/ServiceNotAvailable";
 
 
 
@@ -83,6 +84,7 @@ function App(props) {
         <Route path="/partners" component={Partners} />
         <Route path="/verification" component={Trusted} />
         <Route path="/ad" component={Ad} />
+        <Route path="/service-not-available" component={ServiceNotAvailable} />
         <Route component={NotFound}></Route>
       </Switch>
         </div>
