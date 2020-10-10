@@ -117,7 +117,7 @@ class SubmitBot extends Component {
       discord,
       read
     } = this.state
-    if (!localStorage.userCache || !JSON.parse(localStorage.userCache))
+    if (!localStorage.token)
       return (
         <div className="loader">
           <h1>로그인 해주세요!</h1>
