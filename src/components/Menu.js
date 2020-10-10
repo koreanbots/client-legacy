@@ -55,7 +55,7 @@ export default class Nav extends Component {
         })
         .catch(err => console.log(err))
     }
-    if (!localStorage.userCache && localStorage.token && !window.location.pathname.includes('/callback')) getUser(this.props.token)
+    if (!localStorage.userCache && localStorage.token && !window.location.pathname.startsWith('/callback')) getUser(this.props.token)
     else
     try {
       JSON.parse(localStorage.userCache)
