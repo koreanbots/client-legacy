@@ -24,6 +24,7 @@ class Callback extends React.Component {
         else {
           localStorage.setItem('token', res.data.login)
           this.setState({ isLoading: false })
+          this.redirect()
         } 
       })
   }
@@ -31,7 +32,6 @@ class Callback extends React.Component {
   redirect = () => {
     localStorage.redirect ? window.location.assign(localStorage.redirect) : window.location.assign('/')
     delete localStorage.redirect
-    return '성공적으로 로그인하였습니다. 리다이렉트합니다.'
   }
   componentDidMount() {
     const query = new URLSearchParams(this.props.location.search.replace('?', ''))
@@ -45,7 +45,7 @@ class Callback extends React.Component {
              <Container textAlign="center">
             <Logo /> <Icon className="plus" /> <h1 style={{ marginTop: '14px' }}><Icon className="discord" /></h1>
             <br/>
-            <h3>{ isLoading ? '데이터 검증중입니다.' : error ? '오류가 발생하였습니다. (다시 시도해주세요.)' : this.redirect()}</h3>
+            <h3>{ isLoading ? '데이터 검증중입니다.' : error ? '오류가 발생하였습니다. (다시 시도해주세요.)' : '성공적으로 로그인하였습니다. 리다이렉트합니다.'}</h3>
             </Container>
         </div>
     )
