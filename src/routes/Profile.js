@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Container, Item, Button, Icon, Card, Divider } from 'semantic-ui-react'
 
 import Redirect from '../components/Redirect'
