@@ -15,9 +15,9 @@ import {
 } from 'semantic-ui-react'
 import Redirect from '../components/Redirect'
 import ReactMarkdown from 'react-markdown/with-html'
-import config from '../config'
 import { HelmetProvider, Helmet } from 'react-helmet-async'
 import CodeBlock from '../components/Code'
+import graphql from '../utils/graphql'
 
 class SubmitBot extends Component {
   state = {
@@ -40,19 +40,16 @@ class SubmitBot extends Component {
   }
   myRef = React.createRef()
   sendSumbit = async body => {
-    const token = localStorage.token,
-      id = localStorage.id,
-      date = localStorage.date
-    return await fetch(config.api + '/bots/submit', {
-      method: 'POST',
-      headers: { token, id, time: date, 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    })
-      .then(r => r.json())
-      .then(res => {
-        if (res.code === 200) this.setState({ data: { state: 1 } })
-        else this.setState({ data: { state: 2, data: res } })
-      })
+    this.setState({ data: { state: 4 }})
+    const res = await graphql(`mutation {
+      submitBot(id: "${body.id.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", category: ${JSON.stringify(body.category)}, lib: "${body.lib}", prefix: "${body.prefix.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", intro: "${body.intro.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", desc: "${body.desc.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", web: ${body.web ? '"' + body.web.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, git: ${body.git ? '"' + body.git.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, url: ${body.url ? '"' + body.url.replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"' :  null}, discord: "${body.discord.replace(/\\$/gi, '\\\\').replace(/"/g, '\\"')}") {
+        id
+      }
+    }`)
+  
+  this.setState({ data: { state: 0, data: {} }})
+  if (res.code === 200) this.setState({ data: { state: 1 } })
+  else this.setState({ data: { state: 2, data: res } })
   }
 
   handleChange = (e, { name, value }) => {
@@ -120,7 +117,7 @@ class SubmitBot extends Component {
       discord,
       read
     } = this.state
-    if (!localStorage.userCache || !JSON.parse(localStorage.userCache))
+    if (!localStorage.token)
       return (
         <div className="loader">
           <h1>로그인 해주세요!</h1>
@@ -142,7 +139,7 @@ class SubmitBot extends Component {
           <h1>새로운 봇 추가하기</h1>
           <Transition
             animation="shake"
-            duration={500}
+            duration={700}
             visible={this.state.visible}
           >
             <section id="readme">
@@ -190,15 +187,15 @@ class SubmitBot extends Component {
 
           <Divider />
           <h2>봇 정보</h2>
-          <Form onSubmit={this.handleSubmit}>
+          <p>* 표시된 항목은 모두 작성해주셔야합니다.</p>
+          <Form onSubmit={this.handleSubmit} style={{ marginBottom: '20px'}}>
             <Form.Group>
               <Form.Input
-                placeholder="387548561816027138"
+                placeholder="653534001742741552"
                 label={'봇 ID (*)'}
-                description="GG"
                 name="id"
                 value={id}
-                maxLength={18}
+                maxLength={19}
                 onChange={this.handleChange}
               />
               <Form.Input
@@ -210,7 +207,7 @@ class SubmitBot extends Component {
                 onChange={this.handleChange}
               />
               <Form.Select
-                placeholder="discord.js"
+                placeholder="봇 제작 라이브러리입니다."
                 label="라이브러리 (Library) (*)"
                 name="lib"
                 value={lib}
@@ -243,7 +240,7 @@ class SubmitBot extends Component {
               />
             </Form.Group>
             <Form.Input
-              placeholder="https://wonderbot.xyz"
+              placeholder="https://koreanbots.dev"
               label="웹사이트"
               name="website"
               value={website}
@@ -251,7 +248,7 @@ class SubmitBot extends Component {
               onChange={this.handleChange}
             />
             <Form.Input
-              placeholder="https://github.com/wonderlandpark/wonderbot"
+              placeholder="https://github.com/koreanbots/client"
               label="깃"
               name="git"
               value={git}
@@ -334,16 +331,18 @@ class SubmitBot extends Component {
                   <p>다음 결과는 실제와 다를 수 있습니다.</p>
                 </Segment>
               </div>
-
+              <p>심사는 영업일 기준 최대 3일까지 소요될 수 있습니다.<br/>
+                심사 결과는 DM으로 전달됩니다.
+              </p>
               <Form.Button
                 content="제출"
-                disabled={this.state.data.state === 1}
+                disabled={this.state.data.state === 4}
               />
             </div>
           </Form>
 
           {this.state.data.state === 1 ? (
-            <Redirect to="/?message=submitSuccess" />
+            <Redirect to="/?message=submitSuccess" content=""/>
           ) : this.state.data.state === 2 ? (
             <Message error>{this.state.data.data.message}</Message>
           ) : this.state.data.state === 3 &&

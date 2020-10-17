@@ -1,13 +1,41 @@
 import React from 'react'
 
 import GitInfo from 'react-git-info/macro'
+import { Button, Container, Modal, TextArea } from 'semantic-ui-react'
 import version from '../../package.json'
 
 import Article from '../components/Article'
+import Clipboard from 'react-clipboard.js';
 
 function Version() {
+  const infos = `## 사용자 정보
+버전: v${version.version} | 해시: ${GitInfo().commit.hash}
+브라우저: \`${getBrowser()}\`(${navigator.userAgent})
+플랫폼: ${navigator.platform}
+`
   return (
       <Article title="클라이언트 정보" description="클라이언트 정보들입니다.">
+        
+        <Modal className={localStorage.dark === 'true' ? 'darkmode' : 'lightmode'} trigger={
+          <Button color="blue">
+            이슈 제출용 정보 복사
+          </Button>
+        }>
+          <Modal.Header>
+            이슈 제출용 정보 복사
+          </Modal.Header>
+          <Modal.Description>
+            <Container style={{ padding: '10px' }}>
+              <TextArea style={{ width: '100%' }}
+                value={infos}
+                />
+              <Clipboard component={Button} data-clipboard-text={infos} onSuccess={()=> alert('복사되었습니다!')}>
+                복사하기
+              </Clipboard>
+            
+            </Container>
+          </Modal.Description>
+        </Modal>
         <h1>빌드 정보</h1>
         <p>v{version.version}</p>
         <p>해시: {GitInfo().commit.hash}</p>

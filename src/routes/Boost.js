@@ -124,17 +124,6 @@ class Boost extends React.Component {
               />
             </Card.Content>
           </Card>
-          <Card style={{ width: '100%' }}>
-            <Card.Content>
-              <Card.Header>
-                <Icon className="ban" />
-                광고 없음
-              </Card.Header>
-              봇 페이지에 광고가 표시되지 않습니다.<br/>
-              방문자들이 쾌적하게 봇 페이지를 볼 수 있습니다.
-              
-            </Card.Content>
-          </Card>
         </Card.Group>
         <Divider />
         <h2>부스터 티어2</h2>

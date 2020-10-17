@@ -43,6 +43,26 @@ class Detail extends React.Component {
           status
         }
       }
+      submits {
+        id
+        date
+        intro
+        state
+        reason
+      }
+      reports {
+        id
+        type
+        state
+        category
+        desc
+        bot {
+          id
+          name
+          tag
+          avatar
+        }
+      }
     }`)
 
     this.setState({ result: res, isLoading: false })
@@ -51,7 +71,7 @@ class Detail extends React.Component {
     this.getProfile()
   }
   render() {
-    if (!localStorage.userCache || !JSON.parse(localStorage.userCache))
+    if (!localStorage.token)
       return (
         <div className="loader">
           <h1>로그인 해주세요!</h1>
@@ -122,8 +142,43 @@ class Detail extends React.Component {
               </>
             )}
             <Divider />
-            <h2>심사 이력</h2>
+            <h2>심사이력</h2>
+            <p>신청하신 내용을 보시려면 카드를 클릭해주세요!</p>
+            {
+              result.data.submits.length !== 0 ? (
+                <>
+                <Card.Group stackable itemsPerRow={4}>
+                  {
+                    result.data.submits.map(bot => (
+                      <Submitted {...bot} />
+                    ))
+                  }
+                </Card.Group>
+                <br/>
+                본인의 봇이 거부되셨나요? <a href="https://docs.koreanbots.dev/bots/submit">해당 문서</a>를 확인해주세요.
+                </>
+              ) : (
+                <h3>심사이력이 없습니다.</h3>
+              )
+            }
             <Divider />
+            <h2>신고내역</h2>
+            <p>신고내역을 확인하시려면 카드를 클릭해주세요!</p>
+            {
+              result.data.reports.length !== 0 ? (
+                <>
+                <Card.Group stackable itemsPerRow={4}>
+                  {
+                    result.data.reports.reverse().map(report => (
+                      <Reports {...report} />
+                    ))
+                  }
+                </Card.Group>
+                </>
+              ) : (
+                <h3>신고내역이 없습니다.</h3>
+              )
+            }
           </div>
         )}
         <br />
@@ -137,14 +192,18 @@ export default Detail
 const stateColor = ['gray', 'green', 'red']
 const state = ['심사중', '승인됨', '거부됨']
 
+
 function MyBots(props) {
-  const [see, hoverSee] = useState(false)
-  const [manage, hoverManage] = useState(false)
   const { bot } = props
   return (
     <Card>
       <Card.Content>
-        <Card.Header>
+        <Card.Header href={
+              '/bots/' +
+              ((bot.vanity && bot.boosted) || (bot.vanity && bot.trusted)
+                ? bot.vanity
+                : bot.id)
+            }>
           {' '}
           <Item.Image
             floated="right"
@@ -174,26 +233,10 @@ function MyBots(props) {
       </Card.Content>
       <Card.Content extra>
         <div className="ui two buttons">
-          <Button
-            href={
-              '/bots/' +
-              ((bot.vanity && bot.boosted) || (bot.vanity && bot.trusted)
-                ? bot.vanity
-                : bot.id)
-            }
-            basic={!see}
-            color="blue"
-            onMouseOver={() => hoverSee(true)}
-            onMouseOut={() => hoverSee(false)}
-          >
-            보기
-          </Button>
-          <Button
+          <Button inverted
             href={'/manage/' + bot.id}
-            basic={!manage}
             color="green"
-            onMouseOver={() => hoverManage(true)}
-            onMouseOut={() => hoverManage(false)}
+            
           >
             관리하기
           </Button>
@@ -204,8 +247,7 @@ function MyBots(props) {
 }
 
 function Submitted(props) {
-  const [preview, hoverPrev] = useState(false)
-  const { bot } = props
+  const bot = props
   return (
     <Card
       href={
@@ -220,24 +262,40 @@ function Submitted(props) {
         </Card.Header>
         <Card.Meta>
           상태:{' '}
-          <a style={{ color: stateColor[bot.state] }}>{state[bot.state]}</a>
+          <a style={{ color: stateColor[bot.state] }}>{state[bot.state]}</a><br/>
+          { bot.state === 2 && `사유: ${bot.reason || '없음.'}`}
         </Card.Meta>
         <Card.Description>
           설명:
           {bot.intro}
         </Card.Description>
       </Card.Content>
-      <Card.Content extra>
-        <div className="ui two buttons">
-          <Button
-            basic={!preview}
-            color="blue"
-            onMouseOver={() => hoverPrev(true)}
-            onMouseOut={() => hoverPrev(false)}
-          >
-            {bot.state === 1 ? '이동하기' : '미리보기'}
-          </Button>
-        </div>
+    </Card>
+  )
+}
+
+function Reports(props) {
+  const report = props
+  return (
+    <Card
+      href={
+        '/report/' + report.id
+      }
+    >
+      <Card.Content>
+        <Card.Header>
+          <a>#{report.id}</a>
+        </Card.Header>
+        <Card.Meta>
+          상태:{' '}
+          <a style={{ color: stateColor[report.state === 0 ? 0 : 1] }}>{report.state === 0 ? '대기 중' : '답변 완료'}</a><br/>
+        </Card.Meta>
+        <Card.Description>
+          신고 내용: 
+          {
+            report.type === 'bot' ? `${report.bot.name}#${report.bot.tag}` : ''
+          } - { report.category }
+        </Card.Description>
       </Card.Content>
     </Card>
   )

@@ -25,7 +25,6 @@ export default class Nav extends Component {
   componentDidMount() {
     if(!localStorage.token) return
     const getUser = async () => {
-      if(window.location.pathname === '/callback') return
       await graphql(`query {
         me {
           id
@@ -55,7 +54,7 @@ export default class Nav extends Component {
         })
         .catch(err => console.log(err))
     }
-    if (!localStorage.userCache && localStorage.token) getUser(this.props.token)
+    if (!localStorage.userCache && localStorage.token && !window.location.pathname.startsWith('/callback')) getUser(this.props.token)
     else
     try {
       JSON.parse(localStorage.userCache)
@@ -156,7 +155,7 @@ export default class Nav extends Component {
                         </Dropdown.Item>
                         </>
                       ) : (
-                        <Dropdown.Item href={config.url}>
+                        <Dropdown.Item href={config.url} onClick={()=> localStorage.redirect = window.location.href }>
                           <Icon className="sign in" /> 로그인
                         </Dropdown.Item>
                       )
@@ -272,7 +271,7 @@ export default class Nav extends Component {
                         </Dropdown.Item>
                         </>
                       ) : (
-                        <Dropdown.Item href={config.url}>
+                        <Dropdown.Item href={config.url} onClick={()=> localStorage.redirect = window.location.href }>
                           <Icon className="sign in" /> 로그인
                         </Dropdown.Item>
                       )

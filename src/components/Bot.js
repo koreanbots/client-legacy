@@ -26,7 +26,8 @@ function Bot({
   vanity,
   boosted,
   status,
-  banner
+  banner,
+  refresh
 }) {
   const [lookHover, setLookHover] = useState(false)
   const [inviteHover, setinviteHover] = useState(false)
@@ -119,11 +120,19 @@ function Bot({
         </Card.Content>
         <Card.Content extra>
           {category.slice(0, 5).map(c => (
-            <>
-            <Link as={Link} style={{ color: '#7289DA' }} to={'/categories/' + c} key={c}>
-              #{c}
-            </Link>{' '}
-            </>
+            refresh ? (
+              <>
+              <a style={{ color: '#7289DA' }} href={'/categories/' + c}  key={c}>
+                #{c}
+              </a>{' '}
+              </>
+            ) : (
+              <>
+                <Link as={Link} style={{ color: '#7289DA' }} to={'/categories/' + c}  key={c}>
+                  #{c}
+                </Link>{' '}
+              </>
+            )
           ))}
           <span>
             {' '}

@@ -86,9 +86,7 @@ class User extends React.Component {
     const { data, isLoading, error } = this.state
     return (
       <Container>
-        <div>
-          <br />
-
+        <div style={{ margin: '30px 0' }}>
           {isLoading ? (
             <div className="loader">
               <span>Loading...</span>
@@ -101,9 +99,7 @@ class User extends React.Component {
               <Grid stackable divided="vertically">
                 <Grid.Row columns={2}>
                   <Grid.Column>
-                    <br/>
                     <Image
-                      centered
                       floated
                       src={
                         data.avatar
@@ -121,7 +117,6 @@ class User extends React.Component {
                     />
                   </Grid.Column>
                   <Grid.Column>
-                    <br />
                     <h1 style={{ fontSize: '40px' }}>
                       {data.username}
                       <h2 style={{ color: 'gray' }}>#{data.tag}</h2>
@@ -171,23 +166,30 @@ class User extends React.Component {
                     <br/>
                    
                     {
-                      data.github && (
-                    <>
-                      <Label style={{ marginTop: '20px' }} href={`https://github.com/${data.github}`}>
-                      <Icon className="github" />
-                      { data.github }
-                      </Label>
-                    </>
-                        
-                      )
-                    }
-                    <br/>
-                    {
-                      this.state.user.id === data.id && (
-                        <Label style={{ marginTop: '20px' }} href="/panel">
-                          <Icon className="settings" /> 관리하기
-                        </Label>
-                      )
+                      (data.github) && (
+                        <>
+                        <Icon className="address book" />
+                        {
+                          data.github && (
+                          <>
+                            <Label style={{ marginTop: '20px' }} href={`https://github.com/${data.github}`}>
+                            <Icon className="github" />
+                            { data.github }
+                            </Label>
+                          </>
+                              
+                            )
+                          }
+                          <br/>
+                          {
+                            this.state.user.id === data.id && (
+                              <Label style={{ marginTop: '20px' }} href="/panel">
+                                <Icon className="settings" /> 관리하기
+                              </Label>
+                            )
+                        }
+                        </>
+                      ) 
                     }
                     
                   </Grid.Column>

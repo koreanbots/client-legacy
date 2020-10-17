@@ -144,6 +144,7 @@ class Category extends React.Component {
                 {bot.data.list.data.map(b => (
                   <>
                     <Bot
+                      refresh
                       data={b}
                       key={b.id}
                       id={b.id}

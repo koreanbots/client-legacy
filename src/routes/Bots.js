@@ -24,6 +24,7 @@ import graphql from '../utils/graphql'
 import Adsense from '../components/Advertisement'
 import Permission from '../utils/permission'
 import { Link } from 'react-router-dom'
+import Redirecting from '../components/Redirect'
 
 class Detail extends React.Component {
   constructor(props) {
@@ -104,20 +105,11 @@ class Detail extends React.Component {
   }
 
   report = async () => {
-    let body = {
-      category: this.state.reportCategory,
-      desc: this.state.reportDesc
+    const res = await graphql(`mutation {
+      report(id: "${this.state.bot.id}", type: bot, category: "${this.state.reportCategory}", desc: "${this.state.reportDesc.replace(/\n/g, '\\n').replace(/"/g, '\\"')}") {
+        id
     }
-    const res = await fetch(config.api + '/bots/report/' + this.state.bot.id, {
-      method: 'POST',
-      headers: {
-        token: localStorage.token,
-        id: localStorage.id,
-        time: localStorage.date,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    }).then(r => r.json())
+}`)
     if (res.code !== 200) {
       this.setState({ report: res.message })
     } else {
@@ -125,7 +117,7 @@ class Detail extends React.Component {
     }
   }
 
-  componentDidMount(props) {
+  componentDidMount() {
     const {
       match: {
         params: { id }
@@ -141,7 +133,12 @@ class Detail extends React.Component {
               <div className="loader">
                 <span>Loading...</span>
               </div>
-            ) : !this.state.error ? (
+            ) : !this.state.error ? (bot.trusted || bot.boosted) && bot.vanity && this.props.match.params.id !== bot.vanity ? (
+              <div className="loader">
+                <Redirecting to={`/bots/${bot.vanity}`}/>
+
+              </div>
+            ) : (
               <div
             className="botDetail"
             style={{ minHeight: '100vh' }}
@@ -149,12 +146,13 @@ class Detail extends React.Component {
             <div style={
               (bot.boosted && bot.bg) || (bot.trusted && bot.bg)
                 ? { 
+                    padding: '30px 0',
                     minHeight: '100vh',
                     paddingBottom: '30px',
                     color: 'white',
                     background: `linear-gradient(to right, rgba(34, 36, 38, 0.68), rgba(34, 36, 38, 0.68)), url(${bot.bg}) top/cover no-repeat fixed`
                   }
-                : { paddingBottom: '30px' }
+                : { padding: '30px 0' }
             }>
               <br/>
           <Container>
@@ -183,10 +181,7 @@ class Detail extends React.Component {
                 <Grid stackable divided="vertically">
                   <Grid.Row columns={2}>
                     <Grid.Column>
-                      <br/><br/>
                       <Image
-                        centered
-                        floated
                         src={
                           bot.avatar
                             ? 'https://cdn.discordapp.com/avatars/' +
@@ -203,7 +198,6 @@ class Detail extends React.Component {
                       />
                     </Grid.Column>
                     <Grid.Column>
-                      <br />
                       <h1 style={{ fontSize: '50px' }}>{bot.name} </h1>
                       {bot.verified ? (
                         <Popup
@@ -367,6 +361,7 @@ class Detail extends React.Component {
                                 />
                               ))}
                               <h3>설명</h3>
+                              마크다운을 지원합니다.<br/><br/>
                               <TextArea
                                 maxLength={1000}
                                 value={this.state.desc}
@@ -378,7 +373,7 @@ class Detail extends React.Component {
                               <br />
                               <br />
                               지속적인 허위 신고혹은 장난 신고는 제재대상입니다.
-                              <br />
+                              <br /><br/>
                               <Button
                                 primary
                                 content="제출"
@@ -456,14 +451,7 @@ class Detail extends React.Component {
                     </Label>
                   ))}
                 </div>
-              {
-                  !(bot.trusted || bot.boosted) && (
-                   <>
-                    <Divider section />
-                    <Adsense />
-                   </>
-                  )
-                }
+                <Adsense />
 
                 <Divider section />
                 <Segment

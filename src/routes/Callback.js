@@ -29,7 +29,8 @@ class Callback extends React.Component {
   }
 
   redirect = () => {
-    window.history.go(-2) || window.location.assign('/')
+    localStorage.redirect ? window.location.assign(localStorage.redirect) : window.location.assign('/')
+    delete localStorage.redirect
     return '성공적으로 로그인하였습니다. 리다이렉트합니다.'
   }
   componentDidMount() {

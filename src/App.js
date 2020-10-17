@@ -29,6 +29,8 @@ import Partners from "./routes/Partners";
 import Trusted from "./routes/Trusted";
 import ScrollTop from "./components/ScrollTop";
 import GithubCallback from "./routes/Github";
+import Report from "./routes/Report";
+import ServiceNotAvailable from "./routes/ServiceNotAvailable";
 
 
 
@@ -72,6 +74,7 @@ function App(props) {
           <Redirect to="https://discord.gg/JEh53MQ" />
         </Route>
         <Route path="/manage/:id" component={ManageBot}/>
+        <Route path="/report/:id" component={Report} />
         <Route path="/clientinfo" component={Version}/>
         <Route path="/guidelines" component={GuideLines} />
         <Route path="/privacy" component={Privacy}/>
@@ -79,6 +82,7 @@ function App(props) {
         <Route path="/partners" component={Partners} />
         <Route path="/verification" component={Trusted} />
         <Route path="/ad" component={Ad} />
+        <Route path="/service-not-available" component={ServiceNotAvailable} />
         <Route component={NotFound}></Route>
       </Switch>
         </div>
