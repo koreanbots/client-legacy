@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
   Menu,
   Image,
-  Responsive,
   Icon,
   Sidebar,
   Dropdown, Container
@@ -89,7 +88,8 @@ export default class Nav extends Component {
     }
     return (
       <>
-        <Responsive {...Responsive.onlyMobile}>
+      {/* mobile */}
+        <div className="navbar mobile">
           <Menu
             className="nav"
             pointing
@@ -193,8 +193,9 @@ export default class Nav extends Component {
               <Search fluid />
             </Menu.Item>
           </Sidebar>
-        </Responsive>
-        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+        </div>
+        {/* minWidth={Responsive.onlyTablet.minWidth} */}
+        <div className="navbar pc">
           <Container textAlign="center">
           <Menu
             className="nav"
@@ -282,7 +283,7 @@ export default class Nav extends Component {
             </Menu.Menu>
           </Menu>
           </Container>
-        </Responsive>
+        </div>
       </>
     )
   }

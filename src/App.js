@@ -15,7 +15,6 @@ import GuideLines from "./routes/GuideLines";
 import Version from "./routes/Version";
 import Category from "./routes/Category";
 import Boost from "./routes/Boost";
-import API from "./routes/API";
 import User from "./routes/Users";
 
 import NotFound from "./components/404";
@@ -69,7 +68,6 @@ function App(props) {
         <Route path="/pendingBots/:id/:date" component={Pending} />
         <Route exact path="/bots/:id" component={Bots} />
         <Route exact path="/users/:id" component={User} />
-        <Route path="/api/:topic?/:doc?" component={API}/>
         <Route path="/discord">
           <Redirect to="https://discord.gg/JEh53MQ" />
         </Route>
