@@ -180,6 +180,11 @@
                 include
             </a>
         </li>
+        <li  title="rateLimit">
+            <a href="ratelimit.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                rateLimit
+            </a>
+        </li>
         <li  title="skip">
             <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 skip
@@ -207,7 +212,8 @@
     <div class="container">
         <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
         <h1 class="slds-text-heading--large">List</h1>
-        <div class="slds-text-body--regular"></div>
+        <div class="slds-text-body--regular"><p>봇의 리스트들을 나타냅니다.</p>
+</div>
     </div>
 </section>
 <section>
@@ -218,7 +224,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">List</span> {</li><li></li><li><span class="tab"><span class="meta">type</span>: <a class="support type" href="listtype.doc.html">ListType</a> </span></li><li></li><li><span class="tab"><span class="meta">data</span>: [<a class="support type" href="bot.doc.html">Bot</a>] </span></li><li></li><li><span class="tab"><span class="meta">currentPage</span>: <a class="support type" href="int.doc.html">Int</a> </span></li><li></li><li><span class="tab"><span class="meta">totalPage</span>: <a class="support type" href="int.doc.html">Int</a> </span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">List</span> {</li><li></li><li><span class="tab"><span class="comment line">#   리스트 타입입니다.</span></span></li><li><span class="tab"><span class="meta">type</span>: <a class="support type" href="listtype.doc.html">ListType</a> </span></li><li></li><li><span class="tab"><span class="comment line">#   리스트 데이터입니다.</span></span></li><li><span class="tab"><span class="meta">data</span>: [<a class="support type" href="bot.doc.html">Bot</a>!] </span></li><li></li><li><span class="tab"><span class="comment line">#   현재 페이지입니다.</span></span></li><li><span class="tab"><span class="meta">currentPage</span>: <a class="support type" href="int.doc.html">Int</a> </span></li><li></li><li><span class="tab"><span class="comment line">#   전체 페이지입니다.</span></span></li><li><span class="tab"><span class="meta">totalPage</span>: <a class="support type" href="int.doc.html">Int</a> </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -229,7 +235,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="query.doc.html" title="Query - ">Query<em>null</em></a><li></ul>
+        <ul class="require-by"><li><a href="query.doc.html" title="Query - Query 스키마는 값들을 바뀌지 않고, 정보를 조회만 하는경우에 해당됩니다.">Query<em>Query 스키마는 값들을 바뀌지 않고, 정보를 조회만 하는경우에 해당됩니다.</em></a><li></ul>
     </div>
 </section>
 <footer>

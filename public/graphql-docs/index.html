@@ -180,6 +180,11 @@
                 include
             </a>
         </li>
+        <li  title="rateLimit">
+            <a href="ratelimit.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                rateLimit
+            </a>
+        </li>
         <li  title="skip">
             <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 skip
@@ -218,7 +223,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">schema</span> {</li><li></li><li><span class="tab"><span class="meta">query</span>: <a class="support type" href="query.doc.html">Query</a></span></li><li></li><li><span class="tab"><span class="meta">mutation</span>: <a class="support type" href="mutation.doc.html">Mutation</a></span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">schema</span> {</li><li></li><li><span class="tab"><span class="comment line">#   Query 스키마는 값들을 바뀌지 않고, 정보를 조회만 하는경우에 해당됩니다.</span></span></li><li><span class="tab"><span class="meta">query</span>: <a class="support type" href="query.doc.html">Query</a></span></li><li></li><li><span class="tab"><span class="comment line">#   Mutation 스키마는 값들이 바뀌며, 정보를 유저가 바꾸는 요청들이 해당됩니다.</span></span></li><li><span class="tab"><span class="meta">mutation</span>: <a class="support type" href="mutation.doc.html">Mutation</a></span></li><li>}</li></ul></code>
     </div>
 </section>
 <footer>

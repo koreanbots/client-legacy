@@ -180,6 +180,11 @@
                 include
             </a>
         </li>
+        <li  title="rateLimit">
+            <a href="ratelimit.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                rateLimit
+            </a>
+        </li>
         <li  title="skip">
             <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 skip
@@ -207,7 +212,8 @@
     <div class="container">
         <p class="slds-text-title--caps slds-text-color--weak">ENUM</p>
         <h1 class="slds-text-heading--large">Status</h1>
-        <div class="slds-text-body--regular"></div>
+        <div class="slds-text-body--regular"><p>봇의 디스코드 상태 정보입니다.</p>
+</div>
     </div>
 </section>
 <section>
@@ -218,7 +224,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">enum</span> <span class="identifier">Status</span> {</li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">online</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">idle</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">dnd</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">offline</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">streaming</span></span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">enum</span> <span class="identifier">Status</span> {</li><li><span class="tab"></span></li><li><span class="tab"><span class="comment line">#   온라인</span></span></li><li><span class="tab"><span class="meta">online</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="comment line">#   자리 비움</span></span></li><li><span class="tab"><span class="meta">idle</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="comment line">#   다른 용무중</span></span></li><li><span class="tab"><span class="meta">dnd</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="comment line">#   방송중</span></span></li><li><span class="tab"><span class="meta">streaming</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="comment line">#   오프라인</span></span></li><li><span class="tab"><span class="meta">offline</span></span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -229,7 +235,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="bot.doc.html" title="Bot - ">Bot<em>null</em></a><li></ul>
+        <ul class="require-by"><li><a href="bot.doc.html" title="Bot - KOREANBOTS의 봇을 나타냅니다.">Bot<em>KOREANBOTS의 봇을 나타냅니다.</em></a><li></ul>
     </div>
 </section>
 <footer>

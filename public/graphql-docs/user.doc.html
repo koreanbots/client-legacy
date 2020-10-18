@@ -180,6 +180,11 @@
                 include
             </a>
         </li>
+        <li  title="rateLimit">
+            <a href="ratelimit.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                rateLimit
+            </a>
+        </li>
         <li  title="skip">
             <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 skip
@@ -207,7 +212,8 @@
     <div class="container">
         <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
         <h1 class="slds-text-heading--large">User</h1>
-        <div class="slds-text-body--regular"></div>
+        <div class="slds-text-body--regular"><p>KOREANBOTS 유저를 나타냅니다.</p>
+</div>
     </div>
 </section>
 <section>
@@ -218,7 +224,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">User</span> {</li><li></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">avatar</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">tag</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">username</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">perm</span>: <a class="support type" href="int.doc.html">Int</a>! </span></li><li></li><li><span class="tab"><span class="meta">github</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">bots</span>: [<a class="support type" href="bot.doc.html">Bot</a>] </span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">User</span> {</li><li></li><li><span class="tab"><span class="comment line">#   유저의 디스코드 ID입니다.</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   유저의 아바타 해시입니다.</span></span></li><li><span class="tab"><span class="meta">avatar</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="comment line">#   유저의 디스코드 태그입니다.</span></span></li><li><span class="tab"><span class="meta">tag</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="comment line">#   유저의 디스코드 유저네임입니다.</span></span></li><li><span class="tab"><span class="meta">username</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="comment line">#   유저의 권한을 나타내는 비트 플래그입니다.</span></span></li><li><span class="tab"><span class="comment line"># </span></span></li><li><span class="tab"><span class="comment line">#   FLAGS</span></span></li><li><span class="tab"><span class="comment line"># </span></span></li><li><span class="tab"><span class="comment line">#   |  VALUE  | DESCRIPTION |</span></span></li><li><span class="tab"><span class="comment line">#   |---------|-------------|</span></span></li><li><span class="tab"><span class="comment line">#   | 0       | None        |</span></span></li><li><span class="tab"><span class="comment line">#   | 1 << 0  | Staff       |</span></span></li><li><span class="tab"><span class="comment line">#   | 1 << 1  | Bug Hunter  |</span></span></li><li><span class="tab"><span class="comment line">#   | 1 << 2  | Booster     |</span></span></li><li><span class="tab"><span class="meta">perm</span>: <a class="support type" href="int.doc.html">Int</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   유저의 깃허브 닉네임입니다.</span></span></li><li><span class="tab"><span class="meta">github</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="comment line">#   유저가 소유하고 있는 봇입니다.</span></span></li><li><span class="tab"><span class="meta">bots</span>: [<a class="support type" href="bot.doc.html">Bot</a>!] </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -229,7 +235,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="bot.doc.html" title="Bot - ">Bot<em>null</em></a><li><li><a href="query.doc.html" title="Query - ">Query<em>null</em></a><li><li><a href="report.doc.html" title="Report - ">Report<em>null</em></a><li><li><a href="submitedbot.doc.html" title="SubmitedBot - ">SubmitedBot<em>null</em></a><li></ul>
+        <ul class="require-by"><li><a href="bot.doc.html" title="Bot - KOREANBOTS의 봇을 나타냅니다.">Bot<em>KOREANBOTS의 봇을 나타냅니다.</em></a><li><li><a href="query.doc.html" title="Query - Query 스키마는 값들을 바뀌지 않고, 정보를 조회만 하는경우에 해당됩니다.">Query<em>Query 스키마는 값들을 바뀌지 않고, 정보를 조회만 하는경우에 해당됩니다.</em></a><li><li><a href="report.doc.html" title="Report - 신고 정보를 나타냅니다.">Report<em>신고 정보를 나타냅니다.</em></a><li><li><a href="submitedbot.doc.html" title="SubmitedBot - 신청한 봇을 나타냅니다.">SubmitedBot<em>신청한 봇을 나타냅니다.</em></a><li></ul>
     </div>
 </section>
 <footer>

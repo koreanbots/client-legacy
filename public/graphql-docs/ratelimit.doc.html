@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
-    <title>skip</title>
+    <title>rateLimit</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
 </head>
 <body class="slds-scrollable--y">
@@ -180,12 +180,12 @@
                 include
             </a>
         </li>
-        <li  title="rateLimit">
+        <li class="slds-is-active" title="rateLimit">
             <a href="ratelimit.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 rateLimit
             </a>
         </li>
-        <li class="slds-is-active" title="skip">
+        <li  title="skip">
             <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 skip
             </a>
@@ -211,8 +211,8 @@
     </div>
     <div class="container">
         <p class="slds-text-title--caps slds-text-color--weak"></p>
-        <h1 class="slds-text-heading--large">skip</h1>
-        <div class="slds-text-body--regular"><p>Directs the executor to skip this field or fragment when the <code>if</code> argument is true.</p>
+        <h1 class="slds-text-heading--large">rateLimit</h1>
+        <div class="slds-text-body--regular"><p>Controls the rate of traffic.</p>
 </div>
     </div>
 </section>
@@ -224,7 +224,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">directive</span> <span class="keyword operator ts">@skip</span>(<span class="meta">if</span>: <a class="support type" href="boolean.doc.html">Boolean</a>!) on <span class="keyword operator ts">FIELD</span> | <span class="keyword operator ts">FRAGMENT_SPREAD</span> | <span class="keyword operator ts">INLINE_FRAGMENT</span></li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">directive</span> <span class="keyword operator ts">@rateLimit</span>(<span class="meta">limit</span>: <a class="support type" href="int.doc.html">Int</a>!, <span class="meta">duration</span>: <a class="support type" href="int.doc.html">Int</a>!) on <span class="keyword operator ts">OBJECT</span> | <span class="keyword operator ts">FIELD_DEFINITION</span></li></ul></code>
     </div>
 </section>
 <section>

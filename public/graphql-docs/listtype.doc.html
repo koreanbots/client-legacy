@@ -180,6 +180,11 @@
                 include
             </a>
         </li>
+        <li  title="rateLimit">
+            <a href="ratelimit.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                rateLimit
+            </a>
+        </li>
         <li  title="skip">
             <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 skip
@@ -207,7 +212,8 @@
     <div class="container">
         <p class="slds-text-title--caps slds-text-color--weak">ENUM</p>
         <h1 class="slds-text-heading--large">ListType</h1>
-        <div class="slds-text-body--regular"></div>
+        <div class="slds-text-body--regular"><p>봇의 리스트 타입입니다.</p>
+</div>
     </div>
 </section>
 <section>
@@ -218,7 +224,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">enum</span> <span class="identifier">ListType</span> {</li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">VOTE</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">NEW</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">TRUSTED</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">PARTNERED</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">SEARCH</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">CATEGORY</span></span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">enum</span> <span class="identifier">ListType</span> {</li><li><span class="tab"></span></li><li><span class="tab"><span class="comment line">#   하트 순위 리스트</span></span></li><li><span class="tab"><span class="meta">VOTE</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="comment line">#   새로운 봇 리스트</span></span></li><li><span class="tab"><span class="meta">NEW</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="comment line">#   신뢰된 봇 리스트</span></span></li><li><span class="tab"><span class="meta">TRUSTED</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="comment line">#   파트너 리스트</span></span></li><li><span class="tab"><span class="meta">PARTNERED</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="comment line">#   검색 리스트</span></span></li><li><span class="tab"><span class="meta">SEARCH</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="comment line">#   카테고리 리스트</span></span></li><li><span class="tab"><span class="meta">CATEGORY</span></span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -229,7 +235,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="list.doc.html" title="List - ">List<em>null</em></a><li><li><a href="query.doc.html" title="Query - ">Query<em>null</em></a><li></ul>
+        <ul class="require-by"><li><a href="list.doc.html" title="List - 봇의 리스트들을 나타냅니다.">List<em>봇의 리스트들을 나타냅니다.</em></a><li><li><a href="query.doc.html" title="Query - Query 스키마는 값들을 바뀌지 않고, 정보를 조회만 하는경우에 해당됩니다.">Query<em>Query 스키마는 값들을 바뀌지 않고, 정보를 조회만 하는경우에 해당됩니다.</em></a><li></ul>
     </div>
 </section>
 <footer>
