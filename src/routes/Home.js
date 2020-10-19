@@ -2,11 +2,12 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import fetch from 'node-fetch'
 import Bot from '../components/Bot'
-import { Message, Container, Card, Pagination, Label, Segment } from 'semantic-ui-react'
+import { Message, Container, Card, Pagination, Label, Segment, Advertisement } from 'semantic-ui-react'
 import config from '../config'
 import Typed from 'typed.js'
 import queryString from 'query-string'
 import SearchField from '../components/Search'
+import GitInfo from "react-git-info/macro";
 import ads from './ads'
 
 class Home extends React.Component {
@@ -139,16 +140,16 @@ class Home extends React.Component {
         ) : (
           ''
         )}
-          {
-          ads.top && ( <a href={ads.top.link}>
-            <div class="ui fluid image">
-            <a class="ui top right attached label" href="/ad" style={{ borderRadius: 0 }}>
-              광고
-            </a>
-            <img src={ads.top.img} style={{ width: '100%' }}/>
-              </div>
-            </a>)
-          }
+
+          <Advertisement unit="panorama" style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+            <ins class="adsbygoogle"
+                style={{ display: 'block' }}
+                data-ad-client="ca-pub-4856582423981759"
+                data-ad-slot="3250141451"
+                data-ad-format="auto"
+                data-adtest="on"
+                data-full-width-responsive="true"></ins>
+          </Advertisement>
           </Container>
           </>
               )
@@ -247,16 +248,15 @@ class Home extends React.Component {
           )}
           <br />
         </section>
-        {
-          ads.bottom && ( <a href={ads.bottom.link}>
-            <div class="ui fluid image">
-            <a class="ui top right attached label" href="/ad" style={{ borderRadius: 0 }}>
-              광고
-            </a>
-            <img src={ads.bottom.img} style={{ width: '100%' }}/>
-              </div>
-            </a>)
-        }
+        <Advertisement unit="panorama" style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+            <ins class="adsbygoogle"
+                style={{ display: 'block' }}
+                data-ad-client="ca-pub-4856582423981759"
+                data-ad-slot="3250141451"
+                data-ad-format="auto"
+                data-adtest="on"
+                data-full-width-responsive="true"></ins>
+          </Advertisement>
         {this.state.activePage === 1 ? (
           <>
           <section id="new" style={{marginTop: '15px'}}>
@@ -374,6 +374,15 @@ class Home extends React.Component {
           ''
         )}
         <br />
+        <Advertisement unit="panorama" style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+            <ins class="adsbygoogle"
+                style={{ display: 'block' }}
+                data-ad-client="ca-pub-4856582423981759"
+                data-ad-slot="3250141451"
+                data-ad-format="auto"
+                data-adtest="on"
+                data-full-width-responsive="true"></ins>
+          </Advertisement>
         <br />
         
       </Container>
