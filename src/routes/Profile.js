@@ -63,6 +63,14 @@ class Detail extends React.Component {
           avatar
         }
       }
+      stars {
+        id
+        name
+        tag
+        avatar
+        intro
+        vanity
+      }
     }`)
 
     this.setState({ result: res, isLoading: false })
@@ -135,7 +143,21 @@ class Detail extends React.Component {
               <>
                 <Card.Group stackable itemsPerRow={3}>
                   {result.data.me.bots.map(bot => (
-                    <MyBots bot={bot} />
+                    <MyBots {...bot} />
+                  ))}
+                </Card.Group>
+                <br />
+              </>
+            )}
+            <Divider />
+            <h2>즐겨찾기</h2>
+            {result.data.stars.length === 0 ? (
+              <h3>즐겨찾기에 등록한 봇이 없습니다.</h3>
+            ) : (
+              <>
+                <Card.Group stackable itemsPerRow={4}>
+                  {result.data.stars.map(bot => (
+                    <MyBots {...bot} ignoreExtra={true} ignoreMeta={true}/>
                   ))}
                 </Card.Group>
                 <br />
@@ -194,9 +216,14 @@ const state = ['심사중', '승인됨', '거부됨']
 
 
 function MyBots(props) {
-  const { bot } = props
+  const bot  = props
   return (
-    <Card>
+    <Card href={bot.ignoreExtra ?
+      '/bots/' +
+      ((bot.vanity && bot.boosted) || (bot.vanity && bot.trusted)
+        ? bot.vanity
+        : bot.id)
+     : null}>
       <Card.Content>
         <Card.Header href={
               '/bots/' +
@@ -223,25 +250,33 @@ function MyBots(props) {
           />
           {bot.name}
         </Card.Header>
-        <Card.Meta>
-          <a style={{ color: '#7289DA' }}>{bot.servers} 서버</a> |{' '}
-          <a style={{ color: 'red' }}>
-            {bot.votes} <Icon className="heart" />
-          </a>
-        </Card.Meta>
+        {
+          !bot.ignoreMeta && (
+          <Card.Meta>
+            <a style={{ color: '#7289DA' }}>{bot.servers} 서버</a> |{' '}
+            <a style={{ color: 'red' }}>
+              {bot.votes} <Icon className="heart" />
+            </a>
+          </Card.Meta>
+          )
+        }
         <Card.Description>{bot.intro}</Card.Description>
       </Card.Content>
-      <Card.Content extra>
-        <div className="ui two buttons">
-          <Button inverted
-            href={'/manage/' + bot.id}
-            color="green"
-            
-          >
-            관리하기
-          </Button>
-        </div>
-      </Card.Content>
+      {
+        !bot.ignoreExtra && (
+          <Card.Content extra>
+            <div className="ui two buttons">
+              <Button inverted
+                href={'/manage/' + bot.id}
+                color="green"
+                
+              >
+                관리하기
+              </Button>
+            </div>
+          </Card.Content>
+        )
+      }
     </Card>
   )
 }
