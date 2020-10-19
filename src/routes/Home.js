@@ -7,8 +7,7 @@ import config from '../config'
 import Typed from 'typed.js'
 import queryString from 'query-string'
 import SearchField from '../components/Search'
-import GitInfo from "react-git-info/macro";
-import ads from './ads'
+import GitInfo from "react-git-info/macro"
 
 class Home extends React.Component {
   constructor(props) {
