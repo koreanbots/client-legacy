@@ -252,7 +252,9 @@ function Submitted(props) {
     <Card
       href={
         bot.state === 1
-          ? '/bots/' + bot.id
+          ? '/bots/' + ((bot.vanity && bot.boosted) || (bot.vanity && bot.trusted)
+          ? bot.vanity
+          : bot.id)
           : '/pendingBots/' + bot.id + '/' + bot.date
       }
     >
