@@ -145,6 +145,7 @@ class Home extends React.Component {
                 style={{ display: 'inline-block', width: '100%', height: '90px' }}
                 client="ca-pub-4856582423981759"
                 slot="3250141451"
+                format=''
               />
           </Advertisement>
           </Container>
@@ -250,6 +251,7 @@ class Home extends React.Component {
               style={{ display: 'inline-block', width: '100%', height: '90px' }}
               client="ca-pub-4856582423981759"
               slot="3250141451"
+              format=''
             />
           </Advertisement>
         {this.state.activePage === 1 ? (
