@@ -140,7 +140,7 @@ class Home extends React.Component {
           ''
         )}
 
-          <Advertisement unit="panorama" style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+          <Advertisement unit="large leaderboard" centered style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
             <ins class="adsbygoogle"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-4856582423981759"
@@ -247,7 +247,7 @@ class Home extends React.Component {
           )}
           <br />
         </section>
-        <Advertisement unit="panorama" style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+        <Advertisement unit="large leaderboard" centered style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
             <ins class="adsbygoogle"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-4856582423981759"
@@ -373,7 +373,7 @@ class Home extends React.Component {
           ''
         )}
         <br />
-        <Advertisement unit="panorama" style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+        <Advertisement unit="large leaderboard" centered style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
             <ins class="adsbygoogle"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-4856582423981759"
