@@ -140,13 +140,15 @@ class Home extends React.Component {
         ) : (
           ''
         )}
-          <Advertisement unit="large leaderboard" centered style={{ marginTop: '2em', width: '100%' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+          <Advertisement unit="large leaderboard" centered style={{ marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
             <AdSense.Google
-                style={{ display: 'inline-block', width: '100%', height: '90px' }}
-                client="ca-pub-4856582423981759"
-                slot="3250141451"
-                format=''
-              />
+                  style={{ display: 'block' }}
+                  client="ca-pub-4856582423981759"
+                  slot="3250141451"
+                  format="auto"
+                  responsive="true"
+                  
+                />
           </Advertisement>
           </Container>
           </>
