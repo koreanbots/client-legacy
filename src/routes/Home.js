@@ -8,6 +8,7 @@ import Typed from 'typed.js'
 import queryString from 'query-string'
 import SearchField from '../components/Search'
 import GitInfo from "react-git-info/macro"
+import AdSense from 'react-adsense'
 
 class Home extends React.Component {
   constructor(props) {
@@ -140,10 +141,11 @@ class Home extends React.Component {
           ''
         )}
           <Advertisement unit="large leaderboard" centered style={{ marginTop: '2em', width: '100%' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
-          <ins class="adsbygoogle"
-            style={{ display: 'inline-block', width: '100%', height: '90px' }}
-            data-ad-client="ca-pub-4856582423981759"
-            data-ad-slot="3250141451"></ins>
+            <AdSense.Google
+                style={{ display: 'inline-block', width: '100%', height: '90px' }}
+                client="ca-pub-4856582423981759"
+                slot="3250141451"
+              />
           </Advertisement>
           </Container>
           </>
@@ -244,10 +246,11 @@ class Home extends React.Component {
           <br />
         </section>
         <Advertisement unit="large leaderboard" centered style={{ marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
-        <ins class="adsbygoogle"
-            style={{ display: 'inline-block', width: '100%', height: '90px' }}
-            data-ad-client="ca-pub-4856582423981759"
-            data-ad-slot="3250141451"></ins>
+            <AdSense.Google
+              style={{ display: 'inline-block', width: '100%', height: '90px' }}
+              client="ca-pub-4856582423981759"
+              slot="3250141451"
+            />
           </Advertisement>
         {this.state.activePage === 1 ? (
           <>
@@ -367,12 +370,14 @@ class Home extends React.Component {
         )}
         <br />
         <Advertisement unit="large leaderboard" centered style={{ marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
-        <ins class="adsbygoogle"
-            style={{ display: 'inline-block', width: '100%', height: '90px' }}
-            data-ad-client="ca-pub-4856582423981759"
-            data-ad-slot="3250141451"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
+        <AdSense.Google
+              style={{ display: 'block' }}
+              client="ca-pub-4856582423981759"
+              slot="3250141451"
+              format="auto"
+              responsive="true"
+              
+            />
           </Advertisement>
         <br />
         
