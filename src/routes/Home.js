@@ -139,16 +139,11 @@ class Home extends React.Component {
         ) : (
           ''
         )}
-
-          <Advertisement unit="large leaderboard" centered style={{ marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
-          <amp-ad width="100vw" height="320"
-            type="adsense"
+          <Advertisement unit="large leaderboard" centered style={{ marginTop: '2em', width: '100%' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+          <ins class="adsbygoogle"
+            style={{ display: 'inline-block', width: '100%', height: '90px' }}
             data-ad-client="ca-pub-4856582423981759"
-            data-ad-slot="2879723320"
-            data-auto-format="mcrspv"
-            data-full-width="">
-            <div overflow=""></div>
-          </amp-ad>
+            data-ad-slot="3250141451"></ins>
           </Advertisement>
           </Container>
           </>
@@ -249,14 +244,10 @@ class Home extends React.Component {
           <br />
         </section>
         <Advertisement unit="large leaderboard" centered style={{ marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
-          <amp-ad width="100vw" height="320"
-              type="adsense"
-              data-ad-client="ca-pub-4856582423981759"
-              data-ad-slot="2879723320"
-              data-auto-format="mcrspv"
-              data-full-width="">
-              <div overflow=""></div>
-            </amp-ad>
+        <ins class="adsbygoogle"
+            style={{ display: 'inline-block', width: '100%', height: '90px' }}
+            data-ad-client="ca-pub-4856582423981759"
+            data-ad-slot="3250141451"></ins>
           </Advertisement>
         {this.state.activePage === 1 ? (
           <>
@@ -376,14 +367,12 @@ class Home extends React.Component {
         )}
         <br />
         <Advertisement unit="large leaderboard" centered style={{ marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
-            <amp-ad width="100vw" height="320"
-              type="adsense"
-              data-ad-client="ca-pub-4856582423981759"
-              data-ad-slot="2879723320"
-              data-auto-format="mcrspv"
-              data-full-width="">
-              <div overflow=""></div>
-            </amp-ad>
+        <ins class="adsbygoogle"
+            style={{ display: 'inline-block', width: '100%', height: '90px' }}
+            data-ad-client="ca-pub-4856582423981759"
+            data-ad-slot="3250141451"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
           </Advertisement>
         <br />
         

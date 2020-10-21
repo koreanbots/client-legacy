@@ -455,11 +455,9 @@ class Detail extends React.Component {
                 <Advertisement unit="large leaderboard" centered style={{ marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
                     
                     <AdSense.Google
-                      style={{ display: 'block' }}
+                      style={{ display: 'inline-block', width: '100%', height: '90px' }}
                       client="ca-pub-4856582423981759" 
-                      slot="3250141451" 
-                      format="auto" 
-                      responsive="true"/>
+                      slot="3250141451" />
                 </Advertisement>
                 <Divider section />
                 <Segment
