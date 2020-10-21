@@ -452,7 +452,7 @@ class Detail extends React.Component {
                     </Label>
                   ))}
                 </div>
-                <Advertisement unit="large leaderboard" centered style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+                <Advertisement unit="large leaderboard" centered style={{ marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
                     
                     <AdSense.Google
                       style={{ display: 'block' }}
