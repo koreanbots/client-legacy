@@ -23,6 +23,7 @@ import { Helmet } from 'react-helmet'
 import CodeBlock from '../components/Code'
 import GitInfo from "react-git-info/macro"
 
+import AdSense from 'react-adsense';
 class Detail extends React.Component {
   constructor(props) {
     super(props)
@@ -452,13 +453,13 @@ class Detail extends React.Component {
                   ))}
                 </div>
                 <Advertisement unit="panorama" style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
-                    <ins class="adsbygoogle"
+                    
+                    <AdSense.Google
                       style={{ display: 'block' }}
-                      data-ad-client="ca-pub-4856582423981759"
-                      data-ad-slot="3250141451"
-                      data-ad-format="auto"
-                      data-adtest="on"
-                      data-full-width-responsive="true"></ins>
+                      client="ca-pub-4856582423981759" 
+                      slot="3250141451" 
+                      format="auto" 
+                      responsive="true"/>
                 </Advertisement>
                 <Divider section />
                 <Segment
