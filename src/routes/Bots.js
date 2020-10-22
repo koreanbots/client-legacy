@@ -13,13 +13,13 @@ import {
   Table,
   Modal,
   Form,
-  TextArea
+  TextArea,
+  Advertisement
 } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown/with-html'
 import config from '../config'
 import { HelmetProvider } from 'react-helmet-async'
 import CodeBlock from '../components/Code'
-import ads from './ads'
 import graphql from '../utils/graphql'
 import Adsense from '../components/Advertisement'
 import Permission from '../utils/permission'
@@ -37,8 +37,7 @@ class Detail extends React.Component {
       popup: false,
       report: 0,
       reportCategory: '',
-      reportDesc: '',
-      ads: ads.bot[Math.floor(Math.random() * ads.bot.length)]
+      reportDesc: ''
     }
   }
 
