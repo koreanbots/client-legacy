@@ -5,6 +5,8 @@
   "dependencies": {
     "@sentry/react": "^5.27.1",
     "@sentry/tracing": "^5.27.1",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.0",
     "fomantic-ui-css": "^2.8.7",
     "gh-pages": "^2.0.1",
     "prop-types": "^15.7.2",
@@ -30,6 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "test": "npx react-scripts test --watchAll=false",
     "build": "react-scripts build",
     "deploy": "gh-pages -d build",
     "predeploy": "npm run build"
@@ -50,6 +53,12 @@
     ]
   },
   "devDependencies": {
-    "react-git-info": "^2.0.0"
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "babel-jest": "^24.9.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
+    "react-git-info": "^2.0.0",
+    "react-test-renderer": "^17.0.1"
   }
 }
