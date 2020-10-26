@@ -1,3 +1,4 @@
+/*eslint-disable no-undef*/
 import React from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import Bot from '../components/Bot'
