@@ -17,7 +17,7 @@
     "react-markdown": "^4.3.1",
     "react-p5": "^1.1.8",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "^4.0.0",
     "react-showdown": "^2.0.3",
     "react-syntax-highlighter": "^15.0.1",
     "react-with-important-style": "^0.2.2",
