@@ -1,10 +1,6 @@
 on:
-  pull_request:
-  push:
-    branches:
-      - stable
-      - beta
-      - v2
+  - pull_request
+  - push
 jobs:
   test:
     name: Test
