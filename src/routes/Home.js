@@ -1,4 +1,3 @@
-/*eslint-disable no-undef*/
 import React from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import Bot from '../components/Bot'
@@ -248,12 +247,12 @@ class Home extends React.Component {
             />
           </HelmetProvider>
           <h3 style={{ marginTop: '30px' }}>카테고리로 빠르게 찾아보기: </h3>
-          {cats.map(r => (
+          {cats.map((r, index) => (
             <>
               <Label
+                key={index}
                 as={Link}
                 tag
-                stackable={true}
                 style={{ marginTop: '4px' }}
                 to={'/categories/' + r}
               >
@@ -419,7 +418,7 @@ class Home extends React.Component {
               ) : (
                 <div>
                   <Card.Group itemsPerRow={3} stackable>
-                    {bots.trusted.data.slice(0, 6).map(trusted => (
+                    {bots.trusted.data.slice(0, 6).map((trusted) => (
                       <>
                         <Bot
                           key={trusted.id}
