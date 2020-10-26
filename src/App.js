@@ -35,7 +35,7 @@ import ServiceNotAvailable from "./routes/ServiceNotAvailable";
 
 
 
-function App(props) {
+function App() {
   const [ Dark, setDark ] = useState(localStorage.dark === undefined || JSON.parse(localStorage.dark) ? true : false)
   try {
     const systemColor = window.matchMedia('(prefers-color-scheme: dark)')
