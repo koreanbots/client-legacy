@@ -1,6 +1,6 @@
 import config from "../config";
 
-export default async function( query, ignoreToken=false ) {
+export default async function graphql( query, ignoreToken=false ) {
     const res = await fetch(config.api + '/graphql', {
         method: 'POST',
         headers: {
