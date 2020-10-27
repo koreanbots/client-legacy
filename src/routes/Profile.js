@@ -63,14 +63,6 @@ class Detail extends React.Component {
           avatar
         }
       }
-      stars {
-        id
-        name
-        tag
-        avatar
-        intro
-        vanity
-      }
     }`)
 
     this.setState({ result: res, isLoading: false })
@@ -144,20 +136,6 @@ class Detail extends React.Component {
                 <Card.Group stackable itemsPerRow={3}>
                   {result.data.me.bots.map(bot => (
                     <MyBots {...bot} />
-                  ))}
-                </Card.Group>
-                <br />
-              </>
-            )}
-            <Divider />
-            <h2>즐겨찾기</h2>
-            {result.data.stars.length === 0 ? (
-              <h3>즐겨찾기에 등록한 봇이 없습니다.</h3>
-            ) : (
-              <>
-                <Card.Group stackable itemsPerRow={4}>
-                  {result.data.stars.map(bot => (
-                    <MyBots {...bot} ignoreExtra={true} ignoreMeta={true}/>
                   ))}
                 </Card.Group>
                 <br />
