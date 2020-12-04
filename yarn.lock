@@ -1649,10 +1649,10 @@
     execa "^4.0.3"
     npm-run-path "^4.0.1"
 
-"@snowpack/plugin-webpack@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@snowpack/plugin-webpack/-/plugin-webpack-2.1.1.tgz#8cdcdfaaee71f076906590a35fbd2413a1a3dc3e"
-  integrity sha512-NO0OL20f+SICl9tzJhv8Y8CmSkWpV1B+n9aBOwolHhcIz2UhlA4R8pDxremzcYtrAqSWPagFfO0+VlbxunP+Kg==
+"@snowpack/plugin-webpack@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@snowpack/plugin-webpack/-/plugin-webpack-2.1.2.tgz#857a1a1ea9bcf76b9c4c5cb4f0dd372938a78e4d"
+  integrity sha512-i9Ny6lXkVCI5dwyKLuxAma2msUNlDOLZK2HqnAJmFzjwuoCKBx4m9dxfZVPHUTLbvENoW1JFUxGQ+8P3lkw89Q==
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/preset-env" "^7.12.1"
