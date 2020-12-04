@@ -1,6 +1,5 @@
 import React from 'react'
 
-import GitInfo from 'react-git-info/macro'
 import { Button, Container, Modal, TextArea } from 'semantic-ui-react'
 import version from '../../package.json'
 
@@ -9,7 +8,7 @@ import Clipboard from 'react-clipboard.js';
 
 function Version() {
   const infos = `## 사용자 정보
-버전: v${version.version} | 해시: ${GitInfo().commit.hash}
+버전: v${version.version}
 브라우저: \`${getBrowser()}\`(${navigator.userAgent})
 플랫폼: ${navigator.platform}
 `
@@ -38,7 +37,6 @@ function Version() {
         </Modal>
         <h1>빌드 정보</h1>
         <p>v{version.version}</p>
-        <p>해시: {GitInfo().commit.hash}</p>
         <h1>User-Agent</h1>
         <p>{navigator.userAgent}</p>
         <h1>Browser</h1>

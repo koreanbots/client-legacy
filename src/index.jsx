@@ -1,5 +1,3 @@
-import GitInfo from "react-git-info/macro";
-
 import React from "react";
 import ReactDOM from "react-dom";
 import * as Sentry from "@sentry/react";
@@ -8,10 +6,8 @@ import App from "./App";
 
 import version from "../package.json";
 
-import "semantic-ui-css/semantic.min.css";
-
 console.log(
-  `[빌드 정보] 버전: ${GitInfo().branch} Build Version v.${version.version} 해시: ${GitInfo().commit.hash}`
+  `[빌드 정보] Build Version v.${version.version}`
 );
 
 Sentry.init({
@@ -26,3 +22,7 @@ Sentry.init({
 });
 
 ReactDOM.render(<App/>, document.getElementById("potato"));
+
+if (import.meta.hot) {
+  import.meta.hot.accept()
+}

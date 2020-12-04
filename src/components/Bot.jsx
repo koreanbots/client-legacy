@@ -53,7 +53,7 @@ function Bot({
               src={avatar}
               wrapped
               ui={false}
-              size="small"
+              size="tiny"
               width="128"
               onError={ (e)=> e.target.src="/img/default.png" }
             />
@@ -79,8 +79,6 @@ function Bot({
           </Card.Header>
 
           <Card.Description>
-            <br />
-
             <h1>
               <Label className="status" style={{ background: 'transparent' }}>
                 <Icon

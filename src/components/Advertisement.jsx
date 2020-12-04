@@ -1,11 +1,9 @@
 import React from 'react'
-
-import GitInfo from "react-git-info/macro";
 import { Advertisement } from "semantic-ui-react";
 
 export default function Adsense(props) {
     return (
-        <Advertisement unit="panorama" style={{ width: '100%', marginTop: '2em' }} test={GitInfo().branch !== 'stable' ? '광고' : null}>
+        <Advertisement unit="panorama" style={{ width: '100%', marginTop: '2em' }} test={import.meta.env.MODE !== 'production' ? '광고' : null}>
             <ins className="adsbygoogle"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-4856582423981759"

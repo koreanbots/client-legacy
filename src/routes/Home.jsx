@@ -178,7 +178,7 @@ class Home extends React.Component {
                 color: 'white'
               }}
             >
-              <Container>
+              <Container key="main">
                 <h1>
                   한국 디스코드봇 리스트에서{' '}
                   <span
@@ -207,7 +207,7 @@ class Home extends React.Component {
                 d="M0,128L60,106.7C120,85,240,43,360,69.3C480,96,600,192,720,192C840,192,960,96,1080,69.3C1200,43,1320,85,1380,106.7L1440,128L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
               ></path>
             </svg>
-            <Container>
+            <Container key="message">
               {this.state.message ? (
                 <Message
                   header={this.state.message.title}
@@ -238,7 +238,7 @@ class Home extends React.Component {
           </>
         )}
 
-        <Container style={{ paddingBottom: '30px' }}>
+        <Container style={{ paddingBottom: '30px' }} key="info">
           <HelmetProvider>
             <title>한국 디스코드봇 리스트</title>
             <meta
@@ -276,7 +276,7 @@ class Home extends React.Component {
               </div>
             ) : (
               <div>
-                <Card.Group itemsPerRow={3} stackable>
+                <Card.Group itemsPerRow={4} stackable>
                   {bots.vote.data.map(bot => (
                     <>
                       <Bot
@@ -318,7 +318,7 @@ class Home extends React.Component {
                     </>
                   ))}
                 </Card.Group>
-                <Container align="center">
+                <Container align="center" key="pagination">
                   <br />
                   <Pagination
                     boundaryRange={0}
