@@ -7,7 +7,7 @@
   "homepage": "https://koreanbots.dev",
   "dependencies": {
     "@sentry/react": "^5.27.1",
-    "@sentry/tracing": "^5.27.1",
+    "@sentry/tracing": "^5.28.0",
     "@snowpack/app-scripts-react": "^1.12.6",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
