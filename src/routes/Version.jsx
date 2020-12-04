@@ -1,14 +1,13 @@
 import React from 'react'
 
 import { Button, Container, Modal, TextArea } from 'semantic-ui-react'
-import version from '../../package.json'
 
 import Article from '../components/Article'
 import Clipboard from 'react-clipboard.js';
 
 function Version() {
   const infos = `## 사용자 정보
-버전: v${version.version}
+버전: ${import.meta.env.SNOWPACK_PUBLIC_BRANCH.toUpperCase()} Build v.${import.meta.env.SNOWPACK_PUBLIC_VERSION} Hash: ${import.meta.env.SNOWPACK_PUBLIC_HASH}
 브라우저: \`${getBrowser()}\`(${navigator.userAgent})
 플랫폼: ${navigator.platform}
 `
@@ -36,7 +35,7 @@ function Version() {
           </Modal.Description>
         </Modal>
         <h1>빌드 정보</h1>
-        <p>v{version.version}</p>
+        <p>${import.meta.env.SNOWPACK_PUBLIC_BRANCH.toUpperCase()} Build v.${import.meta.env.SNOWPACK_PUBLIC_VERSION} Hash: ${import.meta.env.SNOWPACK_PUBLIC_HASH}</p>
         <h1>User-Agent</h1>
         <p>{navigator.userAgent}</p>
         <h1>Browser</h1>

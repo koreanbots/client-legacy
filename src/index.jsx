@@ -3,11 +3,8 @@ import ReactDOM from "react-dom";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import App from "./App";
-
-import version from "../package.json";
-
 console.log(
-  `[빌드 정보] Build Version v.${version.version}`
+  `[빌드 정보] ${import.meta.env.SNOWPACK_PUBLIC_BRANCH.toUpperCase()} Build v.${import.meta.env.SNOWPACK_PUBLIC_VERSION} Hash: ${import.meta.env.SNOWPACK_PUBLIC_HASH}`
 );
 
 Sentry.init({
