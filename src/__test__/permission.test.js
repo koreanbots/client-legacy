@@ -1,4 +1,4 @@
-import Permission from './permission'
+import Permission from '../utils/permission'
 
 test('correct permission check', () => {
     expect(Permission.check(0x0, 0x0)).toBe(true)
