@@ -1,64 +1,54 @@
 {
   "name": "client",
+  "jest": {
+    "verbose": true
+  },
   "version": "2.0.0",
   "homepage": "https://koreanbots.dev",
   "dependencies": {
     "@sentry/react": "^5.27.1",
     "@sentry/tracing": "^5.27.1",
-    "@testing-library/jest-dom": "^5.11.5",
-    "@testing-library/react": "^11.1.0",
-    "fomantic-ui-css": "^2.8.7",
-    "gh-pages": "^3.1.0",
-    "prop-types": "^15.7.2",
+    "@snowpack/app-scripts-react": "^1.12.6",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
     "query-string": "^6.12.1",
     "react": "^16.8.6",
     "react-adsense": "^0.1.0",
-    "react-app-polyfill": "^2.0.0",
     "react-clipboard.js": "^2.0.16",
     "react-dom": "^16.8.6",
-    "react-helmet": "^6.1.0",
     "react-helmet-async": "^1.0.6",
     "react-markdown": "^4.3.1",
-    "react-p5": "^1.1.8",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^4.0.0",
     "react-showdown": "^2.0.3",
     "react-syntax-highlighter": "^15.0.1",
     "react-with-important-style": "^0.2.2",
-    "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.0",
-    "sha.js": "^2.4.11",
     "typed.js": "^2.0.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "test": "npx react-scripts test --watchAll=false",
-    "build": "react-scripts build",
-    "deploy": "gh-pages -d build",
-    "predeploy": "npm run build"
+    "start": "snowpack dev --reload",
+    "test": "jest",
+    "build": "snowpack build --clean",
+    "serve": "serve -s build"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
+    "@esm-bundle/chai": "^4.1.5",
+    "@snowpack/plugin-react-refresh": "^2.3.7",
+    "@snowpack/plugin-webpack": "^2.1.1",
+    "@snowpack/web-test-runner-plugin": "^0.1.4",
+    "@web/test-runner": "^0.10.0",
     "babel-jest": "26.6.3",
+    "clean-webpack-plugin": "^3.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "26.6.0",
-    "react-git-info": "^2.0.0",
-    "react-test-renderer": "^17.0.1"
+    "react-test-renderer": "^17.0.1",
+    "snowpack": "^2.17.1",
+    "standard": "^16.0.3"
   }
 }
