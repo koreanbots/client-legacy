@@ -5,10 +5,11 @@ import {
   Responsive,
   Icon,
   Sidebar,
-  Dropdown
+  Dropdown,
+  Container
 } from 'semantic-ui-react'
 import Search from './Search'
-import Config from '../config'
+import { Experiment, Variant } from '@marvelapp/react-ab-test'
 import fetch from 'node-fetch'
 import config from '../config'
 
@@ -157,7 +158,10 @@ export default class Nav extends Component {
           </Sidebar>
         </Responsive>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-          <Menu
+          <Experiment name="Navbar experiment">
+            <Variant name="Treatment">
+              <Container>
+              <Menu
             className="nav"
             secondary
             inverted={this.props.Darkmode}
@@ -243,6 +247,98 @@ export default class Nav extends Component {
               )}
             </Menu.Menu>
           </Menu>
+              </Container>
+            </Variant>
+            <Variant name="Control">
+            <Menu
+            className="nav"
+            secondary
+            inverted={this.props.Darkmode}
+            style={{ background: 'transpert' }}
+          >
+            <Menu.Menu>
+              <Menu.Item href="/">
+                <h1 style={{ fontFamily: 'Uni Sans Heavy CAPS' }}>
+                  KOREANBOTS
+                </h1>
+              </Menu.Item>
+              <Menu.Item name="discord" href="https://discord.gg/JEh53MQ">
+                디스코드
+              </Menu.Item>
+              <Menu.Item name="about" href="/about">
+                소개
+              </Menu.Item>
+              <Menu.Item name="api" href="/api">
+                API
+              </Menu.Item>
+              <Menu.Item name="add" href="/addbot">
+                봇 추가하기
+              </Menu.Item>
+            </Menu.Menu>
+            <Menu.Menu position="right">
+              <Menu.Item>
+              </Menu.Item>
+              {this.state.logged === 0 ? (
+                <Menu.Item color="black" name="로그인" href="/login">
+                  로그인
+                </Menu.Item>
+              ) : this.state.logged === 1 ? (
+                <Dropdown
+                  item
+                  trigger={
+                    this.state.user.avatar !== false ? (
+                      <>
+                        <Image
+                          src={
+                            'https://cdn.discordapp.com/avatars/' +
+                            this.state.user.id +
+                            '/' +
+                            this.state.user.avatar +
+                            '.png'
+                          }
+                          avatar
+                        />
+                        <span>
+                          {' '}
+                          {this.state.user.username}#{this.state.user.tag}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <Image
+                          src={`https://cdn.discordapp.com/embed/avatars/${this
+                            .state.user.tag % 5}.png`}
+                          avatar
+                        />
+                        <span>
+                          {' '}
+                          {this.state.user.username}#{this.state.user.tag}
+                        </span>
+                      </>
+                    )
+                  }
+                >
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="/profile">
+                      <Icon className="settings" /> 관리패널
+                    </Dropdown.Item>
+                    <Dropdown.Item href={'/logout/' + this.state.user.id}>
+                      <a style={{ color: '#ff6e6e' }}>
+                        <Icon className="logout" /> 로그아웃
+                      </a>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              ) : (
+                <Menu.Item color="black" name="로그인" href="/login">
+                  로그인
+                </Menu.Item>
+              )}
+            </Menu.Menu>
+          </Menu>
+            </Variant>
+
+          </Experiment>
         </Responsive>
       </>
     )
