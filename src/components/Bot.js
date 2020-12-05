@@ -25,7 +25,6 @@ function Bot({
   verified,
   vanity,
   boosted,
-  bg,
   status,
   banner
 }) {
@@ -79,7 +78,7 @@ function Bot({
           <Card.Description>
             <br />
 
-            <h1 style={{ margin: 0 }}>
+            <h1 style={treatment ? { marginTop: 0 } : {}}>
               <Label style={{ background: 'transparent' }}>
                 <Icon
                   className="circle"
