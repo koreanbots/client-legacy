@@ -11,6 +11,7 @@ import {
 
 function Bot({
   id,
+  treatment,
   name,
   avatar,
   votes,
@@ -24,7 +25,6 @@ function Bot({
   verified,
   vanity,
   boosted,
-  bg,
   status,
   banner
 }) {
@@ -52,7 +52,7 @@ function Bot({
               src={avatar}
               wrapped
               ui={false}
-              size="small"
+              size={treatment ? "tiny" : "small"}
               width="128"
             />
             {count === undefined ? (
@@ -78,7 +78,7 @@ function Bot({
           <Card.Description>
             <br />
 
-            <h1>
+            <h1 style={treatment ? { marginTop: 0 } : {}}>
               <Label style={{ background: 'transparent' }}>
                 <Icon
                   className="circle"

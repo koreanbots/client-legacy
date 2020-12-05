@@ -3,6 +3,7 @@
   "version": "1.2.0",
   "homepage": "https://koreanbots.dev",
   "dependencies": {
+    "@marvelapp/react-ab-test": "^2.3.0",
     "gh-pages": "^2.0.1",
     "node-fetch": "^2.6.0",
     "prop-types": "^15.7.2",

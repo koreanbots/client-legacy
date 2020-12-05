@@ -2,7 +2,8 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import fetch from 'node-fetch'
 import Bot from '../components/Bot'
-import { Message, Container, Card, Pagination, Label, Segment, Advertisement } from 'semantic-ui-react'
+import { Message, Container, Card, Pagination, Label, Advertisement } from 'semantic-ui-react'
+import { Experiment, Variant } from '@marvelapp/react-ab-test'
 import config from '../config'
 import Typed from 'typed.js'
 import queryString from 'query-string'
@@ -51,8 +52,8 @@ class Home extends React.Component {
       `${window.location.origin}?${parm}=${val}`
     )
   }
-  getData = async page => {
-    const bot = await fetch(config.api + '/bots/get?page=' + page, {
+  getData = async (page, testing=localStorage['PUSHTELL-Bot List Experiment'] === 'Treatment') => {
+    const bot = await fetch(config.api + ( testing ? '/bots/get-testing?page=' : '/bots/get?page=') + page, {
       method: 'GET',
       headers: {
         token: localStorage.token,
@@ -111,7 +112,7 @@ class Home extends React.Component {
       <>
 
       {
-              this.state.activePage === 1 && (
+          this.state.activePage === 1 && (
                 <>
                 <div className="verytop" style={{ padding: '10px', marginBottom: '10px', display: 'flex', minHeight: '370px', alignItems: 'center', justifyContent: 'center', color: 'white'}}>
             <Container>
@@ -187,7 +188,68 @@ class Home extends React.Component {
             </div>
           ) : (
             <div>
-              <Card.Group itemsPerRow={3} stackable>
+              <Experiment name="Bot List Experiment">
+                <Variant name="Treatment">
+                <Card.Group itemsPerRow={4} stackable>
+                {bot.data.map(bot => (
+                  <>
+                    <Bot
+                      treatment
+                      key={bot.id}
+                      id={bot.id}
+                      name={bot.name}
+                      avatar={
+                        bot.avatar !== false
+                          ? 'https://cdn.discordapp.com/avatars/' +
+                            bot.id +
+                            '/' +
+                            bot.avatar +
+                            '.png?size=128'
+                          : `https://cdn.discordapp.com/embed/avatars/${bot.tag %
+                              5}.png?size=128`
+                      }
+                      votes={bot.votes}
+                      servers={bot.servers}
+                      category={bot.category}
+                      intro={bot.intro}
+                      desc={bot.desc}
+                      invite={
+                        bot.url === false
+                          ? `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0`
+                          : bot.url
+                      }
+                      state={bot.state}
+                      count={
+                        this.state.bot.data.findIndex(r => r.id === bot.id) +
+                        (this.state.activePage - 1) * 9
+                      }
+                      verified={bot.verified}
+                      trusted={bot.trusted}
+                      vanity={bot.vanity}
+                      boosted={bot.boosted}
+                      status={bot.status}
+                      banner={bot.banner}
+                      bg={bot.bg}
+                    />
+                  </>
+                ))}
+              </Card.Group>
+              <Container align="center">
+                <br />
+                <Pagination
+                  href="#"
+                  boundaryRange={0}
+                  siblingRange={1}
+                  ellipsisItem={null}
+                  activePage={this.state.activePage}
+                  totalPages={this.state.totalPage}
+                  onPageChange={this.handlePaginationChange}
+                />
+              </Container>
+                </Variant>
+
+                <Variant name="Control">
+                <Card.Group itemsPerRow={3} stackable>
                 {bot.data.map(bot => (
                   <>
                     <Bot
@@ -242,6 +304,8 @@ class Home extends React.Component {
                   onPageChange={this.handlePaginationChange}
                 />
               </Container>
+                </Variant>
+              </Experiment>
             </div>
           )}
           <br />
