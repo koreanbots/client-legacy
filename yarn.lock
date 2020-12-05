@@ -1691,10 +1691,10 @@
     webpack "^4.43.0"
     webpack-manifest-plugin "^2.2.0"
 
-"@snowpack/web-test-runner-plugin@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@snowpack/web-test-runner-plugin/-/web-test-runner-plugin-0.1.4.tgz#bcfa86a17ca3976f3371069fdbd27551fcdce321"
-  integrity sha512-rX/uNR3rf5E9F1hFoXd7C7ZQE0j43zdQTxlv9zOJgF4VPXB/Au+rbTWbvI88KJ5shAhr8izf+ESUnJ+kId2KTw==
+"@snowpack/web-test-runner-plugin@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@snowpack/web-test-runner-plugin/-/web-test-runner-plugin-0.1.5.tgz#239438189785c1f739c42cf711b52b41c48dce21"
+  integrity sha512-aeX08rgqR4WYexGtwnY7nZCjbkzIMK9RIvhNVtyg8Xr6VF9HgCOYnTo2rp/y1PWenUba3o2cYAGcl6RuBIXLbw==
 
 "@testing-library/dom@^7.28.1":
   version "7.28.1"
