@@ -39,7 +39,7 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
     "@esm-bundle/chai": "^4.1.5",
-    "@snowpack/plugin-react-refresh": "^2.3.7",
+    "@snowpack/plugin-react-refresh": "^2.3.8",
     "@snowpack/plugin-webpack": "^2.1.2",
     "@snowpack/web-test-runner-plugin": "^0.1.4",
     "@web/test-runner": "^0.10.0",
