@@ -20,7 +20,7 @@
     "react-markdown": "^4.3.1",
     "react-router-dom": "^5.1.2",
     "react-showdown": "^2.0.3",
-    "react-syntax-highlighter": "^15.0.1",
+    "react-syntax-highlighter": "^15.4.1",
     "react-with-important-style": "^0.2.2",
     "semantic-ui-react": "^2.0.0",
     "typed.js": "^2.0.11"
