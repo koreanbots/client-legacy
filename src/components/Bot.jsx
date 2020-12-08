@@ -12,6 +12,7 @@ import {
 
 function Bot({
   id,
+  treatment,
   name,
   avatar,
   votes,
