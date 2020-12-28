@@ -234,6 +234,7 @@ class SubmitBot extends Component {
                   { text: 'serenity', value: 'serenity' },
                   { text: 'SwiftDiscord', value: 'SwiftDiscord' },
                   { text: 'Sword', value: 'Sword' },
+                  { text: 'Harmony', value: 'Harmony' },
                   { text: '기타', value: '기타' },
                   { text: '비공개', value: '비공개' }
                 ]}
