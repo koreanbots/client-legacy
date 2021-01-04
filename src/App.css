@@ -5,15 +5,14 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: Whitney,Helvetica Neue,Helvetica,Arial,sans-serif;
   background-color: #eff3f7;
   height: 100%;
 }
 
 .loader {
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,7 +50,8 @@ body {
 
 .darkmode .card > .content > .header, 
 .darkmode .card > .content > .meta, 
-.darkmode .card > .content > .description {
+.darkmode .card > .content > .description,
+.darkmode .card > .content > .description h1 .label.status {
   color: white !important
 }
 
@@ -69,37 +69,45 @@ body {
   color: black !important;
 }
 
-.darkmode .segment {
+.darkmode .segment:not(.top) {
   color: white !important;
-  background-color: #1b1c1d;
+  background-color: #1b1c1d !important;
 }
 
 
 
-.darkmode .label, .darkmode .tag.labels > a, .darkmode .example {
+.darkmode .botDetail .label, .darkmode a.label, .darkmode .tag.labels > a, .darkmode .example, .darkmode .tag.label {
   background-color: #23272A;
   color: white;
 }
 
-.darkmode .label[href]:hover, .darkmode .tag.labels > a[href]:hover {
+.darkmode .label:not(.noHover)[href]:hover, .darkmode .tag.labels > a:not(.noHover)[href]:hover {
   background-color: #000000 !important;
-  color: white
+  color: white !important;
 }
 
 .darkmode.modal, .darkmode.modal > .header {
-  background-color: #1b1c1d;
+  background-color: #1b1c1d !important;
   color: white !important;
 }
 
 .darkmode.modal .field > * > * {
-  color: white;
+  color: white !important;
 }
 
-.discord {
+.discord:not(i) {
   background-color: #7289da !important;
   color: #fff !important;
 }
 
+.boosted {
+  background: #ff73fa !important;
+  color: white !important
+}
+.trusted {
+  background: #16ab39 !important;
+  color: #fff !important
+}
 
 .notfound > h2 {
   margin-top: 10%;
@@ -119,8 +127,31 @@ body {
   text-align: center;
 }
 
-.bg * :not(a){
+.bg > * :not(i):not(a){
   color: white !important
+}
+
+.rank.segment {
+  color: black !important;
+}
+
+.darkmode .rank.segment {
+  color: white !important;
+}
+
+.rank.first.segment {
+  background: gold;
+  color: black !important;
+}
+
+.rank.second.segment {
+  background: #c7c7d0;
+  color: black !important;
+}
+
+.rank.third.segment {
+  background: #af602e;
+  color: white !important;
 }
 
 .card .icon.check {
@@ -130,6 +161,21 @@ body {
 .ui.nav.menu {
   margin: 0;
 }
+
+.navbar.mobile {
+  display: none;
+}
+
+@media screen and (max-width: 992px){
+  .navbar.pc {
+    display: none;
+  }
+
+  .navbar.mobile {
+    display: block;
+  }
+}
+
 
 textarea {
   min-height: 300px;
@@ -157,4 +203,37 @@ textarea {
     display: none;
   }
   
+}
+
+.ui.pagination .active.item {
+  font-weight: bold !important;
+}
+
+.ui.pagination .item {
+  outline: none;
+}
+
+.botDetail .buttons .ui.button {
+  margin: 3px 2px;
+}
+
+.botDetail div > .ui.label {
+  margin: 3px 2px;
+}
+
+.footer.segment {
+  margin: 0 !important;
+}
+
+.footer h1, .footer h4 {
+  color: #3366FF !important;
+}
+
+.footer a[href] {
+  color: #fefefe !important
+}
+
+
+.card a[href]:hover:not(.label):not(.results):not(.button), .segment a[href]:hover:not(.label):not(.results):not(.button) {
+  text-decoration: underline;
 }

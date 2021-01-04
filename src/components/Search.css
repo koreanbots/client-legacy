@@ -1,0 +1,8 @@
+.ui.search.fluid > .ui.icon.input  {
+    width: 100%;
+}
+
+.ui.search.tall > .ui.icon.input {
+    height: 64px;
+    font-size: 1.7em;
+}
